@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <title>Ligea-Alex</title>
+</head>
+
+<body>
+  <div id="loader">
+    <img src="img/herrman.png" alt="Loading..." />
+  </div>
+  <main id="main-content">
+    <nav class="nav-container">
+      <div class="nav-content">
+        <div>
+          <p><a href="work.html">Work</a></p>
+        </div>
+        <div>
+          <p><a href="about.html">Background</a></p>
+        </div>
+      </div>
+      <div class="nav-location">
+        <p class="location-line1">Hamburg, Germany</p>
+        <p class="location-line2">New York, America</p>
+      </div>
+      <div class="nav-email">
+        <p><a href="mailto:hi@ligea-alexander.xyz">hi@ligea-alexander.xyz</a></p>
+      </div>
+      <div class="nav-brand">
+        <p><a href="index.html">Ligea</a></p>
+      </div>
+    </nav>
+    <header class="site-header">
+      <div class="hero-container">
+        <!-- Keep existing structure but add the new layout -->
+        <div class="hero-text-group">
+          <p class="hero-subtitle">Freelance</p>
+          <div class="hero-title-layout">
+            <!-- Row 1: Creative + Teal bar -->
+            <div class="title-row row-1">
+              <div class="title-container">
+                <h1 class="title">Creative</h1>
+              </div>
+              <div class="bar-container teal-bar"></div>
+            </div>
+
+            <!-- Row 2: Yellow bar + Technologist -->
+            <div class="title-row row-2">
+              <div class="bar-container yellow-bar"></div>
+              <div class="title-container">
+                <h1 class="title">Technologist</h1>
+              </div>
+            </div>
+
+            <!-- Row 3: Visual (overlapping) + Pink bar -->
+            <div class="title-row row-3">
+              <div class="visual-container">
+                <h1 class="title title--script">Visual</h1>
+              </div>
+              <div class="bar-container pink-bar"></div>
+            </div>
+
+            <!-- Row 4: Red bar + Storyteller -->
+            <div class="title-row row-4">
+              <div class="bar-container red-bar"></div>
+              <div class="title-container">
+                <h1 class="title">Storyteller</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="hero-roles">Data Journalist · Data Visualization Engineer · Researcher</p>
+      </div>
+      </div>
+      <!-- Keep existing tagline unchanged -->
+      <p class="tagline">
+        <span class="greeting">HI, I'M LIGEA</span>.<br><br>
+        I use the <span class="hover-define">visual grammar of information</span>
+        to craft stories, tools, and experiences that resonate with audiences, spark curiosity, and inspire
+        action.<br><br>
+        <a href="about.html">more about me</a>
+      </p>
+    </header>
+    <section class="featured-work">
+      <div class="featured-content">
+        <div class="featured-text">
+          <h2>Featured <span>Work</span></h2>
+          <div class="featured-description">
+            Lorem ipsum dolor sit amet consectetur. Porta a magna laoreet morbi eget mattis ac. Ipsum fringilla eu
+            suspendisse aliquam. Leo in ultrices neque amet. Quam aliquam laoreet scelerisque tellus tortor porttitor
+            augue
+            urna.
+          </div>
+          <span><a href="work.html">View All →</a></span>
+        </div>
+        <div class="project-grid">
+          <div class="project-card">
+            <img src="img/analytics.png" alt="Project 1">
+            <div class="project-info">
+              <div class="project-title">Gerrymandering</div>
+              <div class="project-category">Data Analytics · Dashboard Design</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img src="img/dashboard.png" alt="Project 2">
+            <div class="project-info">
+              <div class="project-title">Lorem ipsum sit luctus nullam</div>
+              <div class="project-category">UX Research · Analytics</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img src="img/data-visualization.png" alt="Project 3">
+            <div class="project-info">
+              <div class="project-title">Lorem ipsum sit luctus nullam</div>
+              <div class="project-category">Data Visualization · D3.js</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img src="img/data-journalism.png" alt="Project 4">
+            <div class="project-info">
+              <div class="project-title">Cost of Sunlight</div>
+              <div class="project-category">Data Journalism · Storytelling</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img src="img/ux-research.png" alt="Project 5">
+            <div class="project-info">
+              <div class="project-title">Lorem ipsum sit luctus nullam</div>
+              <div class="project-category">UX Research · Intervention</div>
+            </div>
+          </div>
+          <div class="project-card">
+            <img src="img/web-des-dev.png" alt="Project 6">
+            <div class="project-info">
+              <div class="project-title">Lorem ipsum sit luctus nullam</div>
+              <div class="project-category">Web Design · Development</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="about-bridge">
+      <div class="bridge-header">
+        <h2>Designing for Clarity, Resonance, and Impact</h2>
+      </div>
+      <div class="bridge-content">
+        <div class="image-block">
+          <img src="img/portfolio.jpg" alt="Portrait" />
+        </div>
+      </div>
+      <div class="text-block">
+        <div class="bridge-description">
+          I design,<br>
+          <span>interactive tools, data stories,<br>
+            and research-driven<br>
+            experiences that make<br>
+            complexity feel intuitive and<br>
+            insights feel personal.</span>
+          <!-- <p>
+            Blending data, code, and narrative into systems that inform and endure. I bring structure and story together
+            to help people <span>understand</s>, <span>feel</span>, and <span>decide</span>.
+          </p> -->
+        </div>
+      </div>
+    </section>
+    <!-- Update the services section: -->
+    <section class="services">
+      <div class="services-header">
+        <h2>Services <span>Tools</span></h2>
+      </div>
+      <div class="services-flex">
+        <div class="services-list">
+          <div class="service-item" data-service="data-science">
+            <div class="service-header">
+              <h3>Data Science & Data Analytics</h3>
+              <span class="service-toggle">+</span>
+            </div>
+            <div class="service-card">
+              <p>Transform raw data into actionable insights through statistical analysis, machine learning, and
+                predictive modeling. I help organizations make data-driven decisions with custom analytics solutions.
+              </p>
+              <ul>
+                <li>Statistical Analysis & Modeling</li>
+                <li>Machine Learning Implementation</li>
+                <li>Predictive Analytics</li>
+                <li>Data Pipeline Development</li>
+              </ul>
+            </div>
+          </div>
+          <div class="service-item" data-service="storytelling">
+            <div class="service-header">
+              <h3>Interactive Data Storytelling</h3>
+              <span class="service-toggle">+</span>
+            </div>
+            <div class="service-card">
+              <p>Create compelling narratives that make complex data accessible and engaging. From interactive
+                dashboards
+                to immersive data experiences that drive understanding and action.</p>
+              <ul>
+                <li>Interactive Dashboard Design</li>
+                <li>Data Visualization Strategy</li>
+                <li>Narrative Design</li>
+                <li>User Experience Optimization</li>
+              </ul>
+            </div>
+          </div>
+          <div class="service-item" data-service="development">
+            <div class="service-header">
+              <h3>Web Development and Programming</h3>
+              <span class="service-toggle">+</span>
+            </div>
+            <div class="service-card">
+              <p>Build robust, scalable web applications and tools that bring your data to life. Full-stack development
+                with focus on performance, accessibility, and user experience.</p>
+              <ul>
+                <li>Frontend Development (React, Vue, D3.js)</li>
+                <li>Backend Development (Node.js, Python)</li>
+                <li>API Design & Integration</li>
+                <li>Performance Optimization</li>
+              </ul>
+            </div>
+          </div>
+          <div class="service-item" data-service="design">
+            <div class="service-header">
+              <h3>Visual Design and Prototyping</h3>
+              <span class="service-toggle">+</span>
+            </div>
+            <div class="service-card">
+              <p>Design intuitive interfaces and create rapid prototypes that validate concepts before development.
+                User-centered design approach that balances aesthetics with functionality.</p>
+              <ul>
+                <li>UI/UX Design</li>
+                <li>Rapid Prototyping</li>
+                <li>Design Systems</li>
+                <li>User Research & Testing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="services-tools-cloud">
+          <div class="tools-cloud-container" id="tools-cloud">
+            <!-- Word cloud will be rendered here -->
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="cta">
+      <h2>Let's Get To Work</h2>
+      <p>I collaborate with mission-driven teams as a visual storyteller, insight specialist, and creative developer.
+        Whether you need research-driven strategy, a compelling data narrative, or an interactive prototype — let's
+        talk.</p>
+      <p>
+        You can reach me at <a href="mailto:ligea.alex@gmail.com">ligea.alex@gmail.com</a>.
+      </p>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Ligea Alexander. All rights reserved.</p>
+    </div>
+  </footer>
+  <div class="fixed-contact">
+    <a href="mailto:ligea.alex@gmail.com" class="contact-link">
+      <span class="contact-text">ligea.alex@gmail.com</span>
+    </a>
+  </div>
+  <!-- Custom Cursor Styles -->
+  <div id="custom-cursor">
+    <div class="cursor-square"></div>
+    <div class="cursor-circle"></div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="main.js"></script>
+  <link rel="icon" href="favicon.ico">
+  <title>Work</title>
+</head>
+
+<body>
+  <div id="custom-cursor">
+    <div class="cursor-square"></div>
+    <div class="cursor-circle"></div>
+  </div>
+  <nav class="nav-container">
+    <div class="nav-content">
+      <div>
+        <p><a href="work.html">Work</a></p>
+      </div>
+      <div>
+        <p><a href="about.html">Background</a></p>
+      </div>
+    </div>
+    <div class="nav-location">
+      <p class="location-line1">Hamburg, Germany</p>
+      <p class="location-line2">New York, America</p>
+    </div>
+    <div class="nav-email">
+      <p><a href="mailto:hi@ligea-alexander.xyz">hi@ligea-alexander.xyz</a></p>
+    </div>
+    <div class="nav-brand">
+      <p><a href="index.html">Ligea</a></p>
+    </div>
+  </nav>
+  <main class="work-main">
+    <!-- Filter Navigation -->
+    <section class="work-filters">
+      <div class="filter-container">
+        <button class="filter-btn active" data-filter="featured" data-count="06">Featured</button>
+        <button class="filter-btn" data-filter="all" data-count="17">All Work</button>
+        <button class="filter-btn" data-filter="focus" data-count="08">Focus</button>
+      </div>
+    </section>
+
+    <section class="work-categories">
+      <!-- Featured View - Card Layout -->
+      <div class="featured-view" data-view="featured">
+        <div class="featured-grid">
+          <div class="project-card-wrapper" data-category="featured" data-work-type="data-science">
+            <!-- Top section: Image with colored background (same as homepage) -->
+            <div class="project-card-image">
+              <img src="img/analytics.png" alt="Climate Data Visualization">
+            </div>
+            <!-- Bottom section: Project details (new structure) -->
+            <div class="project-details">
+              <div class="project-header">
+                <h3 class="project-title">Lorem ipsum feugiat gravida</h3>
+                <div class="project-meta">
+                  <span class="project-tags">Data Science | Analytics | Python</span>
+                </div>
+              </div>
+              <div class="project-description">
+                <p>Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi neque libero semper. Lorem
+                  ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem quae facilis, est, quas
+                  maiores, earum architecto ad non odit deleniti possimus autem cumque adipisci ipsa fuga doloremque
+                  accusamus.</p>
+              </div>
+            </div>
+          </div>
+          <div class="project-card-wrapper" data-category="featured" data-work-type="research">
+            <div class="project-card-image">
+              <img src="img/ux-research.png" alt="UX Research">
+            </div>
+            <div class="project-details">
+              <div class="project-header">
+                <h3 class="project-title">Lorem ipsum feugiat gravida</h3>
+                <div class="project-meta">
+                  <span class="project-tags">Lorem | Ipsum | Dolor</span>
+                </div>
+              </div>
+              <div class="project-description">
+                <p>Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi neque libero semper.</p>
+              </div>
+            </div>
+          </div>
+          <div class="project-card-wrapper" data-category="featured" data-work-type="storytelling">
+            <div class="project-card-image">
+              <img src="img/dashboard.png" alt="Dashboard">
+            </div>
+            <div class="project-details">
+              <div class="project-header">
+                <h3 class="project-title">Lorem ipsum feugiat gravida</h3>
+                <div class="project-meta">
+                  <span class="project-tags">Lorem | Ipsum | Dolor</span>
+                </div>
+              </div>
+              <div class="project-description">
+                <p>Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi neque libero semper. Lorem
+                  ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem quae facilis, est, quas
+                  maiores, earum architecto ad non odit deleniti possimus autem cumque adipisci ipsa fuga doloremque
+                  accusamus.</p>
+              </div>
+            </div>
+          </div>
+          <div class="project-card-wrapper" data-category="featured" data-work-type="journalism">
+            <div class="project-card-image">
+              <img src="img/data-journalism.png" alt="Data Journalism">
+            </div>
+            <div class="project-details">
+              <div class="project-header">
+                <h3 class="project-title">Lorem ipsum feugiat gravida</h3>
+                <div class="project-meta">
+                  <span class="project-tags">Lorem | Ipsum | Dolor</span>
+                </div>
+              </div>
+              <div class="project-description">
+                <p>Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi neque libero semper. Lorem
+                  ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem quae facilis, est, quas
+                  maiores, earum architecto ad non odit deleniti possimus autem cumque adipisci ipsa fuga doloremque
+                  accusamus.</p>
+              </div>
+            </div>
+          </div>
+          <div class="project-card-wrapper" data-category="featured" data-work-type="visualization">
+            <div class="project-card-image">
+              <img src="img/data-visualization.png" alt="Data Visualization">
+            </div>
+            <div class="project-details">
+              <div class="project-header">
+                <h3 class="project-title">Lorem ipsum feugiat gravida</h3>
+                <div class="project-meta">
+                  <span class="project-tags">Lorem | Ipsum | Dolor</span>
+                </div>
+              </div>
+              <div class="project-description">
+                <p>Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi neque libero semper. Lorem
+                  ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem quae facilis, est, quas
+                  maiores, earum architecto ad non odit deleniti possimus autem cumque adipisci ipsa fuga doloremque
+                  accusamus.</p>
+              </div>
+            </div>
+          </div>
+          <div class="project-card-wrapper" data-category="featured" data-work-type="development">
+            <div class="project-card-image">
+              <img src="img/web-des-dev.png" alt="Web Design & Development">
+            </div>
+            <div class="project-details">
+              <div class="project-header">
+                <h3 class="project-title">Lorem ipsum feugiat gravida</h3>
+                <div class="project-meta">
+                  <span class="project-tags">Lorem | Ipsum | Dolor</span>
+                </div>
+              </div>
+              <div class="project-description">
+                <p>Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi neque libero semper.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="all-work-view hidden" data-view="all">
+        <div class="all-work-list">
+
+          <div class="work-item" data-work-type="data-science">
+            <div class="work-title-container">
+              <h3 class="work-title" data-image="img/analytics.png">The Cost of Sunlight</h3>
+            </div>
+            <div class="work-type-indicator"></div>
+          </div>
+
+          <div class="work-item" data-work-type="storytelling">
+            <div class="work-title-container">
+              <h3 class="work-title" data-image="img/dashboard.png">Tarrifs Won't Help</h3>
+            </div>
+            <div class="work-type-indicator"></div>
+          </div>
+
+          <div class="work-item" data-work-type="research">
+            <div class="work-title-container">
+              <h3 class="work-title" data-image="img/ux-research.png">Lorem ipsum facilisi</h3>
+            </div>
+            <div class="work-type-indicator"></div>
+          </div>
+
+          <div class="work-item" data-work-type="development">
+            <div class="work-title-container">
+              <h3 class="work-title" data-image="img/analytics.png">The Cost of Sunlight</h3>
+            </div>
+            <div class="work-type-indicator"></div>
+          </div>
+
+          <div class="work-item" data-work-type="visualization">
+            <div class="work-title-container">
+              <h3 class="work-title" data-image="img/analytics.png">Lorem ipsum commodo habitasse</h3>
+            </div>
+            <div class="work-type-indicator"></div>
+          </div>
+
+          <div class="work-item" data-work-type="journalism">
+            <div class="work-title-container">
+              <h3 class="work-title" data-image="img/analytics.png">Lorem ipsum facilisi</h3>
+            </div>
+            <div class="work-type-indicator"></div>
+          </div>
+
+          <div class="work-item" data-work-type="data-science">
+            <div class="work-title-container">
+              <h3 class="work-title" data-image="img/analytics.png">The Cost of Sunlight</h3>
+            </div>
+            <div class="work-type-indicator"></div>
+          </div>
+
+          <div class="work-item" data-work-type="development">
+            <div class="work-title-container">
+              <h3 class="work-title" data-image="img/analytics.png">Lorem ipsum commodo habitasse</h3>
+            </div>
+            <div class="work-type-indicator"></div>
+          </div>
+
+          <div class="work-item" data-work-type="visualization">
+            <div class="work-title-container">
+              <h3 class="work-title" data-image="img/analytics.png">Lorem ipsum facilisi</h3>
+            </div>
+            <div class="work-type-indicator"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Focus View - To be designed -->
+      <div class="focus-view hidden" data-view="focus">
+        <!-- Role-based organization -->
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Ligea Alexander. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

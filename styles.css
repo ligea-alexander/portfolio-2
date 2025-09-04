@@ -1,0 +1,2012 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Add top padding to body to compensate for fixed nav */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f6f7f3;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: #1a1a1a;
+  cursor: none;
+  padding-top: 80px;
+  /* Add padding to account for fixed nav height */
+}
+
+#loader {
+  position: fixed;
+  inset: 0;
+  /* shorthand for top: 0; right: 0; bottom: 0; left: 0 */
+  z-index: 999;
+  background-color: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#loader img {
+  width: 200px;
+  animation: pulse 2s ease-in-out infinite;
+  margin: 0;
+  padding: 0;
+  display: block;
+  opacity: 1;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+#main-content {
+  display: none;
+}
+
+/* Custom Cursor Styles */
+
+/* #loader~#custom-cursor {
+  display: none;
+} */
+
+/* Show cursor only when main content is visible */
+/* #main-content:not([style*="display: none"])~#custom-cursor {
+  display: block;
+} */
+
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10;
+  /* mix-blend-mode: difference; */
+}
+
+.cursor-square {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1.5px solid #000;
+  border-radius: 0;
+  /* mix-blend-mode: difference; */
+}
+
+.cursor-circle {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #000;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+}
+
+/* Navigation with updated layout */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+  margin-bottom: 2rem;
+  font-size: 12px;
+  color: #2c2c2cd4;
+  position: fixed;
+  /* Make it sticky */
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+  z-index: 50;
+  transition: all 0.3s ease;
+  /* Smooth transitions */
+}
+
+/* Muted state when scrolled */
+.nav-container.scrolled {
+  opacity: 0.4;
+  /* Muted opacity */
+  background-color: transparent;
+
+}
+
+/* Return to full opacity on hover */
+.nav-container.scrolled:hover {
+  opacity: 1;
+}
+
+.nav-content {
+  display: flex;
+  gap: 3rem;
+  flex: 1
+}
+
+/* Name/brand link - positioned on the right */
+.nav-brand {
+  flex: 1;
+  /* Take up available space on right */
+  display: flex;
+  justify-content: flex-end;
+  /* Align to right edge */
+  padding-right: 1rem;
+}
+
+
+/* Regular nav links - NO ANIMATIONS */
+.nav-content a {
+  color: #1a1a1a;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.nav-content a:hover {
+  color: #666;
+  /* Simple color change on hover */
+}
+
+.nav-brand a {
+  color: #1a1a1a;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.nav-brand a:hover {
+  color: #666;
+  /* Simple color change on hover */
+}
+
+
+/* Location section in middle - DEAD CENTER */
+.nav-location {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  flex: 1;
+  /* Take up center space */
+  justify-content: center;
+  gap: 0.3rem;
+}
+
+/* Email section - positioned between location and brand */
+.nav-email {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 0 2rem;
+  /* Add horizontal padding to create space from Ligea */
+}
+
+.nav-email a {
+  color: #1a1a1a;
+  text-decoration: none;
+  font-size: 14px;
+  /* Same as Work and About */
+  font-weight: 200;
+  /* Same as Work and About */
+  letter-spacing: 0.5px;
+  /* Same as Work and About */
+  transition: color 0.3s ease;
+}
+
+.nav-email a:hover {
+  color: #1a1a1a;
+}
+
+.location-line1 {
+  font-size: 12px;
+  font-weight: 400;
+  color: #1a1a1a;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.location-line2 {
+  font-size: 11px;
+  font-weight: 300;
+  color: #888;
+  /* Lighter text for second line */
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.7;
+}
+
+/* Contact Email - slides down from nav */
+/* Fixed contact element */
+.fixed-contact {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 100;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background-color: #1a1a1a;
+  color: white;
+  text-decoration: none;
+  border-radius: 2rem;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid #1a1a1a;
+}
+
+.contact-link:hover {
+  background-color: transparent;
+  color: #1a1a1a;
+  transform: translateY(-2px);
+}
+
+
+/* Header Structure */
+.site-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2rem;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.hero-container {
+  flex: none;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 1800px;
+  width: 100%;
+  text-align: center;
+}
+
+.hero-text-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  width: 100%;
+}
+
+/* Hero Subtitle - "Freelance" */
+.hero-subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: #888;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin: 0 0 -3rem 0;
+  /* Reduce bottom margin from 2rem to 1rem */
+  opacity: 0.8;
+  align-self: flex-start;
+  margin-left: 410px;
+  /* Match the hero-title-layout padding-left */
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero title layout - relative container */
+.hero-title-layout {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  height: 500px;
+  margin: 2rem auto;
+  padding-left: 200px;
+}
+
+/* Title rows - relative positioning */
+.title-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: .8rem;
+  gap: 1.5rem;
+}
+
+/* Row 1 - Creative + Teal bar */
+.row-1 {
+  justify-content: flex-start;
+}
+
+.row-1 .title {
+  padding-left: 0px;
+  /* Reduce padding just for Creative */
+}
+
+/* Row 2 - Yellow bar + Technologist */
+.row-2 {
+  justify-content: flex-start;
+}
+
+/* Row 3 - Visual overlapping + Pink bar */
+.row-3 {
+  justify-content: flex-start;
+  position: relative;
+}
+
+/* Row 4 - Red bar + Storyteller */
+.row-4 {
+  justify-content: flex-start;
+}
+
+/* Title containers */
+.title-container {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 7rem);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  padding-left: 30px;
+}
+
+/* Bar containers */
+.bar-container {
+  /* border-radius: 3px; */
+  opacity: 1;
+}
+
+.teal-bar {
+  background-color: #5AAAAF;
+  width: 450px;
+  height: 100px;
+}
+
+.yellow-bar {
+  background-color: #FFD86F;
+  width: 400px;
+  height: 100px;
+}
+
+.pink-bar {
+  background-color: #FFBDF2;
+  width: 720px;
+  height: 100px;
+  margin-left: 450px;
+  /* Push it right to align under where "Technologist" sits */
+  padding-left: 0;
+}
+
+.red-bar {
+  background-color: #BB4142;
+  width: 400px;
+  height: 100px;
+}
+
+/* Visual - special positioning for overlap */
+.visual-container {
+  position: absolute;
+  width: 400px;
+  top: -50px;
+  /* Move up/down: negative = up, positive = down */
+  /* Overlap yellow bar from row 2 */
+  left: 3px;
+  /* Move left/right: smaller = left, larger = right */
+  transform: rotate(-18deg);
+  /* Angle: negative = counterclockwise, positive = clockwise */
+  z-index: 8;
+  /* Higher z-index to overlap both yellow and red bars */
+  /* Keep this high to overlap rectangles */
+  /* Add isolation context for blend mode */
+  /* isolation: isolate; */
+}
+
+.title--script {
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  font-size: clamp(3.2rem, 7vw, 10rem);
+  color: #3344A8;
+  mix-blend-mode: multiply;
+  position: relative;
+  /* z-index: 8; */
+}
+
+/* Hero Roles */
+.hero-roles {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666;
+  letter-spacing: 1px;
+  margin: 3rem 0 1rem 0;
+  text-transform: uppercase;
+  line-height: 1.4;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.hero-roles:hover {
+  opacity: 1;
+}
+
+/* Tagline */
+.tagline {
+  max-width: 600px;
+  width: 90%;
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+  padding-top: 4.5rem;
+}
+
+.tagline .greeting {
+  font-size: 11px;
+  font-weight: 300;
+  color: #666;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.tagline a {
+  color: #666;
+  text-decoration: underline;
+  font-size: inherit;
+  transition: color 0.3s ease;
+  text-transform: lowercase;
+}
+
+.tagline a:hover {
+  color: #1a1a1a;
+}
+
+/* Style the "more about me" link */
+.hero-button {
+  display: inline-block;
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  text-transform: lowercase;
+}
+
+
+/* Hover definition styling */
+.hero-button:hover {
+  color: #1a1a1a;
+  border-color: #1a1a1a;
+  background-color: rgba(26, 26, 26, 0.05);
+}
+
+/* Hide button wrapper initially, show after scroll or interaction */
+.hero-button-wrapper {
+  margin-top: 1rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.hero-button-wrapper.show {
+  opacity: 1;
+}
+
+/* .hover-define {
+  position: relative;
+  cursor: pointer;
+  border-bottom: 1px dotted #666;
+} */
+
+.definition-text {
+  opacity: 0;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffffb8;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.hover-define:hover .definition-text {
+  opacity: 1;
+}
+
+.arrow-symbol {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+
+/* Featured Work Section - Two Column Layout */
+.featured-work {
+  padding: 100px 0;
+  /* Standardize to 100px top and bottom */
+  margin: 0;
+  max-width: none;
+  width: 100%;
+}
+
+.featured-content {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  /* Give grid side slightly more space */
+  gap: 8rem;
+  /* Reduce gap to give more room to grid */
+  align-items: start;
+  padding: 0 2rem;
+  max-width: 2400px;
+  /* Increase container width */
+  margin: 0 auto;
+}
+
+.featured-text {
+  padding-top: 8rem;
+  padding-left: 12rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.featured-work h2 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  /* Reduce from 18.75rem to 8rem */
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 2px;
+  /* Reduce from 6px */
+  margin: 0;
+  text-align: left;
+  color: #000;
+}
+
+.featured-work h2 span {
+  display: block;
+  margin-left: 10rem
+}
+
+.featured-description {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  /* Reduce from 4rem to 1.25rem */
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: 0.02rem;
+  color: #666;
+  margin: 0;
+  max-width: 600px;
+}
+
+.featured-text>span:last-child {
+  display: block;
+  font-weight: 300;
+  color: rgb(255, 192, 221);
+  opacity: 0;
+  /* Hidden initially */
+  transform: translateY(20px);
+  /* Start below */
+  transition: none;
+  /* Disable CSS transitions */
+  margin-top: 1.5rem;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 450px);
+  /* Increase from 300px to 450px */
+  gap: 2rem;
+  /* Reduce gap slightly to allow bigger cards */
+  width: 100%;
+  max-width: 1600px;
+  /* Increase from 1500px to 1600px */
+}
+
+.project-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  box-shadow: none;
+  transition: all 0.3s ease;
+  /* Change to 'all' to include box-shadow */
+  /* Add subtle hover back */
+  padding: 0;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Specific background colors for each card */
+.project-card:nth-child(1) {
+  background-color: #3344A8;
+}
+
+/* Blue */
+
+.project-card:nth-child(2) {
+  background-color: #BB4142;
+}
+
+/* Red */
+
+.project-card:nth-child(3) {
+  background-color: #5AAAAF;
+}
+
+/* Teal */
+
+.project-card:nth-child(4) {
+  background-color: #00634E;
+}
+
+/* Dark Green */
+
+.project-card:nth-child(5) {
+  background-color: #FFBDF2;
+}
+
+/* Pink */
+
+.project-card:nth-child(6) {
+  background-color: #FFD86F;
+}
+
+/* Yellow */
+
+/* Project image styling */
+
+.project-card img {
+  width: 75%;
+  /* Reduce slightly from 80% */
+  height: 75%;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+/* Project info container - holds both title and category */
+.project-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #000;
+  border-radius: 4px;
+  padding: 0.8rem 1rem;
+  width: 50%;
+  z-index: 3;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  /* Control spacing between title and category */
+}
+
+/* Project title - no absolute positioning needed */
+.project-title {
+  color: #C2BEBE;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.02rem;
+  margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Project category - no absolute positioning needed */
+.project-category {
+  color: #999;
+  font-size: 0.7rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.01rem;
+  margin: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Remove the black overlay since project-info now provides the background */
+.project-card::after {
+  display: none;
+}
+
+/* About Bridge Section */
+.about-bridge {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 2rem;
+  padding: 2rem 6rem;
+  /* Reduce from 100px to 60px to match tighter spacing */
+  align-items: start;
+  max-width: none;
+  margin: 0 auto;
+}
+
+.bridge-header {
+  padding-left: 40rem;
+  padding-right: 45rem;
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+
+.bridge-header h2 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  /* Larger title */
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 1px;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* Image */
+.bridge-content {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+  padding-left: 10rem;
+  /* Match the featured-text padding-left */
+  padding-top: 2rem
+}
+
+.image-block img {
+  width: 700px;
+  height: 700px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Text block - larger, more readable */
+.text-block {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  /* Add some top padding to align better */
+}
+
+.bridge-description {
+  padding-top: 30rem;
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  /* Much larger text */
+  font-weight: 600;
+  line-height: 1.3;
+  color: #1a1a1a;
+  margin: 0;
+  text-indent: 1em
+}
+
+/* Services Section */
+.services {
+  padding: 100px 0;
+  margin: 0;
+  max-width: none;
+  width: 100vw;
+  /* Full viewport width */
+  margin-left: calc(-50vw + 50%);
+  /* Break out of container */
+  margin-right: calc(-50vw + 50%);
+  /* Break out of container */
+}
+
+.services h2 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 600;
+  line-height: 1.1;
+  text-align: left;
+  color: #1a1a1a;
+  padding-top: 8rem;
+  padding-left: 12rem;
+  /* Keep the original positioning */
+  margin-bottom: 4rem;
+}
+
+.services h2 span {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 600;
+  line-height: 1.1;
+  display: block;
+  margin-left: 11rem;
+  /* Keep the "Tools" offset */
+  color: #666;
+}
+
+/* Full-width layout */
+.services-flex {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  /* Full viewport width */
+  margin-left: calc(-50vw + 50%);
+  /* Break out of container */
+  margin-right: calc(-50vw + 50%);
+  /* Break out of container */
+  min-height: 600px;
+  /* Set minimum height for both blocks */
+}
+
+.services-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* gap: 1.5rem; */
+  padding-left: 0;
+  justify-content: space-between;
+  /* Evenly distribute service items */
+  /* Remove left padding to reach left edge */
+  /* padding-right: 1rem; */
+  margin-left: 0;
+  min-height: 600px;
+  /* Match the tools cloud height */
+  max-height: 600px;
+  /* Prevent stretching */
+  background: #3344A8;
+  /* Unified gray background for entire left block */
+  overflow: hidden;
+  /* Hide overflow to prevent stretching */
+}
+
+.service-item {
+  flex: 1;
+  /* Each item takes equal space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 0.8px solid #b1b0b0;
+  overflow: hidden;
+  border-radius: 0;
+  color: #fff;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: none;
+  background: transparent !important;
+  position: relative;
+  /* For absolute positioning of service-card */
+}
+
+/* Remove border from last service item */
+.service-item:last-child {
+  border-bottom: none;
+}
+
+.service-item:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  /* Subtle hover effect */
+}
+
+/* Active state with assigned colors */
+.service-item.active[data-service="data-science"] {
+  background: #3344A8 !important;
+}
+
+.service-item.active[data-service="storytelling"] {
+  background: #BB4142 !important;
+}
+
+.service-item.active[data-service="development"] {
+  background: #FBBF24 !important;
+}
+
+.service-item.active[data-service="design"] {
+  background: #34D399 !important;
+}
+
+.service-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.8rem 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  color: #fff;
+}
+
+.service-header h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 300;
+  color: #e6e6e6;
+  margin: 0;
+  transition: color 0.3s ease;
+  text-align: center;
+  /* flex: 1; */
+}
+
+.service-toggle {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #666;
+  transition: transform 0.3s ease;
+  user-select: none;
+  display: none;
+}
+
+.service-item.active .service-toggle {
+  transform: rotate(45deg);
+}
+
+.service-item.active .service-header h3 {
+  color: gray
+}
+
+.service-card {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  padding: 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  /* Reduce gap for full-width layout */
+  align-items: start;
+}
+
+.service-item.active .service-card {
+  max-height: 400px;
+  padding: 0 0 2rem 0;
+}
+
+.service-card p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #ece9e9;
+  margin-bottom: 0;
+  max-width: none;
+  grid-column: 1;
+  padding-left: 3rem;
+}
+
+.service-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-rows: repeat(4, auto);
+  grid-auto-flow: column;
+  gap: 0.8rem 2rem;
+  grid-column: 2;
+  align-items: start;
+  padding-left: 1rem;
+}
+
+.service-card li {
+  font-size: 0.95rem;
+  color: #ece9e9;
+  padding: 0.5rem 0;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.service-card li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #999;
+  font-weight: 300;
+}
+
+/* Services Tools */
+/* Services Tools Cloud - extend to right edge */
+.tools-cloud-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+  min-width: 400px;
+  /* Add minimum width */
+  background: transparent;
+  /* Add background for debugging */
+}
+
+.services-tools-cloud {
+  flex: 1;
+  background: #F7D77A;
+  border-radius: 0;
+  padding: 2.5rem;
+  min-height: 600px;
+  min-width: 500px;
+  /* Add minimum width */
+  margin-right: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.tools-cloud-container span {
+  display: inline-block;
+  font-size: 1.4em;
+  color: #222;
+  font-weight: 400;
+  opacity: 0.85;
+  cursor: pointer;
+  position: absolute;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  animation: subtleFloat 8s ease-in-out infinite;
+  /* More subtle animation */
+  /* Add fuzzy blur effect */
+  text-shadow: 0 0 20px rgba(34, 34, 34, 0.3),
+    0 0 40px rgba(34, 34, 34, 0.2),
+    0 0 60px rgba(34, 34, 34, 0.1);
+  filter: drop-shadow(0 0 15px rgba(34, 34, 34, 0.25));
+}
+
+.tools-cloud-container span:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  /* Enhance blur on hover */
+  text-shadow: 0 0 25px rgba(34, 34, 34, 0.4),
+    0 0 50px rgba(34, 34, 34, 0.3),
+    0 0 75px rgba(34, 34, 34, 0.2);
+  filter: drop-shadow(0 0 20px rgba(34, 34, 34, 0.35));
+}
+
+/* Subtle floating animation - much smaller movements */
+@keyframes subtleFloat {
+
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px);
+  }
+
+  25% {
+    transform: translateY(-3px) translateX(2px);
+  }
+
+  50% {
+    transform: translateY(2px) translateX(-1px);
+  }
+
+  75% {
+    transform: translateY(-1px) translateX(3px);
+  }
+}
+
+/* Contact Section */
+/* .contact-section {
+  padding: 60px 0;
+  text-align: center;
+  background-color: #f8f8f8;
+}
+
+.contact-section h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.contact-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.contact-section a {
+  color: #1a1a1a;
+  text-decoration: underline;
+  font-weight: 600;
+} */
+
+
+/* Call to Action Section */
+.cta h2 {
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  /* Reduce from 18.75rem to 8rem */
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.cta {
+  text-align: center;
+  background-color: #f8f8f8;
+  border-radius: 12px;
+}
+
+/* ===== ABOUT PAGE STYLES ===== */
+.about-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.about-hero {
+  text-align: center;
+  padding: 80px 0 60px;
+}
+
+.about-hero h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: bold;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.about-content {
+  padding: 40px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.about-text p,
+.ai-text p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.about-ai {
+  padding: 60px 0;
+  background-color: #fafafa;
+}
+
+.about-ai h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 2rem;
+  color: #1a1a1a;
+}
+
+/* ===== WORK PAGE STYLES ===== */
+/* View switching */
+.hidden {
+  display: none;
+}
+
+.work-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10rem 2rem 0 2rem;
+  /* Add 10rem top padding to entire work main */
+}
+
+/* Work Filter Bar */
+
+.work-filters {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 0 2rem 0;
+  margin-bottom: 3rem;
+
+}
+
+.filter-container {
+  display: flex;
+  gap: 8rem;
+  /* Increase gap from 4rem to 8rem for more space */
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  align-items: baseline;
+  /* Align baselines for consistent positioning */
+}
+
+
+.filter-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  white-space: nowrap;
+  /* Prevent text wrapping */
+  min-width: fit-content;
+  /* Ensure button takes minimum needed width */
+}
+
+.filter-btn {
+  font-size: clamp(2rem, 4vw, 5rem);
+  /* Reduce max size from 7rem to 5rem */
+  font-weight: 600;
+  color: #ccc;
+  letter-spacing: 0;
+}
+
+.filter-btn.active {
+  color: #1a1a1a;
+  /* Active state - black */
+}
+
+.filter-btn:hover {
+  color: #666;
+  /* Hover state */
+}
+
+/* Add small numbers next to each filter */
+.filter-btn::after {
+  content: attr(data-count);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #999;
+  vertical-align: top;
+  /* margin-left: 0.1rem; */
+}
+
+/* === Featured view ===*/
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  /* 2 columns for work page */
+  gap: 8rem 8rem;
+  /* 8rem vertical, 8rem horizontal */
+  padding: 2rem 0;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+}
+
+/* Project card wrapper - contains both image and details */
+.project-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.project-card-wrapper:hover {
+  transform: translateY(-5px);
+}
+
+/* Top section: Image card (same styling as homepage) */
+.project-card-image {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  box-shadow: none;
+  transition: all 0.3s ease;
+  padding: 0;
+  overflow: hidden;
+  aspect-ratio: 1;
+}
+
+/* Work type color system */
+:root {
+  --data-science: #3344A8;
+  --storytelling: #BB4142;
+  --development: #FFD86F;
+  --visualization: #5AAAAF;
+  --research: #00634E;
+  --journalism: #FFBDF2;
+}
+
+/* Apply colors based on data attributes */
+[data-work-type="data-science"] {
+  --work-color: var(--data-science);
+}
+
+[data-work-type="storytelling"] {
+  --work-color: var(--storytelling);
+}
+
+[data-work-type="development"] {
+  --work-color: var(--development);
+}
+
+[data-work-type="visualization"] {
+  --work-color: var(--visualization);
+}
+
+[data-work-type="research"] {
+  --work-color: var(--research);
+}
+
+[data-work-type="journalism"] {
+  --work-color: var(--journalism);
+}
+
+/* Use the color variable */
+.project-card-image,
+.work-type-indicator {
+  background-color: var(--work-color);
+}
+
+/* Featured view - remove nth-child, use data attributes instead */
+.project-card-wrapper[data-work-type="data-science"] .project-card-image {
+  background-color: var(--data-science);
+}
+
+.project-card-wrapper[data-work-type="storytelling"] .project-card-image {
+  background-color: var(--storytelling);
+}
+
+.project-card-wrapper[data-work-type="journalism"] .project-card-image {
+  background-color: var(--journalism);
+}
+
+.project-card-wrapper[data-work-type="visualization"] .project-card-image {
+  background-color: var(--visualization);
+}
+
+.project-card-wrapper[data-work-type="research"] .project-card-image {
+  background-color: var(--research);
+}
+
+.project-card-wrapper[data-work-type="development"] .project-card-image {
+  background-color: var(--development);
+}
+
+
+/* Image styling */
+.project-card-image img {
+  width: 75%;
+  height: 75%;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+}
+
+/* Bottom section: Project details */
+.project-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0;
+}
+
+/* Project header - contains title and meta in same row */
+.project-details .project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+/* Project title */
+.project-details .project-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+  /* Take up available space */
+}
+
+/* Project meta - aligned to the right */
+.project-details .project-meta {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  /* Don't shrink */
+}
+
+.project-details .project-tags {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: 400;
+  white-space: nowrap;
+  /* Prevent wrapping */
+  padding-right: 10px;
+}
+
+/* Project description - separate div below */
+.project-details .project-description {
+  margin-top: 0.25rem;
+}
+
+.project-details .project-description p {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* === All Work View === */
+
+.all-work-view {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+.all-work-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* All Work View - keep existing layout */
+.work-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+}
+
+.work-title-container {
+  flex: 1;
+}
+
+/* Work title with word splitting for image preview */
+.work-title {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.35em;
+  /* natural gap between words - EXACTLY like your test */
+  height: clamp(68px, 12vh, 120px);
+  overflow: hidden;
+  font-size: clamp(28px, 6vw, 72px);
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Individual words */
+.work-title .word {
+  margin: 0;
+  white-space: nowrap;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  position: relative;
+  z-index: 2;
+}
+
+/* Keep the existing color square */
+.work-type-indicator {
+  width: 100px;
+  height: 100px;
+  background-color: var(--work-color);
+  flex-shrink: 0;
+}
+
+/* Preview container - EXACTLY like your test */
+.preview {
+  position: relative;
+  flex: 0 0 auto;
+  width: 0;
+  /* closed by default; JS animates open */
+  height: 80%;
+  /* smaller than row height */
+  align-self: center;
+  overflow: hidden;
+  border-radius: 10px;
+  background: transparent;
+  opacity: 0;
+  /* fades in */
+  will-change: width, opacity;
+  z-index: 1;
+  /* under the words */
+}
+
+/* Image - EXACTLY like your test */
+.preview__img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: 50% 50%;
+  pointer-events: none;
+  border-radius: 10px;
+}
+
+
+
+/* ===== RESPONSIVE DESIGN SYSTEM ===== */
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1441px) {
+  .featured-content {
+    max-width: 2800px;
+    gap: 10rem;
+  }
+
+  .project-grid {
+    grid-template-rows: repeat(2, 500px);
+    max-width: 1800px;
+  }
+}
+
+/* Laptop/MacBook Pro (1200px - 1440px) */
+@media (max-width: 1440px) and (min-width: 1200px) {
+  .hero-container {
+    height: 78vh;
+    /* Adjusted for laptop to show more tagline */
+  }
+
+  .tagline {
+    padding-top: 3rem;
+    /* Reduced spacing to bring tagline up */
+  }
+
+  .featured-content {
+    grid-template-columns: 0.8fr 1.4fr;
+    /* Reduce text column, increase grid column */
+    gap: 4rem;
+    /* Reduce gap to give more space to cards */
+    padding: 0 3rem;
+    max-width: 1400px;
+    align-items: start;
+    /* Align both text and grid to the top */
+  }
+
+  .featured-text {
+    padding-left: 2rem;
+    /* Reduce left padding */
+    padding-top: 0;
+    /* Remove top padding to align with grid top */
+  }
+
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 400px);
+    /* 2 columns, 3 rows for better fit on laptop screens */
+    gap: 1.5rem;
+    /* Restore some gap for 2-column layout */
+    max-width: 900px;
+    /* Reduce max width for 2-column layout */
+    margin: 0 auto;
+  }
+
+  .bridge-header {
+    padding-left: 8rem;
+    /* Much more reasonable padding */
+  }
+
+  .bridge-content {
+    padding-left: 6rem;
+  }
+
+  .image-block img {
+    width: 500px;
+    height: 500px;
+  }
+
+
+  .about-bridge {
+    grid-template-columns: 1fr 1fr;
+    padding: 6rem 3rem;
+    /* Reduce padding for laptop */
+    gap: 3rem;
+    /* Reduce gap */
+  }
+
+  .bridge-header {
+    padding-left: 10rem;
+    /* Much more reasonable padding for laptop */
+  }
+
+  .bridge-header h2 {
+    font-size: clamp(2rem, 6vw, 3rem);
+    /* Match bridge description font size */
+  }
+
+  .bridge-content {
+    padding-left: 3rem;
+    /* Reduce padding */
+    padding-top: 2rem;
+    /* Reduce top padding */
+  }
+
+  .image-block img {
+    width: 400px;
+    height: 400px;
+    /* Smaller image for laptop */
+  }
+
+  .text-block {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+
+  .bridge-description {
+    padding-top: 200px;
+    /* Reduce from 350px */
+    font-size: clamp(2rem, 6vw, 3rem);
+    /* Smaller text for laptop */
+    text-indent: 1em;
+  }
+}
+
+/* Smaller Laptop (1024px - 1199px) */
+@media (max-width: 1199px) {
+  .hero-title {
+    font-size: clamp(2rem, 7vw, 5rem);
+  }
+
+  .featured-content {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    padding: 0 2rem;
+  }
+
+  .featured-text {
+    padding-left: 4rem;
+    padding-top: 4rem;
+  }
+
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 400px);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* About Bridge - stack layout */
+  .about-bridge {
+    grid-template-columns: 1fr;
+    padding: 6rem 2rem;
+    gap: 3rem;
+  }
+
+  .bridge-header {
+    grid-column: 1;
+    grid-row: 1;
+    padding-left: 4rem;
+    text-align: left;
+  }
+
+  .bridge-content {
+    grid-column: 1;
+    grid-row: 2;
+    padding-left: 4rem;
+    justify-self: start;
+  }
+
+  .image-block img {
+    width: 500px;
+    height: 500px;
+  }
+
+  .text-block {
+    grid-column: 1;
+    grid-row: 3;
+    padding-top: 2rem;
+  }
+
+  .bridge-description {
+    padding-top: 0;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    text-align: left;
+  }
+
+  .services h2 {
+    padding-left: 4rem;
+    padding-top: 4rem;
+  }
+
+  .services-container {
+    padding: 2rem 4rem;
+    max-width: 1600px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+  body {
+    padding-top: 60px;
+  }
+
+  .nav-container {
+    padding: 1.5rem 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .nav-content {
+    gap: 2rem;
+  }
+
+  .nav-location {
+    order: 3;
+    flex: 100%;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .hero-container {
+    height: 70vh;
+    padding: 1rem;
+  }
+
+  .hero-title {
+    font-size: clamp(1.8rem, 8vw, 4rem);
+  }
+
+  .tagline {
+    padding-top: 2rem;
+    max-width: 500px;
+  }
+
+  .featured-text {
+    padding-left: 2rem;
+    padding-top: 2rem;
+  }
+
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 350px);
+    gap: 1.5rem;
+    max-width: 600px;
+  }
+
+  .project-info {
+    width: 60%;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .project-title {
+    font-size: 0.75rem;
+  }
+
+  .project-category {
+    font-size: 0.65rem;
+  }
+
+  .bridge-header {
+    padding-left: 2rem;
+  }
+
+  .bridge-content {
+    padding-left: 2rem;
+  }
+
+  .image-block img {
+    width: 400px;
+    height: 400px;
+  }
+
+  .bridge-description {
+    font-size: clamp(1.5rem, 6vw, 2.8rem);
+    text-indent: 1.5em;
+  }
+
+  .services h2 {
+    padding-left: 2rem;
+    padding-top: 2rem;
+  }
+
+  .services-container {
+    padding: 1rem 2rem;
+  }
+
+  .service-card {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .service-card p {
+    grid-column: 1;
+    padding-right: 0;
+  }
+
+  .service-card ul {
+    grid-column: 1;
+    grid-template-rows: repeat(2, auto);
+    gap: 0.6rem 1.5rem;
+  }
+}
+
+/* Mobile Large (480px - 767px) */
+@media (max-width: 767px) {
+  .nav-container {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .nav-content {
+    order: 1;
+    gap: 1.5rem;
+  }
+
+  .nav-location {
+    order: 2;
+    text-align: left;
+    margin-top: 0.5rem;
+  }
+
+  .nav-email {
+    order: 3;
+    padding: 0;
+    margin-top: 0.5rem;
+  }
+
+  .nav-brand {
+    order: 4;
+    justify-content: flex-start;
+    padding-right: 0;
+    margin-top: 0.5rem;
+  }
+
+  .hero-container {
+    height: 60vh;
+  }
+
+  .hero-title {
+    font-size: clamp(1.5rem, 10vw, 3rem);
+  }
+
+  .hero-subtitle {
+    font-size: 12px;
+  }
+
+  .hero-roles {
+    font-size: 12px;
+  }
+
+  .tagline {
+    font-size: 14px;
+    padding-top: 1rem;
+  }
+
+  .featured-work {
+    padding: 60px 0;
+  }
+
+  .featured-text {
+    padding-left: 1rem;
+    padding-top: 1rem;
+  }
+
+  .featured-work h2 {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+  }
+
+  .featured-work h2 span {
+    margin-left: 4rem;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 300px);
+    max-width: 400px;
+    gap: 1rem;
+  }
+
+  .about-bridge {
+    padding: 4rem 1rem;
+  }
+
+  .bridge-header {
+    padding-left: 1rem;
+  }
+
+  .bridge-header h2 {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+  }
+
+  .bridge-content {
+    padding-left: 1rem;
+  }
+
+  .image-block img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .bridge-description {
+    font-size: clamp(1.2rem, 8vw, 2rem);
+    text-indent: 1em;
+  }
+
+  .services {
+    padding: 60px 0;
+  }
+
+  .services h2 {
+    padding-left: 1rem;
+    padding-top: 1rem;
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+  }
+
+  .services-container {
+    padding: 1rem;
+  }
+
+  .service-header h3 {
+    font-size: clamp(1.2rem, 6vw, 1.6rem);
+    text-align: left;
+  }
+
+  .service-card ul {
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: row;
+  }
+
+  .fixed-contact {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .contact-link {
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+  }
+}
+
+/* Mobile Small (320px - 479px) */
+@media (max-width: 479px) {
+  .hero-title {
+    font-size: clamp(1.2rem, 12vw, 2.5rem);
+  }
+
+  .featured-work h2 span {
+    margin-left: 2rem;
+  }
+
+  .project-grid {
+    grid-template-rows: repeat(6, 250px);
+    max-width: 320px;
+  }
+
+  .project-info {
+    width: 70%;
+    padding: 0.5rem;
+  }
+
+  .project-title {
+    font-size: 0.7rem;
+  }
+
+  .project-category {
+    font-size: 0.6rem;
+  }
+
+  .image-block img {
+    width: 250px;
+    height: 250px;
+  }
+
+  .bridge-description {
+    font-size: clamp(1rem, 10vw, 1.8rem);
+  }
+}
