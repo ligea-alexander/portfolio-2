@@ -1546,7 +1546,8 @@ body {
 }
 
 .focus-content {
-  max-width: 1200px;
+  max-width: 1400px;
+  /* Matches All Work view */
   margin: 0 auto;
   padding: 0 2rem;
 }
@@ -1559,62 +1560,125 @@ body {
   margin-bottom: 1.5rem;
 }
 
+/* Focus title animation setup */
 .focus-title {
-  font-size: 2rem;
+  font-size: clamp(28px, 6vw, 72px);
   font-weight: 700;
   color: white;
   margin: 0;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2.5rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+
+  /* Animation setup */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Text container for SplitText reveal */
+.focus-title-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Hide characters initially for SplitText */
+.focus-title-text .char {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+/* Text reveal system */
+.reveal-text {
+  will-change: transform, opacity;
+  contain: content;
+}
+
+/* SplitText injects spans. These classes give us crisp masking and GPU transforms */
+.split-line {
+  overflow: hidden;
+  display: block;
+}
+
+.split-word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* Reduced motion: just fade in */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-text {
+    opacity: 0;
+  }
 }
 
 /* Section-specific colors matching your Figma */
 .focus-section[data-focus-type="data-visualization"] .focus-title {
   background-color: var(--visualization);
-  /* Red from your mockup */
 }
 
 .focus-section[data-focus-type="web-design"] .focus-title {
   background-color: var(--development);
-  /* Blue from your mockup */
 }
 
 .focus-section[data-focus-type="research"] .focus-title {
-  background-color: var(--research)
-    /* Teal from your mockup */
+  background-color: var(--research);
+}
+
+.focus-section[data-focus-type="data-science"] .focus-title {
+  background-color: var(--data-science);
 }
 
 .focus-projects {
   overflow: hidden;
 }
 
+/* Scale up project items to match All Work proportions */
 .focus-project-item {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
   gap: 2rem;
-  padding: 1.5rem 2rem;
+  padding: 1.25rem 2.5rem;
+  /* Reduce from 2rem to 1.5rem to tighten rows */
   border-bottom: 1px solid #e5e5e5;
   align-items: center;
   transition: background-color 0.2s ease;
+  min-height: 50px;
+  /* Reduce from 80px to 70px for tighter rows */
 }
 
 .focus-project-item:last-child {
   border-bottom: none;
 }
 
+
+/* Scale up project name to be more prominent */
 .project-name {
-  font-weight: 600;
-  font-size: 1.1rem;
+  font-weight: 300;
+  font-size: clamp(17px, 2.5vw, 24px);
+  /* Increase from 18px-24px to 20px-26px */
   color: #1a1a1a;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
 }
 
+/* Scale up topic text */
 .project-topic {
-  color: #666;
-  font-size: 1rem;
+  font-weight: 300;
+  font-size: clamp(17px, 2.5vw, 24px);
+  /* Increase from 18px-24px to 20px-26px */
+  color: #1a1a1a;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
 }
 
+/* Scale up tools text */
 .project-tools {
-  color: #999;
-  font-size: 0.9rem;
+  font-weight: 300;
+  font-size: clamp(16px, 2.3vw, 22px);
+  /* Increase from 18px-24px to 20px-26px */
+  color: #1a1a1a;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
 }
 
 

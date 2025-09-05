@@ -108,8 +108,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // Check which page we're on
   const isHomePage = document.querySelector('.featured-work');
   const isWorkPage = document.querySelector('.work-main');
-  // Register GSAP plugins
-  gsap.registerPlugin(SplitText);
 
   // Register ScrollTrigger plugin
   gsap.registerPlugin(ScrollTrigger);
@@ -328,171 +326,263 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
       });
     }
-    // Replace the current workItems code (lines 328-373) with this:
 
-    // Work page image reveal - EXACT adaptation of your working test
-    if (isWorkPage) {
-      const workTitles = document.querySelectorAll('.work-title');
+    const workTitles = document.querySelectorAll('.work-title');
 
-      workTitles.forEach((title, idx) => {
-        const src = title.getAttribute('data-image');
-        const text = (title.textContent || '').trim();
-        if (!src || !text) {
-          console.warn('Title missing data-image or text:', title);
-          return;
-        }
+    workTitles.forEach((title, idx) => {
+      const src = title.getAttribute('data-image');
+      const text = (title.textContent || '').trim();
+      if (!src || !text) {
+        console.warn('Title missing data-image or text:', title);
+        return;
+      }
 
-        // 1) split into individual words (each word = <p.word>) - EXACTLY like your test
-        const words = text.split(/\s+/);
-        title.textContent = '';
-        words.forEach(w => {
-          const p = document.createElement('p');
-          p.className = 'word';
-          p.textContent = w;
-          title.appendChild(p);
-        });
+      // 1) split into individual words (each word = <p.word>) - EXACTLY like your test
+      const words = text.split(/\s+/);
+      title.textContent = '';
+      words.forEach(w => {
+        const p = document.createElement('p');
+        p.className = 'word';
+        p.textContent = w;
+        title.appendChild(p);
+      });
 
-        // 2) create one reusable preview per title - EXACTLY like your test
-        const preview = document.createElement('div');
-        preview.className = 'preview';
+      // 2) create one reusable preview per title - EXACTLY like your test
+      const preview = document.createElement('div');
+      preview.className = 'preview';
 
-        const img = new Image();
-        img.className = 'preview__img';
-        img.src = src;
-        img.alt = text;
+      const img = new Image();
+      img.className = 'preview__img';
+      img.src = src;
+      img.alt = text;
 
-        // DEBUG: verify load/err - EXACTLY like your test
-        img.addEventListener('load', () => {
-          console.log('✓ Image loaded successfully:', img.src, img.naturalWidth, 'x', img.naturalHeight);
-          img.style.visibility = 'visible';
-          img.style.opacity = '1';
-        });
-        img.addEventListener('error', () => {
-          console.error('✗ Failed to load image:', img.src);
-          img.style.background = 'repeating-linear-gradient(45deg,#c00 0 6px,#600 6px 12px)';
-          img.style.visibility = 'visible';
-        });
+      // DEBUG: verify load/err - EXACTLY like your test
+      img.addEventListener('load', () => {
+        console.log('✓ Image loaded successfully:', img.src, img.naturalWidth, 'x', img.naturalHeight);
+        img.style.visibility = 'visible';
+        img.style.opacity = '1';
+      });
+      img.addEventListener('error', () => {
+        console.error('✗ Failed to load image:', img.src);
+        img.style.background = 'repeating-linear-gradient(45deg,#c00 0 6px,#600 6px 12px)';
+        img.style.visibility = 'visible';
+      });
 
-        preview.appendChild(img);
+      preview.appendChild(img);
 
-        // 3) tween helpers / state - EXACTLY like your test
-        const OPEN_W = 180; //px
-        gsap.set(preview, { width: 0, opacity: 0 });
+      // 3) tween helpers / state - EXACTLY like your test
+      const OPEN_W = 180; //px
+      gsap.set(preview, { width: 0, opacity: 0 });
 
-        let hovering = false;
-        let fixedIndex = -1;
+      let hovering = false;
+      let fixedIndex = -1;
 
-        function measureGaps() {
-          // EXACTLY like your test
-          const els = [...title.querySelectorAll('.word')];
-          const list = [];
+      function measureGaps() {
+        // EXACTLY like your test
+        const els = [...title.querySelectorAll('.word')];
+        const list = [];
 
-          if (els.length === 1) {
-            const rect = els[0].getBoundingClientRect();
-            list.push({ index: 1, mid: rect.right + 20 });
-            return list;
-          }
-
-          for (let i = 0; i < els.length - 1; i++) {
-            const a = els[i].getBoundingClientRect();
-            const b = els[i + 1].getBoundingClientRect();
-            list.push({ index: i + 1, mid: (a.right + b.left) / 2 });
-          }
+        if (els.length === 1) {
+          const rect = els[0].getBoundingClientRect();
+          list.push({ index: 1, mid: rect.right + 20 });
           return list;
         }
 
-        function getFixedPosition() {
-          // EXACTLY like your test
-          const wordCount = title.querySelectorAll('.word').length;
-          if (wordCount === 1) return 1;
-          if (wordCount === 2) return 1;
-
-          const variations = [
-            Math.floor(wordCount / 2),
-            1,
-            wordCount - 1,
-            Math.floor(wordCount / 3),
-            Math.floor((wordCount * 2) / 3)
-          ];
-
-          return variations[idx % variations.length];
+        for (let i = 0; i < els.length - 1; i++) {
+          const a = els[i].getBoundingClientRect();
+          const b = els[i + 1].getBoundingClientRect();
+          list.push({ index: i + 1, mid: (a.right + b.left) / 2 });
         }
+        return list;
+      }
 
-        function insertAt(index) {
-          // EXACTLY like your test
-          const children = [...title.children].filter(n => n !== preview);
-          const ref = children[index] || null;
-          title.insertBefore(preview, ref);
-        }
+      function getFixedPosition() {
+        // EXACTLY like your test
+        const wordCount = title.querySelectorAll('.word').length;
+        if (wordCount === 1) return 1;
+        if (wordCount === 2) return 1;
 
-        function openPreview() {
-          preview.style.display = 'block';
+        const variations = [
+          Math.floor(wordCount / 2),
+          1,
+          wordCount - 1,
+          Math.floor(wordCount / 3),
+          Math.floor((wordCount * 2) / 3)
+        ];
 
-          // Simple, controlled reveal - just expand width smoothly
-          gsap.to(preview, {
-            width: OPEN_W,
-            opacity: 1,
-            duration: 0.35,
-            ease: 'power2.out'
-          });
-        }
+        return variations[idx % variations.length];
+      }
 
-        function closePreview() {
-          // Simple, controlled close
-          gsap.to(preview, {
-            width: 0,
-            opacity: 0,
-            duration: 0.28,
-            ease: 'power2.in',
-            onComplete: () => {
-              preview.style.display = 'none';
-            }
-          });
-        }
+      function insertAt(index) {
+        // EXACTLY like your test
+        const children = [...title.children].filter(n => n !== preview);
+        const ref = children[index] || null;
+        title.insertBefore(preview, ref);
+      }
 
-        function enter(e) {
-          const gaps = measureGaps();
-          if (!gaps.length) return;
+      function openPreview() {
+        preview.style.display = 'block';
 
-          hovering = true;
-
-          if (fixedIndex === -1) {
-            fixedIndex = getFixedPosition();
-          }
-
-          fixedIndex = Math.min(fixedIndex, gaps.length);
-          insertAt(fixedIndex);
-          openPreview();
-        }
-
-        function leave() {
-          hovering = false;
-          closePreview();
-        }
-
-        // events - EXACTLY like your test
-        const workItem = title.closest('.work-item');
-        workItem.addEventListener('mouseenter', enter);
-        workItem.addEventListener('mouseleave', leave);
-
-        // accessibility - EXACTLY like your test
-        workItem.setAttribute('tabindex', '0');
-        workItem.addEventListener('focus', (e) => {
-          const gaps = measureGaps();
-          if (!gaps.length) return;
-          hovering = true;
-
-          if (fixedIndex === -1) {
-            fixedIndex = getFixedPosition();
-          }
-
-          fixedIndex = Math.min(fixedIndex, gaps.length);
-          insertAt(fixedIndex);
-          openPreview();
+        // Simple, controlled reveal - just expand width smoothly
+        gsap.to(preview, {
+          width: OPEN_W,
+          opacity: 1,
+          duration: 0.35,
+          ease: 'power2.out'
         });
-        workItem.addEventListener('blur', leave);
+      }
+
+      function closePreview() {
+        // Simple, controlled close
+        gsap.to(preview, {
+          width: 0,
+          opacity: 0,
+          duration: 0.28,
+          ease: 'power2.in',
+          onComplete: () => {
+            preview.style.display = 'none';
+          }
+        });
+      }
+
+      function enter(e) {
+        const gaps = measureGaps();
+        if (!gaps.length) return;
+
+        hovering = true;
+
+        if (fixedIndex === -1) {
+          fixedIndex = getFixedPosition();
+        }
+
+        fixedIndex = Math.min(fixedIndex, gaps.length);
+        insertAt(fixedIndex);
+        openPreview();
+      }
+
+      function leave() {
+        hovering = false;
+        closePreview();
+      }
+
+      const workItem = title.closest('.work-item');
+      workItem.addEventListener('mouseenter', enter);
+      workItem.addEventListener('mouseleave', leave);
+
+      // accessibility - EXACTLY like your test
+      workItem.setAttribute('tabindex', '0');
+      workItem.addEventListener('focus', (e) => {
+        const gaps = measureGaps();
+        if (!gaps.length) return;
+        hovering = true;
+
+        if (fixedIndex === -1) {
+          fixedIndex = getFixedPosition();
+        }
+
+        fixedIndex = Math.min(fixedIndex, gaps.length);
+        insertAt(fixedIndex);
+        openPreview();
+      });
+      workItem.addEventListener('blur', leave);
+    });
+
+    // Load GSAP SplitText
+    gsap.registerPlugin(SplitText);
+
+    // Focus view animations - SCROLL TRIGGERED REVEAL FOR ALL TEXT
+    function setupFocusScrollReveals() {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function splitElement(el) {
+        if (window.SplitText) {
+          const st = new SplitText(el, {
+            type: 'lines,words',
+            linesClass: 'split-line',
+            wordsClass: 'split-word'
+          });
+          return { lines: st.lines, words: st.words, splitter: st };
+        } else {
+          // Fallback: wrap each word in a span.split-word
+          const text = el.textContent;
+          const frag = document.createDocumentFragment();
+          const container = document.createElement('span');
+          container.className = 'split-line';
+          text.split(/\s+/).forEach((w, i, arr) => {
+            const span = document.createElement('span');
+            span.className = 'split-word';
+            span.textContent = w + (i < arr.length - 1 ? ' ' : '');
+            container.appendChild(span);
+          });
+          el.textContent = '';
+          el.appendChild(container);
+          return { lines: [container], words: Array.from(container.querySelectorAll('.split-word')), splitter: null };
+        }
+      }
+
+      // Get ALL reveal-text elements in focus view - titles AND project items
+      const revealElements = document.querySelectorAll('.focus-view .reveal-text');
+
+      revealElements.forEach((el) => {
+        const { lines, words } = splitElement(el);
+
+        if (prefersReduced) {
+          gsap.set(el, { opacity: 1 });
+          return;
+        }
+
+        gsap.set(lines, { overflow: 'hidden' });
+        gsap.set(words, { yPercent: 115, opacity: 0, skewY: 8, rotate: 0.001 });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 95%', // Trigger earlier for project items
+            once: true
+          }
+        });
+
+        tl.to(words, {
+          yPercent: 0,
+          opacity: 1,
+          skewY: 0,
+          ease: 'power3.out',
+          duration: 1.65,
+          stagger: {
+            // Different stagger for headings vs project text
+            each: el.tagName.match(/^H\d$/) ? 0.08 : 0.05,
+            from: el.tagName.match(/^H\d$/) ? 'center' : 0
+          }
+        });
       });
     }
+
+    // Call setup when Focus view becomes visible
+    const focusViewButton = document.querySelector('[data-filter="focus"]');
+    if (focusViewButton) {
+      focusViewButton.addEventListener('click', () => {
+        setTimeout(() => {
+          setupFocusScrollReveals();
+          ScrollTrigger.refresh(); // Refresh ScrollTrigger after view change
+        }, 100);
+      });
+    }
+
+    // Also setup if focus view is active on page load
+    if (focusView && !focusView.classList.contains('hidden')) {
+      setTimeout(() => {
+        setupFocusScrollReveals();
+      }, 200);
+    }
+
+    // Cleanup and refresh on window resize
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
+    });
   }
 
-});
+}
+
+);
