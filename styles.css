@@ -1203,6 +1203,41 @@ body {
   /* Add 10rem top padding to entire work main */
 }
 
+/* Work type color system */
+:root {
+  --data-science: #3344A8;
+  --storytelling: #BB4142;
+  --development: #FFD86F;
+  --visualization: #5AAAAF;
+  --research: #00634E;
+  --journalism: #FFBDF2;
+}
+
+/* Apply colors based on data attributes */
+[data-work-type="data-science"] {
+  --work-color: var(--data-science);
+}
+
+[data-work-type="storytelling"] {
+  --work-color: var(--storytelling);
+}
+
+[data-work-type="development"] {
+  --work-color: var(--development);
+}
+
+[data-work-type="visualization"] {
+  --work-color: var(--visualization);
+}
+
+[data-work-type="research"] {
+  --work-color: var(--research);
+}
+
+[data-work-type="journalism"] {
+  --work-color: var(--journalism);
+}
+
 /* Work Filter Bar */
 
 .work-filters {
@@ -1307,40 +1342,6 @@ body {
   aspect-ratio: 1;
 }
 
-/* Work type color system */
-:root {
-  --data-science: #3344A8;
-  --storytelling: #BB4142;
-  --development: #FFD86F;
-  --visualization: #5AAAAF;
-  --research: #00634E;
-  --journalism: #FFBDF2;
-}
-
-/* Apply colors based on data attributes */
-[data-work-type="data-science"] {
-  --work-color: var(--data-science);
-}
-
-[data-work-type="storytelling"] {
-  --work-color: var(--storytelling);
-}
-
-[data-work-type="development"] {
-  --work-color: var(--development);
-}
-
-[data-work-type="visualization"] {
-  --work-color: var(--visualization);
-}
-
-[data-work-type="research"] {
-  --work-color: var(--research);
-}
-
-[data-work-type="journalism"] {
-  --work-color: var(--journalism);
-}
 
 /* Use the color variable */
 .project-card-image,
@@ -1464,6 +1465,9 @@ body {
 
 .work-title-container {
   flex: 1;
+  min-width: 0;
+  /* Important for flex truncation */
+  overflow: hidden;
 }
 
 /* Work title with word splitting for image preview */
@@ -1482,6 +1486,10 @@ body {
   margin: 0;
   line-height: 1;
   cursor: pointer;
+  /* Add truncation */
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* Individual words */
@@ -1503,26 +1511,20 @@ body {
   flex-shrink: 0;
 }
 
-/* Preview container - EXACTLY like your test */
 .preview {
   position: relative;
   flex: 0 0 auto;
   width: 0;
-  /* closed by default; JS animates open */
-  height: 80%;
-  /* smaller than row height */
+  height: 120px;
+  /* Fixed height instead of 80% */
   align-self: center;
   overflow: hidden;
-  border-radius: 10px;
   background: transparent;
-  opacity: 0;
-  /* fades in */
-  will-change: width, opacity;
+  opacity: 1;
+  will-change: width;
   z-index: 1;
-  /* under the words */
 }
 
-/* Image - EXACTLY like your test */
 .preview__img {
   position: absolute;
   top: 0;
@@ -1532,11 +1534,88 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  object-position: 50% 50%;
+  /* Use contain for better framing */
+  object-position: center;
+  /* Focus on top-center of image */
   pointer-events: none;
-  border-radius: 10px;
 }
 
+/* === Focus View Styles === */
+.focus-view {
+  padding: 2rem 0;
+}
+
+.focus-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.focus-section {
+  margin-bottom: 4rem;
+}
+
+.focus-header {
+  margin-bottom: 1.5rem;
+}
+
+.focus-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  padding: 1rem 2rem;
+}
+
+/* Section-specific colors matching your Figma */
+.focus-section[data-focus-type="data-visualization"] .focus-title {
+  background-color: var(--visualization);
+  /* Red from your mockup */
+}
+
+.focus-section[data-focus-type="web-design"] .focus-title {
+  background-color: var(--development);
+  /* Blue from your mockup */
+}
+
+.focus-section[data-focus-type="research"] .focus-title {
+  background-color: var(--research)
+    /* Teal from your mockup */
+}
+
+.focus-projects {
+  overflow: hidden;
+}
+
+.focus-project-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 2rem;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e5e5e5;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.focus-project-item:last-child {
+  border-bottom: none;
+}
+
+.project-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+}
+
+.project-topic {
+  color: #666;
+  font-size: 1rem;
+}
+
+.project-tools {
+  color: #999;
+  font-size: 0.9rem;
+}
 
 
 /* ===== RESPONSIVE DESIGN SYSTEM ===== */

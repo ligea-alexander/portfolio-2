@@ -376,7 +376,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         preview.appendChild(img);
 
         // 3) tween helpers / state - EXACTLY like your test
-        const OPEN_W = 220;
+        const OPEN_W = 180; //px
         gsap.set(preview, { width: 0, opacity: 0 });
 
         let hovering = false;
@@ -426,24 +426,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
 
         function openPreview() {
-          // Show the element before animating
           preview.style.display = 'block';
+
+          // Simple, controlled reveal - just expand width smoothly
           gsap.to(preview, {
             width: OPEN_W,
             opacity: 1,
             duration: 0.35,
-            ease: 'power3.out'
+            ease: 'power2.out'
           });
         }
 
         function closePreview() {
+          // Simple, controlled close
           gsap.to(preview, {
             width: 0,
             opacity: 0,
             duration: 0.28,
-            ease: 'power3.in',
+            ease: 'power2.in',
             onComplete: () => {
-              // Completely hide the element when animation is done
               preview.style.display = 'none';
             }
           });
