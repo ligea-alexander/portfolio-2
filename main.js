@@ -1,12 +1,76 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-
   // Loader and main content handling
   const loader = document.getElementById("loader");
   const mainContent = document.getElementById("main-content");
   const footer = document.querySelector(".footer");
-
-  // Hide cursor initially
   const cursor = document.getElementById('custom-cursor');
+
+  // Register ScrollTrigger plugin
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  // ===== MOVE PAGE DETECTION HERE - BEFORE LOADER =====
+  const isHomePage = document.querySelector('.featured-work');
+  const isWorkPage = document.querySelector('.work-main');
+
+  // ===== SCROLL-ONLY REVEAL FUNCTION =====
+  function setupScrollReveals(selector = '.reveal-text') {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function splitElement(el) {
+      const st = new SplitText(el, {
+        type: 'lines,words',
+        linesClass: 'split-line',
+        wordsClass: 'split-word'
+      });
+      return { lines: st.lines, words: st.words, splitter: st };
+    }
+
+    document.fonts.ready.then(() => {
+      console.log('Setting up SCROLL-ONLY reveals...');
+
+      const revealElements = document.querySelectorAll(selector);
+
+      revealElements.forEach((el) => {
+        // Skip work titles - they have their own word-splitting system
+        if (el.classList.contains('work-title') || el.closest('.work-title')) {
+          return;
+        }
+
+        const { lines, words } = splitElement(el);
+
+        if (prefersReduced) {
+          gsap.set(el, { opacity: 1 });
+          return;
+        }
+
+        gsap.set(lines, { overflow: 'hidden' });
+        gsap.set(words, { yPercent: 115, opacity: 0, skewY: 8, rotate: 0.001 });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 90%',
+            once: true,
+            // ADD THIS: Only trigger on actual scroll, not on page load
+            refreshPriority: -1, // Lower priority
+            invalidateOnRefresh: true
+          }
+        });
+
+        tl.to(words, {
+          yPercent: 0,
+          opacity: 1,
+          skewY: 0,
+          ease: 'power3.out',
+          duration: 1.65,
+          stagger: {
+            each: el.tagName.match(/^H\d$/) ? 0.08 : 0.05,
+            from: el.tagName.match(/^H\d$/) ? 'center' : 0
+          }
+        });
+      });
+    });
+  }
 
   // If there's no loader (like on about/work pages), show cursor immediately
   if (!loader) {
@@ -43,9 +107,38 @@ document.addEventListener("DOMContentLoaded", (event) => {
           if (footer) {
             footer.style.display = "block";
           }
-          // Show cursor when content appears
           if (cursor) {
             cursor.style.display = 'block';
+          }
+
+          if (isHomePage) {
+            setTimeout(() => {
+              console.log('Setting up scroll reveals after loader...');
+              setupScrollReveals('.reveal-text');
+
+              // Bridge description animation with fonts ready check
+              document.fonts.ready.then(() => {
+                const bridgeDescription = document.querySelector('.bridge-description');
+                if (bridgeDescription) {
+                  console.log('Setting up bridge description animation');
+
+                  // Simple fade-up animation - no text splitting
+                  gsap.set(bridgeDescription, { opacity: 0, y: 50 });
+
+                  gsap.to(bridgeDescription, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.5,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                      trigger: bridgeDescription,
+                      start: 'top 85%',
+                      once: true
+                    }
+                  });
+                }
+              });
+            }, 500); // Increase from 100 to 500ms
           }
         } else {
           requestAnimationFrame(fade);
@@ -105,13 +198,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 
 
-  // Check which page we're on
-  const isHomePage = document.querySelector('.featured-work');
-  const isWorkPage = document.querySelector('.work-main');
 
-  // Register ScrollTrigger plugin
-  gsap.registerPlugin(ScrollTrigger);
+  // Cleanup and refresh on window resize
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
+  });
+
   if (isHomePage) {
+
     // Animate "View All" text
     gsap.to(".featured-text > span:last-child", { // Target the LAST span child (View All)
       opacity: 1,
@@ -258,12 +354,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }, 500);
       });
 
-      setTimeout(() => {
-        const cloud = document.getElementById('tools-cloud');
-        if (cloud && cloud.children.length === 0) {
-          renderWordCloud(allTools);
-        }
-      }, 1000);
+      // setTimeout(() => {
+      //   const cloud = document.getElementById('tools-cloud');
+      //   if (cloud && cloud.children.length === 0) {
+      //     renderWordCloud(allTools);
+      //   }
+      // }, 1000);
     }
 
     // Service items click handler
@@ -295,6 +391,103 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   // Work page-specific functionality
   if (isWorkPage) {
+
+    // ===== VIEW-SWITCH REVEAL FUNCTION (immediate, snappy reveals) =====
+    function setupViewSwitchReveals(selector) {
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function splitElement(el) {
+        const st = new SplitText(el, {
+          type: 'lines,words',
+          linesClass: 'split-line',
+          wordsClass: 'split-word'
+        });
+        return { lines: st.lines, words: st.words, splitter: st };
+      }
+
+      document.fonts.ready.then(() => {
+        console.log('Setting up VIEW-SWITCH reveals...');
+
+        const revealElements = document.querySelectorAll(selector);
+
+        revealElements.forEach((el) => {
+          // Skip work titles AND already processed elements
+          if (el.classList.contains('work-title') ||
+            el.closest('.work-title') ||
+            el.__switchProcessed) {
+            return;
+          }
+
+          // Only animate elements that are currently in viewport (above the fold)
+          const rect = el.getBoundingClientRect();
+          const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+
+          if (!isInViewport) {
+            return; // Let scroll reveals handle this element
+          }
+
+          // Mark as processed to prevent double-processing
+          el.__switchProcessed = true;
+
+          const { lines, words } = splitElement(el);
+
+          if (prefersReduced) {
+            gsap.set(el, { opacity: 1 });
+            return;
+          }
+
+          // Simple immediate reveal - no complex roll out/in
+          gsap.set(lines, { overflow: 'hidden' });
+          gsap.set(words, { yPercent: 30, opacity: 0 });
+
+          // Simple, immediate reveal
+          gsap.to(words, {
+            yPercent: 0,
+            opacity: 1,
+            ease: 'power2.out',
+            duration: 0.55,
+            delay: 0.1,
+            stagger: {
+              each: 0.03,
+              from: 0
+            }
+          });
+        });
+      });
+    }
+
+    // CALLING THE MAIN SCROLL REVEALS FUNCTION
+    setTimeout(() => {
+      console.log('Setting up work page scroll reveals...');
+      setupScrollReveals('.reveal-text');
+
+      // Separate animation for work titles (no SplitText conflict)
+      function animateWorkTitles() {
+        const workTitles = document.querySelectorAll('.all-work-view .work-title.reveal-text');
+
+        workTitles.forEach((title) => {
+          // Simple fade-up animation that doesn't interfere with word splitting
+          gsap.set(title, { opacity: 0, y: 30 });
+
+          gsap.to(title, {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: title,
+              start: 'top 90%',
+              once: true
+            }
+          });
+        });
+      }
+
+      animateWorkTitles(); // Add this line
+    }, 200);
+
+
+    // ===== ALL WORK VIEW IMAGE REVEAL FUNCTION =====
     // Work page filtering
     const filterButtons = document.querySelectorAll('.filter-btn');
     const featuredView = document.querySelector('.featured-view');
@@ -315,16 +508,51 @@ document.addEventListener("DOMContentLoaded", (event) => {
           if (allWorkView) allWorkView.classList.add('hidden');
           if (focusView) focusView.classList.add('hidden');
 
-          // Show the selected view
+          // Show the selected view and set up BOTH switch + scroll animations
           if (filter === 'featured' && featuredView) {
             featuredView.classList.remove('hidden');
+            setTimeout(() => {
+              // Immediate switch reveal for visible elements
+              setupViewSwitchReveals('.featured-view .reveal-text');
+              // Set up scroll reveals for elements below the fold
+              setTimeout(() => {
+                setupScrollReveals('.featured-view .reveal-text');
+              }, 100);
+            }, 100);
+
           } else if (filter === 'all' && allWorkView) {
             allWorkView.classList.remove('hidden');
+            setTimeout(() => {
+              setupViewSwitchReveals('.all-work-view .reveal-text');
+              setTimeout(() => {
+                setupScrollReveals('.all-work-view .reveal-text');
+              }, 100);
+            }, 100);
+
           } else if (filter === 'focus' && focusView) {
             focusView.classList.remove('hidden');
+            setTimeout(() => {
+              setupViewSwitchReveals('.focus-view .reveal-text');
+              setTimeout(() => {
+                setupScrollReveals('.focus-view .reveal-text');
+              }, 100);
+            }, 100);
           }
+
+          // Refresh ScrollTrigger after view change
+          setTimeout(() => ScrollTrigger.refresh(), 200);
         });
       });
+      // Set up scroll reveals for the initially visible view
+      setTimeout(() => {
+        if (featuredView && !featuredView.classList.contains('hidden')) {
+          setupScrollReveals('.featured-view .reveal-text');
+        } else if (allWorkView && !allWorkView.classList.contains('hidden')) {
+          setupScrollReveals('.all-work-view .reveal-text');
+        } else if (focusView && !focusView.classList.contains('hidden')) {
+          setupScrollReveals('.focus-view .reveal-text');
+        }
+      }, 300);
     }
 
     const workTitles = document.querySelectorAll('.work-title');
@@ -487,102 +715,57 @@ document.addEventListener("DOMContentLoaded", (event) => {
       workItem.addEventListener('blur', leave);
     });
 
-    // Load GSAP SplitText
-    gsap.registerPlugin(SplitText);
 
-    // Focus view animations - SCROLL TRIGGERED REVEAL FOR ALL TEXT
-    function setupFocusScrollReveals() {
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // // Call setup when Featured view becomes visible
+    // const featuredViewButton = document.querySelector('[data-filter="featured"]');
+    // if (featuredViewButton) {
+    //   featuredViewButton.addEventListener('click', () => {
+    //     setTimeout(() => {
+    //       // Immediate switch reveal
+    //       setupViewSwitchReveals('.featured-view .reveal-text');
+    //       // Then setup scroll reveals for when user scrolls
+    //       setTimeout(() => {
+    //         setupScrollReveals('.featured-view .reveal-text');
+    //         ScrollTrigger.refresh();
+    //       }, 800); // After switch animation completes
+    //     }, 100);
+    //   });
+    // }
 
-      function splitElement(el) {
-        if (window.SplitText) {
-          const st = new SplitText(el, {
-            type: 'lines,words',
-            linesClass: 'split-line',
-            wordsClass: 'split-word'
-          });
-          return { lines: st.lines, words: st.words, splitter: st };
-        } else {
-          // Fallback: wrap each word in a span.split-word
-          const text = el.textContent;
-          const frag = document.createDocumentFragment();
-          const container = document.createElement('span');
-          container.className = 'split-line';
-          text.split(/\s+/).forEach((w, i, arr) => {
-            const span = document.createElement('span');
-            span.className = 'split-word';
-            span.textContent = w + (i < arr.length - 1 ? ' ' : '');
-            container.appendChild(span);
-          });
-          el.textContent = '';
-          el.appendChild(container);
-          return { lines: [container], words: Array.from(container.querySelectorAll('.split-word')), splitter: null };
-        }
-      }
+    // // Call setup when All Work view becomes visible
+    // const allWorkButton = document.querySelector('[data-filter="all"]');
+    // if (allWorkButton) {
+    //   allWorkButton.addEventListener('click', () => {
+    //     setTimeout(() => {
+    //       // Immediate switch reveal
+    //       setupViewSwitchReveals('.all-work-view .reveal-text');
+    //       // Then setup scroll reveals
+    //       setTimeout(() => {
+    //         setupScrollReveals('.all-work-view .reveal-text');
+    //         ScrollTrigger.refresh();
+    //       }, 800); // After switch animation completes
+    //     }, 100);
+    //   });
+    // }
+    // // Call setup when Focus view becomes visible
+    // const focusViewButton = document.querySelector('[data-filter="focus"]');
+    // if (focusViewButton) {
+    //   focusViewButton.addEventListener('click', () => {
+    //     setTimeout(() => {
+    //       setupFocusScrollReveals();
+    //       ScrollTrigger.refresh(); // Refresh ScrollTrigger after view change
+    //     }, 100);
+    //   });
+    // }
 
-      // Get ALL reveal-text elements in focus view - titles AND project items
-      const revealElements = document.querySelectorAll('.focus-view .reveal-text');
+    // // Also setup if focus view is active on page load
+    // if (focusView && !focusView.classList.contains('hidden')) {
+    //   setTimeout(() => {
+    //     setupFocusScrollReveals();
+    //   }, 200);
+    // }
 
-      revealElements.forEach((el) => {
-        const { lines, words } = splitElement(el);
 
-        if (prefersReduced) {
-          gsap.set(el, { opacity: 1 });
-          return;
-        }
-
-        gsap.set(lines, { overflow: 'hidden' });
-        gsap.set(words, { yPercent: 115, opacity: 0, skewY: 8, rotate: 0.001 });
-
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 95%', // Trigger earlier for project items
-            once: true
-          }
-        });
-
-        tl.to(words, {
-          yPercent: 0,
-          opacity: 1,
-          skewY: 0,
-          ease: 'power3.out',
-          duration: 1.65,
-          stagger: {
-            // Different stagger for headings vs project text
-            each: el.tagName.match(/^H\d$/) ? 0.08 : 0.05,
-            from: el.tagName.match(/^H\d$/) ? 'center' : 0
-          }
-        });
-      });
-    }
-
-    // Call setup when Focus view becomes visible
-    const focusViewButton = document.querySelector('[data-filter="focus"]');
-    if (focusViewButton) {
-      focusViewButton.addEventListener('click', () => {
-        setTimeout(() => {
-          setupFocusScrollReveals();
-          ScrollTrigger.refresh(); // Refresh ScrollTrigger after view change
-        }, 100);
-      });
-    }
-
-    // Also setup if focus view is active on page load
-    if (focusView && !focusView.classList.contains('hidden')) {
-      setTimeout(() => {
-        setupFocusScrollReveals();
-      }, 200);
-    }
-
-    // Cleanup and refresh on window resize
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
-    });
   }
-
 }
-
 );

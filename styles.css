@@ -806,7 +806,8 @@ body {
   line-height: 1.3;
   color: #1a1a1a;
   margin: 0;
-  text-indent: 1em
+  text-indent: 1em;
+  opacity: 0;
 }
 
 /* Services Section */
@@ -1189,6 +1190,112 @@ body {
   margin-bottom: 2rem;
   color: #1a1a1a;
 }
+
+/* ==== FOOTER Section ==== */
+/* Enhanced Footer Styles */
+.footer {
+  background-color: #1a1a1a;
+  color: #e6e6e6;
+  padding: 4rem 0 2rem 0;
+  margin-top: 8rem;
+  /* Add space above footer */
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid #333;
+}
+
+.footer-section h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.footer-contact p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ccc;
+  margin-bottom: 1.5rem;
+}
+
+.footer-email {
+  display: inline-block;
+  font-size: 1.1rem;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid #333;
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+}
+
+.footer-email:hover {
+  background-color: #fff;
+  color: #1a1a1a;
+  border-color: #fff;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-nav a {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+}
+
+.footer-nav a:hover {
+  color: #fff;
+}
+
+.footer-location p {
+  font-size: 0.95rem;
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.footer-social {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-social a {
+  color: #999;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-social a:hover {
+  color: #fff;
+}
+
 
 /* ===== WORK PAGE STYLES ===== */
 /* View switching */
@@ -1602,6 +1709,17 @@ body {
 .split-word {
   display: inline-block;
   will-change: transform, opacity;
+}
+
+/* Fix for SplitText removing word spacing */
+.split-word {
+  margin-right: 0.25em;
+  /* Restore natural word spacing */
+}
+
+.split-word:last-child {
+  margin-right: 0;
+  /* Remove margin from last word */
 }
 
 /* Reduced motion: just fade in */

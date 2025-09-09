@@ -6,10 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <script src="main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="main.js" defer></script>
   <title>Ligea-Alex</title>
 </head>
 
@@ -80,7 +80,6 @@
         <p class="hero-roles">Data Journalist · Data Visualization Engineer · Researcher</p>
       </div>
       </div>
-      <!-- Keep existing tagline unchanged -->
       <p class="tagline">
         <span class="greeting">HI, I'M LIGEA</span>.<br><br>
         I use the <span class="hover-define">visual grammar of information</span>
@@ -91,8 +90,8 @@
     </header>
     <section class="featured-work">
       <div class="featured-content">
-        <div class="featured-text">
-          <h2>Featured <span>Work</span></h2>
+        <div class="featured-text ">
+          <h2 class="reveal-text">Featured <span>Work</span></h2>
           <div class="featured-description">
             Lorem ipsum dolor sit amet consectetur. Porta a magna laoreet morbi eget mattis ac. Ipsum fringilla eu
             suspendisse aliquam. Leo in ultrices neque amet. Quam aliquam laoreet scelerisque tellus tortor porttitor
@@ -149,7 +148,7 @@
     </section>
     <section class="about-bridge">
       <div class="bridge-header">
-        <h2>Designing for Clarity, Resonance, and Impact</h2>
+        <h2 class="reveal-text">Designing for Clarity, Resonance, and Impact</h2>
       </div>
       <div class="bridge-content">
         <div class="image-block">
@@ -172,9 +171,9 @@
       </div>
     </section>
     <!-- Update the services section: -->
-    <section class="services">
+    <section class=" services">
       <div class="services-header">
-        <h2>Services <span>Tools</span></h2>
+        <h2 class="reveal-text">Services <span>Tools</span></h2>
       </div>
       <div class="services-flex">
         <div class="services-list">
@@ -185,7 +184,8 @@
             </div>
             <div class="service-card">
               <p>Transform raw data into actionable insights through statistical analysis, machine learning, and
-                predictive modeling. I help organizations make data-driven decisions with custom analytics solutions.
+                predictive modeling. I help organizations make data-driven decisions with custom analytics
+                solutions.
               </p>
               <ul>
                 <li>Statistical Analysis & Modeling</li>
@@ -218,7 +218,8 @@
               <span class="service-toggle">+</span>
             </div>
             <div class="service-card">
-              <p>Build robust, scalable web applications and tools that bring your data to life. Full-stack development
+              <p>Build robust, scalable web applications and tools that bring your data to life. Full-stack
+                development
                 with focus on performance, accessibility, and user experience.</p>
               <ul>
                 <li>Frontend Development (React, Vue, D3.js)</li>
@@ -252,7 +253,7 @@
         </div>
       </div>
     </section>
-    <section class="cta">
+    <!-- <section class="cta">
       <h2>Let's Get To Work</h2>
       <p>I collaborate with mission-driven teams as a visual storyteller, insight specialist, and creative developer.
         Whether you need research-driven strategy, a compelling data narrative, or an interactive prototype — let's
@@ -260,18 +261,43 @@
       <p>
         You can reach me at <a href="mailto:ligea.alex@gmail.com">ligea.alex@gmail.com</a>.
       </p>
-    </section>
+    </section> -->
   </main>
   <footer class="footer">
     <div class="footer-content">
-      <p>&copy; 2025 Ligea Alexander. All rights reserved.</p>
+      <div class="footer-main">
+        <div class="footer-section footer-contact">
+          <h3>Let's Work Together</h3>
+          <p>Ready to turn complex data into compelling stories?</p>
+          <a href="mailto:hi@ligea-alexander.xyz" class="footer-email">hi@ligea-alexander.xyz</a>
+        </div>
+
+        <div class="footer-section footer-links">
+          <h3>Explore</h3>
+          <nav class="footer-nav">
+            <a href="index.html">Home</a>
+            <a href="work.html">Work</a>
+            <a href="about.html">Background</a>
+          </nav>
+        </div>
+
+        <div class="footer-section footer-location">
+          <h3>Currently</h3>
+          <p>Hamburg, Germany</p>
+          <p>New York, America</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Ligea Alexander. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          <a href="#" aria-label="GitHub">GitHub</a>
+          <a href="#" aria-label="Dribbble">Dribbble</a>
+        </div>
+      </div>
     </div>
   </footer>
-  <div class="fixed-contact">
-    <a href="mailto:ligea.alex@gmail.com" class="contact-link">
-      <span class="contact-text">ligea.alex@gmail.com</span>
-    </a>
-  </div>
   <!-- Custom Cursor Styles -->
   <div id="custom-cursor">
     <div class="cursor-square"></div>
