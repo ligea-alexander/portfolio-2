@@ -1547,6 +1547,7 @@ body {
   margin: 0;
 }
 
+
 /* === All Work View === */
 
 .all-work-view {
@@ -1561,20 +1562,41 @@ body {
 }
 
 /* All Work View - keep existing layout */
-.work-item {
+/* .work-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 0;
   border-bottom: 1px solid #e0e0e0;
   cursor: pointer;
+} */
+.work-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.work-title-container {
+
+/* .work-title-container {
   flex: 1;
   min-width: 0;
-  /* Important for flex truncation */
+  Important for flex truncation
   overflow: hidden;
+} */
+
+.work-title-container {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.work-type-indicator {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 /* Work title with word splitting for image preview */
@@ -1729,7 +1751,7 @@ body {
   }
 }
 
-/* Section-specific colors matching your Figma */
+/* Section-specific colors */
 .focus-section[data-focus-type="data-visualization"] .focus-title {
   background-color: var(--visualization);
 }
@@ -1754,7 +1776,7 @@ body {
 .focus-project-item {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 2rem;
+  /* gap: 2rem; */
   padding: 1.25rem 2.5rem;
   /* Reduce from 2rem to 1.5rem to tighten rows */
   border-bottom: 1px solid #e5e5e5;
@@ -1767,7 +1789,6 @@ body {
 .focus-project-item:last-child {
   border-bottom: none;
 }
-
 
 /* Scale up project name to be more prominent */
 .project-name {
@@ -1797,6 +1818,219 @@ body {
   color: #1a1a1a;
   line-height: 1.1;
   letter-spacing: 0.01em;
+}
+
+/* Position the text elements in the grid */
+.focus-project-item .project-name {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.focus-project-item .project-topic {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.focus-project-item .project-tools {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+/* === Work Accordion Styles === */
+
+.work-accordion {
+  grid-column: 1 / -1;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* background-color: #fafafa; */
+}
+
+.work-item.active .work-accordion,
+.focus-project-item.active .work-accordion {
+  max-height: 600px;
+}
+
+.work-item.active .accordion-content,
+.focus-project-item.active .accordion-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.accordion-content {
+  padding: 3rem 2rem 1rem 2rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s;
+}
+
+/* Active grid template rows */
+.work-item.active,
+.focus-project-item.active {
+  grid-template-rows: auto auto;
+  background-color: #f5f5f5;
+}
+
+.work-item:hover,
+.focus-project-item:hover {
+  background-color: #fafafa;
+}
+
+/* Project Details Grid */
+.project-details-grid {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  /* Text column, Images+Button column */
+  grid-template-rows: auto auto auto;
+  /* Three rows: text, images, button */
+  gap: 1.5rem 3rem;
+  align-items: start;
+}
+
+/* Project Text Column - spans left side */
+.project-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  grid-column: 1;
+  grid-row: 1 / span 3;
+  /* Span all three rows */
+}
+
+/* For All-Work Accordion ONLY */
+.project-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--work-color);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.project-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+}
+
+.project-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-tools span:first-child {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.project-tools span:last-child {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Project Images Grid */
+.project-images {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* Align to top */
+}
+
+/* Smaller image grid */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+  /* Increase from 0.75rem */
+  width: 100%;
+  max-width: 400px;
+  /* Increase from 300px to 400px */
+}
+
+.preview-image {
+  aspect-ratio: 1;
+  background-color: #d0d0d0;
+  /* border-radius: 4px; */
+  transition: transform 0.3s ease;
+}
+
+
+/* View Project Button - positioned under images */
+.view-project-btn {
+  grid-column: 2;
+  grid-row: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0 0 0.5rem;
+  background-color: transparent;
+  /* Remove background */
+  color: #1a1a1a;
+  /* Change to dark text */
+  text-decoration: none;
+  font-size: 3rem;
+  /* Increase font size to match screenshot */
+  font-weight: 600;
+  /* Make it bolder */
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  justify-self: center;
+  /* Align to left edge instead of center */
+  margin-top: 1rem;
+  white-space: nowrap;
+  text-transform: uppercase;
+  /* Make it uppercase like in screenshot */
+}
+
+.view-project-btn:hover {
+  background-color: transparent;
+  /* Keep transparent on hover */
+  color: #666;
+  /* Lighter color on hover */
+  transform: translateX(5px);
+  /* Keep the slide effect */
+}
+
+/* Update arrow styling for the plain text button */
+.view-project-btn .arrow {
+  font-size: 2rem;
+  /* Slightly larger arrow */
+  transition: transform 0.3s ease;
+  transform: rotate(5deg);
+  display: inline-block;
+  color: #1a1a1a;
+  /* Match text color */
+}
+
+.view-project-btn:hover .arrow {
+  transform: rotate(10deg) translate(2px, -2px);
+  color: #666;
+  /* Match hover text color */
+}
+
+/* === Focus-View ONLY Accordion Styles === */
+/* .focus-project-item:hover {
+  background-color: #fafafa;
+} */
+
+/* ALL Work View ONLY Accordion Styles */
+
+.all-work-view .work-title-container {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.all-work-view .work-type-indicator {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 

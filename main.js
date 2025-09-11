@@ -740,56 +740,58 @@ document.addEventListener("DOMContentLoaded", (event) => {
       workItem.addEventListener('blur', leave);
     });
 
+    // Add this to your work page section in main.js
+    // Update the setupAccordions function to handle Focus items
+    function setupAccordions() {
+      const workItems = document.querySelectorAll('.work-item');
+      const focusItems = document.querySelectorAll('.focus-project-item');
 
-    // // Call setup when Featured view becomes visible
-    // const featuredViewButton = document.querySelector('[data-filter="featured"]');
-    // if (featuredViewButton) {
-    //   featuredViewButton.addEventListener('click', () => {
-    //     setTimeout(() => {
-    //       // Immediate switch reveal
-    //       setupViewSwitchReveals('.featured-view .reveal-text');
-    //       // Then setup scroll reveals for when user scrolls
-    //       setTimeout(() => {
-    //         setupScrollReveals('.featured-view .reveal-text');
-    //         ScrollTrigger.refresh();
-    //       }, 800); // After switch animation completes
-    //     }, 100);
-    //   });
-    // }
+      // Handle All Work View accordions
+      workItems.forEach(item => {
+        const titleContainer = item.querySelector('.work-title-container');
 
-    // // Call setup when All Work view becomes visible
-    // const allWorkButton = document.querySelector('[data-filter="all"]');
-    // if (allWorkButton) {
-    //   allWorkButton.addEventListener('click', () => {
-    //     setTimeout(() => {
-    //       // Immediate switch reveal
-    //       setupViewSwitchReveals('.all-work-view .reveal-text');
-    //       // Then setup scroll reveals
-    //       setTimeout(() => {
-    //         setupScrollReveals('.all-work-view .reveal-text');
-    //         ScrollTrigger.refresh();
-    //       }, 800); // After switch animation completes
-    //     }, 100);
-    //   });
-    // }
-    // // Call setup when Focus view becomes visible
-    // const focusViewButton = document.querySelector('[data-filter="focus"]');
-    // if (focusViewButton) {
-    //   focusViewButton.addEventListener('click', () => {
-    //     setTimeout(() => {
-    //       setupFocusScrollReveals();
-    //       ScrollTrigger.refresh(); // Refresh ScrollTrigger after view change
-    //     }, 100);
-    //   });
-    // }
+        titleContainer.addEventListener('click', (e) => {
+          e.stopPropagation();
 
-    // // Also setup if focus view is active on page load
-    // if (focusView && !focusView.classList.contains('hidden')) {
-    //   setTimeout(() => {
-    //     setupFocusScrollReveals();
-    //   }, 200);
-    // }
+          const isActive = item.classList.contains('active');
 
+          // Close all other accordions
+          workItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
+            }
+          });
+
+          // Toggle current accordion
+          item.classList.toggle('active');
+        });
+      });
+
+      // Handle Focus View accordions
+      focusItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+
+          // Close all other accordions in same section
+          const section = item.closest('.focus-section');
+          const sectionItems = section.querySelectorAll('.focus-project-item');
+
+          sectionItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
+            }
+          });
+
+          // Toggle current accordion
+          item.classList.toggle('active');
+        });
+      });
+    }
+
+    // Call this function in your work page initialization
+    setTimeout(() => {
+      setupAccordions();
+    }, 300);
 
   }
 }
