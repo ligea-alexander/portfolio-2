@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // ===== MOVE PAGE DETECTION HERE - BEFORE LOADER =====
   const isHomePage = document.querySelector('.featured-work');
   const isWorkPage = document.querySelector('.work-main');
+  const isCaseStudyPage = document.querySelector('.project-main');
 
   // ===== SCROLL-ONLY REVEAL FUNCTION =====
   function setupScrollReveals(selector = '.reveal-text') {
@@ -147,7 +148,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
       fade();
     }, 2500);
   }
-  // Custom Cursor - rest of your cursor code stays the same
+
+  // ====== Custom Cursor Functionality ======  
+
+  // const cursor = document.getElementById('custom-cursor');
   const cursorSquare = document.querySelector('.cursor-square');
   const cursorCircle = document.querySelector('.cursor-circle');
 
@@ -182,6 +186,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     updateCursor();
+
+    // ✅ FIX: Only show cursor immediately for pages WITHOUT a loader
+    if (!loader) {
+      cursor.style.display = 'block';
+    }
+    // For pages WITH a loader, the cursor will be shown after the loader completes
   } else {
     console.log('Cursor elements NOT found!');
   }
@@ -196,8 +206,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       navbar.classList.remove('scrolled');
     }
   });
-
-
 
   // Cleanup and refresh on window resize
   let resizeTimer;
@@ -793,6 +801,68 @@ document.addEventListener("DOMContentLoaded", (event) => {
       setupAccordions();
     }, 300);
 
+  }
+
+  if (isCaseStudyPage) {
+    // ===== PROJECT PAGE SCROLLSPY FUNCTIONALITY =====
+    function initScrollspy() {
+      if (!document.querySelector('.case-study-scrollspy-section')) { // Updated selector
+        console.log('No scrollspy section found');
+        return;
+      }
+
+      console.log('Initializing scrollspy...');
+
+      const sections = document.querySelectorAll('.case-study-content-section'); // Updated selector
+      const mediaItems = document.querySelectorAll('.media-item');
+      const scrollbarThumb = document.querySelector('.scrollbar-thumb');
+
+      console.log('Scrollspy elements:', { sections: sections.length, mediaItems: mediaItems.length, scrollbarThumb: !!scrollbarThumb });
+
+      // ScrollTrigger for each section
+      sections.forEach((section, index) => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top center",
+          end: "bottom center",
+          onEnter: () => activateMedia(section.dataset.section),
+          onEnterBack: () => activateMedia(section.dataset.section),
+        });
+      });
+
+      function activateMedia(sectionName) {
+        console.log('Activating media for section:', sectionName);
+
+        // Remove active class from all media items
+        mediaItems.forEach(item => item.classList.remove('active'));
+
+        // Add active class to corresponding media item
+        const activeMedia = document.querySelector(`[data-media="${sectionName}"]`);
+        if (activeMedia) {
+          activeMedia.classList.add('active');
+        }
+
+        // Update scrollbar thumb position
+        const sectionIndex = Array.from(sections).findIndex(s => s.dataset.section === sectionName);
+        const thumbPosition = (sectionIndex / (sections.length - 1)) * 75; // 75% max position
+        if (scrollbarThumb) {
+          scrollbarThumb.style.top = `${thumbPosition}%`;
+        }
+      }
+
+      // Initialize with first section
+      if (sections.length > 0) {
+        activateMedia(sections[0].dataset.section);
+      }
+    }
+
+    // Initialize case study page functionality
+    if (isCaseStudyPage) {
+      console.log('Case study page detected - initializing...');
+      setTimeout(() => {
+        initScrollspy();
+      }, 100);
+    }
   }
 }
 );

@@ -1606,7 +1606,7 @@ body {
   flex-wrap: nowrap;
   align-items: center;
   gap: 0.35em;
-  /* natural gap between words - EXACTLY like your test */
+  /* natural gap between words */
   height: clamp(68px, 12vh, 120px);
   overflow: hidden;
   font-size: clamp(28px, 6vw, 72px);
@@ -2033,6 +2033,439 @@ body {
   grid-row: 1;
 }
 
+/* PROJECT PAGE LAYOUT STYLES*/
+.case-study-main {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.case-study-main[data-work-type="data-science"] {
+  --work-color: var(--data-science);
+}
+
+.case-study-main[data-work-type="storytelling"] {
+  --work-color: var(--storytelling);
+}
+
+.case-study-main[data-work-type="development"] {
+  --work-color: var(--development);
+}
+
+.case-study-main[data-work-type="visualization"] {
+  --work-color: var(--visualization);
+}
+
+.case-study-main[data-work-type="research"] {
+  --work-color: var(--research);
+}
+
+.case-study-main[data-work-type="journalism"] {
+  --work-color: var(--journalism);
+}
+
+/* Case Study Hero - Split Layout to Match Mockup */
+.case-study-hero {
+  padding: 0;
+  background-color: transparent;
+  margin-bottom: 0;
+}
+
+/* Hero Split Container - 50/50 Layout */
+.hero-split-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 60vh;
+  max-width: none;
+  background-color: var(--work-color);
+  /* Use dynamic work color instead of fixed visualization */
+  margin: 0 2rem;
+}
+
+/* Left Half: Title Block with Project Color Background */
+.hero-title-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 6rem 4rem 6rem 4rem;
+  color: white;
+}
+
+/* Absolutely position the text content at the bottom */
+.hero-title-text {
+  position: absolute;
+  bottom: 4rem;
+  /* Match the padding */
+  left: 4rem;
+  /* Match the padding */
+  right: 4rem;
+  /* Match the padding */
+}
+
+.case-study-subtitle {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: .5rem;
+  display: block;
+}
+
+.case-study-title {
+  font-size: clamp(28px, 6vw, 72px);
+  /* gap: 0.35em; */
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  line-height: 1.1;
+  background-color: transparent;
+  padding: 0;
+  white-space: normal;
+  /* Allow wrapping */
+  word-wrap: break-word;
+  /* Break long words */
+}
+
+/* Right Half: Hero Image - contains a smaller square image */
+.hero-image-block {
+  background-color: transparent;
+  /* Remove background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  /* Add padding around the image */
+}
+
+.hero-image-block .image-placeholder {
+  width: 100%;
+  /* Make it smaller - adjust this percentage as needed */
+  aspect-ratio: 1;
+  /* Keep it square */
+  background-color: #ccc;
+  /* Optional: add slight rounding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #666;
+  max-width: 600px;
+  /* Set a max size */
+  max-height: 600px;
+}
+
+/* Meta Section - Full Width Below Split */
+.hero-meta-section {
+  background-color: #f6f7f3;
+  margin: 0 2rem;
+  padding: 4rem 0;
+}
+
+
+.hero-text-content {
+  max-width: none;
+  /* Remove max-width constraint */
+  margin: 0;
+  padding: 0 4rem;
+  /* Match the hero title padding */
+  display: grid;
+  grid-template-columns: 1fr auto;
+  /* Text takes available space, button auto-sizes */
+  gap: 2rem;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+  /* Add space before the line */
+}
+
+.case-study-intro {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+  max-width: 50%;
+  /* Limit width to roughly half to leave space for button */
+  grid-column: 1;
+  grid-row: 1;
+}
+
+
+.live-site-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #1a1a1a;
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 2rem;
+  transition: all 0.3s ease;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: flex-start;
+  /* Align to top */
+  white-space: nowrap;
+  /* Prevent text wrapping */
+}
+
+.live-site-btn:hover {
+  background-color: #333;
+  transform: translateX(5px);
+}
+
+.external-arrow {
+  font-size: 1.1rem;
+  transform: rotate(45deg);
+}
+
+.case-study-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  /* Change from 4 to 6 columns */
+  gap: 2rem;
+  padding: 2rem 4rem;
+  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #e5e5e5;
+  margin: 3rem 0 0 0;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Position the meta items in the 6-column grid */
+.meta-item:nth-child(1) {
+  grid-column: 1;
+  /* Focus/Domain in first column */
+}
+
+.meta-item:nth-child(2) {
+  grid-column: 4;
+  /* Roles in fourth column (creates gap) */
+}
+
+.meta-item:nth-child(3) {
+  grid-column: 5;
+  /* Duration in fifth column (close to Roles) */
+}
+
+.meta-item:nth-child(4) {
+  grid-column: 6;
+  /* Tools in sixth column (close to Duration) */
+}
+
+.meta-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.meta-value {
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  font-weight: 400;
+}
+
+.hero-image {
+  background-color: #ddd;
+  border-radius: 8px;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Scrollspy + Pinned Media Section */
+.case-study-scrollspy-section {
+  min-height: 100vh;
+  position: relative;
+}
+
+.case-study-scrollspy-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Left Half: Scrollspy Content */
+.case-study-scrollspy-content {
+  padding: 4rem 3rem 4rem 6rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.case-study-content-section {
+  min-height: 80vh;
+  /* Each section takes almost full viewport */
+  padding-bottom: 4rem;
+  margin-bottom: 2rem;
+}
+
+.case-study-content-section h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+.case-study-content-section p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #666;
+  max-width: 600px;
+}
+
+/* Peek section - partially visible at bottom */
+.peek-section {
+  opacity: 0.6;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.peek-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Right Half: Pinned Media Gallery */
+.pinned-media-gallery {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Scrollbar - hidden by default */
+.media-scrollbar {
+  position: absolute;
+  right: 1rem;
+  top: 2rem;
+  bottom: 2rem;
+  width: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.scrollspy-container:hover .media-scrollbar {
+  opacity: 1;
+}
+
+.scrollbar-track {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.scrollbar-thumb {
+  width: 100%;
+  height: 25%;
+  /* Represents current section */
+  background-color: #1a1a1a;
+  border-radius: 2px;
+  position: absolute;
+  top: 0;
+  transition: top 0.3s ease;
+}
+
+/* Media Items */
+.media-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.media-item.active {
+  opacity: 1;
+}
+
+.media-item .image-placeholder {
+  width: 80%;
+  height: 80%;
+  background-color: #ccc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Horizontal Gallery */
+.horizontal-gallery {
+  padding: 6rem 2rem;
+  background-color: #f6f7f3;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.gallery-image {
+  aspect-ratio: 4/3;
+  background-color: #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-image:hover {
+  transform: scale(1.05);
+}
+
+.gallery-image.clickable {
+  cursor: zoom-in;
+}
+
+/* Learning/Takeaways */
+.takeaways-section {
+  padding: 6rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.takeaways-section h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+}
+
+.takeaways-section p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #666;
+}
 
 /* ===== RESPONSIVE DESIGN SYSTEM ===== */
 
