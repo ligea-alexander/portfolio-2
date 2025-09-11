@@ -392,6 +392,31 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // Work page-specific functionality
   if (isWorkPage) {
 
+    // ===== DYNAMIC FILTER COUNTS =====
+    function updateFilterCounts() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+
+      filterButtons.forEach(button => {
+        const filter = button.getAttribute('data-filter');
+        let count = 0;
+
+        if (filter === 'featured') {
+          count = document.querySelectorAll('.featured-view .project-card-wrapper').length;
+        } else if (filter === 'all') {
+          count = document.querySelectorAll('.all-work-view .work-item').length;
+        } else if (filter === 'focus') {
+          count = document.querySelectorAll('.focus-view .focus-project-item').length;
+        }
+
+        // Update the data-count attribute
+        button.setAttribute('data-count', count.toString().padStart(2, '0'));
+      });
+    }
+
+    // Call it when the page loads
+    setTimeout(() => {
+      updateFilterCounts();
+    }, 100);
     // ===== VIEW-SWITCH REVEAL FUNCTION (immediate, snappy reveals) =====
     function setupViewSwitchReveals(selector) {
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
