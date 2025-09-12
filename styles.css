@@ -2281,38 +2281,114 @@ body {
   justify-content: center;
 }
 
-/* Scrollspy + Pinned Media Section */
-.case-study-scrollspy-section {
-  min-height: 100vh;
-  position: relative;
-}
-
-.case-study-scrollspy-container {
+/* ==== CASE STUDY MAIN SECTION ==== */
+.case-study-main-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
-  position: relative;
+  /* 50/50 split */
+  min-height: 85vh;
+  margin: 0 2rem;
 }
 
-/* Left Half: Scrollspy Content */
+/* === Scrollspy + Pinned Media Section === */
+
+/* Scrollbar Container - positioned absolutely on the left */
+/* .scrollbar-container {
+  position: absolute;
+  left: 3rem;
+  top: 6rem;
+  height: calc(100% - 8rem);
+  Calculate height based on container minus top/bottom padding
+  width: 10px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 10;
+} */
+.scrollbar-container {
+  position: absolute;
+  left: 2rem;
+  top: 6rem;
+  /* Match content padding-top */
+  bottom: 4rem;
+  /* Leave some space at bottom */
+  width: 10px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Scrollspy scrollbar - now positioned within the content area */
+.scrollyspy-scrollbar {
+  position: sticky;
+  top: 2rem;
+  /* Small offset from container top */
+  height: calc(100% - 8rem);
+  /* Smaller height to fit within content area */
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.scrollbar-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.scrollbar-thumb {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 20%;
+  background-color: var(--work-color, #1a1a1a);
+  border-radius: 6px;
+  transition: top 0.2s ease;
+}
+
 .case-study-scrollspy-content {
-  padding: 4rem 3rem 4rem 6rem;
-  overflow-y: auto;
+  padding: 6rem 0.5rem 4rem 18rem;
+  overflow-y: hidden;
   position: relative;
+  background-color: #fff;
+  height: 85vh;
+  /* Match the main section height */
+  max-height: 85vh;
+  /* Hide default scrollbar on right */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
 }
 
+/* Hide default scrollbar on WebKit browsers */
+.case-study-scrollspy-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* Content sections - sized to show exactly 2 full + partial 3rd */
 .case-study-content-section {
-  min-height: 80vh;
-  /* Each section takes almost full viewport */
-  padding-bottom: 4rem;
-  margin-bottom: 2rem;
+  height: 35vh;
+  /* Fixed height instead of min-height - slightly larger than 40vh */
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  /* Increase margin to create clear separation */
+  position: relative;
+  max-width: 600px;
+  /* Constrain width */
+  flex-shrink: 0;
+  /* Prevent shrinking */
+}
+
+.case-study-content-section:last-child {
+  margin-bottom: 6rem;
+  /* Less space at bottom */
 }
 
 .case-study-content-section h2 {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 600;
   color: #1a1a1a;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  /* Reduce from 2rem */
   line-height: 1.2;
 }
 
@@ -2320,81 +2396,51 @@ body {
   font-size: 1.1rem;
   line-height: 1.7;
   color: #666;
-  max-width: 600px;
+  max-width: none;
+  /* Remove paragraph constraint since section is already constrained */
 }
 
-/* Peek section - partially visible at bottom */
-.peek-section {
-  opacity: 0.6;
-  transform: translateY(20px);
-  transition: all 0.3s ease;
-}
 
-.peek-section.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
-/* Right Half: Pinned Media Gallery */
+
+/* RIGHT HALF: Pinned Media Gallery - MUCH SMALLER */
 .pinned-media-gallery {
   position: sticky;
   top: 0;
   height: 100vh;
-  background-color: #f0f0f0;
+  /* background-color: #f8f9fa; */
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  padding: 4rem;
+  /* Add padding to contain the smaller media */
 }
 
-/* Scrollbar - hidden by default */
-.media-scrollbar {
-  position: absolute;
-  right: 1rem;
-  top: 2rem;
-  bottom: 2rem;
-  width: 4px;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 2px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  z-index: 10;
-}
-
-.scrollspy-container:hover .media-scrollbar {
-  opacity: 1;
-}
-
-.scrollbar-track {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.scrollbar-thumb {
-  width: 100%;
-  height: 25%;
-  /* Represents current section */
-  background-color: #1a1a1a;
-  border-radius: 2px;
-  position: absolute;
-  top: 0;
-  transition: top 0.3s ease;
-}
-
-/* Media Items */
+/* Media items - MUCH SMALLER like in your mockup */
 .media-item {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  /* Much smaller - was 80% */
+  height: 50%;
+  /* Much smaller - was 80% */
+  max-width: 1000px;
+  /* Set max size */
+  max-height: 1500px;
+  /* Set max size */
+  background-color: #ddd;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity 0.5s ease;
+  font-size: 1.2rem;
+  color: #666;
 }
 
 .media-item.active {
@@ -2402,15 +2448,13 @@ body {
 }
 
 .media-item .image-placeholder {
-  width: 80%;
-  height: 80%;
-  background-color: #ccc;
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  color: #666;
+  border-radius: 8px;
+  background-color: #ccc;
 }
 
 /* Horizontal Gallery */

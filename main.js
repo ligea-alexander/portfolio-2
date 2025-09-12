@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // ===== MOVE PAGE DETECTION HERE - BEFORE LOADER =====
   const isHomePage = document.querySelector('.featured-work');
   const isWorkPage = document.querySelector('.work-main');
-  const isCaseStudyPage = document.querySelector('.project-main');
+  const isCaseStudyPage = document.querySelector('.case-study-main');
 
   // ===== SCROLL-ONLY REVEAL FUNCTION =====
   function setupScrollReveals(selector = '.reveal-text') {
@@ -804,49 +804,100 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   if (isCaseStudyPage) {
-    // ===== PROJECT PAGE SCROLLSPY FUNCTIONALITY =====
+
+    /* filepath: /Users/ligeaalexander/Desktop/temp/skills_first/main.js */
+
     function initScrollspy() {
-      if (!document.querySelector('.case-study-scrollspy-section')) { // Updated selector
+      if (!document.querySelector('.case-study-main-section')) {
         console.log('No scrollspy section found');
         return;
       }
 
       console.log('Initializing scrollspy...');
 
-      const sections = document.querySelectorAll('.case-study-content-section'); // Updated selector
+      const scrollContainer = document.querySelector('.case-study-scrollspy-content');
+      const sections = document.querySelectorAll('.case-study-content-section');
       const mediaItems = document.querySelectorAll('.media-item');
       const scrollbarThumb = document.querySelector('.scrollbar-thumb');
 
-      console.log('Scrollspy elements:', { sections: sections.length, mediaItems: mediaItems.length, scrollbarThumb: !!scrollbarThumb });
+      if (!scrollContainer || sections.length === 0) {
+        console.log('Missing required elements');
+        return;
+      }
 
-      // ScrollTrigger for each section
-      sections.forEach((section, index) => {
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top center",
-          end: "bottom center",
-          onEnter: () => activateMedia(section.dataset.section),
-          onEnterBack: () => activateMedia(section.dataset.section),
+      // Disable browser scrolling and handle it manually
+      let scrollPosition = 0;
+      const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+
+      // Handle wheel events manually
+      scrollContainer.addEventListener('wheel', (e) => {
+        e.preventDefault(); // Stop browser scrolling
+
+        const delta = e.deltaY;
+        scrollPosition += delta;
+        scrollPosition = Math.max(0, Math.min(scrollPosition, maxScroll));
+
+        // Apply scroll position manually
+        scrollContainer.scrollTop = scrollPosition;
+
+        // Update our custom scrollbar
+        updateScrollbarPosition();
+
+        // Update section states
+        updateSectionStates();
+      }, { passive: false });
+
+      function updateSectionStates() {
+        const scrollTop = scrollContainer.scrollTop;
+        const containerHeight = scrollContainer.clientHeight;
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          const sectionCenter = sectionTop + (sectionHeight / 2);
+          const viewportCenter = scrollTop + (containerHeight / 2);
+
+          // Check if section center is in the middle 40% of viewport
+          const isActive = Math.abs(sectionCenter - viewportCenter) < (containerHeight * 0.2);
+
+          if (isActive) {
+            activateMedia(section.dataset.section);
+          }
         });
-      });
+      }
 
       function activateMedia(sectionName) {
         console.log('Activating media for section:', sectionName);
 
         // Remove active class from all media items
         mediaItems.forEach(item => item.classList.remove('active'));
+        sections.forEach(section => section.classList.remove('active'));
 
         // Add active class to corresponding media item
         const activeMedia = document.querySelector(`[data-media="${sectionName}"]`);
+        const activeSection = document.querySelector(`[data-section="${sectionName}"]`);
+
         if (activeMedia) {
           activeMedia.classList.add('active');
         }
 
-        // Update scrollbar thumb position
-        const sectionIndex = Array.from(sections).findIndex(s => s.dataset.section === sectionName);
-        const thumbPosition = (sectionIndex / (sections.length - 1)) * 75; // 75% max position
+        if (activeSection) {
+          activeSection.classList.add('active');
+        }
+      }
+
+      function updateScrollbarPosition() {
+        const scrollTop = scrollContainer.scrollTop;
+        const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+        const scrollPercent = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+
+        // Map scroll progress to thumb position within the track
+        const thumbHeight = 20; // 20% of track height
+        const maxTravel = 100 - thumbHeight; // 80% available travel
+        const thumbPosition = scrollPercent * maxTravel;
+
         if (scrollbarThumb) {
-          scrollbarThumb.style.top = `${thumbPosition}%`;
+          scrollbarThumb.style.top = `${Math.min(thumbPosition, maxTravel)}%`;
         }
       }
 
@@ -854,15 +905,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
       if (sections.length > 0) {
         activateMedia(sections[0].dataset.section);
       }
+
+      // Initial position
+      updateScrollbarPosition();
     }
 
-    // Initialize case study page functionality
-    if (isCaseStudyPage) {
-      console.log('Case study page detected - initializing...');
-      setTimeout(() => {
-        initScrollspy();
-      }, 100);
-    }
+    // Call the function
+    initScrollspy();
   }
 }
 );
