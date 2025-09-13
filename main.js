@@ -803,10 +803,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   }
 
+  /* filepath: /Users/ligeaalexander/Desktop/temp/skills_first/main.js */
+
   if (isCaseStudyPage) {
-
-    /* filepath: /Users/ligeaalexander/Desktop/temp/skills_first/main.js */
-
     function initScrollspy() {
       if (!document.querySelector('.case-study-main-section')) {
         console.log('No scrollspy section found');
@@ -815,103 +814,317 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       console.log('Initializing scrollspy...');
 
-      const scrollContainer = document.querySelector('.case-study-scrollspy-content');
-      const sections = document.querySelectorAll('.case-study-content-section');
-      const mediaItems = document.querySelectorAll('.media-item');
-      const scrollbarThumb = document.querySelector('.scrollbar-thumb');
+      // Get the actual elements from your HTML
+      const scrollContainer = document.querySelector('.case-body'); // This is the scrolling container
+      const sections = document.querySelectorAll('.step[data-label]'); // Sections with data-label
+      const railThumb = document.querySelector('.rail-thumb'); // The thumb element
+      const railNav = document.querySelector('.rail-nav'); // Nav container
 
-      if (!scrollContainer || sections.length === 0) {
-        console.log('Missing required elements');
+      if (!scrollContainer || sections.length === 0 || !railThumb || !railNav) {
+        console.log('Missing required elements:', {
+          scrollContainer: !!scrollContainer,
+          sections: sections.length,
+          railThumb: !!railThumb,
+          railNav: !!railNav
+        });
         return;
       }
 
-      // Disable browser scrolling and handle it manually
-      let scrollPosition = 0;
-      const maxScroll = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+      console.log('Found elements:', {
+        scrollContainer: scrollContainer.className,
+        sections: sections.length,
+        railThumb: railThumb.className,
+        railNav: railNav.className
+      });
 
-      // Handle wheel events manually
-      scrollContainer.addEventListener('wheel', (e) => {
-        e.preventDefault(); // Stop browser scrolling
-
-        const delta = e.deltaY;
-        scrollPosition += delta;
-        scrollPosition = Math.max(0, Math.min(scrollPosition, maxScroll));
-
-        // Apply scroll position manually
-        scrollContainer.scrollTop = scrollPosition;
-
-        // Update our custom scrollbar
-        updateScrollbarPosition();
-
-        // Update section states
-        updateSectionStates();
-      }, { passive: false });
-
-      function updateSectionStates() {
-        const scrollTop = scrollContainer.scrollTop;
-        const containerHeight = scrollContainer.clientHeight;
+      // Build rail nav from sections
+      function buildRailNav() {
+        railNav.innerHTML = ''; // Clear existing nav
 
         sections.forEach((section) => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.offsetHeight;
-          const sectionCenter = sectionTop + (sectionHeight / 2);
-          const viewportCenter = scrollTop + (containerHeight / 2);
+          const label = section.getAttribute('data-label');
+          const id = section.getAttribute('id');
 
-          // Check if section center is in the middle 40% of viewport
-          const isActive = Math.abs(sectionCenter - viewportCenter) < (containerHeight * 0.2);
+          if (label && id) {
+            const li = document.createElement('li');
+            const button = document.createElement('button');
+            button.textContent = label;
+            button.setAttribute('data-target', `#${id}`);
+            button.addEventListener('click', () => scrollToSection(section));
 
-          if (isActive) {
-            activateMedia(section.dataset.section);
+            li.appendChild(button);
+            railNav.appendChild(li);
           }
         });
       }
 
-      function activateMedia(sectionName) {
-        console.log('Activating media for section:', sectionName);
+      // Smooth scroll to section
+      function scrollToSection(targetSection) {
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const sectionRect = targetSection.getBoundingClientRect();
+        const currentScroll = scrollContainer.scrollTop;
+
+        // Calculate target scroll position (center the section)
+        const targetScroll = currentScroll + sectionRect.top - containerRect.top - (containerRect.height / 2) + (sectionRect.height / 2);
+
+        scrollContainer.scrollTo({
+          top: Math.max(0, targetScroll),
+          behavior: 'smooth'
+        });
+      }
+
+      // Update active nav button
+      function updateActiveNav(activeSection) {
+        const buttons = railNav.querySelectorAll('button');
+        buttons.forEach(button => button.classList.remove('active'));
+
+        if (activeSection) {
+          const targetId = `#${activeSection.getAttribute('id')}`;
+          const activeButton = railNav.querySelector(`button[data-target="${targetId}"]`);
+          if (activeButton) {
+            activeButton.classList.add('active');
+          }
+
+          // CAREFULLY ADD: Update media gallery
+          updateMediaGallery(activeSection.getAttribute('id'));
+        }
+      }
+
+      // CAREFULLY ADD: New function to update media gallery
+      function updateMediaGallery(sectionId) {
+        const mediaItems = document.querySelectorAll('.media-item');
 
         // Remove active class from all media items
         mediaItems.forEach(item => item.classList.remove('active'));
-        sections.forEach(section => section.classList.remove('active'));
 
         // Add active class to corresponding media item
-        const activeMedia = document.querySelector(`[data-media="${sectionName}"]`);
-        const activeSection = document.querySelector(`[data-section="${sectionName}"]`);
-
+        const activeMedia = document.querySelector(`[data-media="${sectionId}"]`);
         if (activeMedia) {
           activeMedia.classList.add('active');
-        }
-
-        if (activeSection) {
-          activeSection.classList.add('active');
+          console.log('Media updated for section:', sectionId);
+        } else {
+          console.log('No media found for section:', sectionId);
         }
       }
 
-      function updateScrollbarPosition() {
+      // Update rail thumb position based on scroll progress
+      function updateRailThumb() {
         const scrollTop = scrollContainer.scrollTop;
         const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-        const scrollPercent = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+        const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
 
-        // Map scroll progress to thumb position within the track
+        // Map progress to thumb position (20% thumb height, 80% travel)
         const thumbHeight = 20; // 20% of track height
         const maxTravel = 100 - thumbHeight; // 80% available travel
-        const thumbPosition = scrollPercent * maxTravel;
+        const thumbPosition = progress * maxTravel;
 
-        if (scrollbarThumb) {
-          scrollbarThumb.style.top = `${Math.min(thumbPosition, maxTravel)}%`;
+        if (railThumb) {
+          railThumb.style.top = `${Math.min(thumbPosition, maxTravel)}%`;
         }
       }
 
-      // Initialize with first section
-      if (sections.length > 0) {
-        activateMedia(sections[0].dataset.section);
+      // Find which section is currently active (in center of viewport)
+      function getActiveSection() {
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const containerCenter = containerRect.top + (containerRect.height / 2);
+
+        let activeSection = null;
+        let minDistance = Infinity;
+
+        sections.forEach((section) => {
+          const sectionRect = section.getBoundingClientRect();
+          const sectionCenter = sectionRect.top + (sectionRect.height / 2);
+          const distance = Math.abs(sectionCenter - containerCenter);
+
+          // If section is in viewport and closest to center
+          if (sectionRect.bottom > containerRect.top &&
+            sectionRect.top < containerRect.bottom &&
+            distance < minDistance) {
+            minDistance = distance;
+            activeSection = section;
+          }
+        });
+
+        return activeSection;
       }
 
-      // Initial position
-      updateScrollbarPosition();
+      // Create ScrollTrigger for each section
+      sections.forEach((section, index) => {
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top 60%",
+          end: "bottom 40%",
+          scroller: scrollContainer,
+          onEnter: () => {
+            console.log('Section entered:', section.getAttribute('data-label'));
+            updateActiveNav(section);
+          },
+          onEnterBack: () => {
+            console.log('Section entered back:', section.getAttribute('data-label'));
+            updateActiveNav(section);
+          }
+        });
+      });
+
+      // Add this to your initScrollspy function, after getting the elements
+      let scrollTimeout;
+
+      // Listen for scroll events to show/hide nav
+      scrollContainer.addEventListener('scroll', () => {
+        updateRailThumb();
+
+        // Show nav during scrolling
+        railNav.classList.add('show-nav');
+
+        // Clear existing timeout
+        clearTimeout(scrollTimeout);
+
+        // Hide nav after scrolling stops (500ms delay)
+        scrollTimeout = setTimeout(() => {
+          railNav.classList.remove('show-nav');
+        }, 1000); // Adjust timing as needed
+
+        // Also update active section on scroll
+        const activeSection = getActiveSection();
+        if (activeSection) {
+          updateActiveNav(activeSection);
+        }
+      });
+
+      // Initialize
+      buildRailNav();
+      updateRailThumb();
+
+      // Set first section as active initially
+      if (sections.length > 0) {
+        updateActiveNav(sections[0]);
+      }
+
+      // Refresh ScrollTrigger
+      ScrollTrigger.refresh();
+    }
+  }
+  /* filepath: /Users/ligeaalexander/Desktop/temp/skills_first/main.js */
+
+  // Lightbox functionality - move outside initScrollspy and fix
+  function initLightbox() {
+    const galleryImages = document.querySelectorAll('.gallery-image.clickable');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.getElementById('lightbox-close');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxCounter = document.getElementById('lightbox-counter');
+
+    // Check if all elements exist
+    if (!lightbox || !lightboxImage || !lightboxClose || !lightboxPrev || !lightboxNext || !lightboxCounter) {
+      console.log('Lightbox elements missing:', {
+        lightbox: !!lightbox,
+        lightboxImage: !!lightboxImage,
+        lightboxClose: !!lightboxClose,
+        lightboxPrev: !!lightboxPrev,
+        lightboxNext: !!lightboxNext,
+        lightboxCounter: !!lightboxCounter
+      });
+      return;
     }
 
-    // Call the function
-    initScrollspy();
+    if (galleryImages.length === 0) {
+      console.log('No gallery images found');
+      return;
+    }
+
+    console.log('Initializing lightbox with', galleryImages.length, 'images');
+
+    let currentImageIndex = 0;
+    const imageUrls = [];
+
+    // Use placeholder images for now (replace with actual paths later)
+    galleryImages.forEach((img, index) => {
+      imageUrls.push(`https://picsum.photos/800/600?random=${index + 1}`);
+    });
+
+    // Open lightbox
+    galleryImages.forEach((img, index) => {
+      img.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation(); // Prevent event bubbling
+        console.log('Image clicked:', index);
+        currentImageIndex = index;
+        openLightbox();
+      });
+    });
+
+    // Close lightbox
+    lightboxClose.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeLightbox();
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeLightbox();
+      }
+    });
+
+    // Navigation
+    lightboxPrev.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : imageUrls.length - 1;
+      updateLightboxImage();
+    });
+
+    lightboxNext.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      currentImageIndex = currentImageIndex < imageUrls.length - 1 ? currentImageIndex + 1 : 0;
+      updateLightboxImage();
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox.classList.contains('active')) return;
+
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        closeLightbox();
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        lightboxPrev.click();
+      }
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        lightboxNext.click();
+      }
+    });
+
+    function openLightbox() {
+      console.log('Opening lightbox');
+      lightbox.classList.add('active');
+      // DON'T prevent body scrolling - this might be causing the scroll issue
+      updateLightboxImage();
+    }
+
+    function closeLightbox() {
+      console.log('Closing lightbox');
+      lightbox.classList.remove('active');
+      // Restore body scrolling
+      document.body.style.overflow = '';
+    }
+
+    function updateLightboxImage() {
+      console.log('Updating image to:', imageUrls[currentImageIndex]);
+      lightboxImage.src = imageUrls[currentImageIndex];
+      lightboxCounter.textContent = `${currentImageIndex + 1} / ${imageUrls.length}`;
+    }
   }
-}
-);
+
+  // Call initScrollspy and initLightbox separately
+  initScrollspy();
+  // initLightbox();
+});

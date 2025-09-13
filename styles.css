@@ -2281,15 +2281,6 @@ body {
   justify-content: center;
 }
 
-/* ==== CASE STUDY MAIN SECTION ==== */
-.case-study-main-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  /* 50/50 split */
-  min-height: 85vh;
-  margin: 0 2rem;
-}
-
 /* === Scrollspy + Pinned Media Section === */
 
 /* Scrollbar Container - positioned absolutely on the left */
@@ -2304,134 +2295,185 @@ body {
   border-radius: 4px;
   z-index: 10;
 } */
-.scrollbar-container {
-  position: absolute;
-  left: 2rem;
-  top: 6rem;
-  /* Match content padding-top */
-  bottom: 4rem;
-  /* Leave some space at bottom */
-  width: 10px;
-  z-index: 10;
-  pointer-events: none;
+
+
+/* ==== CASE STUDY MAIN SECTION ==== */
+.case-study-main-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: auto;
+  margin: 0 1rem;
 }
 
-/* Scrollspy scrollbar - now positioned within the content area */
-.scrollyspy-scrollbar {
+/* Case Article Container */
+.case {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  /* Rail auto-width, content fills remaining */
+  gap: 2rem;
+  height: auto;
+  min-height: 75vh;
+  overflow: hidden;
+}
+
+/* Fixed Rail - LEFT SIDE */
+.case-rail {
   position: sticky;
-  top: 2rem;
-  /* Small offset from container top */
-  height: calc(100% - 8rem);
-  /* Smaller height to fit within content area */
-  width: 100%;
+  top: 0;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10rem 2rem 4rem 4rem;
+  z-index: 10;
+}
+
+/* Rail Track - The scrollbar */
+.rail-track {
+  position: relative;
+  width: 8px;
+  height: 60vh;
   background-color: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
+  margin-bottom: 2rem;
 }
 
-.scrollbar-track {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.scrollbar-thumb {
+/* Rail Thumb - Moves within track */
+.rail-thumb {
   position: absolute;
   top: 0;
   width: 100%;
   height: 20%;
   background-color: var(--work-color, #1a1a1a);
-  border-radius: 6px;
-  transition: top 0.2s ease;
+  border-radius: 4px;
+  transition: top 0.3s ease;
 }
 
-.case-study-scrollspy-content {
-  padding: 6rem 0.5rem 4rem 18rem;
-  overflow-y: hidden;
-  position: relative;
-  background-color: #fff;
+/* Rail Navigation - Section buttons */
+/* .rail-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+} */
+/* Rail Navigation - positioned on right side, initially hidden */
+.rail-nav {
+  position: absolute;
+  right: -120px;
+  /* Position it to the right of the rail */
+  top: 50%;
+  transform: translateY(-50%);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  opacity: 0;
+  /* Hidden by default */
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  /* Disable interactions when hidden */
+}
+
+/* Show nav when scrolling */
+.rail-nav.show-nav {
+  opacity: 0.6;
+  /* Slightly muted when visible */
+  pointer-events: auto;
+  /* Enable interactions when visible */
+}
+
+.rail-nav li {
+  margin: 0;
+}
+
+.rail-nav button {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-align: left;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.rail-nav button:hover,
+.rail-nav button.active {
+  color: var(--work-color, #1a1a1a);
+  font-weight: 500;
+}
+
+/* Scrolling Content Body */
+.case-body {
+  overflow-y: auto;
   height: 85vh;
-  /* Match the main section height */
-  max-height: 85vh;
-  /* Hide default scrollbar on right */
+  padding: 10rem 2rem 4rem 10rem;
+  /* Hide scrollbar */
   scrollbar-width: none;
-  /* Firefox */
   -ms-overflow-style: none;
-  /* IE/Edge */
 }
 
-/* Hide default scrollbar on WebKit browsers */
-.case-study-scrollspy-content::-webkit-scrollbar {
+.case-body::-webkit-scrollbar {
   display: none;
 }
 
-/* Content sections - sized to show exactly 2 full + partial 3rd */
-.case-study-content-section {
-  height: 35vh;
-  /* Fixed height instead of min-height - slightly larger than 40vh */
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
-  /* Increase margin to create clear separation */
+/* Content Steps/Sections */
+.step {
+  min-height: 30vh;
+  /* Ensure each section takes up most of viewport */
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
   position: relative;
-  max-width: 600px;
-  /* Constrain width */
-  flex-shrink: 0;
-  /* Prevent shrinking */
+  max-width: 800px;
 }
 
-.case-study-content-section:last-child {
+.step:last-child {
   margin-bottom: 6rem;
-  /* Less space at bottom */
 }
 
-.case-study-content-section h2 {
+.step h2 {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 600;
   color: #1a1a1a;
   margin-bottom: 1.5rem;
-  /* Reduce from 2rem */
   line-height: 1.2;
 }
 
-.case-study-content-section p {
+.step p {
   font-size: 1.1rem;
   line-height: 1.7;
   color: #666;
   max-width: none;
-  /* Remove paragraph constraint since section is already constrained */
 }
 
-
-
-
-/* RIGHT HALF: Pinned Media Gallery - MUCH SMALLER */
+/* RIGHT HALF: Pinned Media Gallery - stays the same */
 .pinned-media-gallery {
   position: sticky;
   top: 0;
   height: 100vh;
-  /* background-color: #f8f9fa; */
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  padding: 4rem;
-  /* Add padding to contain the smaller media */
+  padding: 2rem;
 }
 
-/* Media items - MUCH SMALLER like in your mockup */
 .media-item {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-  /* Much smaller - was 80% */
   height: 50%;
-  /* Much smaller - was 80% */
-  max-width: 1000px;
-  /* Set max size */
-  max-height: 1500px;
-  /* Set max size */
+  max-width: 1200px;
+  max-height: 2000px;
   background-color: #ddd;
   border-radius: 8px;
   display: flex;
@@ -2458,15 +2500,22 @@ body {
 }
 
 /* Horizontal Gallery */
+
 .horizontal-gallery {
-  padding: 6rem 2rem;
-  background-color: #f6f7f3;
+  padding: 2rem 2rem 6rem 2rem;
+  background-color: #820f0f;
+  position: relative;
+  /* This is already there */
+  overflow: hidden;
+  /* Add this to prevent lightbox from escaping */
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
+  grid-template-columns: repeat(5, 1fr);
+  /* Change to 5 columns to match your HTML */
+  gap: 1.5rem;
+  /* Reduce gap slightly for better fit */
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -2475,40 +2524,237 @@ body {
   aspect-ratio: 4/3;
   background-color: #ddd;
   border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+  cursor: zoom-in;
+  /* Changed from pointer to zoom-in for lightbox indication */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  position: relative;
 }
 
 .gallery-image:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
+  /* Slightly reduced scale for subtlety */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  /* Add shadow on hover */
 }
 
 .gallery-image.clickable {
   cursor: zoom-in;
 }
 
-/* Learning/Takeaways */
-.takeaways-section {
-  padding: 6rem 2rem;
-  max-width: 800px;
-  margin: 0 auto;
+/* Add a subtle overlay for better UX */
+.gallery-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.3s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.gallery-image:hover::before {
+  background: rgba(0, 0, 0, 0.1);
+  /* Subtle dark overlay on hover */
+}
+
+/* Lightbox overlay */
+.lightbox-overlay {
+  position: absolute;
+  /* Change from fixed to absolute */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(84, 84, 84, 0.8);
+  /* Slightly less opaque */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Make sure the gallery container can contain the lightbox */
+.horizontal-gallery {
+  padding: 2rem 2rem 6rem 2rem;
+  background-color: #f6f7f3;
+  position: relative;
+  /* Add this to contain the absolute lightbox */
+}
+
+/* Lightbox content - much smaller */
+.lightbox-content {
+  position: relative;
+  max-width: 80vw;
+  max-height: 80vh;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.lightbox-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox-overlay.active .lightbox-content {
+  transform: scale(1);
+}
+
+.lightbox-image {
+  width: 100%;
+  height: auto;
+  max-width: 80vw;
+  max-height: 80vh;
+  object-fit: contain;
+  /* Show full image */
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Close button - adjusted for smaller lightbox */
+.lightbox-close {
+  position: absolute;
+  top: -30px;
+  /* Bring closer */
+  right: -30px;
+  /* Bring closer */
+  background: rgba(255, 255, 255, 0.9);
+  /* More opaque */
+  border: none;
+  width: 35px;
+  /* Slightly smaller */
+  height: 35px;
+  /* Slightly smaller */
+  border-radius: 50%;
+  color: #333;
+  /* Darker color for better contrast */
+  font-size: 18px;
+  /* Slightly smaller */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+/* Navigation arrows - adjusted for smaller lightbox */
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  /* More opaque */
+  border: none;
+  width: 45px;
+  /* Slightly smaller */
+  height: 45px;
+  /* Slightly smaller */
+  border-radius: 50%;
+  color: #333;
+  /* Darker color */
+  font-size: 20px;
+  /* Slightly smaller */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.lightbox-prev {
+  left: -60px;
+  /* Bring closer */
+}
+
+.lightbox-next {
+  right: -60px;
+  /* Bring closer */
+}
+
+/* Image counter - adjusted position */
+.lightbox-counter {
+  position: absolute;
+  bottom: -35px;
+  /* Bring closer */
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 13px;
+  /* Slightly smaller */
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 12px;
+  /* Slightly smaller padding */
+  border-radius: 15px;
+  /* Smaller radius */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.takeaway-section {
+  min-height: 30vh;
+  padding: 4rem 2rem 4rem 2rem;
+  /* Add more generous padding */
+  margin: 0 auto 4rem auto;
+  /* Center it with auto margins */
+  max-width: 1400px;
+  /* Match the step max-width */
   text-align: center;
+  /* Center the content */
 }
 
-.takeaways-section h2 {
+.takeaway-section .content-wrapper {
+  max-width: 800px;
+  /* Slightly narrower for better readability when centered */
+  margin: 0 auto;
+  /* Center the wrapper */
+}
+
+.takeaway-section h2 {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
+  /* Match step h2 sizing */
   font-weight: 600;
+  /* Match step h2 weight */
   color: #1a1a1a;
-  margin-bottom: 2rem;
+  /* Match step h2 color */
+  margin-bottom: 1.5rem;
+  /* Match step h2 margin */
+  line-height: 1.2;
+  /* Match step h2 line-height */
+  text-align: left;
+  /* Align the heading to the left */
 }
 
-.takeaways-section p {
+.takeaway-section p {
   font-size: 1.1rem;
+  /* Match step p font size */
   line-height: 1.7;
+  /* Match step p line-height */
   color: #666;
+  /* Match step p color */
+  text-align: left;
+  /* Align the paragraph text to the left */
+  margin: 0;
+  /* Remove default margins */
+  max-width: none;
+  /* Remove width constraints */
 }
 
 /* ===== RESPONSIVE DESIGN SYSTEM ===== */

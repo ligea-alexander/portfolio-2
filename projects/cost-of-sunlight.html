@@ -88,90 +88,95 @@
 
     <!-- Scrollspy + Pinned Media Section -->
     <section class="case-study-main-section">
-
-      <!-- Scrollspy Content -->
-      <div class="case-study-scrollspy-content">
-        <!-- Scrollbar in its own container -->
-        <div class="scrollbar-container">
-          <div class="scrollyspy-scrollbar">
-            <div class="scrollbar-track">
-              <div class="scrollbar-thumb"></div>
-            </div>
+      <!-- Case Study Article Container -->
+      <article id="case" class="case">
+        <!-- Left Side: Fixed Rail -->
+        <aside id="case-rail" class="case-rail">
+          <div class="rail-track">
+            <div class="rail-thumb"></div>
           </div>
-        </div>
-        <!-- Section 1: Context, The Problem -->
-        <div class="case-study-content-section" data-section="context">
-          <h2>Why This Story</h2>
-          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
-            Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
-        </div>
+          <ol class="rail-nav">
+            <li><button data-target="#context">Why This Story</button></li>
+            <li><button data-target="#my-role">Topic Development</button></li>
+            <li><button data-target="#execution">Methodology</button></li>
+            <li><button data-target="#design">Design Choices</button></li>
+            <li><button data-target="#impact">Impact</button></li>
+          </ol>
+        </aside>
 
-        <!-- Section 2: Our Goal / My Role -->
-        <div class="case-study-content-section" data-section="my-role">
-          <h2>Topic Development</h2>
-          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
-            Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
-        </div>
+        <!-- Center: Scrolling Content -->
+        <main class="case-body">
+          <section id="context" class="step" data-label="Why This Story">
+            <h2>Why This Story</h2>
+            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
+              Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+            <br>
+            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
+              Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+          </section>
 
-        <!-- Section 3: Execution / Strategy / (Solution artifact can be added here)-->
-        <div class="case-study-content-section" data-section="execution">
-          <h2>Methodology / Execution</h2>
-          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
-            Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
-        </div>
+          <section id="my-role" class="step" data-label="Topic Development">
+            <h2>Topic Development</h2>
+            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
+              Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+          </section>
 
-        <!-- Section 4: Design / Production Choices / (Solution artifact can be added here) -->
-        <div class="case-study-content-section" data-section="design">
-          <h2>Design and Production Choices</h2>
-          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
-        </div>
+          <section id="execution" class="step" data-label="Methodology">
+            <h2>Methodology / Execution</h2>
+            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
+              Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+          </section>
 
-        <!-- Section 5: Impact / Results -->
-        <div class="case-study-content-section" data-section="impact">
-          <h2>Impact</h2>
-          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
-        </div>
-      </div>
-      </div>
+          <section id="design" class="step" data-label="Design Choices">
+            <h2>Design and Production Choices</h2>
+            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
+          </section>
 
-      <!-- Right Half: Pinned Media Gallery -->
+          <section id="impact" class="step" data-label="Impact">
+            <h2>Impact</h2>
+            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
+          </section>
+        </main>
+      </article>
+
+      <!-- Right Side: Pinned Media Gallery -->
       <div class="pinned-media-gallery">
-        <!-- Media items that change based on scrollspy -->
         <div class="media-item active" data-media="context">
           <div class="image-placeholder">Context Media</div>
         </div>
-
         <div class="media-item" data-media="my-role">
           <div class="image-placeholder">My Role Media</div>
         </div>
-
         <div class="media-item" data-media="execution">
           <div class="image-placeholder">Execution Media</div>
         </div>
         <div class="media-item" data-media="design">
           <div class="image-placeholder">Design Media</div>
         </div>
-
         <div class="media-item" data-media="impact">
           <div class="image-placeholder">Impact Media</div>
         </div>
@@ -193,11 +198,14 @@
         <div class="gallery-image clickable" data-lightbox="project-gallery">
           <div class="image-placeholder">Asset 4</div>
         </div>
+        <div class="gallery-image clickable" data-lightbox="project-gallery">
+          <div class="image-placeholder">Asset 5</div>
+        </div>
       </div>
     </section>
 
     <!-- Learning/Takeaways Section -->
-    <section class="takeaways-section">
+    <section class="takeaway-section">
       <div class="content-wrapper">
         <h2>Reflection</h2>
         <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
@@ -208,8 +216,18 @@
           Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
       </div>
     </section>
-
   </main>
+
+  <!-- Add this lightbox HTML before closing body tag -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <img class="lightbox-image" id="lightbox-image" src="" alt="">
+      <button class="lightbox-close" id="lightbox-close">×</button>
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
+      <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
+      <div class="lightbox-counter" id="lightbox-counter">1 / 5</div>
+    </div>
+  </div>
 </body>
 
 </html>
