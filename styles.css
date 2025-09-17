@@ -2281,21 +2281,6 @@ body {
   justify-content: center;
 }
 
-/* === Scrollspy + Pinned Media Section === */
-
-/* Scrollbar Container - positioned absolutely on the left */
-/* .scrollbar-container {
-  position: absolute;
-  left: 3rem;
-  top: 6rem;
-  height: calc(100% - 8rem);
-  Calculate height based on container minus top/bottom padding
-  width: 10px;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-  z-index: 10;
-} */
-
 
 /* ==== CASE STUDY MAIN SECTION ==== */
 .case-study-main-section {
@@ -2349,15 +2334,6 @@ body {
   transition: top 0.3s ease;
 }
 
-/* Rail Navigation - Section buttons */
-/* .rail-nav {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-} */
 /* Rail Navigation - positioned on right side, initially hidden */
 .rail-nav {
   position: absolute;

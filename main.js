@@ -803,8 +803,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   }
 
-  /* filepath: /Users/ligeaalexander/Desktop/temp/skills_first/main.js */
-
   if (isCaseStudyPage) {
     function initScrollspy() {
       if (!document.querySelector('.case-study-main-section')) {
@@ -1003,128 +1001,127 @@ document.addEventListener("DOMContentLoaded", (event) => {
       // Refresh ScrollTrigger
       ScrollTrigger.refresh();
     }
-  }
-  /* filepath: /Users/ligeaalexander/Desktop/temp/skills_first/main.js */
+    initScrollspy();
 
-  // Lightbox functionality - move outside initScrollspy and fix
-  function initLightbox() {
-    const galleryImages = document.querySelectorAll('.gallery-image.clickable');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    const lightboxClose = document.getElementById('lightbox-close');
-    const lightboxPrev = document.getElementById('lightbox-prev');
-    const lightboxNext = document.getElementById('lightbox-next');
-    const lightboxCounter = document.getElementById('lightbox-counter');
+    // Lightbox functionality - move outside initScrollspy and fix
+    function initLightbox() {
+      const galleryImages = document.querySelectorAll('.gallery-image.clickable');
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightbox-image');
+      const lightboxClose = document.getElementById('lightbox-close');
+      const lightboxPrev = document.getElementById('lightbox-prev');
+      const lightboxNext = document.getElementById('lightbox-next');
+      const lightboxCounter = document.getElementById('lightbox-counter');
 
-    // Check if all elements exist
-    if (!lightbox || !lightboxImage || !lightboxClose || !lightboxPrev || !lightboxNext || !lightboxCounter) {
-      console.log('Lightbox elements missing:', {
-        lightbox: !!lightbox,
-        lightboxImage: !!lightboxImage,
-        lightboxClose: !!lightboxClose,
-        lightboxPrev: !!lightboxPrev,
-        lightboxNext: !!lightboxNext,
-        lightboxCounter: !!lightboxCounter
+      // Check if all elements exist
+      if (!lightbox || !lightboxImage || !lightboxClose || !lightboxPrev || !lightboxNext || !lightboxCounter) {
+        console.log('Lightbox elements missing:', {
+          lightbox: !!lightbox,
+          lightboxImage: !!lightboxImage,
+          lightboxClose: !!lightboxClose,
+          lightboxPrev: !!lightboxPrev,
+          lightboxNext: !!lightboxNext,
+          lightboxCounter: !!lightboxCounter
+        });
+        return;
+      }
+
+      if (galleryImages.length === 0) {
+        console.log('No gallery images found');
+        return;
+      }
+
+      console.log('Initializing lightbox with', galleryImages.length, 'images');
+
+      let currentImageIndex = 0;
+      const imageUrls = [];
+
+      // Use placeholder images for now (replace with actual paths later)
+      galleryImages.forEach((img, index) => {
+        imageUrls.push(`https://picsum.photos/800/600?random=${index + 1}`);
       });
-      return;
-    }
 
-    if (galleryImages.length === 0) {
-      console.log('No gallery images found');
-      return;
-    }
-
-    console.log('Initializing lightbox with', galleryImages.length, 'images');
-
-    let currentImageIndex = 0;
-    const imageUrls = [];
-
-    // Use placeholder images for now (replace with actual paths later)
-    galleryImages.forEach((img, index) => {
-      imageUrls.push(`https://picsum.photos/800/600?random=${index + 1}`);
-    });
-
-    // Open lightbox
-    galleryImages.forEach((img, index) => {
-      img.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation(); // Prevent event bubbling
-        console.log('Image clicked:', index);
-        currentImageIndex = index;
-        openLightbox();
+      // Open lightbox
+      galleryImages.forEach((img, index) => {
+        img.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation(); // Prevent event bubbling
+          console.log('Image clicked:', index);
+          currentImageIndex = index;
+          openLightbox();
+        });
       });
-    });
 
-    // Close lightbox
-    lightboxClose.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      closeLightbox();
-    });
-
-    lightbox.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
+      // Close lightbox
+      lightboxClose.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
         closeLightbox();
-      }
-    });
+      });
 
-    // Navigation
-    lightboxPrev.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : imageUrls.length - 1;
-      updateLightboxImage();
-    });
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeLightbox();
+        }
+      });
 
-    lightboxNext.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      currentImageIndex = currentImageIndex < imageUrls.length - 1 ? currentImageIndex + 1 : 0;
-      updateLightboxImage();
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (!lightbox.classList.contains('active')) return;
-
-      if (e.key === 'Escape') {
+      // Navigation
+      lightboxPrev.addEventListener('click', (e) => {
         e.preventDefault();
-        closeLightbox();
-      }
-      if (e.key === 'ArrowLeft') {
+        e.stopPropagation();
+        currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : imageUrls.length - 1;
+        updateLightboxImage();
+      });
+
+      lightboxNext.addEventListener('click', (e) => {
         e.preventDefault();
-        lightboxPrev.click();
+        e.stopPropagation();
+        currentImageIndex = currentImageIndex < imageUrls.length - 1 ? currentImageIndex + 1 : 0;
+        updateLightboxImage();
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          closeLightbox();
+        }
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          lightboxPrev.click();
+        }
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          lightboxNext.click();
+        }
+      });
+
+      function openLightbox() {
+        console.log('Opening lightbox');
+        lightbox.classList.add('active');
+        // DON'T prevent body scrolling - this might be causing the scroll issue
+        updateLightboxImage();
       }
-      if (e.key === 'ArrowRight') {
-        e.preventDefault();
-        lightboxNext.click();
+
+      function closeLightbox() {
+        console.log('Closing lightbox');
+        lightbox.classList.remove('active');
+        // Restore body scrolling
+        document.body.style.overflow = '';
       }
-    });
 
-    function openLightbox() {
-      console.log('Opening lightbox');
-      lightbox.classList.add('active');
-      // DON'T prevent body scrolling - this might be causing the scroll issue
-      updateLightboxImage();
+      function updateLightboxImage() {
+        console.log('Updating image to:', imageUrls[currentImageIndex]);
+        lightboxImage.src = imageUrls[currentImageIndex];
+        lightboxCounter.textContent = `${currentImageIndex + 1} / ${imageUrls.length}`;
+      }
     }
+    initLightbox();
+  } // End of isCaseStudyPage
 
-    function closeLightbox() {
-      console.log('Closing lightbox');
-      lightbox.classList.remove('active');
-      // Restore body scrolling
-      document.body.style.overflow = '';
-    }
 
-    function updateLightboxImage() {
-      console.log('Updating image to:', imageUrls[currentImageIndex]);
-      lightboxImage.src = imageUrls[currentImageIndex];
-      lightboxCounter.textContent = `${currentImageIndex + 1} / ${imageUrls.length}`;
-    }
-  }
-
-  // Call initScrollspy and initLightbox separately
-  initScrollspy();
-  // initLightbox();
 });

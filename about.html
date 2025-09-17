@@ -5,9 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <script src="main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+  <script src="main.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
   <link rel="icon" href="favicon.ico">
   <title>About</title>
 </head>
@@ -105,12 +105,37 @@
   </section>
   <footer class="footer">
     <div class="footer-content">
-      <p>&copy; 2025 Ligea Alexander. All rights reserved.</p>
-      <!-- <p>Follow me on <a href="https://twitter.com/yourprofile" target="_blank">Twitter</a> and <a
-            href="https://www.linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>.</p> -->
+      <div class="footer-main">
+        <div class="footer-section footer-contact">
+          <h3>Let's Work Together</h3>
+          <p>Ready to turn complex data into compelling stories?</p>
+          <a href="mailto:hi@ligea-alexander.xyz" class="footer-email">hi@ligea-alexander.xyz</a>
+        </div>
+
+        <div class="footer-section footer-links">
+          <h3>Explore</h3>
+          <nav class="footer-nav">
+            <a href="index.html">Home</a>
+            <a href="work.html">Work</a>
+            <a href="about.html">Background</a>
+          </nav>
+        </div>
+        <div class="footer-section footer-location">
+          <h3>Currently</h3>
+          <p>Hamburg, Germany</p>
+          <p>New York, America</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Ligea Alexander. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="#" aria-label="LinkedIn">LinkedIn</a>
+          <a href="#" aria-label="GitHub">GitHub</a>
+          <a href="#" aria-label="Dribbble">Dribbble</a>
+        </div>
+      </div>
     </div>
   </footer>
-
 </body>
 
 </html>
