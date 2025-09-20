@@ -918,16 +918,24 @@ body {
   background: #3344A8 !important;
 }
 
-.service-item.active[data-service="storytelling"] {
+.service-item.active[data-service="writing"] {
   background: #BB4142 !important;
 }
 
-.service-item.active[data-service="development"] {
+.service-item.active[data-service="developer"] {
   background: #FBBF24 !important;
 }
 
-.service-item.active[data-service="design"] {
+.service-item.active[data-service="visualization"] {
   background: #34D399 !important;
+}
+
+.service-item.active[data-service="research"] {
+  background: #00634E !important;
+}
+
+.service-item.active[data-service="journalism"] {
+  background: #FFBDF2 !important;
 }
 
 .service-header {
@@ -1100,31 +1108,6 @@ body {
     transform: translateY(-1px) translateX(3px);
   }
 }
-
-/* Contact Section */
-/* .contact-section {
-  padding: 60px 0;
-  text-align: center;
-  background-color: #f8f8f8;
-}
-
-.contact-section h2 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-  margin-bottom: 1.5rem;
-  color: #1a1a1a;
-}
-
-.contact-section p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #333;
-}
-
-.contact-section a {
-  color: #1a1a1a;
-  text-decoration: underline;
-  font-weight: 600;
-} */
 
 
 /* Call to Action Section */
@@ -1313,8 +1296,8 @@ body {
 /* Work type color system */
 :root {
   --data-science: #3344A8;
-  --storytelling: #BB4142;
-  --development: #FFD86F;
+  --writing: #BB4142;
+  --developer: #FFD86F;
   --visualization: #5AAAAF;
   --research: #00634E;
   --journalism: #FFBDF2;
@@ -1325,12 +1308,12 @@ body {
   --work-color: var(--data-science);
 }
 
-[data-work-type="storytelling"] {
-  --work-color: var(--storytelling);
+[data-work-type="writing"] {
+  --work-color: var(--writing);
 }
 
-[data-work-type="development"] {
-  --work-color: var(--development);
+[data-work-type="developer"] {
+  --work-color: var(--developer);
 }
 
 [data-work-type="visualization"] {
@@ -1352,7 +1335,11 @@ body {
   justify-content: center;
   padding: 4rem 0 2rem 0;
   margin-bottom: 3rem;
-
+  max-width: 900px;
+  /* Set a reasonable max-width */
+  margin-left: auto;
+  /* Center horizontally */
+  margin-right: auto;
 }
 
 .filter-container {
@@ -1435,6 +1422,21 @@ body {
   transform: translateY(-5px);
 }
 
+/* Remove underline and inherit color for all links in project cards */
+.project-card-wrapper a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  /* height: 100%;
+  width: 100%; */
+}
+
+/* Prevent underline on hover too */
+.project-card-wrapper a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Top section: Image card (same styling as homepage) */
 .project-card-image {
   position: relative;
@@ -1461,12 +1463,12 @@ body {
   background-color: var(--data-science);
 }
 
-.project-card-wrapper[data-work-type="storytelling"] .project-card-image {
-  background-color: var(--storytelling);
+.project-card-wrapper[data-work-type="writing"] .project-card-image {
+  background-color: var(--writing);
 }
 
-.project-card-wrapper[data-work-type="journalism"] .project-card-image {
-  background-color: var(--journalism);
+.project-card-wrapper[data-work-type="developer"] .project-card-image {
+  background-color: var(--developer);
 }
 
 .project-card-wrapper[data-work-type="visualization"] .project-card-image {
@@ -1477,9 +1479,10 @@ body {
   background-color: var(--research);
 }
 
-.project-card-wrapper[data-work-type="development"] .project-card-image {
-  background-color: var(--development);
+.project-card-wrapper[data-work-type="journalism"] .project-card-image {
+  background-color: var(--journalism);
 }
+
 
 
 /* Image styling */
@@ -1503,7 +1506,7 @@ body {
 .project-details .project-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: 1rem;
 }
 
@@ -1520,10 +1523,9 @@ body {
 
 /* Project meta - aligned to the right */
 .project-details .project-meta {
-  display: flex;
   align-items: center;
-  flex-shrink: 0;
-  /* Don't shrink */
+  display: flex;
+  height: 100%;
 }
 
 .project-details .project-tags {
@@ -1589,17 +1591,24 @@ body {
   overflow: hidden;
 } */
 
+/* .work-title-container {
+  grid-column: 1;
+  grid-row: 1;
+} */
 .work-title-container {
   grid-column: 1;
   grid-row: 1;
-}
-
-.work-type-indicator {
-  grid-column: 2;
-  grid-row: 1;
+  min-width: 0;
+  /* Allows flex/grid children to shrink */
+  overflow: hidden;
+  /* max-width: 500px; */
+  /* Limit width so it doesn't push indicator */
+  display: flex;
+  align-items: center;
 }
 
 /* Work title with word splitting for image preview */
+
 .work-title {
   position: relative;
   display: flex;
@@ -1630,6 +1639,11 @@ body {
   line-height: 1;
   position: relative;
   z-index: 2;
+}
+
+.work-type-indicator {
+  grid-column: 2;
+  grid-row: 1;
 }
 
 /* Keep the existing color square */
@@ -1696,7 +1710,7 @@ body {
   color: white;
   margin: 0;
   padding: 1.5rem 2.5rem;
-  line-height: 1;
+  line-height: 1.15;
   letter-spacing: 0.02em;
 
   /* Animation setup */
@@ -1726,6 +1740,10 @@ body {
 .split-line {
   overflow: hidden;
   display: block;
+  /* line-height: 1.15;  */
+  /* Add or increase slightly */
+  /* padding-bottom: 0.08em; */
+  /* Add a tiny bit of space if needed */
 }
 
 .split-word {
@@ -1752,20 +1770,28 @@ body {
 }
 
 /* Section-specific colors */
-.focus-section[data-focus-type="data-visualization"] .focus-title {
-  background-color: var(--visualization);
+.focus-section[data-focus-type="data-science"] .focus-title {
+  background-color: var(--data-science);
 }
 
-.focus-section[data-focus-type="web-design"] .focus-title {
-  background-color: var(--development);
+.focus-section[data-focus-type="writing"] .focus-title {
+  background-color: var(--writing);
+}
+
+.focus-section[data-focus-type="developer"] .focus-title {
+  background-color: var(--developer);
+}
+
+.focus-section[data-focus-type="visualization"] .focus-title {
+  background-color: var(--visualization);
 }
 
 .focus-section[data-focus-type="research"] .focus-title {
   background-color: var(--research);
 }
 
-.focus-section[data-focus-type="data-science"] .focus-title {
-  background-color: var(--data-science);
+.focus-section[data-focus-type="journalism"] .focus-title {
+  background-color: var(--journalism);
 }
 
 .focus-projects {
@@ -1816,7 +1842,7 @@ body {
   font-size: clamp(16px, 2.3vw, 22px);
   /* Increase from 18px-24px to 20px-26px */
   color: #1a1a1a;
-  line-height: 1.1;
+  line-height: 1.5;
   letter-spacing: 0.01em;
 }
 
@@ -1959,9 +1985,25 @@ body {
   aspect-ratio: 1;
   background-color: #d0d0d0;
   /* border-radius: 4px; */
-  transition: transform 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  /* Ensure it fills the grid cell */
+  height: 100%;
+  /* Ensure it fills the grid cell */
+  position: relative;
 }
 
+.preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Use 'cover' for cropping, 'contain' for full image */
+  /* border-radius: 4px; */
+  display: block;
+}
 
 /* View Project Button - positioned under images */
 .view-project-btn {
@@ -2044,12 +2086,12 @@ body {
   --work-color: var(--data-science);
 }
 
-.case-study-main[data-work-type="storytelling"] {
-  --work-color: var(--storytelling);
+.case-study-main[data-work-type="writing"] {
+  --work-color: var(--writing);
 }
 
-.case-study-main[data-work-type="development"] {
-  --work-color: var(--development);
+.case-study-main[data-work-type="developer"] {
+  --work-color: var(--developer);
 }
 
 .case-study-main[data-work-type="visualization"] {
@@ -2153,6 +2195,13 @@ body {
   max-width: 600px;
   /* Set a max size */
   max-height: 600px;
+}
+
+.hero-image-block .image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* Meta Section - Full Width Below Split */
@@ -2450,7 +2499,7 @@ body {
   height: 50%;
   max-width: 1200px;
   max-height: 2000px;
-  background-color: #ddd;
+  /* background-color: #ddd; */
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -2465,14 +2514,26 @@ body {
   opacity: 1;
 }
 
+/* The placeholder sets the size/aspect ratio */
 .media-item .image-placeholder {
-  width: 100%;
-  height: 100%;
+  width: 95%;
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
-  background-color: #ccc;
+  overflow: hidden;
+  /* background-color: #ccc; */
+  /* optional for visual feedback */
+}
+
+.media-item .image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin: auto;
+  display: block;
 }
 
 /* Horizontal Gallery */

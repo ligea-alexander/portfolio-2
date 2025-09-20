@@ -888,7 +888,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
       }
 
-      // CAREFULLY ADD: New function to update media gallery
+      // ADD: New function to update media gallery
       function updateMediaGallery(sectionId) {
         const mediaItems = document.querySelectorAll('.media-item');
 
@@ -996,6 +996,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       // Set first section as active initially
       if (sections.length > 0) {
         updateActiveNav(sections[0]);
+        updateMediaGallery(sections[0].getAttribute('id')); // <-- Add this line
       }
 
       // Refresh ScrollTrigger

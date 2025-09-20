@@ -45,6 +45,7 @@
     </section>
 
     <section class="work-categories">
+
       <!-- Featured View - Card Layout -->
       <div class="featured-view" data-view="featured">
         <div class="featured-grid">
@@ -85,22 +86,23 @@
               </div>
             </div>
           </div>
-          <div class="project-card-wrapper" data-category="featured" data-work-type="storytelling">
-            <div class="project-card-image">
-              <img src="img/dashboard.png" alt="Dashboard">
-            </div>
+          <div class="project-card-wrapper" data-category="featured" data-work-type="writing">
+            <a href="projects/dialogue-librae.html" target="_blank" rel="noopener">
+              <div class="project-card-image">
+                <img src="img/writing.jpeg"
+                  alt="Group of young adults socializing in a modern lounge with large green plant, minimalist furniture, and drinks on small tables; relaxed and friendly atmosphere">
+              </div>
+            </a>
             <div class="project-details">
               <div class="project-header">
-                <h3 class="project-title reveal-text">Lorem ipsum feugiat gravida</h3>
+                <h3 class="project-title reveal-text">Librae Bakery — Dialogue Magazine Feature</h3>
                 <div class="project-meta">
-                  <span class="project-tags reveal-text">Lorem | Ipsum | Dolor</span>
+                  <span class="project-tags reveal-text">Interviews | Feature Writing</span>
                 </div>
               </div>
               <div class="project-description reveal-text">
-                <p>Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi neque libero semper. Lorem
-                  ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem quae facilis, est, quas
-                  maiores, earum architecto ad non odit deleniti possimus autem cumque adipisci ipsa fuga doloremque
-                  accusamus.</p>
+                <p>Editorial feature profiling Librae Bakery in Dialogue Magazine's second issue, weaving architecture,
+                  coffee culture, and community into a cultural narrative.</p>
               </div>
             </div>
           </div>
@@ -142,31 +144,68 @@
               </div>
             </div>
           </div>
-          <div class="project-card-wrapper" data-category="featured" data-work-type="development">
-            <a href="projects/ligea-portfolio.html">
+          <div class="project-card-wrapper" data-category="featured" data-work-type="developer">
+            <a href="projects/ligea-portfolio-redesign.html" target="_blank" rel="noopener">
               <div class="project-card-image">
                 <img src="img/web-des-dev.png" alt="Web Design & Development">
               </div>
-              <div class="project-details">
-                <div class="project-header">
-                  <h3 class="project-title reveal-text">Ligea Portfolio Redesign</h3>
-                  <div class="project-meta">
-                    <span class="project-tags reveal-text">Frontend | Animation (GSAP) | Interaction Design</span>
-                  </div>
-                </div>
-                <div class="project-description reveal-text">
-                  <p>A fresh direction for my portfolio, designed in pure HTML, CSS, and JavaScript with GSAP — blending
-                    storytelling, interaction design, and development into one cohesive site.</p>
+            </a>
+            <div class="project-details">
+              <div class="project-header">
+                <h3 class="project-title reveal-text">Ligea Portfolio Redesign</h3>
+                <div class="project-meta">
+                  <span class="project-tags reveal-text">Frontend | Animation (GSAP) | Interaction Design</span>
                 </div>
               </div>
-            </a>
+              <div class="project-description reveal-text">
+                <p>A fresh direction for my portfolio, designed in pure HTML, CSS, and JavaScript with GSAP — blending
+                  storytelling, interaction design, and development into one cohesive site.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
       <!-- All Work View -->
       <div class="all-work-view hidden" data-view="all">
         <div class="all-work-list">
           <div class="work-item" data-work-type="data-science">
+            <div class="work-title-container reveal-text ">
+              <h3 class="work-title" data-image="img/img_wrk_prvw/cost_of_sunlight_preview.jpeg">PathwayPal
+              </h3>
+            </div>
+            <div class="work-type-indicator"></div>
+            <div class="work-accordion">
+              <div class="accordion-content">
+                <div class="project-details-grid">
+                  <div class="project-text">
+                    <h4 class="project-subtitle">Data Science</h4>
+                    <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi
+                      neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem
+                      quae facilis, est, quas maiores.</p>
+                    <div class="project-tools">
+                      <span>Tools</span>
+                      <span>Python / Mini-search / LLM</span>
+                    </div>
+                  </div>
+                  <div class="project-images">
+                    <div class="image-grid">
+                      <div class="preview-image"></div>
+                      <div class="preview-image"></div>
+                      <div class="preview-image"></div>
+                      <div class="preview-image"></div>
+                      <div class="preview-image"></div>
+                      <div class="preview-image"></div>
+                    </div>
+                  </div>
+                  <a href="projects/cost-of-sunlight.html" class="view-project-btn" target="_blank" rel="noopener">
+                    VIEW PROJECT <span class="arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="work-item" data-work-type="journalism">
             <div class="work-title-container reveal-text ">
               <h3 class="work-title" data-image="img/img_wrk_prvw/cost_of_sunlight_preview.jpeg">The Cost of
                 Sunlight
@@ -177,7 +216,7 @@
               <div class="accordion-content">
                 <div class="project-details-grid">
                   <div class="project-text">
-                    <h4 class="project-subtitle">Data Visualization</h4>
+                    <h4 class="project-subtitle">Data Journalism</h4>
                     <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi
                       neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem
                       quae facilis, est, quas maiores.</p>
@@ -196,7 +235,7 @@
                       <div class="preview-image"></div>
                     </div>
                   </div>
-                  <a href="projects/cost-of-sunlight.html" class="view-project-btn">
+                  <a href="projects/cost-of-sunlight.html" class="view-project-btn" target="_blank" rel="noopener">
                     VIEW PROJECT <span class="arrow">↗</span>
                   </a>
                 </div>
@@ -204,19 +243,19 @@
             </div>
           </div>
 
-          <div class="work-item" data-work-type="storytelling">
+          <div class="work-item" data-work-type="writing">
             <div class="work-title-container reveal-text ">
-              <h3 class="work-title " data-image="img/dashboard.png">Tarrifs Won't Help</h3>
+              <h3 class="work-title " data-image="img/img_wrk_prvw/librae_preview.png">Librae Bakery (Feature Piece)
+              </h3>
             </div>
             <div class="work-type-indicator"></div>
             <div class="work-accordion">
               <div class="accordion-content">
                 <div class="project-details-grid">
                   <div class="project-text">
-                    <h4 class="project-subtitle">Data Visualization</h4>
-                    <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi
-                      neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem
-                      quae facilis, est, quas maiores.</p>
+                    <h4 class="project-subtitle">Writing</h4>
+                    <p class="project-description">Editorial feature profiling Librae Bakery in Dialogue Magazine's
+                      second issue, weaving architecture, coffee culture, and community into a cultural narrative.</p>
                     <div class="project-tools">
                       <span>Tools</span>
                       <span>D3.js/ QGIS / Tableau</span>
@@ -224,15 +263,19 @@
                   </div>
                   <div class="project-images">
                     <div class="image-grid">
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
+                      <div class="preview-image"><img src="img/img_wrk_prvw/librae_asset1.png"
+                          alt="Librae Bakery Preview"></div>
+                      <div class="preview-image"> <img src="img/img_wrk_prvw/librae_asset3.png"
+                          alt="Librae Bakery Preview"></div>
+                      <div class="preview-image"> <img src="img/img_wrk_prvw/librae_asset2.png"
+                          alt="Librae Bakery Preview"></div>
+                      <div class="preview-image"> <img src="img/img_wrk_prvw/librae_asset4.png"
+                          alt="Librae Bakery Preview"></div>
+                      <div class="preview-image"> <img src="img/img_wrk_prvw/librae_asset5.jpeg"
+                          alt="Librae Bakery Preview"></div>
                     </div>
                   </div>
-                  <a href="#" class="view-project-btn">
+                  <a href="projects/dialogue-librae.html" class="view-project-btn" target="_blank" rel="noopener">
                     VIEW PROJECT <span class="arrow">↗</span>
                   </a>
                 </div>
@@ -249,7 +292,7 @@
               <div class="accordion-content">
                 <div class="project-details-grid">
                   <div class="project-text">
-                    <h4 class="project-subtitle">Data Visualization</h4>
+                    <h4 class="project-subtitle">UX Research</h4>
                     <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi
                       neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem
                       quae facilis, est, quas maiores.</p>
@@ -268,7 +311,7 @@
                       <div class="preview-image"></div>
                     </div>
                   </div>
-                  <a href="#" class="view-project-btn">
+                  <a href="#" class="view-project-btn" target="_blank" rel="noopener">
                     VIEW PROJECT <span class="arrow">↗</span>
                   </a>
                 </div>
@@ -276,9 +319,52 @@
             </div>
           </div>
 
-          <div class="work-item" data-work-type="development">
+          <div class="work-item" data-work-type="developer">
             <div class="work-title-container reveal-text">
-              <h3 class="work-title" data-image="img/analytics.png">The Cost of Sunlight</h3>
+              <h3 class="work-title" data-image="img/img_wrk_prvw/ligea_redesign_prvw.png">Ligea Portfolio Redesign</h3>
+            </div>
+            <div class="work-type-indicator"></div>
+            <div class="work-accordion">
+              <div class="accordion-content">
+                <div class="project-details-grid">
+                  <div class="project-text">
+                    <h4 class="project-subtitle">Web Design & Development</h4>
+                    <p class="project-description">A fresh direction for my portfolio, designed in pure HTML, CSS, and
+                      JavaScript with GSAP — blending storytelling, interaction design, and development into one
+                      cohesive site.</p>
+                    <div class="project-tools">
+                      <span>Tools</span>
+                      <span>Figma / HTML / CSS / JavaScript / GSAP</span>
+                    </div>
+                  </div>
+                  <div class="project-images">
+                    <div class="image-grid">
+                      <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset1.png" alt="">
+                      </div>
+                      <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset2.png" alt="">
+                      </div>
+                      <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset3.png" alt="">
+                      </div>
+                      <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset4.png" alt="">
+                      </div>
+                      <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset5.png" alt="">
+                      </div>
+                      <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset6.png" alt="">
+                      </div>
+                    </div>
+                  </div>
+                  <a href="projects/ligea-portfolio-redesign.html" class="view-project-btn" target="_blank"
+                    rel="noopener">
+                    VIEW PROJECT <span class="arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="work-item" data-work-type="visualization">
+            <div class="work-title-container reveal-text">
+              <h3 class="work-title" data-image="img/analytics.png">Charts, Charts, Charts</h3>
             </div>
             <div class="work-type-indicator"></div>
             <div class="work-accordion">
@@ -304,7 +390,75 @@
                       <div class="preview-image"></div>
                     </div>
                   </div>
-                  <a href="#" class="view-project-btn">
+                  <a href="#" class="view-project-btn" target="_blank" rel="noopener">
+                    VIEW PROJECT <span class="arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="work-item" data-work-type="writing">
+            <div class="work-title-container reveal-text">
+              <h3 class="work-title" data-image="img/img_wrk_prvw/ciao_bella_preview.png">Ciao Bella (Feature Piece)
+              </h3>
+            </div>
+            <div class="work-type-indicator"></div>
+            <div class="work-accordion">
+              <div class="accordion-content">
+                <div class="project-details-grid">
+                  <div class="project-text">
+                    <h4 class="project-subtitle">Writing</h4>
+                    <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi
+                      neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem
+                      quae facilis, est, quas maiores.</p>
+                    <div class="project-tools">
+                      <span>Tools</span>
+                      <span>D3.js/ QGIS / Tableau</span>
+                    </div>
+                  </div>
+                  <div class="project-images">
+                    <div class="image-grid">
+                      <div class="preview-image"><img src="img/img_wrk_prvw/ciao_bella_asset1.png" alt=""></div>
+                      <div class="preview-image"><img src="img/img_wrk_prvw/ciao_bella_asset2.png" alt=""></div>
+                      <div class="preview-image"><img src="img/img_wrk_prvw/ciao_bella_asset3.png" alt=""></div>
+                    </div>
+                  </div>
+                  <a href="projects/dialogue-ciao-bella.html" class="view-project-btn" target="_blank" rel="noopener">
+                    VIEW PROJECT <span class="arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="work-item" data-work-type="visualization">
+            <div class="work-title-container reveal-text">
+              <h3 class="work-title" data-image="img/analytics.png">Maps</h3>
+            </div>
+            <div class="work-type-indicator"></div>
+            <div class="work-accordion">
+              <div class="accordion-content">
+                <div class="project-details-grid">
+                  <div class="project-text">
+                    <h4 class="project-subtitle">Data Visualization</h4>
+                    <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi
+                      neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem
+                      quae facilis, est, quas maiores.</p>
+                    <div class="project-tools">
+                      <span>Tools</span>
+                      <span>D3.js/ QGIS / Tableau</span>
+                    </div>
+                  </div>
+                  <div class="project-images">
+                    <div class="image-grid">
+                      <div class="preview-image"></div>
+                      <div class="preview-image"></div>
+                      <div class="preview-image"></div>
+                      <div class="preview-image"></div>
+                      <div class="preview-image"></div>
+                      <div class="preview-image"></div>
+                    </div>
+                  </div>
+                  <a href="#" class="view-project-btn" target="_blank" rel="noopener">
                     VIEW PROJECT <span class="arrow">↗</span>
                   </a>
                 </div>
@@ -312,7 +466,7 @@
             </div>
           </div>
 
-          <div class="work-item" data-work-type="visualization">
+          <!-- <div class="work-item" data-work-type="developer">
             <div class="work-title-container reveal-text">
               <h3 class="work-title" data-image="img/analytics.png">Lorem ipsum commodo habitasse</h3>
             </div>
@@ -346,9 +500,9 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
-          <div class="work-item" data-work-type="journalism">
+          <!-- <div class="work-item" data-work-type="visualization">
             <div class="work-title-container reveal-text">
               <h3 class="work-title" data-image="img/analytics.png">Lorem ipsum facilisi</h3>
             </div>
@@ -382,145 +536,35 @@
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="work-item" data-work-type="data-science">
-            <div class="work-title-container reveal-text">
-              <h3 class="work-title" data-image="img/analytics.png">The Cost of Sunlight</h3>
-            </div>
-            <div class="work-type-indicator"></div>
-            <div class="work-accordion">
-              <div class="accordion-content">
-                <div class="project-details-grid">
-                  <div class="project-text">
-                    <h4 class="project-subtitle">Data Visualization</h4>
-                    <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi
-                      neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem
-                      quae facilis, est, quas maiores.</p>
-                    <div class="project-tools">
-                      <span>Tools</span>
-                      <span>D3.js/ QGIS / Tableau</span>
-                    </div>
-                  </div>
-                  <div class="project-images">
-                    <div class="image-grid">
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                    </div>
-                  </div>
-                  <a href="#" class="view-project-btn">
-                    VIEW PROJECT <span class="arrow">↗</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="work-item" data-work-type="development">
-            <div class="work-title-container reveal-text">
-              <h3 class="work-title" data-image="img/analytics.png">Lorem ipsum commodo habitasse</h3>
-            </div>
-            <div class="work-type-indicator"></div>
-            <div class="work-accordion">
-              <div class="accordion-content">
-                <div class="project-details-grid">
-                  <div class="project-text">
-                    <h4 class="project-subtitle">Data Visualization</h4>
-                    <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi
-                      neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem
-                      quae facilis, est, quas maiores.</p>
-                    <div class="project-tools">
-                      <span>Tools</span>
-                      <span>D3.js/ QGIS / Tableau</span>
-                    </div>
-                  </div>
-                  <div class="project-images">
-                    <div class="image-grid">
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                    </div>
-                  </div>
-                  <a href="#" class="view-project-btn">
-                    VIEW PROJECT <span class="arrow">↗</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="work-item" data-work-type="visualization">
-            <div class="work-title-container reveal-text">
-              <h3 class="work-title" data-image="img/analytics.png">Lorem ipsum facilisi</h3>
-            </div>
-            <div class="work-type-indicator"></div>
-            <div class="work-accordion">
-              <div class="accordion-content">
-                <div class="project-details-grid">
-                  <div class="project-text">
-                    <h4 class="project-subtitle">Data Visualization</h4>
-                    <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor scelerisque mi
-                      neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore rem
-                      quae facilis, est, quas maiores.</p>
-                    <div class="project-tools">
-                      <span>Tools</span>
-                      <span>D3.js/ QGIS / Tableau</span>
-                    </div>
-                  </div>
-                  <div class="project-images">
-                    <div class="image-grid">
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                      <div class="preview-image"></div>
-                    </div>
-                  </div>
-                  <a href="#" class="view-project-btn">
-                    VIEW PROJECT <span class="arrow">↗</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+          </div> -->
         </div>
       </div>
+
       <!-- Focus View - Role-based organization -->
       <div class="focus-view hidden" data-view="focus">
         <div class="focus-content">
-          <!-- Data Visualization Section -->
-          <div class="focus-section" data-focus-type="data-visualization">
+          <!-- Data Analytics & Science Section -->
+          <div class="focus-section" data-focus-type="data-science">
             <div class="focus-header">
               <h2 class="focus-title">
-                <span class="focus-title-text reveal-text">Data Visualization</span>
+                <span class="focus-title-text reveal-text">Data Science</span>
               </h2>
             </div>
             <div class="focus-projects">
-              <div class="focus-project-item" data-work-type="visualization">
-                <div class="project-name reveal-text">The Cost of Sunlight</div>
-                <div class="project-topic reveal-text">Climate Economics</div>
-                <div class="project-tools reveal-text">D3.js, Python, Figma</div>
+              <div class="focus-project-item" data-work-type="data-science">
+                <div class="project-name reveal-text">Analysis of Social Media Trends</div>
+                <div class="project-topic reveal-text">Data Analysis</div>
+                <div class="project-tools reveal-text">Python, Pandas, Matplotlib</div>
                 <div class="work-accordion">
                   <div class="accordion-content">
                     <div class="project-details-grid">
                       <div class="project-text">
-                        <!-- <h4 class="project-subtitle  ">Data Visualization</h4> -->
-                        <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor
-                          scelerisque mi
-                          neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore
-                          rem
-                          quae facilis, est, quas maiores.</p>
+                        <!-- <h4 class="project-subtitle">Data Analysis</h4> -->
+                        <p class="project-description">Comprehensive analysis of social media trends using machine
+                          learning algorithms to identify patterns and predict engagement metrics.</p>
                         <div class="project-tools">
                           <span>Tools</span>
-                          <span>D3.js/ QGIS / Tableau</span>
+                          <span>Python / Pandas / Matplotlib / Twitter API</span>
                         </div>
                       </div>
                       <div class="project-images">
@@ -533,28 +577,27 @@
                           <div class="preview-image"></div>
                         </div>
                       </div>
-                      <a href="#" class="view-project-btn">
+                      <a href="#" class="view-project-btn" target="_blank" rel="noopener">
                         VIEW PROJECT <span class="arrow">↗</span>
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="focus-project-item" data-work-type="visualization">
-                <div class="project-name reveal-text">Energy Market Analysis</div>
-                <div class="project-topic reveal-text">Market Research</div>
-                <div class="project-tools reveal-text">Tableau, R, Adobe</div>
+              <div class="focus-project-item" data-work-type="data-science">
+                <div class="project-name reveal-text">Machine Learning Model Development</div>
+                <div class="project-topic reveal-text">Model Development</div>
+                <div class="project-tools reveal-text">Python, Scikit-learn, TensorFlow</div>
                 <div class="work-accordion">
                   <div class="accordion-content">
                     <div class="project-details-grid">
                       <div class="project-text">
-                        <!-- <h4 class="project-subtitle">Market Research</h4> -->
-                        <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor
-                          scelerisque mi neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        </p>
+                        <!-- <h4 class="project-subtitle">Model Development</h4> -->
+                        <p class="project-description">Development and deployment of machine learning models for
+                          predictive analytics with focus on performance optimization and scalability.</p>
                         <div class="project-tools">
                           <span>Tools</span>
-                          <span>Tableau / R / Adobe Creative Suite</span>
+                          <span>Python / Scikit-learn / TensorFlow / AWS</span>
                         </div>
                       </div>
                       <div class="project-images">
@@ -567,41 +610,7 @@
                           <div class="preview-image"></div>
                         </div>
                       </div>
-                      <a href="#" class="view-project-btn">
-                        VIEW PROJECT <span class="arrow">↗</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="focus-project-item" data-work-type="visualization">
-                <div class="project-name reveal-text">Supply Chain Visualization</div>
-                <div class="project-topic reveal-text">Logistics</div>
-                <div class="project-tools reveal-text">Observable, SQL</div>
-                <div class="work-accordion">
-                  <div class="accordion-content">
-                    <div class="project-details-grid">
-                      <div class="project-text">
-                        <!-- <h4 class="project-subtitle">Logistics</h4> -->
-                        <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor
-                          scelerisque mi neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                        </p>
-                        <div class="project-tools">
-                          <span>Tools</span>
-                          <span>Observable / SQL / D3.js</span>
-                        </div>
-                      </div>
-                      <div class="project-images">
-                        <div class="image-grid">
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                        </div>
-                      </div>
-                      <a href="#" class="view-project-btn">
+                      <a href="#" class="view-project-btn" target="_blank" rel="noopener">
                         VIEW PROJECT <span class="arrow">↗</span>
                       </a>
                     </div>
@@ -610,117 +619,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Web Design Section -->
-          <div class="focus-section" data-focus-type="web-design">
-            <div class="focus-header">
-              <h2 class="focus-title">
-                <span class="focus-title-text reveal-text">Web Design</span>
-              </h2>
-            </div>
-            <div class="focus-projects">
-              <div class="focus-project-item">
-                <div class="project-name reveal-text">Portfolio Website</div>
-                <div class="project-topic reveal-text">Personal Branding</div>
-                <div class="project-tools reveal-text">HTML, CSS, JavaScript</div>
-                <div class="work-accordion">
-                  <div class="accordion-content">
-                    <div class="project-details-grid">
-                      <div class="project-text">
-                        <!-- <h4 class="project-subtitle">Personal Branding</h4> -->
-                        <p class="project-description">A modern, responsive portfolio showcasing design and development
-                          skills with smooth animations and interactive elements.</p>
-                        <div class="project-tools">
-                          <span>Tools</span>
-                          <span>HTML / CSS / JavaScript / GSAP</span>
-                        </div>
-                      </div>
-                      <div class="project-images">
-                        <div class="image-grid">
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                        </div>
-                      </div>
-                      <a href="#" class="view-project-btn">
-                        VIEW PROJECT <span class="arrow">↗</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="focus-project-item" data-work-type="web-design">
-                <div class="project-name reveal-text">E-commerce Platform</div>
-                <div class="project-topic reveal-text">User Experience</div>
-                <div class="project-tools reveal-text">React, Node.js, Figma</div>
-                <div class="work-accordion">
-                  <div class="accordion-content">
-                    <div class="project-details-grid">
-                      <div class="project-text">
-                        <!-- <h4 class="project-subtitle">User Experience</h4> -->
-                        <p class="project-description">Full-stack e-commerce solution with intuitive user interface,
-                          secure payment processing, and comprehensive admin dashboard.</p>
-                        <div class="project-tools">
-                          <span>Tools</span>
-                          <span>React / Node.js / Figma / Stripe API</span>
-                        </div>
-                      </div>
-                      <div class="project-images">
-                        <div class="image-grid">
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                        </div>
-                      </div>
-                      <a href="#" class="view-project-btn">
-                        VIEW PROJECT <span class="arrow">↗</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="focus-project-item" data-work-type="web-design">
-                <div class="project-name reveal-text">Dashboard Interface</div>
-                <div class="project-topic reveal-text">Data Analytics</div>
-                <div class="project-tools reveal-text">Vue.js, Chart.js</div>
-                <div class="work-accordion">
-                  <div class="accordion-content">
-                    <div class="project-details-grid">
-                      <div class="project-text">
-                        <!-- <h4 class="project-subtitle">Data Analytics</h4> -->
-                        <p class="project-description">Interactive dashboard for real-time data visualization and
-                          analytics with customizable widgets and responsive design.</p>
-                        <div class="project-tools">
-                          <span>Tools</span>
-                          <span>Vue.js / Chart.js / D3.js / API Integration</span>
-                        </div>
-                      </div>
-                      <div class="project-images">
-                        <div class="image-grid">
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                        </div>
-                      </div>
-                      <a href="#" class="view-project-btn">
-                        VIEW PROJECT <span class="arrow">↗</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <!-- Research Section -->
           <div class="focus-section" data-focus-type="research">
             <div class="focus-header">
@@ -755,7 +653,7 @@
                           <div class="preview-image"></div>
                         </div>
                       </div>
-                      <a href="#" class="view-project-btn">
+                      <a href="#" class="view-project-btn" target="_blank" rel="noopener">
                         VIEW PROJECT <span class="arrow">↗</span>
                       </a>
                     </div>
@@ -822,7 +720,7 @@
                           <div class="preview-image"></div>
                         </div>
                       </div>
-                      <a href="#" class="view-project-btn">
+                      <a href="#" class="view-project-btn" target="_blank" rel="noopener">
                         VIEW PROJECT <span class="arrow">↗</span>
                       </a>
                     </div>
@@ -831,61 +729,114 @@
               </div>
             </div>
           </div>
-          <div class="focus-section" data-focus-type="data-science">
+          <!-- Writing Section -->
+          <div class="focus-section" data-focus-type="writing">
             <div class="focus-header">
               <h2 class="focus-title">
-                <span class="focus-title-text reveal-text">Data Science</span>
+                <span class="focus-title-text reveal-text">Writing</span>
               </h2>
             </div>
             <div class="focus-projects">
-              <div class="focus-project-item" data-work-type="data-science">
-                <div class="project-name reveal-text">Analysis of Social Media Trends</div>
-                <div class="project-topic reveal-text">Data Analysis</div>
-                <div class="project-tools reveal-text">Python, Pandas, Matplotlib</div>
+              <div class="focus-project-item" data-work-type="writing">
+                <div class="project-name reveal-text">Ciao Bella - Dialogue Magazine Feature</div>
+                <div class="project-topic reveal-text">Feature Writing</div>
+                <div class="project-tools reveal-text">Interview, Research</div>
                 <div class="work-accordion">
                   <div class="accordion-content">
                     <div class="project-details-grid">
                       <div class="project-text">
-                        <!-- <h4 class="project-subtitle">Data Analysis</h4> -->
-                        <p class="project-description">Comprehensive analysis of social media trends using machine
-                          learning algorithms to identify patterns and predict engagement metrics.</p>
+                        <!-- <h4 class="project-subtitle  ">Data Visualization</h4> -->
+                        <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor
+                          scelerisque mi
+                          neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque inventore
+                          rem
+                          quae facilis, est, quas maiores.</p>
                         <div class="project-tools">
-                          <span>Tools</span>
-                          <span>Python / Pandas / Matplotlib / Twitter API</span>
+                          <span>Tags</span>
+                          <span>Cultural Storytelling / Print</span>
                         </div>
                       </div>
                       <div class="project-images">
                         <div class="image-grid">
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
-                          <div class="preview-image"></div>
+                          <div class="preview-image"><img src="img/img_wrk_prvw/ciao_bella_asset1.png" alt=""></div>
+                          <div class="preview-image"><img src="img/img_wrk_prvw/ciao_bella_asset2.png" alt=""></div>
+                          <div class="preview-image"><img src="img/img_wrk_prvw/ciao_bella_asset3.png" alt=""></div>
                         </div>
                       </div>
-                      <a href="#" class="view-project-btn">
+                      <a href="projects/dialogue-ciao-bella.html" class="view-project-btn" target="_blank"
+                        rel="noopener">
                         VIEW PROJECT <span class="arrow">↗</span>
                       </a>
                     </div>
                   </div>
                 </div>
               </div>
-
-              <div class="focus-project-item" data-work-type="data-science">
-                <div class="project-name reveal-text">Machine Learning Model Development</div>
-                <div class="project-topic reveal-text">Model Development</div>
-                <div class="project-tools reveal-text">Python, Scikit-learn, TensorFlow</div>
+              <div class="focus-project-item" data-work-type="writing">
+                <div class="project-name reveal-text">Librae Bakery - Dialogue Magazine Feature</div>
+                <div class="project-topic reveal-text">Feature Writing</div>
+                <div class="project-tools reveal-text">Interview, Research</div>
                 <div class="work-accordion">
                   <div class="accordion-content">
                     <div class="project-details-grid">
                       <div class="project-text">
-                        <!-- <h4 class="project-subtitle">Model Development</h4> -->
-                        <p class="project-description">Development and deployment of machine learning models for
-                          predictive analytics with focus on performance optimization and scalability.</p>
+                        <p class="project-description">Editorial feature profiling Librae Bakery in Dialogue Magazine's
+                          second issue, weaving architecture, coffee culture, and community into a cultural narrative.
+                        </p>
+                        <div class="project-tools">
+                          <span>Tags</span>
+                          <span>Cultural Storytelling / Print</span>
+                        </div>
+                      </div>
+                      <div class="project-images">
+                        <div class="image-grid">
+                          <div class="preview-image"><img src="img/img_wrk_prvw/librae_asset1.png"
+                              alt="Librae Bakery Preview"></div>
+                          <div class="preview-image"> <img src="img/img_wrk_prvw/librae_asset3.png"
+                              alt="Librae Bakery Preview"></div>
+                          <div class="preview-image"> <img src="img/img_wrk_prvw/librae_asset2.png"
+                              alt="Librae Bakery Preview"></div>
+                          <div class="preview-image"> <img src="img/img_wrk_prvw/librae_asset4.png"
+                              alt="Librae Bakery Preview"></div>
+                          <div class="preview-image"> <img src="img/img_wrk_prvw/librae_asset5.jpeg"
+                              alt="Librae Bakery Preview"></div>
+                        </div>
+                      </div>
+                      <a href="projects/dialogue-librae.html" class="view-project-btn">
+                        VIEW PROJECT <span class="arrow">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Journalism Section -->
+          <div class="focus-section" data-focus-type="journalism">
+            <div class="focus-header">
+              <h2 class="focus-title">
+                <span class="focus-title-text reveal-text">Data Journalism</span>
+              </h2>
+            </div>
+            <div class="focus-projects">
+              <div class="focus-project-item" data-work-type="journalism">
+                <div class="project-name reveal-text">The Cost of Sunlight</div>
+                <div class="project-topic reveal-text">Climate Economics</div>
+                <div class="project-tools reveal-text">D3.js, Python, Figma</div>
+                <div class="work-accordion">
+                  <div class="accordion-content">
+                    <div class="project-details-grid">
+                      <div class="project-text">
+                        <!-- <h4 class="project-subtitle  ">Data Visualization</h4> -->
+                        <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor
+                          scelerisque mi
+                          neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque
+                          inventore
+                          rem
+                          quae facilis, est, quas maiores.</p>
                         <div class="project-tools">
                           <span>Tools</span>
-                          <span>Python / Scikit-learn / TensorFlow / AWS</span>
+                          <span>D3.js/ QGIS / Tableau</span>
                         </div>
                       </div>
                       <div class="project-images">
@@ -898,7 +849,281 @@
                           <div class="preview-image"></div>
                         </div>
                       </div>
-                      <a href="#" class="view-project-btn">
+                      <a href="#" class="view-project-btn" target="_blank" rel="noopener">
+                        VIEW PROJECT <span class="arrow">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="focus-project-item" data-work-type="journalism">
+              <div class="project-name reveal-text">Energy Market Analysis</div>
+              <div class="project-topic reveal-text">Market Research</div>
+              <div class="project-tools reveal-text">Tableau, R, Adobe</div>
+              <div class="work-accordion">
+                <div class="accordion-content">
+                  <div class="project-details-grid">
+                    <div class="project-text">
+                      <!-- <h4 class="project-subtitle">Market Research</h4> -->
+                      <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor
+                        scelerisque mi neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      </p>
+                      <div class="project-tools">
+                        <span>Tools</span>
+                        <span>Tableau / R / Adobe Creative Suite</span>
+                      </div>
+                    </div>
+                    <div class="project-images">
+                      <div class="image-grid">
+                        <div class="preview-image"></div>
+                        <div class="preview-image"></div>
+                        <div class="preview-image"></div>
+                        <div class="preview-image"></div>
+                        <div class="preview-image"></div>
+                        <div class="preview-image"></div>
+                      </div>
+                    </div>
+                    <a href="#" class="view-project-btn" target="_blank" rel="noopener">
+                      VIEW PROJECT <span class="arrow">↗</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Data Visualization Section -->
+          <div class="focus-section" data-focus-type="visualization">
+            <div class="focus-header">
+              <h2 class="focus-title">
+                <span class="focus-title-text reveal-text">Data Visualization</span>
+              </h2>
+            </div>
+            <div class="focus-projects">
+              <div class="focus-project-item" data-work-type="visualization">
+                <div class="project-name reveal-text">The Cost of Sunlight</div>
+                <div class="project-topic reveal-text">Climate Economics</div>
+                <div class="project-tools reveal-text">D3.js, Python, Figma</div>
+                <div class="work-accordion">
+                  <div class="accordion-content">
+                    <div class="project-details-grid">
+                      <div class="project-text">
+                        <!-- <h4 class="project-subtitle  ">Data Visualization</h4> -->
+                        <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor
+                          scelerisque mi
+                          neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque
+                          inventore
+                          rem
+                          quae facilis, est, quas maiores.</p>
+                        <div class="project-tools">
+                          <span>Tools</span>
+                          <span>D3.js/ QGIS / Tableau</span>
+                        </div>
+                      </div>
+                      <div class="project-images">
+                        <div class="image-grid">
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                        </div>
+                      </div>
+                      <a href="#" class="view-project-btn" target="_blank" rel="noopener">
+                        VIEW PROJECT <span class="arrow">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="focus-project-item" data-work-type="visualization">
+                <div class="project-name reveal-text">Energy Market Analysis</div>
+                <div class="project-topic reveal-text">Market Research</div>
+                <div class="project-tools reveal-text">Tableau, R, Adobe</div>
+                <div class="work-accordion">
+                  <div class="accordion-content">
+                    <div class="project-details-grid">
+                      <div class="project-text">
+                        <!-- <h4 class="project-subtitle">Market Research</h4> -->
+                        <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor
+                          scelerisque mi neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing
+                          elit.
+                        </p>
+                        <div class="project-tools">
+                          <span>Tools</span>
+                          <span>Tableau / R / Adobe Creative Suite</span>
+                        </div>
+                      </div>
+                      <div class="project-images">
+                        <div class="image-grid">
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                        </div>
+                      </div>
+                      <a href="#" class="view-project-btn" target="_blank" rel="noopener">
+                        VIEW PROJECT <span class="arrow">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="focus-project-item" data-work-type="visualization">
+                <div class="project-name reveal-text">Supply Chain Visualization</div>
+                <div class="project-topic reveal-text">Logistics</div>
+                <div class="project-tools reveal-text">Observable, SQL</div>
+                <div class="work-accordion">
+                  <div class="accordion-content">
+                    <div class="project-details-grid">
+                      <div class="project-text">
+                        <!-- <h4 class="project-subtitle">Logistics</h4> -->
+                        <p class="project-description">Lorem ipsum dolor sit amet consectetur. Aliquet tortor
+                          scelerisque mi neque libero semper. Lorem ipsum dolor sit, amet consectetur adipisicing
+                          elit.
+                        </p>
+                        <div class="project-tools">
+                          <span>Tools</span>
+                          <span>Observable / SQL / D3.js</span>
+                        </div>
+                      </div>
+                      <div class="project-images">
+                        <div class="image-grid">
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                        </div>
+                      </div>
+                      <a href="#" class="view-project-btn" target="_blank" rel="noopener">
+                        VIEW PROJECT <span class="arrow">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Web Design Section -->
+          <div class="focus-section" data-focus-type="developer">
+            <div class="focus-header">
+              <h2 class="focus-title">
+                <span class="focus-title-text reveal-text">Web Design</span>
+              </h2>
+            </div>
+            <div class="focus-projects">
+              <div class="focus-project-item" data-work-type="developer">
+                <div class="project-name reveal-text">Ligea Portfolio Redesign</div>
+                <div class="project-topic reveal-text">Personal Branding</div>
+                <div class="project-tools reveal-text">Figma, HTML, CSS, JavaScript (GSAP) </div>
+                <div class="work-accordion">
+                  <div class="accordion-content">
+                    <div class="project-details-grid">
+                      <div class="project-text">
+                        <!-- <h4 class="project-subtitle">Personal Branding</h4> -->
+                        <p class="project-description">A fresh direction for my portfolio, designed in pure HTML, CSS,
+                          and JavaScript with GSAP — blending storytelling, interaction design, and development into one
+                          cohesive site.</p>
+                        <div class="project-tools">
+                          <span>Tools</span>
+                          <span> Figma / HTML / CSS / JavaScript / GSAP</span>
+                        </div>
+                      </div>
+                      <div class="project-images">
+                        <div class="image-grid">
+                          <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset1.png"
+                              alt="">
+                          </div>
+                          <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset2.png"
+                              alt="">
+                          </div>
+                          <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset3.png"
+                              alt="">
+                          </div>
+                          <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset4.png"
+                              alt="">
+                          </div>
+                          <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset5.png"
+                              alt="">
+                          </div>
+                          <div class="preview-image"><img src="img/img_wrk_prvw/ligea_portfolio_redesign_asset6.png"
+                              alt="">
+                          </div>
+                        </div>
+                      </div>
+                      <a href="projects/ligea-portfolio-redesign.html" class="view-project-btn" target="_blank"
+                        rel="noopener">
+                        VIEW PROJECT <span class="arrow">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="focus-project-item" data-work-type="developer">
+                <div class="project-name reveal-text">E-commerce Platform</div>
+                <div class="project-topic reveal-text">User Experience</div>
+                <div class="project-tools reveal-text">React, Node.js, Figma</div>
+                <div class="work-accordion">
+                  <div class="accordion-content">
+                    <div class="project-details-grid">
+                      <div class="project-text">
+                        <!-- <h4 class="project-subtitle">User Experience</h4> -->
+                        <p class="project-description">Full-stack e-commerce solution with intuitive user interface,
+                          secure payment processing, and comprehensive admin dashboard.</p>
+                        <div class="project-tools">
+                          <span>Tools</span>
+                          <span>React / Node.js / Figma / Stripe API</span>
+                        </div>
+                      </div>
+                      <div class="project-images">
+                        <div class="image-grid">
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                        </div>
+                      </div>
+                      <a href="#" class="view-project-btn" target="_blank" rel="noopener">
+                        VIEW PROJECT <span class="arrow">↗</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="focus-project-item" data-work-type="developer">
+                <div class="project-name reveal-text">Dashboard Interface</div>
+                <div class="project-topic reveal-text">Data Analytics</div>
+                <div class="project-tools reveal-text">Vue.js, Chart.js</div>
+                <div class="work-accordion">
+                  <div class="accordion-content">
+                    <div class="project-details-grid">
+                      <div class="project-text">
+                        <!-- <h4 class="project-subtitle">Data Analytics</h4> -->
+                        <p class="project-description">Interactive dashboard for real-time data visualization and
+                          analytics with customizable widgets and responsive design.</p>
+                        <div class="project-tools">
+                          <span>Tools</span>
+                          <span>Vue.js / Chart.js / D3.js / API Integration</span>
+                        </div>
+                      </div>
+                      <div class="project-images">
+                        <div class="image-grid">
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                          <div class="preview-image"></div>
+                        </div>
+                      </div>
+                      <a href="#" class="view-project-btn" target="_blank" rel="noopener">
                         VIEW PROJECT <span class="arrow">↗</span>
                       </a>
                     </div>

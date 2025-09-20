@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
+  <script src="../main.js" defer></script>
+  <title>Portfolio Redesign</title>
+</head>
+
+<body>
+  <div id="custom-cursor">
+    <div class="cursor-square"></div>
+    <div class="cursor-circle"></div>
+  </div>
+  <nav class="nav-container">
+    <div class="nav-content">
+      <div>
+        <p><a href="../work.html">Work</a></p>
+      </div>
+      <div>
+        <p><a href="../about.html">Background</a></p>
+      </div>
+    </div>
+    <div class="nav-location">
+      <p class="location-line1">Hamburg, Germany</p>
+      <p class="location-line2">New York, America</p>
+    </div>
+    <div class="nav-email">
+      <p><a href="mailto:hi@ligea-alexander.xyz">hi@ligea-alexander.xyz</a></p>
+    </div>
+    <div class="nav-brand">
+      <p><a href="../index.html">Ligea</a></p>
+    </div>
+  </nav>
+  <main class="case-study-main" data-work-type="developer">
+    <!-- Hero Section - Split Layout -->
+    <section class="case-study-hero">
+      <div class="hero-split-container">
+        <!-- Left Half: Title Block with Background Color -->
+        <div class="hero-title-block">
+          <span class="case-study-subtitle">Web Design & Development</span>
+          <h1 class="case-study-title">My Portfolio Redesign</h1>
+        </div>
+
+        <!-- Right Half: Hero Image -->
+        <div class="hero-image-block">
+          <div class="image-placeholder">
+            <img src="../img/img_wrk_prvw/ligea_redesign_prvw.png" alt="">
+          </div>
+        </div>
+      </div>
+
+      <!-- Meta Info Section - Full Width Below -->
+      <div class="hero-meta-section">
+        <div class="hero-text-content">
+          <p class="case-study-intro">Redesigning my portfolio to showcase interactive storytelling, thoughtful design
+            direction, and front-end development skills.</p>
+          <!-- Live Site Link -->
+          <a href="#" class="live-site-btn">
+            Live Site <span class="external-arrow">↗</span>
+          </a>
+        </div>
+        <!-- Project Meta Info -->
+        <div class="case-study-meta-grid">
+          <div class="meta-item">
+            <span class="meta-label">Focus/Domain</span>
+            <span class="meta-value">Web Design & Development</span>
+            <span class="meta-value">Interactive Storytelling</span>
+            <span class="meta-value">UI/UX Design</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Roles</span>
+            <span class="meta-value">Designer</span>
+            <span class="meta-value">Developer</span>
+            <span class="meta-value">Researcher</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Duration</span>
+            <span class="meta-value">3 months</span>
+            <span class="meta-value">(July 2025 - September 2025)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Tools</span>
+            <span class="meta-value">Figma</span>
+            <span class="meta-value">HTML/CSS, JavaScript (GSAP)</span>
+            <span class="meta-value">GitHub Copilot</span>
+            <span class="meta-value">Playwright</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scrollspy + Pinned Media Section -->
+    <section class="case-study-main-section">
+      <!-- Case Study Article Container -->
+      <article id="case" class="case">
+        <!-- Left Side: Fixed Rail -->
+        <aside id="case-rail" class="case-rail">
+          <div class="rail-track">
+            <div class="rail-thumb"></div>
+          </div>
+          <ol class="rail-nav">
+            <li><button data-target="#context">Why This Story</button></li>
+            <li><button data-target="#my-role">Topic Development</button></li>
+            <li><button data-target="#execution">Methodology</button></li>
+            <li><button data-target="#design">Design Choices</button></li>
+            <li><button data-target="#impact">Impact</button></li>
+          </ol>
+        </aside>
+
+        <!-- Center: Scrolling Content -->
+        <main class="case-body">
+          <section id="context" class="step" data-label="Why This Story">
+            <h2>Why This Story</h2>
+            <p>My previous portfolio didn't reflect where I am today as a creative technologist. It was static, visually
+              flat, and didn't show my capabilities in animation, interaction design, or narrative case studies. I
+              needed a portfolio that felt alive — professional yet playful — and that clearly positioned me in the
+              space between data, design, and development.</p>
+            <br>
+            <p>My previous portfolio didn’t reflect the kind of work I do now. It was static, minimal, and lacked the
+              interactive qualities I value in design. I wanted a site that would demonstrate my ability to craft
+              experiences — not just display projects. The challenge was to create a portfolio that felt alive and
+              personal while staying professional, lightweight, and easy to maintain.</p>
+          </section>
+
+          <section id="my-role" class="step" data-label="Topic Development">
+            <h2>Topic Development</h2>
+            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
+              Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+          </section>
+
+          <section id="execution" class="step" data-label="Methodology">
+            <h2>Methodology / Execution</h2>
+            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
+              Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+          </section>
+
+          <section id="design" class="step" data-label="Design">
+            <h2>Design and Production Choices</h2>
+            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
+          </section>
+
+          <section id="impact" class="step" data-label="Impact">
+            <h2>Impact</h2>
+            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
+          </section>
+        </main>
+      </article>
+
+      <!-- Right Side: Pinned Media Gallery -->
+      <div class="pinned-media-gallery">
+        <div class="media-item active" data-media="context">
+          <div class="image-placeholder">Context Media</div>
+        </div>
+        <div class="media-item" data-media="my-role">
+          <div class="image-placeholder">My Role Media</div>
+        </div>
+        <div class="media-item" data-media="execution">
+          <div class="image-placeholder">Execution Media</div>
+        </div>
+        <div class="media-item" data-media="design">
+          <div class="image-placeholder">Design Media</div>
+        </div>
+        <div class="media-item" data-media="impact">
+          <div class="image-placeholder">Impact Media</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Horizontal Asset Gallery -->
+    <section class="horizontal-gallery">
+      <div class="gallery-grid">
+        <div class="gallery-image clickable" data-lightbox="project-gallery">
+          <div class="image-placeholder">Asset 1</div>
+        </div>
+        <div class="gallery-image clickable" data-lightbox="project-gallery">
+          <div class="image-placeholder">Asset 2</div>
+        </div>
+        <div class="gallery-image clickable" data-lightbox="project-gallery">
+          <div class="image-placeholder">Asset 3</div>
+        </div>
+        <div class="gallery-image clickable" data-lightbox="project-gallery">
+          <div class="image-placeholder">Asset 4</div>
+        </div>
+        <div class="gallery-image clickable" data-lightbox="project-gallery">
+          <div class="image-placeholder">Asset 5</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning/Takeaways Section -->
+    <section class="takeaway-section">
+      <div class="content-wrapper">
+        <h2>Reflection</h2>
+        <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+          pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+          tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+          senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+          placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
+          Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Add this lightbox HTML before closing body tag -->
+  <div class="lightbox-overlay" id="lightbox">
+    <div class="lightbox-content">
+      <img class="lightbox-image" id="lightbox-image" src="" alt="">
+      <button class="lightbox-close" id="lightbox-close">×</button>
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
+      <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
+      <div class="lightbox-counter" id="lightbox-counter">1 / 5</div>
+    </div>
+  </div>
+</body>
+
+</html>
