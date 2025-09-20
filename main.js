@@ -804,6 +804,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   if (isCaseStudyPage) {
+    // Case study page-specific functionality
     function initScrollspy() {
       if (!document.querySelector('.case-study-main-section')) {
         console.log('No scrollspy section found');
@@ -812,58 +813,196 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       console.log('Initializing scrollspy...');
 
-      // Get the actual elements from your HTML
-      const scrollContainer = document.querySelector('.case-body'); // This is the scrolling container
-      const sections = document.querySelectorAll('.step[data-label]'); // Sections with data-label
-      const railThumb = document.querySelector('.rail-thumb'); // The thumb element
-      const railNav = document.querySelector('.rail-nav'); // Nav container
+      // Get elements
+      const scrollContainer = document.querySelector('.case-body');
+      const sections = document.querySelectorAll('.step[data-label]');
+      const railThumb = document.querySelector('.rail-thumb');
+      const railNav = document.querySelector('.rail-nav');
 
-      if (!scrollContainer || sections.length === 0 || !railThumb || !railNav) {
-        console.log('Missing required elements:', {
-          scrollContainer: !!scrollContainer,
-          sections: sections.length,
-          railThumb: !!railThumb,
-          railNav: !!railNav
-        });
-        return;
-      }
+      // Mobile elements
+      const mobileNavTrigger = document.getElementById('mobile-nav-trigger');
+      const mobileNavMenu = document.getElementById('mobile-nav-menu');
+      const mobileProgressBar = document.getElementById('mobile-progress-bar');
+      const currentSectionLabel = document.getElementById('current-section-label');
+      const navMenuItems = document.querySelectorAll('.nav-menu-item');
 
-      console.log('Found elements:', {
-        scrollContainer: scrollContainer.className,
-        sections: sections.length,
-        railThumb: railThumb.className,
-        railNav: railNav.className
+      // Check if mobile
+      const isMobile = window.innerWidth <= 925;
+
+      console.log('Mobile detection:', {
+        isMobile,
+        windowWidth: window.innerWidth,
+        mobileNavTrigger: !!mobileNavTrigger,
+        mobileNavMenu: !!mobileNavMenu,
+        navMenuItems: navMenuItems.length
       });
 
-      // Build rail nav from sections
-      function buildRailNav() {
-        railNav.innerHTML = ''; // Clear existing nav
+      // Mobile navigation functions
+      function updateMobileProgress() {
+        if (!mobileProgressBar || !scrollContainer) return;
+        const scrollTop = scrollContainer.scrollTop;
+        const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        mobileProgressBar.style.width = `${Math.min(progress, 100)}%`;
+      }
 
-        sections.forEach((section) => {
-          const label = section.getAttribute('data-label');
-          const id = section.getAttribute('id');
+      function updateMobileSection(activeSection) {
+        if (!activeSection) return;
 
-          if (label && id) {
-            const li = document.createElement('li');
-            const button = document.createElement('button');
-            button.textContent = label;
-            button.setAttribute('data-target', `#${id}`);
-            button.addEventListener('click', () => scrollToSection(section));
+        console.log('Updating mobile section to:', activeSection.getAttribute('data-label'));
 
-            li.appendChild(button);
-            railNav.appendChild(li);
+        // Update current section label
+        if (currentSectionLabel) {
+          currentSectionLabel.textContent = activeSection.getAttribute('data-label');
+        }
+
+        // Update menu items active state
+        navMenuItems.forEach(item => {
+          item.classList.remove('active');
+          const targetId = item.getAttribute('data-target');
+          const sectionId = activeSection.getAttribute('id');
+
+          if (targetId === `#${sectionId}`) {
+            item.classList.add('active');
+            console.log('Set active mobile menu item:', targetId);
           }
         });
       }
 
-      // Smooth scroll to section
+      // Set up mobile navigation if mobile elements exist
+      if (mobileNavTrigger && mobileNavMenu) {
+        console.log('Setting up mobile navigation...');
+
+        // Mobile nav trigger click
+        mobileNavTrigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          const isOpen = mobileNavMenu.classList.contains('open');
+          console.log('Mobile nav clicked, currently open:', isOpen);
+
+          if (isOpen) {
+            mobileNavMenu.classList.remove('open');
+            mobileNavTrigger.classList.remove('open');
+            console.log('Closed mobile nav');
+          } else {
+            mobileNavMenu.classList.add('open');
+            mobileNavTrigger.classList.add('open');
+            console.log('Opened mobile nav');
+          }
+        });
+
+        // Menu item clicks
+        navMenuItems.forEach(item => {
+          item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = item.getAttribute('data-target');
+            const targetSection = document.querySelector(targetId);
+            console.log('Menu item clicked:', targetId, 'found section:', !!targetSection);
+
+            if (targetSection) {
+              scrollToSection(targetSection);
+              mobileNavMenu.classList.remove('open');
+              mobileNavTrigger.classList.remove('open');
+            }
+          });
+        });
+
+        // Initialize first section for mobile
+        if (sections.length > 0) {
+          updateMobileSection(sections[0]);
+        }
+      } else {
+        console.log('Mobile nav elements not found');
+      }
+
+      // Desktop navigation setup
+      if (railThumb && railNav && scrollContainer && sections.length > 0) {
+        console.log('Setting up desktop navigation...');
+
+        // Build rail nav from sections
+        function buildRailNav() {
+          railNav.innerHTML = '';
+          sections.forEach((section) => {
+            const label = section.getAttribute('data-label');
+            const id = section.getAttribute('id');
+            if (label && id) {
+              const li = document.createElement('li');
+              const button = document.createElement('button');
+              button.textContent = label;
+              button.setAttribute('data-target', `#${id}`);
+              button.addEventListener('click', () => scrollToSection(section));
+              li.appendChild(button);
+              railNav.appendChild(li);
+            }
+          });
+        }
+
+        // Update rail thumb position
+        function updateRailThumb() {
+          const scrollTop = scrollContainer.scrollTop;
+          const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+          const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+          const thumbHeight = 20;
+          const maxTravel = 100 - thumbHeight;
+          const thumbPosition = progress * maxTravel;
+          railThumb.style.top = `${Math.min(thumbPosition, maxTravel)}%`;
+        }
+
+        // Update active nav button
+        function updateActiveNav(activeSection) {
+          const buttons = railNav.querySelectorAll('button');
+          buttons.forEach(button => button.classList.remove('active'));
+
+          if (activeSection) {
+            const targetId = `#${activeSection.getAttribute('id')}`;
+            const activeButton = railNav.querySelector(`button[data-target="${targetId}"]`);
+            if (activeButton) {
+              activeButton.classList.add('active');
+            }
+            updateMediaGallery(activeSection.getAttribute('id'));
+          }
+        }
+
+        buildRailNav();
+        updateRailThumb();
+
+        // Desktop scroll handling
+        let scrollTimeout;
+        scrollContainer.addEventListener('scroll', () => {
+          updateRailThumb();
+          railNav.classList.add('show-nav');
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            railNav.classList.remove('show-nav');
+          }, 1000);
+
+          const activeSection = getActiveSection();
+          if (activeSection) {
+            updateActiveNav(activeSection);
+            // Also update mobile if elements exist
+            if (mobileNavTrigger) {
+              updateMobileSection(activeSection);
+            }
+          }
+
+          // Update mobile progress
+          updateMobileProgress();
+        });
+
+        // Set first section as active
+        if (sections.length > 0) {
+          updateActiveNav(sections[0]);
+          updateMediaGallery(sections[0].getAttribute('id'));
+        }
+      }
+
+      // Shared functions
       function scrollToSection(targetSection) {
+        if (!scrollContainer || !targetSection) return;
+
         const containerRect = scrollContainer.getBoundingClientRect();
         const sectionRect = targetSection.getBoundingClientRect();
         const currentScroll = scrollContainer.scrollTop;
-
-        // Calculate target scroll position (center the section)
-        const targetScroll = currentScroll + sectionRect.top - containerRect.top - (containerRect.height / 2) + (sectionRect.height / 2);
+        const targetScroll = currentScroll + sectionRect.top - containerRect.top - 100;
 
         scrollContainer.scrollTo({
           top: Math.max(0, targetScroll),
@@ -871,61 +1010,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
       }
 
-      // Update active nav button
-      function updateActiveNav(activeSection) {
-        const buttons = railNav.querySelectorAll('button');
-        buttons.forEach(button => button.classList.remove('active'));
-
-        if (activeSection) {
-          const targetId = `#${activeSection.getAttribute('id')}`;
-          const activeButton = railNav.querySelector(`button[data-target="${targetId}"]`);
-          if (activeButton) {
-            activeButton.classList.add('active');
-          }
-
-          // CAREFULLY ADD: Update media gallery
-          updateMediaGallery(activeSection.getAttribute('id'));
-        }
-      }
-
-      // ADD: New function to update media gallery
-      function updateMediaGallery(sectionId) {
-        const mediaItems = document.querySelectorAll('.media-item');
-
-        // Remove active class from all media items
-        mediaItems.forEach(item => item.classList.remove('active'));
-
-        // Add active class to corresponding media item
-        const activeMedia = document.querySelector(`[data-media="${sectionId}"]`);
-        if (activeMedia) {
-          activeMedia.classList.add('active');
-          console.log('Media updated for section:', sectionId);
-        } else {
-          console.log('No media found for section:', sectionId);
-        }
-      }
-
-      // Update rail thumb position based on scroll progress
-      function updateRailThumb() {
-        const scrollTop = scrollContainer.scrollTop;
-        const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-        const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
-
-        // Map progress to thumb position (20% thumb height, 80% travel)
-        const thumbHeight = 20; // 20% of track height
-        const maxTravel = 100 - thumbHeight; // 80% available travel
-        const thumbPosition = progress * maxTravel;
-
-        if (railThumb) {
-          railThumb.style.top = `${Math.min(thumbPosition, maxTravel)}%`;
-        }
-      }
-
-      // Find which section is currently active (in center of viewport)
       function getActiveSection() {
+        if (!scrollContainer) return null;
+
         const containerRect = scrollContainer.getBoundingClientRect();
         const containerCenter = containerRect.top + (containerRect.height / 2);
-
         let activeSection = null;
         let minDistance = Infinity;
 
@@ -934,7 +1023,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
           const sectionCenter = sectionRect.top + (sectionRect.height / 2);
           const distance = Math.abs(sectionCenter - containerCenter);
 
-          // If section is in viewport and closest to center
           if (sectionRect.bottom > containerRect.top &&
             sectionRect.top < containerRect.bottom &&
             distance < minDistance) {
@@ -946,61 +1034,29 @@ document.addEventListener("DOMContentLoaded", (event) => {
         return activeSection;
       }
 
-      // Create ScrollTrigger for each section
-      sections.forEach((section, index) => {
-        ScrollTrigger.create({
-          trigger: section,
-          start: "top 60%",
-          end: "bottom 40%",
-          scroller: scrollContainer,
-          onEnter: () => {
-            console.log('Section entered:', section.getAttribute('data-label'));
-            updateActiveNav(section);
-          },
-          onEnterBack: () => {
-            console.log('Section entered back:', section.getAttribute('data-label'));
-            updateActiveNav(section);
-          }
-        });
-      });
-
-      // Add this to your initScrollspy function, after getting the elements
-      let scrollTimeout;
-
-      // Listen for scroll events to show/hide nav
-      scrollContainer.addEventListener('scroll', () => {
-        updateRailThumb();
-
-        // Show nav during scrolling
-        railNav.classList.add('show-nav');
-
-        // Clear existing timeout
-        clearTimeout(scrollTimeout);
-
-        // Hide nav after scrolling stops (500ms delay)
-        scrollTimeout = setTimeout(() => {
-          railNav.classList.remove('show-nav');
-        }, 1000); // Adjust timing as needed
-
-        // Also update active section on scroll
-        const activeSection = getActiveSection();
-        if (activeSection) {
-          updateActiveNav(activeSection);
+      function updateMediaGallery(sectionId) {
+        const mediaItems = document.querySelectorAll('.media-item');
+        mediaItems.forEach(item => item.classList.remove('active'));
+        const activeMedia = document.querySelector(`[data-media="${sectionId}"]`);
+        if (activeMedia) {
+          activeMedia.classList.add('active');
         }
-      });
-
-      // Initialize
-      buildRailNav();
-      updateRailThumb();
-
-      // Set first section as active initially
-      if (sections.length > 0) {
-        updateActiveNav(sections[0]);
-        updateMediaGallery(sections[0].getAttribute('id')); // <-- Add this line
       }
 
-      // Refresh ScrollTrigger
-      ScrollTrigger.refresh();
+      // ScrollTrigger for desktop only
+      if (!isMobile && sections.length > 0) {
+        sections.forEach((section) => {
+          ScrollTrigger.create({
+            trigger: section,
+            start: "top 60%",
+            end: "bottom 40%",
+            scroller: scrollContainer,
+            onEnter: () => updateActiveNav(section),
+            onEnterBack: () => updateActiveNav(section)
+          });
+        });
+        ScrollTrigger.refresh();
+      }
     }
     initScrollspy();
 

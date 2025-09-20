@@ -110,21 +110,64 @@
       <article id="case" class="case">
         <!-- Left Side: Fixed Rail -->
         <aside id="case-rail" class="case-rail">
-          <div class="rail-track">
-            <div class="rail-thumb"></div>
+          <!-- Desktop Rail (hidden on mobile) -->
+          <div class="desktop-rail">
+            <div class="rail-track">
+              <div class="rail-thumb"></div>
+            </div>
+            <ol class="rail-nav">
+              <li><button data-target="#context">Why This Story</button></li>
+              <li><button data-target="#my-role">My Approach</button></li>
+              <li><button data-target="#execution">Execution</button></li>
+              <li><button data-target="#design">Design & Production</button></li>
+              <li><button data-target="#impact">Impact</button></li>
+            </ol>
           </div>
-          <ol class="rail-nav">
-            <li><button data-target="#context">Why This Story</button></li>
-            <li><button data-target="#my-role">Topic Development</button></li>
-            <li><button data-target="#execution">Methodology</button></li>
-            <li><button data-target="#design">Design Choices</button></li>
-            <li><button data-target="#impact">Impact</button></li>
-          </ol>
+
+          <!-- Mobile Sticky Navigation -->
+          <div class="mobile-nav-bar">
+            <button class="mobile-nav-trigger" id="mobile-nav-trigger">
+              <div class="progress-container">
+                <div class="progress-bar" id="mobile-progress-bar"></div>
+              </div>
+              <span class="current-section-label" id="current-section-label">Why This Story</span>
+              <span class="nav-arrow">▼</span>
+            </button>
+
+            <!-- Slide-down menu -->
+            <div class="mobile-nav-menu" id="mobile-nav-menu">
+              <div class="nav-menu-item" data-target="#context" data-index="01">
+                <span class="section-number">01</span>
+                <span class="section-title">Why This Story</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#my-role" data-index="02">
+                <span class="section-number">02</span>
+                <span class="section-title">My Approach</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#execution" data-index="03">
+                <span class="section-number">03</span>
+                <span class="section-title">Execution</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#design" data-index="04">
+                <span class="section-number">04</span>
+                <span class="section-title">Design & Production</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#impact" data-index="05">
+                <span class="section-number">05</span>
+                <span class="section-title">Impact</span>
+                <span class="active-dot"></span>
+              </div>
+            </div>
+          </div>
         </aside>
 
         <!-- Center: Scrolling Content -->
         <main class="case-body">
-          <section id="context" class="step" data-label="Why This Story">
+          <section id="context" class="step" data-label="Why This Story" data-index="01">
             <h2>Why This Story</h2>
             <p>I pitched Librae Bakery because it represented more than a trendy café opening. It was a story about how
               architecture, heritage, and food culture intersect in New York City. Librae's design drew from Bahraini
@@ -134,7 +177,7 @@
               a community hub offered a chance to write a feature that spoke to both design and cultural storytelling.
             </p>
           </section>
-          <section id="my-role" class="step" data-label="My Approach">
+          <section id="my-role" class="step" data-label="My Approach" data-index="02">
             <h2>My Approach</h2>
             <p>I structured the feature with a classic magazine arc. The <strong>lede</strong> immersed readers in the
               sensory experience
@@ -154,7 +197,7 @@
             </p>
           </section>
 
-          <section id="execution" class="step" data-label="Execution">
+          <section id="execution" class="step" data-label="Execution" data-index="03">
             <h2>Execution</h2>
             <p>I conducted a virtual interview with owner Dona Murad, who shared the backstory of launching Librae with
               her family and her broader work with Hopscotch and Grind Roastery. Her reflections set the tone for the
@@ -165,7 +208,7 @@
               narrative that blended personal detail, cultural context, and sensory immersion.</p>
           </section>
 
-          <section id="design" class="step" data-label="Design & Production">
+          <section id="design" class="step" data-label="Design & Production" data-index="04">
             <h2>Design and Production</h2>
             <p>The visual presentation was led by Dialogue Magazine's founder and editor-in-chief, Kristin
               Sandgren-Jolain, together with the magazine's graphic designer. They paired Sophie Chen's photography with
@@ -175,7 +218,7 @@
               the writing.</p>
           </section>
 
-          <section id="impact" class="step" data-label="Impact">
+          <section id="impact" class="step" data-label="Impact" data-index="05">
             <h2>Impact</h2>
             <p>The feature appeared in the print-only second issue of Dialogue Magazine. Readers shared that the piece
               drew them toward Librae, with several noting they felt compelled to visit specifically to experience the

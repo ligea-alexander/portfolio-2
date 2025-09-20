@@ -2803,9 +2803,9 @@ body {
 }
 
 /* ===== CASE STUDY: RESPONSIVE DESIGN SYSTEM ===== */
-/* ===== MOBILE FIRST ===== */
+/* ===== MOBILE FIRST - BELOW IPHONE PRO MAX (926px) ===== */
 
-/* Mobile Case Study Hero - Below iPhone Pro Max (926px) */
+/* Mobile Case Study Hero */
 @media (max-width: 925px) {
 
   /* Convert split layout to vertical stack */
@@ -2947,6 +2947,176 @@ body {
   .meta-value {
     font-size: 0.85rem;
     /* Slightly smaller values */
+  }
+
+  /* Mobile Case Study Navigation - Below iPhone Pro Max (926px) */
+
+
+  /* Hide desktop rail completely on mobile */
+  .case-rail .desktop-rail {
+    display: none !important;
+  }
+
+  /* Show mobile nav only on mobile */
+  .mobile-nav-bar {
+    display: block !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .mobile-nav-trigger {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .progress-container {
+    width: 60px;
+    height: 4px;
+    background: #e5e5e5;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--work-color, #1a1a1a);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  .current-section-label {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #1a1a1a;
+  }
+
+  .nav-arrow {
+    font-size: 0.8rem;
+    color: #666;
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-nav-trigger.open .nav-arrow {
+    transform: rotate(180deg);
+  }
+
+  /* Slide-down Menu */
+  .mobile-nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .mobile-nav-menu.open {
+    max-height: 300px;
+  }
+
+  .nav-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border-bottom: 1px solid #f5f5f5;
+    transition: background-color 0.2s ease;
+  }
+
+  .nav-menu-item:hover {
+    background-color: #f9f9f9;
+  }
+
+  .nav-menu-item.active {
+    background-color: #f0f9f0;
+  }
+
+  .section-number {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #999;
+    margin-right: 1rem;
+    min-width: 24px;
+  }
+
+  .section-title {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #1a1a1a;
+  }
+
+  .active-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: transparent;
+    margin-left: 1rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .nav-menu-item.active .active-dot {
+    background: #4CAF50;
+  }
+
+  /* Adjust case study main section for mobile nav */
+  .case-study-main-section {
+    grid-template-columns: 1fr !important;
+    margin: 0;
+    padding-top: 80px;
+    /* Account for fixed nav */
+  }
+
+  .case-rail {
+    position: relative !important;
+    height: auto !important;
+    padding: 0 !important;
+  }
+
+  .case-body {
+    height: auto !important;
+    overflow-y: visible !important;
+    padding: 2rem 1.5rem;
+  }
+
+  .step {
+    min-height: auto;
+    padding-bottom: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  /* Hide pinned media gallery on mobile */
+  .pinned-media-gallery {
+    display: none !important;
+  }
+}
+
+/* Show desktop rail only on desktop */
+@media (min-width: 926px) {
+  .mobile-nav-bar {
+    display: none;
+  }
+
+  .desktop-rail {
+    display: flex;
+    flex-direction: column;
   }
 }
 
