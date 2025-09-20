@@ -2477,6 +2477,14 @@ body {
   max-width: none;
 }
 
+.step ul {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #666;
+  max-width: none;
+  padding-left: 2rem;
+}
+
 /* RIGHT HALF: Pinned Media Gallery - stays the same */
 .pinned-media-gallery {
   position: sticky;
@@ -2794,8 +2802,150 @@ body {
   /* Remove width constraints */
 }
 
-/* ===== RESPONSIVE DESIGN SYSTEM ===== */
+/* ===== CASE STUDY: RESPONSIVE DESIGN SYSTEM ===== */
+/* ===== MOBILE FIRST ===== */
 
+/* Mobile Case Study Hero - Below iPhone Pro Max (926px) */
+@media (max-width: 925px) {
+
+  /* Convert split layout to vertical stack */
+  .hero-split-container {
+    display: flex;
+    flex-direction: column;
+    min-height: auto;
+    margin: 0 1rem;
+    /* Reduce horizontal margin */
+  }
+
+  /* Title block - full width, reduced padding */
+  .hero-title-block {
+    width: 100%;
+    padding: 3rem 2rem 2rem 2rem;
+    /* Reduce padding significantly */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Center content instead of flex-end */
+    position: relative;
+    /* Remove absolute positioning context */
+  }
+
+  /* Remove absolute positioning for mobile */
+  .hero-title-text {
+    position: static;
+    bottom: auto;
+    left: auto;
+    right: auto;
+  }
+
+  /* Adjust title sizing for mobile */
+  .case-study-title {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    /* Smaller on mobile */
+    line-height: 1.2;
+    margin-top: 0.5rem;
+  }
+
+  .case-study-subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Image block - full width, reduced padding */
+  .hero-image-block {
+    width: 100%;
+    padding: 1rem 2rem 2rem 2rem;
+    /* Reduce padding */
+    background-color: var(--work-color);
+    /* Keep same background as title block */
+  }
+
+  .hero-image-block .image-placeholder {
+    max-width: 100%;
+    max-height: 300px;
+    /* Limit height on mobile */
+    aspect-ratio: 4/3;
+    /* Change to landscape aspect ratio */
+  }
+
+  /* Meta section adjustments */
+  .hero-meta-section {
+    margin: 0 1rem;
+    /* Match container margin */
+    padding: 2rem 0;
+    /* Reduce padding */
+  }
+
+  .hero-text-content {
+    grid-template-columns: 1fr;
+    /* Stack intro and button vertically */
+    gap: 1.5rem;
+    padding: 0 2rem;
+    /* Reduce padding */
+    margin-bottom: 2rem;
+    /* Reduce margin */
+  }
+
+  .case-study-intro {
+    max-width: 100%;
+    /* Full width on mobile */
+    font-size: 1rem;
+    /* Slightly smaller text */
+    line-height: 1.5;
+  }
+
+  .live-site-btn {
+    justify-self: start;
+    /* Align to left instead of center */
+    font-size: 0.85rem;
+    /* Slightly smaller button */
+    padding: 0.65rem 1.25rem;
+    /* Adjust padding */
+  }
+
+  /* Meta grid - stack vertically or reduce columns */
+  .case-study-meta-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns instead of 6 */
+    gap: 1.5rem 1rem;
+    /* Reduce gaps */
+    padding: 1.5rem 2rem;
+    /* Reduce padding */
+  }
+
+  /* Reposition meta items for 2-column grid */
+  .meta-item:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .meta-item:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .meta-item:nth-child(3) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .meta-item:nth-child(4) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .meta-label {
+    font-size: 0.75rem;
+    /* Slightly smaller labels */
+  }
+
+  .meta-value {
+    font-size: 0.85rem;
+    /* Slightly smaller values */
+  }
+}
+
+/* =====  RESPONSIVE DESIGN SYSTEM ===== */
 /* Large Desktop (1440px+) */
 @media (min-width: 1441px) {
   .featured-content {

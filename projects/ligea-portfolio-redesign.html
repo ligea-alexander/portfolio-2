@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles.css">
+  <link rel="shortcut icon" href="icon/favicon.ico" type="image/x-icon">
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
@@ -115,27 +116,49 @@
 
         <!-- Center: Scrolling Content -->
         <main class="case-body">
-          <section id="context" class="step" data-label="Why This Story">
-            <h2>Why This Story</h2>
-            <p>My previous portfolio didn't reflect where I am today as a creative technologist. It was static, visually
-              flat, and didn't show my capabilities in animation, interaction design, or narrative case studies. I
-              needed a portfolio that felt alive — professional yet playful — and that clearly positioned me in the
-              space between data, design, and development.</p>
+          <section id="context" class="step" data-label="Why / Rationale">
+            <h2>A Site That (Better) Represents Me</h2>
+            <p>My <a href="https://ligea-alexander.github.io/ligea-portfolio/" target="_blank">previous portfolio</a>
+              was functional but flat — a simple grid that showed projects without much
+              character. It didn't communicate how I work or the kinds of experiences I aim to create through my work.
+              For me, it's obvious how a creator (whether writer, coder, or analyst) works from the <em>moment</em> you
+              come into visual contact with their work — long before you scroll to an About page. My old site failed
+              that test.
+            </p>
             <br>
-            <p>My previous portfolio didn’t reflect the kind of work I do now. It was static, minimal, and lacked the
-              interactive qualities I value in design. I wanted a site that would demonstrate my ability to craft
-              experiences — not just display projects. The challenge was to create a portfolio that felt alive and
-              personal while staying professional, lightweight, and easy to maintain.</p>
+            <p>Like many of us, I leaned on fast, out-of-the-box tools to get something online quickly when I realized I
+              needed to share my work for jobs and conversations. For me, that tool was Quarto; especially attractive
+              because of its rising popularity among people working at the intersection of data science, analytics,
+              research, and storytelling (and its tight connection to R).</p>
+            <br>
+            <p>That first site served its purpose, but it wasn't enough. I needed a portfolio that would do two things
+              at once:</p>
+            <ul>
+              <li>Showcase my skills in frontend development, animation, and design thinking</li>
+              <li>Express my perspective as a creative technologist — blending narrative, interaction, and code into
+                something cohesive.</li>
+            </ul>
+            <p>The redesign became a chance to treat my own portfolio like a client project: setting goals,
+              experimenting
+              with design direction, and building an experience that reflects who I am now, not who I was when I first
+              coded a site.
+            </p>
           </section>
 
-          <section id="my-role" class="step" data-label="Topic Development">
-            <h2>Topic Development</h2>
-            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
-              Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+          <section id="my-role" class="step" data-label="Shaping the Direction">
+            <h2>Shaping the Direction</h2>
+            <p>The redesign wasn't just a reskin — it was a rebuild. My old site relied on Quarto, a fast,
+              out-of-the-box solution popular among data practitioners. It worked, but it also limited my ability to
+              control design, interaction, and identity.
+              Here's the shift I captured in the redesign:</p>
+            <pre><!-- Diagram using text characters -->
+            Old Portfolio ──> Functional | Fast-build | Tool-dependent (Quarto)
+                                  │
+                                  ▼
+            New Portfolio ──> Interactive | Narrative | Hand-coded Identity
+            </pre>
+            <p>From there, I approached the rebuild as both designer and developer, making deliberate choices about
+              aesthetic direction, interaction design, and the underlying architecture.</p>
           </section>
 
           <section id="execution" class="step" data-label="Methodology">
@@ -171,7 +194,8 @@
       <!-- Right Side: Pinned Media Gallery -->
       <div class="pinned-media-gallery">
         <div class="media-item active" data-media="context">
-          <div class="image-placeholder">Context Media</div>
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/redesign_previous_portfolio.png" alt="">
+          </div>
         </div>
         <div class="media-item" data-media="my-role">
           <div class="image-placeholder">My Role Media</div>
