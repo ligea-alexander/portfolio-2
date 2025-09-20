@@ -2841,14 +2841,16 @@ body {
   /* Adjust title sizing for mobile */
   .case-study-title {
     font-size: clamp(1.8rem, 6vw, 2.5rem);
-    /* Smaller on mobile */
     line-height: 1.2;
-    margin-top: 0.5rem;
+    margin-top: 0;
+    /* Remove the 0.5rem margin-top */
   }
 
+  /* Tighten spacing between subtitle and title */
   .case-study-subtitle {
     font-size: 0.8rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.25rem;
+    /* Reduce from 0.75rem to 0.25rem */
   }
 
   /* Image block - full width, reduced padding */
@@ -2876,31 +2878,34 @@ body {
     /* Reduce padding */
   }
 
+  /* Stack intro and button vertically with button below intro */
   .hero-text-content {
     grid-template-columns: 1fr;
-    /* Stack intro and button vertically */
+    /* Single column layout */
+    grid-template-rows: auto auto;
+    /* Two rows: intro, then button */
     gap: 1.5rem;
     padding: 0 2rem;
-    /* Reduce padding */
     margin-bottom: 2rem;
-    /* Reduce margin */
   }
 
   .case-study-intro {
     max-width: 100%;
-    /* Full width on mobile */
     font-size: 1rem;
-    /* Slightly smaller text */
     line-height: 1.5;
+    grid-column: 1;
+    grid-row: 1;
+    /* First row */
   }
 
   .live-site-btn {
     justify-self: start;
-    /* Align to left instead of center */
+    /* Align to left */
     font-size: 0.85rem;
-    /* Slightly smaller button */
     padding: 0.65rem 1.25rem;
-    /* Adjust padding */
+    grid-column: 1;
+    grid-row: 2;
+    /* Second row (below intro) */
   }
 
   /* Meta grid - stack vertically or reduce columns */
