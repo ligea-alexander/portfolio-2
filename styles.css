@@ -291,7 +291,7 @@ body {
   .mobile-nav-trigger-btn {
     width: 40px;
     height: 40px;
-    background-image: url('./icon/favicon.ico');
+    background-image: url('./favicon.ico');
     /* Try relative path with ./ */
     background-size: 24px 24px;
     /* Make icon smaller and more visible */
