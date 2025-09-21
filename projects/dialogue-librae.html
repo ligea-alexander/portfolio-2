@@ -14,7 +14,7 @@
   <meta property="og:type" content="article" />
   <meta property="og:image" content="https://ligea-alexander.xyz/projects/assets/librae-feature/social-cover.jpg" />
   <link rel="stylesheet" href="../styles.css">
-  <link rel="shortcut icon" href="icon/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../icon/favicon.ico" type="image/x-icon">
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
@@ -22,7 +22,7 @@
   <title>Librae Bakery Feature</title>
 </head>
 
-<body>
+<body class="case-study-page">
   <div id="custom-cursor">
     <div class="cursor-square"></div>
     <div class="cursor-circle"></div>
@@ -47,6 +47,25 @@
       <p><a href="../index.html">Ligea</a></p>
     </div>
   </nav>
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav-container" id="mobile-nav-container">
+    <button class="mobile-nav-trigger-btn" id="mobile-nav-trigger-btn">
+    </button>
+
+    <div class="mobile-nav-dropdown" id="mobile-nav-dropdown">
+      <div class="mobile-nav-location">
+        <p class="mobile-location-line1">Hamburg, Germany</p>
+        <p class="mobile-location-line2">New York, America</p>
+      </div>
+
+      <a href="../work.html" class="mobile-nav-link">Work</a>
+      <a href="../about.html" class="mobile-nav-link">Background</a>
+
+      <div class="mobile-nav-email">
+        <a href="mailto:hi@ligea-alexander.xyz">hi@ligea-alexander.xyz</a>
+      </div>
+    </div>
+  </div>
   <main class="case-study-main" data-work-type="writing">
     <!-- Hero Section - Split Layout -->
     <section class="case-study-hero">
@@ -125,17 +144,17 @@
           </div>
 
           <!-- Mobile Sticky Navigation -->
-          <div class="mobile-nav-bar">
+          <!-- <div class="mobile-nav-bar">
             <button class="mobile-nav-trigger" id="mobile-nav-trigger">
               <div class="progress-container">
                 <div class="progress-bar" id="mobile-progress-bar"></div>
               </div>
               <span class="current-section-label" id="current-section-label">Why This Story</span>
               <span class="nav-arrow">▼</span>
-            </button>
+            </button> -->
 
-            <!-- Slide-down menu -->
-            <div class="mobile-nav-menu" id="mobile-nav-menu">
+          <!-- Slide-down menu -->
+          <!-- <div class="mobile-nav-menu" id="mobile-nav-menu">
               <div class="nav-menu-item" data-target="#context" data-index="01">
                 <span class="section-number">01</span>
                 <span class="section-title">Why This Story</span>
@@ -161,7 +180,7 @@
                 <span class="section-title">Impact</span>
                 <span class="active-dot"></span>
               </div>
-            </div>
+            </div> -->
           </div>
         </aside>
 

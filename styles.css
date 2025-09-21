@@ -56,7 +56,7 @@ body {
   display: none;
 }
 
-/* Custom Cursor Styles */
+/* ===== Custom Cursor Styles ===== */
 
 /* #loader~#custom-cursor {
   display: none;
@@ -95,6 +95,26 @@ body {
   mix-blend-mode: difference;
 }
 
+/* ===== CURSOR: RESPONSIVE DESIGN SYSTEM ===== */
+@media (max-width: 925px) {
+
+  /* Hide custom cursor on mobile */
+  #custom-cursor {
+    display: none !important;
+  }
+
+  /* Reset cursor to default on mobile */
+  body {
+    cursor: auto !important;
+  }
+
+  /* Your existing mobile styles... */
+  .nav-container {
+    display: none;
+  }
+}
+
+/* ===== NAVIGATION STYLES ===== */
 /* Navigation with updated layout */
 .nav-container {
   display: flex;
@@ -232,37 +252,199 @@ body {
   opacity: 0.7;
 }
 
-/* Contact Email - slides down from nav */
-/* Fixed contact element */
-.fixed-contact {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 100;
+/* ===== NAVIGATION: RESPONSIVE DESIGN SYSTEM ===== */
+/* ===== MOBILE FIRST - BELOW IPHONE PRO MAX (926px) ===== */
+/* Hide desktop nav on mobile */
+@media (max-width: 925px) {
+  .nav-container {
+    display: none;
+  }
+
+  body {
+    padding-top: 0;
+  }
+
+  /* DEFAULT: Floating mobile nav with scroll opacity */
+  .mobile-nav-container {
+    position: fixed !important;
+    top: 1rem !important;
+    /* Keep same top position */
+    left: 1rem !important;
+    z-index: 999 !important;
+    transition: opacity 0.3s ease;
+    pointer-events: auto !important;
+    will-change: opacity;
+  }
+
+  /* Scroll opacity behavior */
+  .mobile-nav-container.scrolled {
+    opacity: 0.4 !important;
+    pointer-events: auto !important;
+  }
+
+  .mobile-nav-container.scrolled:hover,
+  .mobile-nav-container.scrolled:focus-within {
+    opacity: 1 !important;
+  }
+
+  /* Mobile nav trigger button - favicon icon */
+  .mobile-nav-trigger-btn {
+    width: 40px;
+    height: 40px;
+    background-image: url('../icon/favicon.ico');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .mobile-nav-trigger-btn:hover {
+    transform: translateY(-1px) scale(1.1);
+    opacity: 0.8;
+  }
+
+  /* Mobile dropdown menu */
+  .mobile-nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-nav-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Navigation links */
+  .mobile-nav-link {
+    display: block;
+    padding: 1rem 1.25rem;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #f5f5f5;
+    transition: background-color 0.2s ease;
+  }
+
+  .mobile-nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-nav-link:hover {
+    background-color: #f9f9f9;
+    color: #666;
+  }
+
+  /* Location and email styling */
+  .mobile-nav-location {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #f5f5f5;
+    background-color: #fafafa;
+  }
+
+  .mobile-location-line1 {
+    font-size: 11px;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0 0 0.25rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .mobile-location-line2 {
+    font-size: 10px;
+    font-weight: 300;
+    color: #888;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+  }
+
+  .mobile-nav-email {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #f5f5f5;
+  }
+
+  .mobile-nav-email a {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-nav-email a:hover {
+    color: #666;
+  }
 }
 
-.contact-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  background-color: #1a1a1a;
-  color: white;
-  text-decoration: none;
-  border-radius: 2rem;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border: 1px solid #1a1a1a;
+/* Show desktop nav only on desktop */
+@media (min-width: 926px) {
+  .mobile-nav-container {
+    display: none;
+  }
+
+  .nav-container {
+    display: flex;
+  }
 }
 
-.contact-link:hover {
-  background-color: transparent;
-  color: #1a1a1a;
-  transform: translateY(-2px);
+/* Case study specific mobile nav positioning */
+@media (max-width: 925px) {
+
+  /* On case study pages, mobile nav stays at ORIGINAL position but HIDDEN on scroll */
+  .case-study-page .mobile-nav-container {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 200;
+    /* Normal z-index, not super high */
+
+    /* DISABLE all scroll opacity behavior - it should DISAPPEAR completely on scroll */
+    opacity: 1;
+    /* Start visible at top */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  /* When scrolled on case study pages, HIDE the mobile nav completely */
+  .case-study-page .mobile-nav-container.scrolled {
+    opacity: 0 !important;
+    transform: translateY(-20px);
+    /* Optional: slide up as it disappears */
+    pointer-events: none;
+    /* Disable interactions when hidden */
+  }
+
+  /* Remove hover behavior on case study pages when scrolled */
+  .case-study-page .mobile-nav-container.scrolled:hover,
+  .case-study-page .mobile-nav-container.scrolled:focus-within {
+    opacity: 0 !important;
+    /* Stay hidden even on hover */
+  }
 }
 
-
+/* ====== HOME PAGE DESKTOP STYLES ====== */
 /* Header Structure */
 .site-header {
   min-height: 100vh;
@@ -409,6 +591,7 @@ body {
 .visual-container {
   position: absolute;
   width: 400px;
+  padding: 0 20px;
   top: -50px;
   /* Move up/down: negative = up, positive = down */
   /* Overlap yellow bar from row 2 */
@@ -430,6 +613,10 @@ body {
   color: #3344A8;
   mix-blend-mode: multiply;
   position: relative;
+  padding: 10px;
+  /* Add padding around the text */
+  overflow: visible;
+  /* Ensure full text visibility */
   /* z-index: 8; */
 }
 
@@ -1124,6 +1311,482 @@ body {
   text-align: center;
   background-color: #f8f8f8;
   border-radius: 12px;
+}
+
+/* ===== HOME PAGE:  RESPONSIVE DESIGN SYSTEM ===== */
+/* ===== MOBILE FIRST - BELOW IPHONE PRO MAX (926px) ===== */
+
+/* Add this at the very top of your mobile styles @media (max-width: 925px) section: */
+
+@media (max-width: 925px) {
+
+  /* ===== GLOBAL OVERFLOW PREVENTION ===== */
+  html,
+  body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    box-sizing: border-box;
+  }
+
+  /* Ensure all elements respect viewport width */
+  * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+
+  .hero-subtitle {
+    font-size: 12px;
+    font-weight: 400;
+    color: #888;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: 0 0 -2rem 0;
+    opacity: 0.8;
+
+    /* DYNAMIC POSITIONING - Always center over "Creative" */
+    align-self: left;
+    /* Center horizontally */
+    text-align: center;
+    /* Center the text */
+    position: relative;
+    z-index: 1;
+
+    /* Use transform to fine-tune position over "Creative" */
+    /* transform: translateX(20%); */
+    /* Adjust this percentage as needed */
+
+    /* Alternative approach - use calc with viewport width */
+    margin-left: calc(50vw - 50% - 2rem);
+  }
+
+  /* 2. Fix hero title layout */
+  .hero-title-layout {
+    position: relative;
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding-left: 0 !important;
+    /* Remove the 200px padding */
+    padding-right: 0 !important;
+    margin: 1rem 0;
+    overflow: hidden;
+  }
+
+  /* 3. Contain title rows */
+  .title-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 100vw !important;
+    overflow: hidden;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* 4. Fix bar containers to not exceed viewport */
+  .bar-container {
+    width: clamp(120px, 25vw, 200px) !important;
+    /* Make smaller and responsive */
+    height: 50px;
+    flex-shrink: 0;
+    max-width: calc(100vw - 4rem) !important;
+    /* Never exceed viewport minus padding */
+  }
+
+  /* ROW 1 & 4 ALIGNMENT FIXES */
+
+  /* Row 1 - Align Creative with yellow bar position */
+  .row-1 {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Row 1 Creative title - align with yellow bar */
+  .row-1 .title {
+    margin-left: 0px !important;
+    /* Push Creative right to align with yellow bar */
+  }
+
+  /* Row 1 Teal bar - extend it */
+  .teal-bar {
+    width: clamp(180px, 45vw, 320px) !important;
+    /* Reduced from 200px/50vw/350px to 180px/45vw/320px */
+    height: 50px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: calc(100vw - 2rem) !important;
+  }
+
+  /* Row 2 - ensure proper alignment */
+  .row-2 {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Row 4 - align with Row 2 */
+  .row-4 {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Row 4 Storyteller title - align with Technologist */
+  .row-4 .title {
+    margin-left: 0 !important;
+    /* Remove any margin to align with Technologist */
+  }
+
+  /* Row 4 Storyteller title - align with Technologist */
+  .row-4 .title {
+    margin-left: 0 !important;
+    /* Remove any margin to align with Technologist */
+  }
+
+  /* Ensure Row 2 and Row 4 titles align vertically */
+  .row-2 .title,
+  .row-4 .title {
+    margin-left: 0 !important;
+    /* Make sure both start at same position */
+  }
+
+  .yellow-bar,
+  .red-bar {
+    width: clamp(120px, 25vw, 200px) !important;
+    height: 50px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    max-width: calc(100vw - 4rem) !important;
+  }
+
+  /* Row 3 and Pink Bar */
+
+  /* Row 3 - Visual on left, Pink bar on right */
+  .row-3 {
+    position: relative;
+    flex-direction: row !important;
+    /* Keep horizontal layout */
+    justify-content: flex-start;
+    /* Space between elements */
+    align-items: center;
+    flex-wrap: nowrap;
+    /* Prevent wrapping */
+    gap: 2rem;
+    margin-bottom: 1rem;
+    z-index: 5;
+  }
+
+  /* Position pink bar on the right in Row 3 */
+  .row-3 .pink-bar {
+    position: static !important;
+    width: clamp(220px, 55vw, 320px) !important;
+    /* Increase width to extend left */
+    height: 50px;
+    margin-left: 0 !important;
+    /* Remove auto - this makes it extend left only */
+    /* margin-right: 1rem !important; */
+    /* Keep the right space */
+    max-width: calc(100vw - 3rem) !important;
+    flex-shrink: 0;
+    order: 2;
+    z-index: 5;
+  }
+
+  /* Fix visual container positioning for mobile */
+  .visual-container {
+    position: relative !important;
+    /* Keep it relative */
+    width: auto;
+    top: -40px;
+    /* Position to overlap yellow bar above */
+    bottom: -40px;
+    /* Position to overlap red bar below */
+    right: 20px;
+    /* Position slightly from left edge */
+    left: -5px;
+    transform: rotate(-18deg) translateY(25px) !important;
+    /* Add translateY to push it down */
+    z-index: 999 !important;
+    /* High z-index to overlap rows 2 and 4 */
+    overflow: visible !important;
+    flex-shrink: 0;
+    order: 1;
+    pointer-events: none;
+    margin-bottom: -20px;
+    /* Negative margin to pull following content up */
+  }
+
+  /* 7. Fix title sizing to prevent overflow */
+  .title {
+    font-size: clamp(2.4rem, 8.5vw, 4.5rem) !important;
+    /* Slightly increased */
+    padding-left: 0 !important;
+    text-align: center;
+    line-height: 1.1;
+    white-space: nowrap;
+    max-width: 100% !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Keep Visual title large */
+  .title--script {
+    font-size: clamp(4rem, 9vw, 3rem) !important;
+    text-align: center;
+    /* Center within its container */
+    max-width: none !important;
+    white-space: nowrap;
+    overflow: visible !important;
+    /* padding: 0.75rem; */
+    /* Increase padding for better spacing */
+    line-height: 1;
+    letter-spacing: 0.02em;
+    pointer-events: auto;
+  }
+
+  /* Make sure Row 3 doesn't exceed viewport */
+  .title-row.row-3 {
+    max-width: 100vw !important;
+    overflow: visible !important;
+    /* Allow Visual to overflow and overlap other rows */
+    padding: 0;
+    position: relative;
+    /* Create positioning context */
+    height: 60px;
+    /* Set height for proper positioning */
+  }
+
+  /* Ensure rows 2 and 4 have lower z-index so Visual can overlap them */
+  .title-row.row-2,
+  .title-row.row-4 {
+    position: relative;
+    z-index: 1;
+    /* Lower z-index than Visual */
+  }
+
+  /* 8. Fix services section - main culprit of overflow */
+  .services {
+    width: 100% !important;
+    /* Don't use 100vw */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden !important;
+    padding: 60px 1rem !important;
+    /* Add horizontal padding */
+  }
+
+  .services-flex {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden !important;
+    flex-direction: column !important;
+    /* Stack on mobile */
+    gap: 2rem;
+  }
+
+  .services-list {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    overflow: hidden;
+  }
+
+  .services-tools-cloud {
+    width: 100% !important;
+    min-width: 0 !important;
+    /* Remove minimum width */
+    margin-right: 0 !important;
+    overflow: hidden;
+  }
+
+  /* 9. Fix featured work section */
+  .featured-content {
+    max-width: 100% !important;
+    overflow: hidden;
+    padding: 0 1rem !important;
+    display: grid !important;
+    /* Ensure grid is active */
+    grid-template-columns: 1fr !important;
+    /* Single column on mobile */
+    grid-template-rows: auto auto !important;
+    /* Define two rows: text row, grid row */
+    gap: 6rem !important;
+    /* Increase gap between text and project grid */
+  }
+
+  .featured-text {
+    grid-row: 1;
+    /* First row */
+    grid-column: 1;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+    max-width: 100%;
+  }
+
+  .project-grid {
+    grid-row: 2;
+    /* Second row */
+    grid-column: 1;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden;
+    padding: 2rem 0 !important;
+    margin: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    /* Single column for project cards */
+    grid-template-rows: repeat(6, auto) !important;
+    /* 6 rows for 6 cards */
+    gap: 4rem !important;
+    /* Large gap between each project card */
+  }
+
+  /* Ensure each project card takes its own row */
+  .project-card {
+    margin-bottom: 0 !important;
+    /* Remove margin, use grid gap instead */
+  }
+
+  /* Add more space to the featured work section overall */
+  .featured-work {
+    padding: 80px 0 !important;
+  }
+
+  /* 10. Fix about bridge section */
+  .about-bridge {
+    padding: 2rem 1rem !important;
+    overflow: hidden;
+    grid-template-columns: 1fr !important;
+  }
+
+  .bridge-header {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    text-align: center;
+  }
+
+  .bridge-content {
+    padding-left: 0 !important;
+    text-align: center;
+  }
+
+  .image-block img {
+    width: 90vw !important;
+    max-width: 400px !important;
+    height: auto !important;
+    aspect-ratio: 1;
+  }
+
+  .text-block {
+    padding: 0 1rem;
+  }
+
+  .bridge-description {
+    padding-top: 2rem !important;
+    font-size: clamp(1.2rem, 6vw, 2rem) !important;
+    text-indent: 0 !important;
+    /* Remove text indent on mobile */
+    text-align: center;
+  }
+
+  /* 11. Fix container elements */
+  .hero-container,
+  .site-header {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* 12. Fix any remaining full-width elements */
+  .hero-text-group {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden;
+    padding: 0 1rem;
+  }
+
+  /* 13. Fix hero roles and tagline */
+  .hero-roles {
+    max-width: 100%;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  .tagline {
+    max-width: 100%;
+    padding: 2rem 1rem 0 1rem;
+    text-align: center;
+  }
+
+  /* Rest of your existing mobile styles... */
+  .site-header {
+    min-height: 100vh;
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .hero-container {
+    height: auto;
+    min-height: 80vh;
+    padding: 3rem 0;
+    justify-content: center;
+  }
+
+  .hero-text-group {
+    gap: 2rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* For very small screens, you might need additional adjustment */
+@media (max-width: 480px) {
+  .hero-subtitle {
+    font-size: 11px;
+    transform: translateX(45%);
+    /* Fine-tune for smaller screens */
+  }
+}
+
+/* For medium mobile screens */
+@media (max-width: 768px) and (min-width: 481px) {
+  .hero-subtitle {
+    transform: translateX(80%);
+    /* Fine-tune for medium mobile */
+  }
+}
+
+/* For very small screens, stack pink bar and 'Visual' container if needed */
+@media (max-width: 400px) {
+  .row-3 {
+    gap: 0.25rem;
+    /* Even tighter gap on very small screens */
+  }
+
+  .visual-container {
+    max-width: 50% !important;
+    padding: 0.5rem;
+    /* More padding on very small screens */
+  }
+
+  .row-3 .pink-bar {
+    width: clamp(120px, 40vw, 180px) !important;
+  }
+
+  .title--script {
+    font-size: clamp(1.2rem, 5vw, 1.8rem) !important;
+    /* Even smaller on very small screens */
+  }
 }
 
 /* ===== ABOUT PAGE STYLES ===== */
@@ -3550,43 +4213,5 @@ body {
   .contact-link {
     padding: 0.5rem 1rem;
     font-size: 12px;
-  }
-}
-
-/* Mobile Small (320px - 479px) */
-@media (max-width: 479px) {
-  .hero-title {
-    font-size: clamp(1.2rem, 12vw, 2.5rem);
-  }
-
-  .featured-work h2 span {
-    margin-left: 2rem;
-  }
-
-  .project-grid {
-    grid-template-rows: repeat(6, 250px);
-    max-width: 320px;
-  }
-
-  .project-info {
-    width: 70%;
-    padding: 0.5rem;
-  }
-
-  .project-title {
-    font-size: 0.7rem;
-  }
-
-  .project-category {
-    font-size: 0.6rem;
-  }
-
-  .image-block img {
-    width: 250px;
-    height: 250px;
-  }
-
-  .bridge-description {
-    font-size: clamp(1rem, 10vw, 1.8rem);
   }
 }

@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     updateCursor();
 
-    // ✅ FIX: Only show cursor immediately for pages WITHOUT a loader
+    // FIX: Only show cursor immediately for pages WITHOUT a loader
     if (!loader) {
       cursor.style.display = 'block';
     }
@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     console.log('Cursor elements NOT found!');
   }
 
-  // Navbar scroll behavior
+  // ====== NAVBAR FUNCTIONALITY ====== 
   window.addEventListener('scroll', function () {
     const navbar = document.querySelector('.nav-container');
 
@@ -214,6 +214,100 @@ document.addEventListener("DOMContentLoaded", (event) => {
     resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 200);
   });
 
+  // Mobile Navigation Functionality
+  // Global Mobile Navigation - Works on ALL pages
+  function initGlobalMobileNavigation() {
+    const container = document.getElementById('mobile-nav-container');
+    const trigger = document.getElementById('mobile-nav-trigger-btn');
+    const dropdown = document.getElementById('mobile-nav-dropdown');
+    if (!container || !trigger || !dropdown) return;
+
+    const IS_CASE = document.body.classList.contains('case-study-page');
+    const TOP_THRESHOLD = 50;
+    const isOpen = () => dropdown.classList.contains('open');
+
+    console.log('🎯 Mobile nav setup:', IS_CASE ? 'CASE STUDY' : 'GLOBAL PAGE');
+
+    // --- open/close
+    function openDropdown() {
+      dropdown.classList.add('open');
+      // force visible while open: remove "scrolled" so CSS shows full opacity
+      container.classList.remove('scrolled');
+      console.log('📱 Dropdown opened');
+    }
+
+    function closeDropdown() {
+      dropdown.classList.remove('open');
+      // after closing, re-apply scroll state
+      handleScroll();
+      console.log('📱 Dropdown closed');
+    }
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      isOpen() ? closeDropdown() : openDropdown();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!container.contains(e.target) && isOpen()) closeDropdown();
+    });
+
+    dropdown.querySelectorAll('.mobile-nav-link')
+      .forEach(link => link.addEventListener('click', closeDropdown));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) closeDropdown();
+    });
+
+    // --- scroll (rAF-throttled)
+    let ticking = false;
+    function handleScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY || 0;
+        console.log('📊 Scroll:', y, IS_CASE ? '(CASE)' : '(GLOBAL)');
+
+        if (IS_CASE) {
+          // case-study: hide when scrolled, show at top; menu close on scroll
+          if (isOpen()) closeDropdown();
+          if (y > TOP_THRESHOLD) {
+            container.classList.add('scrolled');   // -> hidden per your CSS
+            console.log('✅ Case study: HIDDEN');
+          } else {
+            container.classList.remove('scrolled'); // -> visible
+            console.log('✅ Case study: VISIBLE');
+          }
+        } else {
+          // global: never hide; just mute when scrolled
+          if (!isOpen()) {
+            // only apply scroll opacity when menu is closed
+            if (y > TOP_THRESHOLD) {
+              container.classList.add('scrolled');
+              console.log('✅ Global: MUTED');
+            } else {
+              container.classList.remove('scrolled');
+              console.log('✅ Global: FULL OPACITY');
+            }
+          }
+        }
+
+        ticking = false;
+      });
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // init
+    handleScroll();
+    console.log('✅ Mobile nav initialization complete');
+  }
+
+
+  // Call the function
+  initGlobalMobileNavigation();
+
+  // Home page-specific functionality
   if (isHomePage) {
 
     // Animate "View All" text
@@ -871,22 +965,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       // Set up mobile navigation if mobile elements exist
       if (mobileNavTrigger && mobileNavMenu) {
-        console.log('Setting up mobile navigation...');
+        console.log('Setting up case study mobile navigation...');
+
+        // HIDE the case study nav initially until first step is reached
+        const mobileNavBar = document.querySelector('.mobile-nav-bar');
+        if (mobileNavBar) {
+          mobileNavBar.style.display = 'none';
+        }
 
         // Mobile nav trigger click
         mobileNavTrigger.addEventListener('click', (e) => {
           e.preventDefault();
           const isOpen = mobileNavMenu.classList.contains('open');
-          console.log('Mobile nav clicked, currently open:', isOpen);
 
           if (isOpen) {
             mobileNavMenu.classList.remove('open');
             mobileNavTrigger.classList.remove('open');
-            console.log('Closed mobile nav');
           } else {
             mobileNavMenu.classList.add('open');
             mobileNavTrigger.classList.add('open');
-            console.log('Opened mobile nav');
           }
         });
 
@@ -896,7 +993,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             e.preventDefault();
             const targetId = item.getAttribute('data-target');
             const targetSection = document.querySelector(targetId);
-            console.log('Menu item clicked:', targetId, 'found section:', !!targetSection);
 
             if (targetSection) {
               scrollToSection(targetSection);
@@ -911,7 +1007,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
           updateMobileSection(sections[0]);
         }
       } else {
-        console.log('Mobile nav elements not found');
+        console.log('Case study mobile nav elements not found');
       }
 
       // Desktop navigation setup
@@ -978,7 +1074,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
           const activeSection = getActiveSection();
           if (activeSection) {
             updateActiveNav(activeSection);
-            // Also update mobile if elements exist
             if (mobileNavTrigger) {
               updateMobileSection(activeSection);
             }
@@ -1057,6 +1152,62 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
         ScrollTrigger.refresh();
       }
+
+      // Show/hide case study navigation based on scroll position
+      function updateCaseStudyNavVisibility() {
+        const mobileNavBar = document.querySelector('.mobile-nav-bar');
+        const firstStep = document.querySelector('.step[data-label]');
+
+        if (!mobileNavBar || !firstStep || !scrollContainer) return;
+
+        const firstStepRect = firstStep.getBoundingClientRect();
+        const containerRect = scrollContainer.getBoundingClientRect();
+
+        // Show nav when first step comes into view
+        if (firstStepRect.top <= containerRect.top + 100) {
+          mobileNavBar.style.display = 'block';
+          // Add a fade-in animation
+          if (mobileNavBar.style.opacity === '0' || !mobileNavBar.style.opacity) {
+            mobileNavBar.style.opacity = '0';
+            mobileNavBar.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+              mobileNavBar.style.opacity = '1';
+            }, 10);
+          }
+        } else {
+          // Hide nav when scrolled back up before first step
+          mobileNavBar.style.opacity = '0';
+          setTimeout(() => {
+            if (mobileNavBar.style.opacity === '0') {
+              mobileNavBar.style.display = 'none';
+            }
+          }, 300);
+        }
+      }
+
+      // Add this to the existing scroll listener in the desktop navigation setup:
+      scrollContainer.addEventListener('scroll', () => {
+        updateRailThumb();
+        railNav.classList.add('show-nav');
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          railNav.classList.remove('show-nav');
+        }, 1000);
+
+        const activeSection = getActiveSection();
+        if (activeSection) {
+          updateActiveNav(activeSection);
+          if (mobileNavTrigger) {
+            updateMobileSection(activeSection);
+          }
+        }
+
+        // Update mobile progress
+        updateMobileProgress();
+
+        // ADD THIS: Update case study nav visibility
+        updateCaseStudyNavVisibility();
+      });
     }
     initScrollspy();
 
