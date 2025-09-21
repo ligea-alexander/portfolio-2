@@ -291,18 +291,13 @@ body {
   .mobile-nav-trigger-btn {
     width: 40px;
     height: 40px;
-    background-image: url('./favicon.ico');
-    /* Try relative path with ./ */
-    background-size: 24px 24px;
-    /* Make icon smaller and more visible */
+    background-image: url('../icon/favicon.ico');
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    background-color: #f5f5f5;
-    /* Add light background so you can see the button */
-    border: 1px solid #ddd;
-    /* Add border for visibility */
-    border-radius: 4px;
-    /* Small radius */
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
     cursor: pointer;
     transition: all 0.3s ease;
     padding: 0;
@@ -1771,26 +1766,169 @@ body {
   }
 }
 
-/* For very small screens, stack pink bar and 'Visual' container if needed */
+/* Add very small screen breakpoints to your mobile styles: */
+
+/* For screens under 400px - Very small phones */
 @media (max-width: 400px) {
-  .row-3 {
-    gap: 0.25rem;
-    /* Even tighter gap on very small screens */
+
+  /* Make bars much smaller */
+  .bar-container {
+    width: clamp(80px, 20vw, 120px) !important;
+    /* Much smaller bars */
+    height: 35px !important;
+    /* Reduce height too */
+    max-width: calc(100vw - 3rem) !important;
   }
 
-  .visual-container {
-    max-width: 50% !important;
-    padding: 0.5rem;
-    /* More padding on very small screens */
+  /* Specific bar sizing for very small screens */
+  .teal-bar {
+    width: clamp(100px, 25vw, 150px) !important;
+    /* Smaller teal bar */
+    height: 35px !important;
+  }
+
+  .yellow-bar,
+  .red-bar {
+    width: clamp(80px, 20vw, 120px) !important;
+    /* Much smaller bars */
+    height: 35px !important;
   }
 
   .row-3 .pink-bar {
-    width: clamp(120px, 40vw, 180px) !important;
+    width: clamp(120px, 30vw, 180px) !important;
+    /* Smaller pink bar */
+    height: 35px !important;
+    max-width: calc(100vw - 2rem) !important;
+  }
+
+  /* Make titles smaller to fit */
+  .title {
+    font-size: clamp(1.8rem, 7vw, 2.5rem) !important;
+    /* Much smaller titles */
+    padding-left: 0 !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Make Visual script text smaller */
+  .title--script {
+    font-size: clamp(2rem, 7vw, 2.8rem) !important;
+    /* Smaller Visual text */
+  }
+
+  /* Adjust Visual container for smaller screens */
+  .visual-container {
+    max-width: 40% !important;
+    padding: 0.25rem;
+    transform: rotate(-15deg) translateY(15px) !important;
+    /* Less rotation, less translation */
+  }
+
+  /* Reduce gaps and spacing */
+  .title-row {
+    gap: 0.5rem !important;
+    /* Smaller gaps between elements */
+    margin-bottom: 0.5rem !important;
+  }
+
+  .row-3 {
+    gap: 1rem !important;
+    /* Smaller gap in row 3 */
+  }
+
+  /* Adjust hero title layout */
+  .hero-title-layout {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0.5rem 0 !important;
+  }
+
+  /* Make hero subtitle smaller and repositioned */
+  .hero-subtitle {
+    font-size: 10px !important;
+    margin-left: calc(25vw - 25% - 1rem) !important;
+    /* Adjust positioning */
+    margin-bottom: -1rem !important;
+  }
+
+  /* Ensure all rows fit in viewport */
+  .title-row.row-3 {
+    height: 45px !important;
+    /* Smaller height */
+  }
+
+  /* Make sure hero container doesn't overflow */
+  .hero-container {
+    min-height: 70vh !important;
+    /* Reduce min height */
+    padding: 2rem 0 !important;
+  }
+
+  /* Adjust hero roles text */
+  .hero-roles {
+    font-size: 11px !important;
+    margin: 2rem 0 0.5rem 0 !important;
+  }
+
+  /* Adjust tagline */
+  .tagline {
+    font-size: 13px !important;
+    padding-top: 1.5rem !important;
+    line-height: 1.4 !important;
+  }
+}
+
+/* For screens under 360px - Very very small phones */
+@media (max-width: 360px) {
+
+  /* Even smaller bars */
+  .bar-container {
+    width: clamp(70px, 18vw, 100px) !important;
+    height: 30px !important;
+  }
+
+  .teal-bar {
+    width: clamp(90px, 22vw, 130px) !important;
+    height: 30px !important;
+  }
+
+  .yellow-bar,
+  .red-bar {
+    width: clamp(70px, 18vw, 100px) !important;
+    height: 30px !important;
+  }
+
+  .row-3 .pink-bar {
+    width: clamp(100px, 28vw, 150px) !important;
+    height: 30px !important;
+  }
+
+  /* Even smaller titles */
+  .title {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
   }
 
   .title--script {
-    font-size: clamp(1.2rem, 5vw, 1.8rem) !important;
-    /* Even smaller on very small screens */
+    font-size: clamp(1.8rem, 6vw, 2.3rem) !important;
+  }
+
+  /* Tighter spacing */
+  .title-row {
+    gap: 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .hero-subtitle {
+    font-size: 9px !important;
+  }
+
+  .hero-roles {
+    font-size: 10px !important;
+  }
+
+  .tagline {
+    font-size: 12px !important;
   }
 }
 
