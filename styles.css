@@ -291,7 +291,7 @@ body {
   .mobile-nav-trigger-btn {
     width: 40px;
     height: 40px;
-    background-image: url('icon/favicon.ico');
+    background-image: url('/icon/favicon.ico');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
