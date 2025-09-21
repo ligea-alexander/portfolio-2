@@ -291,13 +291,18 @@ body {
   .mobile-nav-trigger-btn {
     width: 40px;
     height: 40px;
-    background-image: url('/icon/apple-touch-icon.png');
-    background-size: contain;
+    background-image: url('./icon/favicon.ico');
+    /* Try relative path with ./ */
+    background-size: 24px 24px;
+    /* Make icon smaller and more visible */
     background-repeat: no-repeat;
     background-position: center;
-    background-color: transparent;
-    border: none;
-    border-radius: 0;
+    background-color: #f5f5f5;
+    /* Add light background so you can see the button */
+    border: 1px solid #ddd;
+    /* Add border for visibility */
+    border-radius: 4px;
+    /* Small radius */
     cursor: pointer;
     transition: all 0.3s ease;
     padding: 0;
