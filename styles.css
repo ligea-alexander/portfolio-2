@@ -291,7 +291,7 @@ body {
   .mobile-nav-trigger-btn {
     width: 40px;
     height: 40px;
-    background-image: url('/imgs/favicon.ico');
+    background-image: url('/icon/apple-touch-icon.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
