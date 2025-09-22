@@ -1357,7 +1357,7 @@ body {
     /* Adjust this percentage as needed */
 
     /* Alternative approach - use calc with viewport width */
-    margin-left: calc(50vw - 50% - 2rem);
+    margin-left: calc(40vw - 40% - 2rem);
   }
 
   /* 2. Fix hero title layout */
@@ -1368,7 +1368,7 @@ body {
     padding-left: 0 !important;
     /* Remove the 200px padding */
     padding-right: 0 !important;
-    margin: 1rem 0;
+    /* margin: 1rem 0; */
     overflow: hidden;
   }
 
@@ -1506,9 +1506,9 @@ body {
     /* Position to overlap yellow bar above */
     bottom: -40px;
     /* Position to overlap red bar below */
-    right: 20px;
+    right: 80px;
     /* Position slightly from left edge */
-    left: -5px;
+    /* left: -5px; */
     transform: rotate(-18deg) translateY(25px) !important;
     /* Add translateY to push it down */
     z-index: 999 !important;
@@ -1517,7 +1517,7 @@ body {
     flex-shrink: 0;
     order: 1;
     pointer-events: none;
-    margin-bottom: -20px;
+    margin-bottom: -40px;
     /* Negative margin to pull following content up */
   }
 
@@ -1753,7 +1753,8 @@ body {
 @media (max-width: 480px) {
   .hero-subtitle {
     font-size: 11px;
-    transform: translateX(45%);
+    transform: translateX(10%);
+    /* Reduce from 45% to 10% to push more left */
     /* Fine-tune for smaller screens */
   }
 }
@@ -1761,7 +1762,7 @@ body {
 /* For medium mobile screens */
 @media (max-width: 768px) and (min-width: 481px) {
   .hero-subtitle {
-    transform: translateX(80%);
+    transform: translateX(5%);
     /* Fine-tune for medium mobile */
   }
 }
@@ -1770,6 +1771,44 @@ body {
 
 /* For screens under 400px - Very small phones */
 @media (max-width: 400px) {
+
+  /* Move the entire hero container to the right */
+  .hero-container {
+    height: auto;
+    min-height: 80vh;
+    padding: 3rem 0;
+    justify-content: center;
+    margin-left: 1rem;
+    /* Add left margin to shift everything right */
+    /* OR use padding-left instead: */
+    /* padding-left: 1rem; */
+  }
+
+  /* Alternative: Move just the hero text group */
+  .hero-text-group {
+    gap: 2rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+    /* Shift just the text content right */
+  }
+
+  /* Or move the entire site header */
+  .site-header {
+    min-height: 100vh;
+    padding: 1rem;
+    justify-content: center;
+    padding-left: 2rem;
+    /* Add more left padding to shift everything right */
+  }
+
+  .hero-subtitle {
+    font-size: 10px !important;
+    margin-left: calc(20vw - 20% - 1rem) !important;
+    /* Reduce from 25vw to 20vw to push more left */
+    margin-bottom: -1rem !important;
+  }
 
   /* Make bars much smaller */
   .bar-container {
