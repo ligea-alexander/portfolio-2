@@ -2023,7 +2023,7 @@ body {
     height: 250px !important;
   }
 
-  /* Services Section - Small Screens (add to existing 400px styles) */
+  /* Services Section - Small Screens  */
   .services {
     padding: 40px 0.5rem !important;
     width: 100% !important;
@@ -2047,13 +2047,13 @@ body {
   .services h2 span {
     font-size: clamp(1.2rem, 6vw, 2rem) !important;
     /* Proportionally smaller than main Services text */
-    font-weight: 400 !important;
+    font-weight: 600 !important;
     line-height: 1.1;
     display: block;
-    margin-left: 4rem !important;
+    margin-left: 6rem !important;
     /* Position under the 's' in Services */
     color: #666;
-    margin-top: -0.5rem !important;
+    /* margin-top: -0.5rem !important; */
   }
 
   .services-flex {
@@ -2348,7 +2348,6 @@ body {
   /* Services Section - Very Small Screens */
   .services {
     padding: 30px 0.25rem !important;
-    /* Even more reduced padding */
   }
 
   .services h2 {
@@ -2518,16 +2517,13 @@ body {
     position: relative;
     overflow: hidden;
     min-height: 150px;
-    /* Much smaller */
     min-width: 200px;
-    /* Smaller minimum width */
     background: transparent;
   }
 
   .tools-cloud-container span {
     display: inline-block;
     font-size: 0.9em !important;
-    /* Much smaller font */
     color: #222;
     font-weight: 400;
     opacity: 0.85;
@@ -2545,7 +2541,6 @@ body {
   .tools-cloud-container span:hover {
     opacity: 1;
     transform: scale(1.05);
-    /* Smaller scale on hover */
     text-shadow: 0 0 20px rgba(34, 34, 34, 0.35),
       0 0 40px rgba(34, 34, 34, 0.25),
       0 0 60px rgba(34, 34, 34, 0.15);
