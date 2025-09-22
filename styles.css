@@ -1364,6 +1364,7 @@ body {
   .hero-title-layout {
     position: relative;
     width: 100% !important;
+    height: auto !important;
     max-width: 100vw !important;
     padding-left: 0 !important;
     /* Remove the 200px padding */
@@ -1778,7 +1779,7 @@ body {
     min-height: 80vh;
     padding: 3rem 0;
     justify-content: center;
-    margin-left: 2rem;
+    margin-left: 1rem;
     /* Add left margin to shift everything right */
     /* OR use padding-left instead: */
     /* padding-left: 1rem; */
@@ -1878,6 +1879,7 @@ body {
 
   /* Adjust hero title layout */
   .hero-title-layout {
+    height: auto !important;
     padding-left: 0 !important;
     padding-right: 0 !important;
     margin: 0.5rem 0 !important;
@@ -1956,6 +1958,12 @@ body {
   .title-row {
     gap: 0.25rem !important;
     margin-bottom: 0.25rem !important;
+  }
+
+  .hero-title-layout {
+    height: auto !important;
+    min-height: 150px;
+    /* Even smaller minimum for very small screens */
   }
 
   .hero-subtitle {
