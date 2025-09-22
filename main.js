@@ -613,6 +613,223 @@ document.addEventListener("DOMContentLoaded", (event) => {
       animateWorkTitles(); // Add this line
     }, 200);
 
+    // ===== MOBILE WORK PAGE FILTER FUNCTION =====
+
+    function initWorkFilterMobile() {
+      const filterContainer = document.querySelector('.filter-container');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+
+      if (!filterContainer || filterButtons.length === 0) return;
+
+      // Check if we're on mobile
+      function isMobile() {
+        return window.innerWidth <= 925;
+      }
+
+      // Create dropdown menu structure
+      function createDropdownMenu() {
+        // Only create if it doesn't exist
+        if (filterContainer.querySelector('.filter-dropdown')) return;
+
+        const dropdown = document.createElement('div');
+        dropdown.className = 'filter-dropdown';
+
+        filterButtons.forEach(button => {
+          const filter = button.getAttribute('data-filter');
+          const count = button.getAttribute('data-count') || '00';
+          const text = button.textContent.replace(/\d+/g, '').trim(); // Remove existing numbers
+
+          const dropdownItem = document.createElement('div');
+          dropdownItem.className = 'dropdown-item';
+          dropdownItem.setAttribute('data-filter', filter);
+
+          dropdownItem.innerHTML = `
+        <span class="filter-text">${text}</span>
+        <span class="count">${count}</span>
+      `;
+
+          dropdown.appendChild(dropdownItem);
+        });
+
+        filterContainer.appendChild(dropdown);
+      }
+
+      // Update active filter display
+      function updateActiveDisplay() {
+        const activeButton = document.querySelector('.filter-btn.active');
+        if (!activeButton) return;
+
+        const activeText = activeButton.textContent.replace(/\d+/g, '').trim();
+        const activeCount = activeButton.getAttribute('data-count') || '00';
+
+        // Update active button display for mobile
+        if (isMobile()) {
+          activeButton.innerHTML = `
+      <span class="filter-text" data-count="${activeCount}">${activeText}</span>`;
+        }
+        // Update dropdown items
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+          item.classList.remove('current');
+          if (item.getAttribute('data-filter') === activeButton.getAttribute('data-filter')) {
+            item.classList.add('current');
+          }
+        });
+      }
+
+      // Toggle dropdown
+      function toggleDropdown() {
+        if (!isMobile()) return;
+
+        const isOpen = filterContainer.classList.contains('open');
+
+        if (isOpen) {
+          filterContainer.classList.remove('open');
+        } else {
+          filterContainer.classList.add('open');
+        }
+      }
+
+      // Close dropdown
+      function closeDropdown() {
+        filterContainer.classList.remove('open');
+      }
+
+      // Handle filter selection
+      function selectFilter(filterValue) {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+
+        // Add active class to selected button
+        const newActiveButton = document.querySelector(`[data-filter="${filterValue}"]`);
+        if (newActiveButton) {
+          newActiveButton.classList.add('active');
+        }
+
+        // Update the display
+        updateActiveDisplay();
+
+        // Close dropdown
+        closeDropdown();
+
+        // Trigger the existing filter functionality
+        triggerFilterChange(filterValue);
+      }
+
+      // Trigger existing filter functionality
+      function triggerFilterChange(filter) {
+        const featuredView = document.querySelector('.featured-view');
+        const allWorkView = document.querySelector('.all-work-view');
+        const focusView = document.querySelector('.focus-view');
+
+        // Hide all views first
+        if (featuredView) featuredView.classList.add('hidden');
+        if (allWorkView) allWorkView.classList.add('hidden');
+        if (focusView) focusView.classList.add('hidden');
+
+        // Show the selected view
+        if (filter === 'featured' && featuredView) {
+          featuredView.classList.remove('hidden');
+          setTimeout(() => {
+            setupViewSwitchReveals('.featured-view .reveal-text');
+            setTimeout(() => {
+              setupScrollReveals('.featured-view .reveal-text');
+            }, 100);
+          }, 100);
+
+        } else if (filter === 'all' && allWorkView) {
+          allWorkView.classList.remove('hidden');
+          setTimeout(() => {
+            setupViewSwitchReveals('.all-work-view .reveal-text');
+            setTimeout(() => {
+              setupScrollReveals('.all-work-view .reveal-text');
+            }, 100);
+          }, 100);
+
+        } else if (filter === 'focus' && focusView) {
+          focusView.classList.remove('hidden');
+          setTimeout(() => {
+            setupViewSwitchReveals('.focus-view .reveal-text');
+            setTimeout(() => {
+              setupScrollReveals('.focus-view .reveal-text');
+            }, 100);
+          }, 100);
+        }
+
+        // Refresh ScrollTrigger after view change
+        setTimeout(() => ScrollTrigger.refresh(), 200);
+      }
+
+      // Setup event listeners
+      function setupEventListeners() {
+        // Click on active filter button to toggle dropdown (mobile only)
+        filterButtons.forEach(button => {
+          button.addEventListener('click', (e) => {
+            if (isMobile() && button.classList.contains('active')) {
+              e.preventDefault();
+              toggleDropdown();
+            }
+          });
+        });
+
+        // Click on dropdown items
+        filterContainer.addEventListener('click', (e) => {
+          const dropdownItem = e.target.closest('.dropdown-item');
+          if (dropdownItem) {
+            e.preventDefault();
+            const filterValue = dropdownItem.getAttribute('data-filter');
+            selectFilter(filterValue);
+          }
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!filterContainer.contains(e.target)) {
+            closeDropdown();
+          }
+        });
+
+        // Close dropdown on escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            closeDropdown();
+          }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+          if (!isMobile()) {
+            closeDropdown();
+            filterContainer.classList.remove('open');
+          }
+          updateActiveDisplay();
+        });
+      }
+
+      // Initialize
+      function init() {
+        if (isMobile()) {
+          createDropdownMenu();
+        }
+        updateActiveDisplay();
+        setupEventListeners();
+      }
+
+      // Run initialization
+      init();
+
+      // Re-run on window resize to handle mobile/desktop switches
+      window.addEventListener('resize', () => {
+        setTimeout(() => {
+          if (isMobile() && !filterContainer.querySelector('.filter-dropdown')) {
+            createDropdownMenu();
+            updateActiveDisplay();
+          }
+        }, 100);
+      });
+    }
+
+    initWorkFilterMobile();
 
     // ===== ALL WORK VIEW IMAGE REVEAL FUNCTION =====
     // Work page filtering
