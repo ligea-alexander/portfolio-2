@@ -1778,7 +1778,7 @@ body {
     min-height: 80vh;
     padding: 3rem 0;
     justify-content: center;
-    margin-left: 1rem;
+    margin-left: 2rem;
     /* Add left margin to shift everything right */
     /* OR use padding-left instead: */
     /* padding-left: 1rem; */
