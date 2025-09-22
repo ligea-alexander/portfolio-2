@@ -2124,6 +2124,66 @@ body {
   .tagline {
     font-size: 12px !important;
   }
+
+  /* Featured Work Section */
+  .featured-work {
+    padding: 50px 0;
+  }
+
+  .featured-text {
+    padding-left: 0.75rem;
+    padding-top: 0.75rem;
+  }
+
+  .featured-work h2 {
+    font-size: clamp(1.3rem, 7.5vw, 2.2rem) !important;
+    /* Even smaller for 360px */
+  }
+
+  .featured-work h2 span {
+    margin-left: 3rem;
+    /* Reduce margin */
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 250px);
+    /* Smaller cards */
+    max-width: 320px;
+    gap: 0.75rem;
+  }
+
+  /* Bridge Section */
+  .about-bridge {
+    padding: 3rem 0.75rem;
+  }
+
+  .bridge-header {
+    padding-left: 0.75rem;
+  }
+
+  .bridge-header h2 {
+    font-size: clamp(1.3rem, 7.5vw, 2.2rem) !important;
+    /* Match featured-work h2 */
+  }
+
+  .bridge-content {
+    padding-left: 0.75rem;
+  }
+
+  .image-block img {
+    width: 220px !important;
+    /* Even smaller image */
+    height: 220px !important;
+  }
+
+  .bridge-description {
+    font-size: clamp(1.3rem, 7.5vw, 2.2rem) !important;
+    /* Match featured-work h2 */
+    padding-top: 0.75rem !important;
+    line-height: 1.2 !important;
+  }
+
 }
 
 /* ===== ABOUT PAGE STYLES ===== */
