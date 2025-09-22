@@ -1790,7 +1790,7 @@ body {
     align-items: center;
     display: flex;
     flex-direction: column;
-    margin-left: 1rem;
+    margin-left: 2rem;
     /* Shift just the text content right */
   }
 
