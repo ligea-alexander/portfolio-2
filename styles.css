@@ -444,7 +444,7 @@ body {
   }
 }
 
-/* ====== HOME PAGE DESKTOP STYLES ====== */
+/* ====== HOME PAGE STYLES ====== */
 /* Header Structure */
 .site-header {
   min-height: 100vh;
@@ -783,11 +783,11 @@ body {
 
 .featured-description {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  /* Reduce from 4rem to 1.25rem */
+  font-family: Arial, Helvetica, sans-serif;
   font-weight: 400;
   line-height: 1.6;
   letter-spacing: 0.02rem;
-  color: #666;
+  color: #393939;
   margin: 0;
   max-width: 600px;
 }
@@ -1333,6 +1333,55 @@ body {
     box-sizing: border-box;
   }
 
+  .hero-container,
+  .site-header {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  /* 12. Fix any remaining full-width elements */
+  .hero-text-group {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden;
+    padding: 0 1rem;
+  }
+
+  /* 13. Fix hero roles and tagline */
+  .hero-roles {
+    max-width: 100%;
+    padding: 0 1rem;
+    text-align: center;
+  }
+
+  .tagline {
+    max-width: 100%;
+    padding: 2rem 1rem 0 1rem;
+    text-align: center;
+  }
+
+  /* Rest of your existing mobile styles... */
+  .site-header {
+    min-height: 100vh;
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .hero-container {
+    height: auto;
+    min-height: 80vh;
+    padding: 3rem 0;
+    justify-content: center;
+  }
+
+  .hero-text-group {
+    gap: 2rem;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
 
   .hero-subtitle {
     font-size: 12px;
@@ -1569,6 +1618,14 @@ body {
     /* Lower z-index than Visual */
   }
 
+  .bridge-description {
+    padding-top: 2rem !important;
+    font-size: clamp(1.2rem, 6vw, 2rem) !important;
+    /* Reduce from 2.5rem max to 2rem */
+    text-indent: 0 !important;
+    text-align: center;
+  }
+
   /* 8. Fix services section - main culprit of overflow */
   .services {
     width: 100% !important;
@@ -1673,6 +1730,10 @@ body {
     text-align: center;
   }
 
+  .bridge-header h2 {
+    font-size: clamp(2.5rem, 8vw, 4rem) !important;
+  }
+
   .bridge-content {
     padding-left: 0 !important;
     text-align: center;
@@ -1691,61 +1752,39 @@ body {
 
   .bridge-description {
     padding-top: 2rem !important;
-    font-size: clamp(1.2rem, 6vw, 2rem) !important;
+    font-size: clamp(2.5rem, 8vw, 4rem) !important;
     text-indent: 0 !important;
-    /* Remove text indent on mobile */
     text-align: center;
+    line-height: 1.3 !important;
+  }
+}
+
+/* For medium mobile screens */
+@media (max-width: 768px) and (min-width: 481px) {
+  .hero-subtitle {
+    transform: translateX(5%);
+    /* Fine-tune for medium mobile */
   }
 
-  /* 11. Fix container elements */
-  .hero-container,
-  .site-header {
-    max-width: 100vw !important;
-    overflow-x: hidden !important;
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+  .featured-work h2 {
+    font-size: clamp(1.8rem, 7vw, 3rem) !important;
   }
 
-  /* 12. Fix any remaining full-width elements */
-  .hero-text-group {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden;
-    padding: 0 1rem;
+  .bridge-header h2 {
+    font-size: clamp(1.8rem, 7vw, 3rem) !important;
+    /* MATCH featured-work h2 */
   }
 
-  /* 13. Fix hero roles and tagline */
-  .hero-roles {
-    max-width: 100%;
-    padding: 0 1rem;
-    text-align: center;
+  .bridge-description {
+    font-size: clamp(1.8rem, 7vw, 3rem) !important;
+    padding-top: 1.75rem !important;
+    line-height: 1.4 !important;
   }
 
-  .tagline {
-    max-width: 100%;
-    padding: 2rem 1rem 0 1rem;
-    text-align: center;
-  }
-
-  /* Rest of your existing mobile styles... */
-  .site-header {
-    min-height: 100vh;
-    padding: 1rem;
-    justify-content: center;
-  }
-
-  .hero-container {
-    height: auto;
-    min-height: 80vh;
-    padding: 3rem 0;
-    justify-content: center;
-  }
-
-  .hero-text-group {
-    gap: 2rem;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+  /* Adjust image size for medium mobile */
+  .image-block img {
+    width: 300px !important;
+    height: 300px !important;
   }
 }
 
@@ -1757,13 +1796,21 @@ body {
     /* Reduce from 45% to 10% to push more left */
     /* Fine-tune for smaller screens */
   }
-}
 
-/* For medium mobile screens */
-@media (max-width: 768px) and (min-width: 481px) {
-  .hero-subtitle {
-    transform: translateX(5%);
-    /* Fine-tune for medium mobile */
+  .featured-work h2 {
+    font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
+  }
+
+  .bridge-header h2 {
+    font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
+    /* MATCH featured-work h2 */
+  }
+
+  .bridge-description {
+    font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
+    /* MATCH featured-work h2 */
+    padding-top: 1.5rem !important;
+    line-height: 1.4 !important;
   }
 }
 
@@ -1917,6 +1964,107 @@ body {
     padding-top: 1.5rem !important;
     line-height: 1.4 !important;
   }
+
+  .featured-work {
+    padding: 60px 0;
+  }
+
+  .featured-text {
+    padding-left: 1rem;
+    padding-top: 1rem;
+  }
+
+  .featured-work h2 {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+  }
+
+  .featured-work h2 span {
+    margin-left: 4rem;
+  }
+
+  .project-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 300px);
+    max-width: 400px;
+    gap: 1rem;
+  }
+
+  .about-bridge {
+    padding: 4rem 1rem;
+  }
+
+  .bridge-header {
+    padding-left: 1rem;
+  }
+
+  .bridge-header h2 {
+    font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
+  }
+
+  .bridge-content {
+    padding-left: 1rem;
+  }
+
+  .image-block img {
+    width: 300px;
+    height: 300px;
+  }
+
+  .bridge-description {
+    font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
+    /* MATCH header size */
+    padding-top: 1rem !important;
+    line-height: 1.3 !important;
+  }
+
+  .image-block img {
+    width: 250px !important;
+    /* Smaller image */
+    height: 250px !important;
+  }
+
+  .services {
+    padding: 40px 0.5rem !important;
+    /* Further reduce padding */
+  }
+
+  .services h2 {
+    font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
+    /* Match featured-work h2 */
+    padding-top: 1rem !important;
+    padding-left: 1rem !important;
+  }
+
+  .services h2 span {
+    font-size: clamp(1.2rem, 6vw, 2rem) !important;
+    /* Proportionally smaller */
+    margin-left: 4rem !important;
+    /* Adjust for smaller screen */
+  }
+
+  .services-tools-cloud {
+    min-height: 180px !important;
+    padding: 1.5rem !important;
+    /* Reduce padding */
+  }
+
+  .service-header h3 {
+    font-size: clamp(1rem, 5.5vw, 1.4rem) !important;
+    text-align: center !important;
+  }
+
+  .service-card p {
+    font-size: 1rem !important;
+    /* Smaller text */
+    padding-left: 1.5rem !important;
+    /* Reduce padding */
+  }
+
+  .service-card li {
+    font-size: 0.85rem !important;
+    /* Smaller list items */
+  }
+
 }
 
 /* For screens under 360px - Very very small phones */
@@ -4263,144 +4411,5 @@ body {
     grid-column: 1;
     grid-template-rows: repeat(2, auto);
     gap: 0.6rem 1.5rem;
-  }
-}
-
-/* Mobile Large (480px - 767px) */
-@media (max-width: 767px) {
-  .nav-container {
-    padding: 1rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .nav-content {
-    order: 1;
-    gap: 1.5rem;
-  }
-
-  .nav-location {
-    order: 2;
-    text-align: left;
-    margin-top: 0.5rem;
-  }
-
-  .nav-email {
-    order: 3;
-    padding: 0;
-    margin-top: 0.5rem;
-  }
-
-  .nav-brand {
-    order: 4;
-    justify-content: flex-start;
-    padding-right: 0;
-    margin-top: 0.5rem;
-  }
-
-  .hero-container {
-    height: 60vh;
-  }
-
-  .hero-title {
-    font-size: clamp(1.5rem, 10vw, 3rem);
-  }
-
-  .hero-subtitle {
-    font-size: 12px;
-  }
-
-  .hero-roles {
-    font-size: 12px;
-  }
-
-  .tagline {
-    font-size: 14px;
-    padding-top: 1rem;
-  }
-
-  .featured-work {
-    padding: 60px 0;
-  }
-
-  .featured-text {
-    padding-left: 1rem;
-    padding-top: 1rem;
-  }
-
-  .featured-work h2 {
-    font-size: clamp(1.5rem, 8vw, 2.5rem);
-  }
-
-  .featured-work h2 span {
-    margin-left: 4rem;
-  }
-
-  .project-grid {
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 300px);
-    max-width: 400px;
-    gap: 1rem;
-  }
-
-  .about-bridge {
-    padding: 4rem 1rem;
-  }
-
-  .bridge-header {
-    padding-left: 1rem;
-  }
-
-  .bridge-header h2 {
-    font-size: clamp(1.5rem, 8vw, 2.5rem);
-  }
-
-  .bridge-content {
-    padding-left: 1rem;
-  }
-
-  .image-block img {
-    width: 300px;
-    height: 300px;
-  }
-
-  .bridge-description {
-    font-size: clamp(1.5rem, 8vw, 2.5rem);
-    text-indent: 1em;
-  }
-
-  .services {
-    padding: 60px 0;
-  }
-
-  .services h2 {
-    padding-left: 1rem;
-    padding-top: 1rem;
-    font-size: clamp(1.5rem, 8vw, 2.5rem);
-  }
-
-  .services-container {
-    padding: 1rem;
-  }
-
-  .service-header h3 {
-    font-size: clamp(1.2rem, 6vw, 1.6rem);
-    text-align: left;
-  }
-
-  .service-card ul {
-    grid-template-rows: repeat(4, auto);
-    grid-auto-flow: row;
-  }
-
-  .fixed-contact {
-    bottom: 1rem;
-    right: 1rem;
-  }
-
-  .contact-link {
-    padding: 0.5rem 1rem;
-    font-size: 12px;
   }
 }
