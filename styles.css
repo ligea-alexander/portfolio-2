@@ -3472,7 +3472,6 @@ body {
   /* Align baselines for consistent positioning */
 }
 
-
 .filter-btn {
   background: none;
   border: none;
@@ -3515,6 +3514,312 @@ body {
   color: #999;
   vertical-align: top;
   /* margin-left: 0.1rem; */
+}
+
+/* ===== MOBILE STYLES FOR WORK FILTERS ===== */
+
+/* Main mobile breakpoint (max-width: 925px) */
+@media (max-width: 925px) {
+
+  .work-filters {
+    padding: 2rem 0 1rem 0;
+    margin-bottom: 2rem;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .filter-container {
+    position: relative;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    max-width: 320px;
+    margin: 0 auto;
+    box-shadow: none;
+  }
+
+  /* Hide all inactive filter buttons */
+  .filter-btn {
+    display: none;
+  }
+
+  /* Show only the active filter button - EVEN LARGER! */
+  .filter-btn.active {
+    display: flex;
+    width: 100%;
+    padding: 0;
+    background: transparent;
+    border: none;
+    justify-content: space-between;
+    align-items: center;
+    color: #1a1a1a;
+    font-size: clamp(3rem, 9vw, 4.5rem) !important;
+    /* INCREASED from 2.8rem, 8.5vw, 4rem */
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    line-height: 1.1;
+  }
+
+  /* LARGER data-count numbers next to view title */
+  .filter-btn.active .filter-text::after {
+    content: attr(data-count);
+    font-size: 0.42em !important;
+    /* INCREASED from 0.4em to 0.42em */
+    font-weight: 400;
+    color: #999;
+    margin-left: 0.3em;
+    vertical-align: top;
+    line-height: 1;
+  }
+
+  /* Dropdown arrow indicator - LARGER + PERFECTLY CENTERED */
+  .filter-btn.active::after {
+    content: "⌄";
+    font-size: 3rem !important;
+    /* INCREASED from 2.5rem to 3rem */
+    color: #666;
+    margin-left: 1rem;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* CENTER HORIZONTALLY */
+    line-height: 1;
+    height: 100%;
+    width: auto;
+    /* Let it size naturally */
+  }
+
+  /* Rotate arrow when dropdown is open */
+  .filter-container.open .filter-btn.active::after {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown menu - initially hidden */
+  .filter-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #1a1a1a;
+    margin-top: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+
+  /* Show dropdown when open */
+  .filter-container.open .filter-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Dropdown menu items - LARGER */
+  .dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    color: #e6e6e6;
+    cursor: pointer;
+    border-bottom: 1px solid #333;
+    font-size: clamp(1.6rem, 6.5vw, 2.2rem) !important;
+    /* INCREASED from 1.5rem, 6vw, 2rem */
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+  }
+
+  .dropdown-item:last-child {
+    border-bottom: none;
+  }
+
+  .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Count numbers in dropdown - LARGER */
+  .dropdown-item .count {
+    font-size: 1.3rem !important;
+    /* INCREASED from 1.2rem to 1.3rem */
+    color: #999;
+    font-weight: 400;
+  }
+
+  /* Currently active item styling */
+  .dropdown-item.current {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+}
+
+/* Medium mobile screens (max-width: 768px) and (min-width: 481px) */
+@media (max-width: 768px) and (min-width: 481px) {
+
+  .work-filters {
+    padding: 1.8rem 0 1rem 0;
+  }
+
+  .filter-container {
+    max-width: 300px;
+  }
+
+  .filter-btn.active {
+    font-size: clamp(2.8rem, 8vw, 3.8rem) !important;
+    /* INCREASED from 2.5rem, 7.5vw, 3.5rem */
+  }
+
+  .filter-btn.active .filter-text::after {
+    font-size: 0.4em !important;
+    /* INCREASED proportionally */
+  }
+
+  .filter-btn.active::after {
+    font-size: 2.6rem !important;
+    /* INCREASED from 2.2rem to 2.6rem */
+    justify-content: center;
+    /* CENTER HORIZONTALLY */
+  }
+
+  .dropdown-item {
+    padding: 0.9rem 1.3rem;
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    /* INCREASED from 1.4rem, 5.5vw, 1.8rem */
+  }
+
+  .dropdown-item .count {
+    font-size: 1.2rem !important;
+    /* INCREASED from 1.1rem */
+  }
+}
+
+/* Small mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+
+  .work-filters {
+    padding: 1.5rem 0 1rem 0;
+  }
+
+  .filter-container {
+    max-width: 280px;
+    margin: 0 1rem;
+  }
+
+  .filter-btn.active {
+    font-size: clamp(2.5rem, 7.5vw, 3.4rem) !important;
+    /* INCREASED from 2.2rem, 7vw, 3rem */
+  }
+
+  .filter-btn.active .filter-text::after {
+    font-size: 0.4em !important;
+    /* INCREASED proportionally */
+  }
+
+  .filter-btn.active::after {
+    font-size: 2.4rem !important;
+    /* INCREASED from 2rem to 2.4rem */
+    justify-content: center;
+    /* CENTER HORIZONTALLY */
+  }
+
+  .dropdown-item {
+    padding: 0.85rem 1.2rem;
+    font-size: clamp(1.4rem, 5vw, 1.9rem) !important;
+    /* INCREASED from 1.3rem, 4.5vw, 1.7rem */
+  }
+
+  .dropdown-item .count {
+    font-size: 1.1rem !important;
+    /* INCREASED from 1rem */
+  }
+}
+
+/* Very small screens (max-width: 400px) */
+@media (max-width: 400px) {
+
+  .work-filters {
+    padding: 1.25rem 0 0.75rem 0;
+  }
+
+  .filter-container {
+    max-width: 260px;
+    margin: 0 0.75rem;
+  }
+
+  .filter-btn.active {
+    font-size: clamp(2.2rem, 7vw, 3rem) !important;
+    /* INCREASED from 2rem, 6.5vw, 2.8rem */
+  }
+
+  .filter-btn.active .filter-text::after {
+    font-size: 0.39em !important;
+    /* INCREASED proportionally */
+  }
+
+  .filter-btn.active::after {
+    font-size: 2.1rem !important;
+    /* INCREASED from 1.8rem to 2.1rem */
+    justify-content: center;
+    /* CENTER HORIZONTALLY */
+  }
+
+  .dropdown-item {
+    padding: 0.8rem 1rem;
+    font-size: clamp(1.3rem, 4.5vw, 1.7rem) !important;
+    /* INCREASED from 1.2rem, 4.2vw, 1.5rem */
+  }
+
+  .dropdown-item .count {
+    font-size: 1rem !important;
+    /* INCREASED from 0.95rem */
+  }
+}
+
+
+/* Very very small screens (max-width: 360px) */
+@media (max-width: 360px) {
+
+  .work-filters {
+    padding: 1rem 0 0.5rem 0;
+  }
+
+  .filter-container {
+    max-width: 240px;
+    margin: 0 0.5rem;
+  }
+
+  .filter-btn.active {
+    font-size: clamp(2rem, 6.5vw, 2.8rem) !important;
+    /* INCREASED from 1.8rem, 6vw, 2.5rem */
+  }
+
+  .filter-btn.active .filter-text::after {
+    font-size: 0.38em !important;
+    /* INCREASED proportionally */
+  }
+
+  .filter-btn.active::after {
+    font-size: 1.8rem !important;
+    /* INCREASED from 1.5rem to 1.8rem */
+    justify-content: center;
+    /* CENTER HORIZONTALLY */
+  }
+
+  .dropdown-item {
+    padding: 0.75rem 0.9rem;
+    font-size: clamp(1.2rem, 4.2vw, 1.6rem) !important;
+    /* INCREASED from 1.1rem, 4vw, 1.4rem */
+  }
+
+  .dropdown-item .count {
+    font-size: 0.95rem !important;
+    /* INCREASED from 0.9rem */
+  }
 }
 
 /* === Featured view ===*/
@@ -3668,6 +3973,284 @@ body {
   margin: 0;
 }
 
+/* Featured View Mobile Responsive Design */
+
+/* Main mobile breakpoint (max-width: 925px) */
+@media (max-width: 925px) {
+
+  /* Stack featured grid vertically */
+  .featured-grid {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    /* Single column */
+    grid-template-rows: auto !important;
+    /* Auto rows for each project */
+    gap: 4rem !important;
+    /* Large gap between projects */
+    padding: 2rem 1rem !important;
+    /* Add horizontal padding */
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+  /* Project card wrapper - maintain square aspect ratio */
+  .project-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    /* Space between image and details */
+    max-width: 400px;
+    /* Reasonable max width */
+    margin: 0 auto;
+    /* Center each project */
+    width: 100%;
+  }
+
+  /* Keep project card image square */
+  .project-card-image {
+    aspect-ratio: 1;
+    /* Maintain square */
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    /* Match wrapper max-width */
+  }
+
+  .project-card-image img {
+    width: 75%;
+    /* Keep existing image sizing */
+    height: 75%;
+    object-fit: cover;
+  }
+
+  /* Reorganize project details - tags under title */
+  .project-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* Space between elements */
+    text-align: center;
+    /* Center all text on mobile */
+  }
+
+  .project-details .project-header {
+    display: flex;
+    flex-direction: column;
+    /* Stack title and tags vertically */
+    gap: 0.5rem;
+    /* Small gap between title and tags */
+    align-items: center;
+    /* Center content */
+  }
+
+  /* Project title styling */
+  .project-details .project-title {
+    font-size: clamp(1.2rem, 4vw, 1.5rem) !important;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.3;
+    text-align: center;
+    order: 1;
+    /* Title first */
+  }
+
+  /* Project tags/meta under title */
+  .project-details .project-meta {
+    display: flex;
+    justify-content: center;
+    /* Center the tags */
+    width: 100%;
+    order: 2;
+    /* Tags second, under title */
+  }
+
+  .project-details .project-tags {
+    font-size: clamp(0.8rem, 3vw, 0.9rem) !important;
+    color: #888;
+    font-weight: 400;
+    text-align: center;
+    white-space: normal;
+    /* Allow wrapping on mobile */
+    padding: 0;
+    /* Remove padding */
+  }
+
+  /* Project description - comes last */
+  .project-details .project-description {
+    order: 3;
+    /* Description third, after tags */
+    margin-top: 0.5rem;
+  }
+
+  .project-details .project-description p {
+    font-size: clamp(0.9rem, 3.5vw, 1rem) !important;
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+    text-align: left;
+    /* Left align description text */
+    max-width: 100%;
+    /* Use full width */
+  }
+}
+
+/* Medium mobile screens (max-width: 768px) and (min-width: 481px) */
+@media (max-width: 768px) and (min-width: 481px) {
+
+  .featured-grid {
+    gap: 3.5rem !important;
+    /* Slightly smaller gap */
+    padding: 1.8rem 1rem !important;
+  }
+
+  .project-card-wrapper {
+    max-width: 380px;
+    /* Slightly smaller max width */
+    gap: 1.3rem;
+    /* Adjust gap between image and details */
+  }
+
+  .project-card-image {
+    max-width: 380px;
+    /* Match wrapper */
+  }
+
+  .project-details .project-title {
+    font-size: clamp(1.1rem, 3.8vw, 1.4rem) !important;
+  }
+
+  .project-details .project-tags {
+    font-size: clamp(0.75rem, 2.8vw, 0.85rem) !important;
+  }
+
+  .project-details .project-description p {
+    font-size: clamp(0.85rem, 3.2vw, 0.95rem) !important;
+    line-height: 1.5;
+  }
+}
+
+/* Small mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+
+  .featured-grid {
+    gap: 3rem !important;
+    /* Smaller gap for small screens */
+    padding: 1.5rem 0.75rem !important;
+  }
+
+  .project-card-wrapper {
+    max-width: 350px;
+    /* Smaller max width */
+    gap: 1.2rem;
+  }
+
+  .project-card-image {
+    max-width: 350px;
+    /* Match wrapper */
+  }
+
+  .project-details .project-title {
+    font-size: clamp(1rem, 3.5vw, 1.3rem) !important;
+  }
+
+  .project-details .project-tags {
+    font-size: clamp(0.7rem, 2.5vw, 0.8rem) !important;
+  }
+
+  .project-details .project-description p {
+    font-size: clamp(0.8rem, 3vw, 0.9rem) !important;
+    line-height: 1.5;
+  }
+}
+
+/* Very small screens (max-width: 400px) */
+@media (max-width: 400px) {
+
+  .featured-grid {
+    gap: 2.5rem !important;
+    /* Even smaller gap */
+    padding: 1.25rem 0.5rem !important;
+  }
+
+  .project-card-wrapper {
+    max-width: 320px;
+    /* Smaller for very small screens */
+    gap: 1rem;
+  }
+
+  .project-card-image {
+    max-width: 320px;
+    /* Match wrapper */
+  }
+
+  .project-details {
+    gap: 0.8rem;
+    /* Tighter spacing between elements */
+  }
+
+  .project-details .project-header {
+    gap: 0.4rem;
+    /* Smaller gap between title and tags */
+  }
+
+  .project-details .project-title {
+    font-size: clamp(0.95rem, 3.2vw, 1.2rem) !important;
+  }
+
+  .project-details .project-tags {
+    font-size: clamp(0.65rem, 2.3vw, 0.75rem) !important;
+  }
+
+  .project-details .project-description p {
+    font-size: clamp(0.75rem, 2.8vw, 0.85rem) !important;
+    line-height: 1.4;
+  }
+}
+
+/* Very very small screens (max-width: 360px) */
+@media (max-width: 360px) {
+
+  .featured-grid {
+    gap: 2rem !important;
+    /* Minimal gap for tiny screens */
+    padding: 1rem 0.25rem !important;
+  }
+
+  .project-card-wrapper {
+    max-width: 300px;
+    /* Smallest max width */
+    gap: 0.9rem;
+  }
+
+  .project-card-image {
+    max-width: 300px;
+    /* Match wrapper */
+  }
+
+  .project-details {
+    gap: 0.7rem;
+    /* Very tight spacing */
+  }
+
+  .project-details .project-header {
+    gap: 0.3rem;
+    /* Very small gap between title and tags */
+  }
+
+  .project-details .project-title {
+    font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
+  }
+
+  .project-details .project-tags {
+    font-size: clamp(0.6rem, 2.1vw, 0.7rem) !important;
+  }
+
+  .project-details .project-description p {
+    font-size: clamp(0.7rem, 2.5vw, 0.8rem) !important;
+    line-height: 1.4;
+  }
+}
 
 /* === All Work View === */
 
@@ -3800,6 +4383,410 @@ body {
   object-position: center;
   /* Focus on top-center of image */
   pointer-events: none;
+}
+
+/* All Work View Mobile Responsive Design */
+
+/* Main mobile breakpoint (max-width: 925px) */
+@media (max-width: 925px) {
+
+  .all-work-view {
+    max-width: 100% !important;
+    margin: 0 auto;
+    padding: 2rem 1rem !important;
+    /* Add horizontal padding */
+    overflow: hidden;
+  }
+
+  .all-work-list {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow: hidden;
+  }
+
+  /* Stack work items vertically with better spacing */
+  .work-item {
+    display: flex !important;
+    /* Override grid for mobile */
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 3rem 1rem 2rem 1rem !important;
+    /* Increase vertical padding */
+    border-bottom: 1px solid #e0e0e0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    gap: 1.5rem !important;
+    /* Space between elements */
+    text-align: center !important;
+  }
+
+  /* Work title container - full width, centered */
+  .work-title-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    overflow: visible !important;
+    /* Allow title to show fully */
+    order: 1;
+    /* Title comes first */
+  }
+
+  /* Responsive work title sizing */
+  .work-title {
+    font-size: clamp(1.8rem, 6vw, 2.5rem) !important;
+    /* Much smaller for mobile */
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.2 !important;
+    text-align: center !important;
+    white-space: normal !important;
+    /* Allow wrapping */
+    text-overflow: initial !important;
+    overflow: visible !important;
+    max-width: 100% !important;
+    height: auto !important;
+    gap: 0.25em !important;
+    /* Tighter word spacing */
+  }
+
+  .work-title .word {
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+  }
+
+  /* Work type indicator - smaller, below title */
+  .work-type-indicator {
+    width: 60px !important;
+    /* Much smaller square */
+    height: 60px !important;
+    background-color: var(--work-color);
+    flex-shrink: 0;
+    order: 2;
+    /* Indicator comes after title */
+    margin: 0 !important;
+  }
+
+  /* Hide preview images on mobile for cleaner look */
+  .preview {
+    display: none !important;
+  }
+
+  /* Work accordion - full width */
+  .work-accordion {
+    width: 100% !important;
+    max-width: 100% !important;
+    order: 3;
+    /* Accordion comes last when expanded */
+  }
+
+  .accordion-content {
+    padding: 2rem 1rem 1rem 1rem !important;
+    /* Reduce padding for mobile */
+  }
+
+  /* Adjust project details grid for mobile */
+  .project-details-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    /* Single column */
+    grid-template-rows: auto auto auto !important;
+    /* Three rows */
+    gap: 2rem !important;
+    align-items: start;
+  }
+
+  /* Project text - full width, first */
+  .project-text {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    max-width: 100% !important;
+  }
+
+  .project-subtitle {
+    font-size: 1rem !important;
+    text-align: center;
+  }
+
+  .project-description {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    text-align: center;
+  }
+
+  .project-tools span:first-child {
+    font-size: 0.9rem !important;
+    text-align: center;
+  }
+
+  .project-tools span:last-child {
+    font-size: 1rem !important;
+    text-align: center;
+  }
+
+  /* Project images - full width, second */
+  .project-images {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    justify-content: center;
+  }
+
+  .image-grid {
+    max-width: 100% !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    /* 2 columns on mobile */
+    grid-template-rows: repeat(3, 1fr) !important;
+    /* 3 rows */
+    gap: 0.75rem !important;
+  }
+
+  /* View project button - full width, third */
+  .view-project-btn {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    justify-self: center !important;
+    font-size: 1.5rem !important;
+    /* Smaller on mobile */
+    margin-top: 1rem;
+  }
+
+  .view-project-btn .arrow {
+    font-size: 1.2rem !important;
+  }
+}
+
+/* Medium mobile screens (max-width: 768px) and (min-width: 481px) */
+@media (max-width: 768px) and (min-width: 481px) {
+
+  .all-work-view {
+    padding: 1.8rem 1rem !important;
+  }
+
+  .work-item {
+    padding: 2.5rem 1rem 1.8rem 1rem !important;
+    gap: 1.3rem !important;
+  }
+
+  .work-title {
+    font-size: clamp(1.6rem, 5.5vw, 2.2rem) !important;
+    gap: 0.3em !important;
+  }
+
+  .work-type-indicator {
+    width: 55px !important;
+    height: 55px !important;
+  }
+
+  .accordion-content {
+    padding: 1.8rem 1rem 1rem 1rem !important;
+  }
+
+  .project-details-grid {
+    gap: 1.8rem !important;
+  }
+
+  .project-subtitle {
+    font-size: 0.95rem !important;
+  }
+
+  .project-description {
+    font-size: 0.95rem !important;
+  }
+
+  .view-project-btn {
+    font-size: 1.4rem !important;
+  }
+
+  .view-project-btn .arrow {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* Small mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+
+  .all-work-view {
+    padding: 1.5rem 0.75rem !important;
+  }
+
+  .work-item {
+    padding: 2.2rem 0.75rem 1.5rem 0.75rem !important;
+    gap: 1.2rem !important;
+  }
+
+  .work-title {
+    font-size: clamp(1.5rem, 5vw, 2rem) !important;
+    gap: 0.25em !important;
+  }
+
+  .work-type-indicator {
+    width: 50px !important;
+    height: 50px !important;
+  }
+
+  .accordion-content {
+    padding: 1.5rem 0.75rem 1rem 0.75rem !important;
+  }
+
+  .project-details-grid {
+    gap: 1.5rem !important;
+  }
+
+  .project-subtitle {
+    font-size: 0.9rem !important;
+  }
+
+  .project-description {
+    font-size: 0.9rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .project-tools span:first-child {
+    font-size: 0.85rem !important;
+  }
+
+  .project-tools span:last-child {
+    font-size: 0.9rem !important;
+  }
+
+  .image-grid {
+    gap: 0.6rem !important;
+    max-width: 300px !important;
+  }
+
+  .view-project-btn {
+    font-size: 1.3rem !important;
+  }
+
+  .view-project-btn .arrow {
+    font-size: 1rem !important;
+  }
+}
+
+/* Very small screens (max-width: 400px) */
+@media (max-width: 400px) {
+
+  .all-work-view {
+    padding: 1.25rem 0.5rem !important;
+  }
+
+  .work-item {
+    padding: 2rem 0.5rem 1.25rem 0.5rem !important;
+    gap: 1rem !important;
+  }
+
+  .work-title {
+    font-size: clamp(1.3rem, 4.5vw, 1.8rem) !important;
+    gap: 0.2em !important;
+  }
+
+  .work-type-indicator {
+    width: 45px !important;
+    height: 45px !important;
+  }
+
+  .accordion-content {
+    padding: 1.25rem 0.5rem 1rem 0.5rem !important;
+  }
+
+  .project-details-grid {
+    gap: 1.25rem !important;
+  }
+
+  .project-subtitle {
+    font-size: 0.85rem !important;
+  }
+
+  .project-description {
+    font-size: 0.85rem !important;
+    line-height: 1.5 !important;
+  }
+
+  .project-tools span:first-child {
+    font-size: 0.8rem !important;
+  }
+
+  .project-tools span:last-child {
+    font-size: 0.85rem !important;
+  }
+
+  .image-grid {
+    gap: 0.5rem !important;
+    max-width: 280px !important;
+  }
+
+  .view-project-btn {
+    font-size: 1.2rem !important;
+  }
+
+  .view-project-btn .arrow {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* Very very small screens (max-width: 360px) */
+@media (max-width: 360px) {
+
+  .all-work-view {
+    padding: 1rem 0.25rem !important;
+  }
+
+  .work-item {
+    padding: 1.8rem 0.25rem 1rem 0.25rem !important;
+    gap: 0.9rem !important;
+  }
+
+  .work-title {
+    font-size: clamp(1.2rem, 4vw, 1.6rem) !important;
+    gap: 0.2em !important;
+  }
+
+  .work-type-indicator {
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .accordion-content {
+    padding: 1rem 0.25rem 0.75rem 0.25rem !important;
+  }
+
+  .project-details-grid {
+    gap: 1rem !important;
+  }
+
+  .project-subtitle {
+    font-size: 0.8rem !important;
+  }
+
+  .project-description {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .project-tools span:first-child {
+    font-size: 0.75rem !important;
+  }
+
+  .project-tools span:last-child {
+    font-size: 0.8rem !important;
+  }
+
+  .image-grid {
+    gap: 0.4rem !important;
+    max-width: 240px !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .view-project-btn {
+    font-size: 1.1rem !important;
+  }
+
+  .view-project-btn .arrow {
+    font-size: 0.85rem !important;
+  }
 }
 
 /* === Focus View Styles === */
