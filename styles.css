@@ -2198,7 +2198,7 @@ body {
   }
 
   .services h2 span {
-    font-size: clamp(1.1rem, 6vw, 2rem) !important;
+    font-size: clamp(1.2rem, 6.5vw, 2.1rem) !important;
     /* Proportionally smaller */
     margin-left: 3rem !important;
     /* Adjust for very small screen */
@@ -2282,7 +2282,7 @@ body {
     display: grid;
     grid-template-columns: 1fr !important;
     /* Single column for very small screens */
-    gap: 1rem !important;
+    gap: 0.5rem !important;
     /* Reduce gap */
     align-items: start;
   }
@@ -2290,14 +2290,14 @@ body {
   .service-item.active .service-card {
     max-height: 300px;
     /* Reduce max height */
-    padding: 0 0 1.5rem 0;
+    padding: 0 0 1.2rem 0;
     /* Reduce padding */
   }
 
   .service-card p {
     font-size: 0.9rem !important;
     /* Much smaller text */
-    line-height: 1.5;
+    line-height: 1.4;
     color: #ece9e9;
     margin-bottom: 0;
     max-width: none;
@@ -2306,6 +2306,8 @@ body {
     /* Reduce padding */
     padding-right: 1rem !important;
     /* Add right padding */
+    padding-bottom: 0.25rem !important;
+    /* Add small bottom padding to create slight separation */
   }
 
   .service-card ul {
@@ -2317,19 +2319,21 @@ body {
     /* More rows, single column */
     grid-auto-flow: row !important;
     /* Stack vertically */
-    gap: 0.5rem !important;
+    gap: 0.4rem !important;
     /* Reduce gap */
     grid-column: 1;
     align-items: start;
     padding-left: 1rem !important;
     padding-right: 1rem !important;
+    padding-top: 0 !important;
+
   }
 
   .service-card li {
     font-size: 0.75rem !important;
     /* Much smaller list items */
     color: #ece9e9;
-    padding: 0.3rem 0;
+    padding: 0.25rem 0;
     /* Reduce padding */
     position: relative;
     padding-left: 1.2rem;
