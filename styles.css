@@ -4391,170 +4391,277 @@ body {
 @media (max-width: 925px) {
 
   .all-work-view {
-    max-width: 100% !important;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 2rem 1rem !important;
-    /* Add horizontal padding */
-    overflow: hidden;
+    padding: 2rem 1rem;
+    overflow-x: hidden;
   }
 
   .all-work-list {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
   }
 
-  /* Stack work items vertically with better spacing */
+  /* Scale down work items but maintain layout */
   .work-item {
-    display: flex !important;
-    /* Override grid for mobile */
-    flex-direction: column !important;
-    align-items: center !important;
-    padding: 3rem 1rem 2rem 1rem !important;
-    /* Increase vertical padding */
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: center;
+    padding: 1rem 0;
     border-bottom: 1px solid #e0e0e0;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    gap: 1.5rem !important;
-    /* Space between elements */
-    text-align: center !important;
+    max-width: 100%;
+    overflow: hidden;
   }
 
-  /* Work title container - full width, centered */
   .work-title-container {
-    width: 100% !important;
-    max-width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    overflow: visible !important;
-    /* Allow title to show fully */
-    order: 1;
-    /* Title comes first */
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    max-width: calc(100vw - 120px);
+    /* Leave space for indicator */
   }
 
-  /* Responsive work title sizing */
+  /* Scale down work title significantly but keep proportional */
   .work-title {
-    font-size: clamp(1.8rem, 6vw, 2.5rem) !important;
-    /* Much smaller for mobile */
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.2em;
+    /* Reduce gap between words */
+    height: clamp(40px, 8vh, 70px);
+    /* Scale down height */
+    overflow: hidden;
+    font-size: clamp(18px, 5vw, 45px) !important;
+    /* Scale down font size */
     font-weight: 700;
     color: #1a1a1a;
     margin: 0;
-    line-height: 1.2 !important;
-    text-align: center !important;
-    white-space: normal !important;
-    /* Allow wrapping */
-    text-overflow: initial !important;
-    overflow: visible !important;
-    max-width: 100% !important;
-    height: auto !important;
-    gap: 0.25em !important;
-    /* Tighter word spacing */
+    line-height: 1;
+    cursor: pointer;
+    max-width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
+  /* Individual words - scale down */
   .work-title .word {
-    font-weight: 700;
+    margin: 0;
+    white-space: nowrap;
+    font-weight: 600;
     letter-spacing: 0.01em;
-    line-height: 1.2;
+    /* Reduce letter spacing */
+    line-height: 1;
+    position: relative;
+    z-index: 2;
   }
 
-  /* Work type indicator - smaller, below title */
+  /* Scale down work type indicator */
   .work-type-indicator {
-    width: 60px !important;
-    /* Much smaller square */
-    height: 60px !important;
+    grid-column: 2;
+    grid-row: 1;
+    width: clamp(60px, 15vw, 80px) !important;
+    /* Scale down from 100px */
+    height: clamp(60px, 15vw, 80px) !important;
+    /* Scale down from 100px */
     background-color: var(--work-color);
     flex-shrink: 0;
-    order: 2;
-    /* Indicator comes after title */
-    margin: 0 !important;
   }
 
-  /* Hide preview images on mobile for cleaner look */
+  /* Scale down preview container */
   .preview {
-    display: none !important;
+    position: relative;
+    flex: 0 0 auto;
+    width: 0;
+    height: clamp(70px, 12vh, 90px);
+    /* Scale down from 120px */
+    align-self: center;
+    overflow: hidden;
+    background: transparent;
+    opacity: 1;
+    will-change: width;
+    z-index: 1;
   }
 
-  /* Work accordion - full width */
+  .preview__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    pointer-events: none;
+  }
+
+  /* Scale down accordion content */
   .work-accordion {
-    width: 100% !important;
-    max-width: 100% !important;
-    order: 3;
-    /* Accordion comes last when expanded */
+    grid-column: 1 / -1;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .work-item.active .work-accordion {
+    max-height: 500px;
+    /* Reduce from 600px */
   }
 
   .accordion-content {
-    padding: 2rem 1rem 1rem 1rem !important;
-    /* Reduce padding for mobile */
+    padding: 2rem 1rem;
+    /* Reduce padding */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease 0.2s, transform 0.3s ease 0.2s;
   }
 
-  /* Adjust project details grid for mobile */
+  /* Scale down project details grid */
   .project-details-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    /* Single column */
-    grid-template-rows: auto auto auto !important;
-    /* Three rows */
-    gap: 2rem !important;
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Single column on mobile */
+    grid-template-rows: auto auto auto;
+    gap: 1.5rem;
     align-items: start;
   }
 
-  /* Project text - full width, first */
+  /* Project text spans full width */
   .project-text {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-    max-width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    grid-column: 1;
+    grid-row: 1;
   }
 
   .project-subtitle {
-    font-size: 1rem !important;
-    text-align: center;
+    font-size: 1rem;
+    /* Scale down from 1.2rem */
+    font-weight: 600;
+    color: var(--work-color);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .project-description {
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-    text-align: center;
+    font-size: 1rem;
+    /* Scale down from 1.2rem */
+    line-height: 1.5;
+    color: #666;
+    margin: 0;
+  }
+
+  .project-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
   }
 
   .project-tools span:first-child {
-    font-size: 0.9rem !important;
-    text-align: center;
+    font-size: 0.9rem;
+    /* Scale down from 1rem */
+    font-weight: 600;
+    color: #1a1a1a;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .project-tools span:last-child {
-    font-size: 1rem !important;
-    text-align: center;
+    font-size: 1rem;
+    /* Scale down from 1.2rem */
+    color: #666;
   }
 
-  /* Project images - full width, second */
+  /* Images below text */
   .project-images {
-    grid-column: 1 !important;
-    grid-row: 2 !important;
+    grid-column: 1;
+    grid-row: 2;
+    display: flex;
     justify-content: center;
+    align-items: flex-start;
   }
 
+  /* Smaller image grid for mobile */
   .image-grid {
-    max-width: 100% !important;
-    grid-template-columns: repeat(2, 1fr) !important;
-    /* 2 columns on mobile */
-    grid-template-rows: repeat(3, 1fr) !important;
-    /* 3 rows */
-    gap: 0.75rem !important;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0.75rem;
+    /* Reduce gap */
+    width: 100%;
+    max-width: 300px;
+    /* Scale down from 400px */
   }
 
-  /* View project button - full width, third */
+  .preview-image {
+    aspect-ratio: 1;
+    background-color: #d0d0d0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .preview-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Button below images */
   .view-project-btn {
-    grid-column: 1 !important;
-    grid-row: 3 !important;
-    justify-self: center !important;
-    font-size: 1.5rem !important;
-    /* Smaller on mobile */
+    grid-column: 1;
+    grid-row: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0;
+    background-color: transparent;
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 2rem;
+    /* Scale down from 3rem */
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    justify-self: center;
     margin-top: 1rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  .view-project-btn:hover {
+    background-color: transparent;
+    color: #666;
+    transform: translateX(5px);
   }
 
   .view-project-btn .arrow {
-    font-size: 1.2rem !important;
+    font-size: 1.5rem;
+    /* Scale down from 2rem */
+    transition: transform 0.3s ease;
+    transform: rotate(5deg);
+    display: inline-block;
+    color: #1a1a1a;
+  }
+
+  .view-project-btn:hover .arrow {
+    transform: rotate(10deg) translate(2px, -2px);
+    color: #666;
   }
 }
 
@@ -4562,46 +4669,63 @@ body {
 @media (max-width: 768px) and (min-width: 481px) {
 
   .all-work-view {
-    padding: 1.8rem 1rem !important;
+    padding: 1.8rem 1rem;
   }
 
   .work-item {
-    padding: 2.5rem 1rem 1.8rem 1rem !important;
-    gap: 1.3rem !important;
+    padding: 0.9rem 0;
   }
 
   .work-title {
-    font-size: clamp(1.6rem, 5.5vw, 2.2rem) !important;
-    gap: 0.3em !important;
+    height: clamp(38px, 7.5vh, 65px);
+    font-size: clamp(16px, 4.5vw, 42px) !important;
+    gap: 0.18em;
   }
 
   .work-type-indicator {
-    width: 55px !important;
-    height: 55px !important;
+    width: clamp(55px, 14vw, 75px) !important;
+    height: clamp(55px, 14vw, 75px) !important;
+  }
+
+  .preview {
+    height: clamp(65px, 11vh, 85px);
+  }
+
+  .work-item.active .work-accordion {
+    max-height: 450px;
   }
 
   .accordion-content {
-    padding: 1.8rem 1rem 1rem 1rem !important;
-  }
-
-  .project-details-grid {
-    gap: 1.8rem !important;
+    padding: 1.8rem 0.9rem;
   }
 
   .project-subtitle {
-    font-size: 0.95rem !important;
+    font-size: 0.95rem;
   }
 
   .project-description {
-    font-size: 0.95rem !important;
+    font-size: 0.95rem;
+  }
+
+  .project-tools span:first-child {
+    font-size: 0.85rem;
+  }
+
+  .project-tools span:last-child {
+    font-size: 0.95rem;
+  }
+
+  .image-grid {
+    max-width: 280px;
+    gap: 0.7rem;
   }
 
   .view-project-btn {
-    font-size: 1.4rem !important;
+    font-size: 1.8rem;
   }
 
   .view-project-btn .arrow {
-    font-size: 1.1rem !important;
+    font-size: 1.4rem;
   }
 }
 
@@ -4609,60 +4733,64 @@ body {
 @media (max-width: 480px) {
 
   .all-work-view {
-    padding: 1.5rem 0.75rem !important;
+    padding: 1.5rem 0.75rem;
   }
 
   .work-item {
-    padding: 2.2rem 0.75rem 1.5rem 0.75rem !important;
-    gap: 1.2rem !important;
+    padding: 0.8rem 0;
   }
 
   .work-title {
-    font-size: clamp(1.5rem, 5vw, 2rem) !important;
-    gap: 0.25em !important;
+    height: clamp(35px, 7vh, 60px);
+    font-size: clamp(15px, 4.2vw, 38px) !important;
+    gap: 0.15em;
   }
 
   .work-type-indicator {
-    width: 50px !important;
-    height: 50px !important;
+    width: clamp(50px, 13vw, 70px) !important;
+    height: clamp(50px, 13vw, 70px) !important;
+  }
+
+  .preview {
+    height: clamp(60px, 10vh, 80px);
+  }
+
+  .work-item.active .work-accordion {
+    max-height: 400px;
   }
 
   .accordion-content {
-    padding: 1.5rem 0.75rem 1rem 0.75rem !important;
-  }
-
-  .project-details-grid {
-    gap: 1.5rem !important;
+    padding: 1.5rem 0.75rem;
   }
 
   .project-subtitle {
-    font-size: 0.9rem !important;
+    font-size: 0.9rem;
   }
 
   .project-description {
-    font-size: 0.9rem !important;
-    line-height: 1.5 !important;
+    font-size: 0.9rem;
+    line-height: 1.4;
   }
 
   .project-tools span:first-child {
-    font-size: 0.85rem !important;
+    font-size: 0.8rem;
   }
 
   .project-tools span:last-child {
-    font-size: 0.9rem !important;
+    font-size: 0.9rem;
   }
 
   .image-grid {
-    gap: 0.6rem !important;
-    max-width: 300px !important;
+    max-width: 260px;
+    gap: 0.65rem;
   }
 
   .view-project-btn {
-    font-size: 1.3rem !important;
+    font-size: 1.6rem;
   }
 
   .view-project-btn .arrow {
-    font-size: 1rem !important;
+    font-size: 1.3rem;
   }
 }
 
@@ -4670,60 +4798,77 @@ body {
 @media (max-width: 400px) {
 
   .all-work-view {
-    padding: 1.25rem 0.5rem !important;
+    padding: 1.25rem 0.5rem;
   }
 
   .work-item {
-    padding: 2rem 0.5rem 1.25rem 0.5rem !important;
-    gap: 1rem !important;
+    padding: 0.7rem 0;
+  }
+
+  .work-title-container {
+    max-width: calc(100vw - 100px);
+    /* Adjust for smaller indicator */
   }
 
   .work-title {
-    font-size: clamp(1.3rem, 4.5vw, 1.8rem) !important;
-    gap: 0.2em !important;
+    height: clamp(32px, 6.5vh, 55px);
+    font-size: clamp(14px, 4vw, 35px) !important;
+    gap: 0.12em;
   }
 
   .work-type-indicator {
-    width: 45px !important;
-    height: 45px !important;
+    width: clamp(45px, 12vw, 65px) !important;
+    height: clamp(45px, 12vw, 65px) !important;
+  }
+
+  .preview {
+    height: clamp(55px, 9vh, 75px);
+  }
+
+  .work-item.active .work-accordion {
+    max-height: 350px;
   }
 
   .accordion-content {
-    padding: 1.25rem 0.5rem 1rem 0.5rem !important;
+    padding: 1.25rem 0.5rem;
   }
 
   .project-details-grid {
-    gap: 1.25rem !important;
+    gap: 1.25rem;
+  }
+
+  .project-text {
+    gap: 1rem;
   }
 
   .project-subtitle {
-    font-size: 0.85rem !important;
+    font-size: 0.85rem;
   }
 
   .project-description {
-    font-size: 0.85rem !important;
-    line-height: 1.5 !important;
+    font-size: 0.85rem;
+    line-height: 1.4;
   }
 
   .project-tools span:first-child {
-    font-size: 0.8rem !important;
+    font-size: 0.75rem;
   }
 
   .project-tools span:last-child {
-    font-size: 0.85rem !important;
+    font-size: 0.85rem;
   }
 
   .image-grid {
-    gap: 0.5rem !important;
-    max-width: 280px !important;
+    max-width: 240px;
+    gap: 0.6rem;
   }
 
   .view-project-btn {
-    font-size: 1.2rem !important;
+    font-size: 1.4rem;
   }
 
   .view-project-btn .arrow {
-    font-size: 0.9rem !important;
+    font-size: 1.2rem;
   }
 }
 
@@ -4731,61 +4876,77 @@ body {
 @media (max-width: 360px) {
 
   .all-work-view {
-    padding: 1rem 0.25rem !important;
+    padding: 1rem 0.25rem;
   }
 
   .work-item {
-    padding: 1.8rem 0.25rem 1rem 0.25rem !important;
-    gap: 0.9rem !important;
+    padding: 0.6rem 0;
+  }
+
+  .work-title-container {
+    max-width: calc(100vw - 90px);
+    /* Adjust for smallest indicator */
   }
 
   .work-title {
-    font-size: clamp(1.2rem, 4vw, 1.6rem) !important;
-    gap: 0.2em !important;
+    height: clamp(30px, 6vh, 50px);
+    font-size: clamp(13px, 3.8vw, 32px) !important;
+    gap: 0.1em;
   }
 
   .work-type-indicator {
-    width: 40px !important;
-    height: 40px !important;
+    width: clamp(40px, 11vw, 60px) !important;
+    height: clamp(40px, 11vw, 60px) !important;
+  }
+
+  .preview {
+    height: clamp(50px, 8vh, 70px);
+  }
+
+  .work-item.active .work-accordion {
+    max-height: 320px;
   }
 
   .accordion-content {
-    padding: 1rem 0.25rem 0.75rem 0.25rem !important;
+    padding: 1rem 0.25rem;
   }
 
   .project-details-grid {
-    gap: 1rem !important;
+    gap: 1rem;
+  }
+
+  .project-text {
+    gap: 0.9rem;
   }
 
   .project-subtitle {
-    font-size: 0.8rem !important;
+    font-size: 0.8rem;
   }
 
   .project-description {
-    font-size: 0.8rem !important;
-    line-height: 1.4 !important;
+    font-size: 0.8rem;
+    line-height: 1.4;
   }
 
   .project-tools span:first-child {
-    font-size: 0.75rem !important;
+    font-size: 0.7rem;
   }
 
   .project-tools span:last-child {
-    font-size: 0.8rem !important;
+    font-size: 0.8rem;
   }
 
   .image-grid {
-    gap: 0.4rem !important;
-    max-width: 240px !important;
-    grid-template-columns: repeat(2, 1fr) !important;
+    max-width: 220px;
+    gap: 0.5rem;
   }
 
   .view-project-btn {
-    font-size: 1.1rem !important;
+    font-size: 1.2rem;
   }
 
   .view-project-btn .arrow {
-    font-size: 0.85rem !important;
+    font-size: 1.1rem;
   }
 }
 
