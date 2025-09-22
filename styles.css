@@ -2023,48 +2023,209 @@ body {
     height: 250px !important;
   }
 
+  /* Services Section - Small Screens (add to existing 400px styles) */
   .services {
     padding: 40px 0.5rem !important;
-    /* Further reduce padding */
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden !important;
   }
 
   .services h2 {
     font-size: clamp(1.5rem, 8vw, 2.5rem) !important;
     /* Match featured-work h2 */
+    font-weight: 600;
+    line-height: 1.1;
+    text-align: left;
+    color: #1a1a1a;
     padding-top: 1rem !important;
     padding-left: 1rem !important;
+    margin-bottom: 1rem !important;
   }
 
   .services h2 span {
     font-size: clamp(1.2rem, 6vw, 2rem) !important;
-    /* Proportionally smaller */
+    /* Proportionally smaller than main Services text */
+    font-weight: 400 !important;
+    line-height: 1.1;
+    display: block;
     margin-left: 4rem !important;
-    /* Adjust for smaller screen */
+    /* Position under the 's' in Services */
+    color: #666;
+    margin-top: -0.5rem !important;
+  }
+
+  .services-flex {
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden !important;
+    flex-direction: column !important;
+    gap: 2rem;
+    min-height: auto !important;
+    max-height: none !important;
+  }
+
+  .services-list {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    overflow: hidden;
+    min-height: auto !important;
+    max-height: none !important;
   }
 
   .services-tools-cloud {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden;
     min-height: 180px !important;
     padding: 1.5rem !important;
-    /* Reduce padding */
+  }
+
+  .service-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 0.5px solid #b1b0b0;
+    overflow: hidden;
+    border-radius: 0;
+    color: #fff;
+    margin-bottom: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: none;
+    background: transparent !important;
+    position: relative;
+  }
+
+  .service-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.2rem 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: transparent;
+    color: #fff;
   }
 
   .service-header h3 {
     font-size: clamp(1rem, 5.5vw, 1.4rem) !important;
+    font-weight: 300;
+    color: #e6e6e6;
+    margin: 0;
+    transition: color 0.3s ease;
     text-align: center !important;
+  }
+
+  .service-card {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    padding: 0 0;
+    display: grid;
+    grid-template-columns: 1fr !important;
+    /* Single column for small screens */
+    gap: 0.5rem !important;
+    /* Tighter spacing between p and ul */
+    align-items: start;
+  }
+
+  .service-item.active .service-card {
+    max-height: 280px;
+    /* Compact height */
+    padding: 0 0 1.2rem 0;
   }
 
   .service-card p {
     font-size: 1rem !important;
-    /* Smaller text */
+    line-height: 1.4;
+    color: #ece9e9;
+    margin-bottom: 0;
+    max-width: none;
+    grid-column: 1;
     padding-left: 1.5rem !important;
-    /* Reduce padding */
+    padding-right: 1.5rem !important;
+    padding-bottom: 0.25rem !important;
+    /* Small bottom padding for separation */
+  }
+
+  .service-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-rows: repeat(8, auto) !important;
+    /* Single column, more rows */
+    grid-auto-flow: row !important;
+    gap: 0.4rem !important;
+    grid-column: 1;
+    align-items: start;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    padding-top: 0 !important;
+    /* No top padding */
   }
 
   .service-card li {
     font-size: 0.85rem !important;
-    /* Smaller list items */
+    color: #ece9e9;
+    padding: 0.25rem 0;
+    position: relative;
+    padding-left: 1.2rem;
   }
 
+  .service-card li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #999;
+    font-weight: 300;
+    font-size: 0.75rem;
+  }
+
+  /* Tools cloud adjustments for 400px */
+  .tools-cloud-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    min-height: 180px;
+    min-width: 250px;
+    background: transparent;
+  }
+
+  .tools-cloud-container span {
+    display: inline-block;
+    font-size: 1em !important;
+    /* Slightly larger than 360px breakpoint */
+    color: #222;
+    font-weight: 400;
+    opacity: 0.85;
+    cursor: pointer;
+    position: absolute;
+    white-space: nowrap;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    animation: subtleFloat 8s ease-in-out infinite;
+    text-shadow: 0 0 15px rgba(34, 34, 34, 0.25),
+      0 0 30px rgba(34, 34, 34, 0.15),
+      0 0 45px rgba(34, 34, 34, 0.1);
+    filter: drop-shadow(0 0 10px rgba(34, 34, 34, 0.2));
+  }
+
+  .tools-cloud-container span:hover {
+    opacity: 1;
+    transform: scale(1.08);
+    /* Slightly larger hover scale than 360px */
+    text-shadow: 0 0 20px rgba(34, 34, 34, 0.35),
+      0 0 40px rgba(34, 34, 34, 0.25),
+      0 0 60px rgba(34, 34, 34, 0.15);
+    filter: drop-shadow(0 0 15px rgba(34, 34, 34, 0.3));
+  }
 }
 
 /* For screens under 360px - Very very small phones */
