@@ -908,7 +908,16 @@ document.addEventListener("DOMContentLoaded", (event) => {
         console.warn('Title missing data-image or text:', title);
         return;
       }
+      // CHECK IF MOBILE - if mobile, skip the hover effect entirely
+      function isMobile() {
+        return window.innerWidth <= 925;
+      }
 
+      // Skip hover effect setup on mobile
+      if (isMobile()) {
+        console.log('Mobile detected - skipping hover preview for:', text);
+        return;
+      }
       // 1) split into individual words (each word = <p.word>) - EXACTLY like your test
       const words = text.split(/\s+/);
       title.textContent = '';
@@ -986,7 +995,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }
 
       function insertAt(index) {
-        // EXACTLY like your test
         const children = [...title.children].filter(n => n !== preview);
         const ref = children[index] || null;
         title.insertBefore(preview, ref);
@@ -994,8 +1002,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       function openPreview() {
         preview.style.display = 'block';
-
-        // Simple, controlled reveal - just expand width smoothly
         gsap.to(preview, {
           width: OPEN_W,
           opacity: 1,
@@ -1005,7 +1011,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       }
 
       function closePreview() {
-        // Simple, controlled close
         gsap.to(preview, {
           width: 0,
           opacity: 0,
@@ -1041,7 +1046,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       workItem.addEventListener('mouseenter', enter);
       workItem.addEventListener('mouseleave', leave);
 
-      // accessibility - EXACTLY like your test
+      // accessibility - focus/blur on the entire work item
       workItem.setAttribute('tabindex', '0');
       workItem.addEventListener('focus', (e) => {
         const gaps = measureGaps();
@@ -1059,7 +1064,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
       workItem.addEventListener('blur', leave);
     });
 
-    // Add this to your work page section in main.js
+    // On window resize, if switching to mobile, disable hover effects
+    window.addEventListener('resize', () => {
+      // Debounce the resize
+      clearTimeout(window.resizeTimeout);
+      window.resizeTimeout = setTimeout(() => {
+        // If switching from desktop to mobile, disable hover effects
+        if (window.innerWidth <= 925) {
+          const previews = document.querySelectorAll('.preview');
+          previews.forEach(preview => {
+            preview.style.display = 'none';
+          });
+        }
+        // If switching from mobile to desktop, the page will need a refresh
+        // to re-initialize hover effects properly
+      }, 250);
+    });
+
+    // ===== ACCORDION FUNCTIONALITY FOR ALL WORK + FOCUS VIEWS =====
     // Update the setupAccordions function to handle Focus items
     function setupAccordions() {
       const workItems = document.querySelectorAll('.work-item');
