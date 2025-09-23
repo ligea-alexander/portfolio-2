@@ -5856,6 +5856,12 @@ body {
 /* Very small screens (max-width: 400px) */
 @media (max-width: 400px) {
 
+  /* INCREASED HEIGHT FOR ALL WORK VIEW */
+  .all-work-view .work-item.active .work-accordion {
+    max-height: 400px;
+    /* INCREASED from 320px */
+  }
+
   .work-item.active .work-accordion,
   .focus-project-item.active .work-accordion {
     max-height: 320px;
@@ -5926,6 +5932,12 @@ body {
 
 /* Very very small screens (max-width: 360px) */
 @media (max-width: 360px) {
+
+  /* INCREASED HEIGHT FOR ALL WORK VIEW */
+  .all-work-view .work-item.active .work-accordion {
+    max-height: 380px;
+    /* INCREASED from 300px */
+  }
 
   .work-item.active .work-accordion,
   .focus-project-item.active .work-accordion {
