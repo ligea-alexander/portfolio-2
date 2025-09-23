@@ -4473,24 +4473,73 @@ body {
   .work-item {
     padding: 0.7rem 0;
     grid-template-columns: 1fr auto;
-    /* CHANGED: Keep two columns */
+    grid-template-rows: auto auto;
+    align-items: flex-start;
+    /* CHANGED: Align to top instead of center */
+    gap: 0.5rem;
+    /* ADD: Small gap for better spacing */
   }
 
   .work-title-container {
-    max-width: calc(100% - 60px);
-    /* CHANGED: Account for preview */
+    max-width: calc(100% - 65px);
+    /* CHANGED: More space for preview */
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    /* CHANGED: Align to top */
   }
 
   .work-title {
-    height: clamp(32px, 6.5vh, 55px);
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    /* CHANGED: Allow wrapping */
+    align-items: flex-start;
+    /* CHANGED: Align to top */
+    gap: 0.2em 0.28em;
+    /* CHANGED: Different gaps for rows vs words */
+    height: auto;
+    /* CHANGED: Auto height to accommodate wrapping */
+    min-height: clamp(32px, 6.5vh, 55px);
+    /* ADD: Minimum height */
+    max-height: none;
+    /* REMOVE: Max height constraint */
+    overflow: visible;
+    /* CHANGED: Allow overflow for wrapped text */
     font-size: clamp(14px, 4vw, 35px) !important;
-    gap: 0.28em;
-    /* CHANGED: Keep closer to normal gap */
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.1;
+    /* CHANGED: Tighter line height for wrapped text */
+    cursor: pointer;
+    max-width: 100%;
+    white-space: normal;
+    /* CHANGED: Allow text wrapping */
+    text-overflow: clip;
+    /* CHANGED: Remove ellipsis since we're wrapping */
+  }
+
+  .work-title .word {
+    margin: 0;
+    white-space: nowrap;
+    /* KEEP: Individual words don't break */
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
+    /* MATCH: Same line height as parent */
+    position: relative;
+    z-index: 2;
   }
 
   .work-mobile-preview {
     width: 55px;
     height: 55px;
+    align-self: flex-start;
+    /* CHANGED: Align to top */
+    margin-top: 0.2rem;
+    /* ADD: Small offset to align with first line of text */
   }
 }
 
@@ -4504,24 +4553,74 @@ body {
   .work-item {
     padding: 0.6rem 0;
     grid-template-columns: 1fr auto;
-    /* CHANGED: Keep two columns */
+    grid-template-rows: auto auto;
+    align-items: flex-start;
+    /* CHANGED: Align to top instead of center */
+    gap: 0.4rem;
+    /* ADD: Small gap for better spacing */
   }
 
   .work-title-container {
     max-width: calc(100% - 55px);
-    /* CHANGED: Account for preview */
+    /* CHANGED: More space for preview */
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    /* CHANGED: Align to top */
   }
 
   .work-title {
-    height: clamp(30px, 6vh, 50px);
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    /* CHANGED: Allow wrapping */
+    align-items: flex-start;
+    /* CHANGED: Align to top */
+    gap: 0.15em 0.25em;
+    /* CHANGED: Even tighter gaps for very small screens */
+    height: auto;
+    /* CHANGED: Auto height to accommodate wrapping */
+    min-height: clamp(30px, 6vh, 50px);
+    /* ADD: Minimum height */
+    max-height: none;
+    /* REMOVE: Max height constraint */
+    overflow: visible;
+    /* CHANGED: Allow overflow for wrapped text */
     font-size: clamp(13px, 3.8vw, 32px) !important;
-    gap: 0.25em;
-    /* CHANGED: Keep closer to normal gap */
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.05;
+    /* CHANGED: Even tighter line height */
+    cursor: pointer;
+    max-width: 100%;
+    white-space: normal;
+    /* CHANGED: Allow text wrapping */
+    text-overflow: clip;
+    /* CHANGED: Remove ellipsis since we're wrapping */
+  }
+
+  .work-title .word {
+    margin: 0;
+    white-space: nowrap;
+    /* KEEP: Individual words don't break */
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    /* REDUCE: Less letter spacing for tight screens */
+    line-height: 1.05;
+    /* MATCH: Same line height as parent */
+    position: relative;
+    z-index: 2;
   }
 
   .work-mobile-preview {
     width: 50px;
     height: 50px;
+    align-self: flex-start;
+    /* CHANGED: Align to top */
+    margin-top: 0.15rem;
+    /* ADD: Small offset to align with first line of text */
   }
 }
 
