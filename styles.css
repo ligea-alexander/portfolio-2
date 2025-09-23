@@ -2318,7 +2318,6 @@ body {
     display: block;
     margin-left: 5rem !important;
     color: #666;
-    margin-top: -0.5rem !important;
   }
 
   .services-flex {
@@ -2731,7 +2730,6 @@ body {
     margin-left: 6rem !important;
     /* Position under the 's' in Services */
     color: #666;
-    /* margin-top: -0.5rem !important; */
   }
 
   .services-flex {
