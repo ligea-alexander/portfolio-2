@@ -4295,15 +4295,13 @@ body {
 
 /* All Work View Mobile Responsive Design */
 
-/* Main mobile breakpoint (max-width: 925px) */
-
+/* Main mobile breakpoint (max-width: 925px) - SCALED UP */
 @media (max-width: 925px) {
 
   .all-work-view {
     max-width: 100%;
     margin: 0 auto;
     padding: 2rem 1rem;
-    /* SCALED UP - generous padding */
     overflow-x: hidden;
   }
 
@@ -4319,16 +4317,13 @@ body {
     grid-template-columns: 1fr auto;
     grid-template-rows: auto auto;
     align-items: flex-start;
-    /* Allow for text wrapping */
     padding: 1rem 0;
-    /* SCALED UP */
     border-bottom: 1px solid #e0e0e0;
     cursor: pointer;
     transition: background-color 0.3s ease;
     max-width: 100%;
     overflow: hidden;
     gap: 0.8rem;
-    /* SCALED UP - add gap for better spacing */
   }
 
   .work-title-container {
@@ -4339,55 +4334,43 @@ body {
     display: flex;
     align-items: flex-start;
     max-width: calc(100% - 90px);
-    /* SCALED UP - account for larger mobile preview */
+    /* Account for mobile preview */
   }
 
-  /* Allow text wrapping on 925px breakpoint */
+  /* Allow text wrapping by default - NO hover spacing needed */
   .work-title {
     position: relative;
     display: flex;
     flex-wrap: wrap;
     /* Allow wrapping by default */
     align-items: flex-start;
-    gap: 0.25em;
-    /* SCALED UP: Better gap for readability */
+    gap: 0.2em;
+    /* REDUCED: Normal word spacing since no hover effects */
     height: auto;
-    /* Allow dynamic height for wrapping */
     min-height: clamp(40px, 8vh, 70px);
-    /* SCALED UP */
     max-height: none;
-    /* Remove max height constraint */
     overflow: visible;
-    /* Allow text to wrap */
     font-size: clamp(18px, 5vw, 45px) !important;
-    /* SCALED UP */
     font-weight: 700;
     color: #1a1a1a;
     margin: 0;
     line-height: 1.35;
-    /* SCALED UP: Better line height for wrapped text */
     cursor: pointer;
     max-width: 100%;
     white-space: normal;
     /* Allow text wrapping by default */
     text-overflow: clip;
-    /* Don't truncate since we're wrapping */
   }
 
   /* CRITICAL FIX: When accordion is active, disable wrapping for preview functionality */
   .work-item.active .work-title {
     flex-wrap: nowrap !important;
-    /* Disable wrapping when accordion is active */
     white-space: nowrap !important;
-    /* Force single line when accordion is active */
     overflow: hidden !important;
-    /* Hide overflow when accordion is active */
     text-overflow: ellipsis !important;
-    /* Add ellipsis when accordion is active */
     height: clamp(40px, 8vh, 70px) !important;
-    /* Fixed height when active */
-    gap: 0.35em !important;
-    /* SCALED UP: Normal word spacing when active */
+    gap: 0.25em !important;
+    /* REDUCED: Normal word spacing when active */
   }
 
   .work-title .word {
@@ -4395,9 +4378,8 @@ body {
     white-space: nowrap;
     font-weight: 600;
     letter-spacing: 0;
-    /* No extra letter spacing needed */
+    /* NO extra letter spacing needed */
     line-height: 1.35;
-    /* MATCH: Same as parent */
     position: relative;
     z-index: 2;
   }
@@ -4417,18 +4399,13 @@ body {
     grid-column: 2;
     grid-row: 1;
     width: 70px;
-    /* SCALED UP */
     height: 70px;
-    /* SCALED UP */
     flex-shrink: 0;
     overflow: hidden;
     align-items: flex-start;
-    /* Align to top with wrapped text */
     justify-content: center;
     background-color: #f0f0f0;
-    /* Optional background for empty states */
     margin-top: 0.4rem;
-    /* SCALED UP - align with first line of text */
   }
 
   .work-mobile-preview img {
@@ -4441,9 +4418,7 @@ body {
   /* When accordion is active, center the mobile preview */
   .work-item.active .work-mobile-preview {
     align-items: center;
-    /* Center align when accordion is active */
     margin-top: 0;
-    /* Remove top margin when accordion is active */
   }
 }
 
@@ -4452,125 +4427,18 @@ body {
 
   .all-work-view {
     padding: 1.8rem 1rem;
-    /* SCALED UP significantly */
   }
 
   .work-item {
     padding: 0.9rem 0;
-    /* SCALED UP */
     grid-template-columns: 1fr auto;
     grid-template-rows: auto auto;
     align-items: flex-start;
-    /* Allow for text wrapping */
     gap: 0.7rem;
-    /* SCALED UP */
   }
 
   .work-title-container {
     max-width: calc(100% - 85px);
-    /* SCALED UP - more space for larger preview */
-    min-width: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: flex-start;
-  }
-
-  .work-title {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    /* Allow wrapping by default */
-    align-items: flex-start;
-    gap: 0.2em;
-    /* SCALED UP: Single gap value */
-    height: auto;
-    min-height: clamp(38px, 7.5vh, 65px);
-    /* SCALED UP */
-    max-height: none;
-    overflow: visible;
-    font-size: clamp(16px, 4.5vw, 42px) !important;
-    /* SCALED UP */
-    font-weight: 700;
-    color: #1a1a1a;
-    margin: 0;
-    line-height: 1.3;
-    /* SCALED UP: Better line height */
-    cursor: pointer;
-    max-width: 100%;
-    white-space: normal;
-    /* Allow text wrapping by default */
-    text-overflow: clip;
-  }
-
-  /* CRITICAL FIX: When accordion is active, disable wrapping for preview functionality */
-  .work-item.active .work-title {
-    flex-wrap: nowrap !important;
-    /* Disable wrapping when accordion is active */
-    white-space: nowrap !important;
-    /* Force single line when accordion is active */
-    overflow: hidden !important;
-    /* Hide overflow when accordion is active */
-    text-overflow: ellipsis !important;
-    /* Add ellipsis when accordion is active */
-    height: clamp(38px, 7.5vh, 65px) !important;
-    /* Fixed height when active */
-    gap: 0.32em !important;
-    /* SCALED UP: Normal word spacing when active */
-  }
-
-  .work-title .word {
-    margin: 0;
-    white-space: nowrap;
-    font-weight: 600;
-    letter-spacing: 0;
-    /* No extra letter spacing needed */
-    line-height: 1.3;
-    /* MATCH: Same as parent */
-    position: relative;
-    z-index: 2;
-  }
-
-  .work-mobile-preview {
-    width: 65px;
-    /* SCALED UP */
-    height: 65px;
-    /* SCALED UP */
-    align-self: flex-start;
-    margin-top: 0.3rem;
-    /* SCALED UP */
-  }
-
-  /* When accordion is active, align mobile preview to center */
-  .work-item.active .work-mobile-preview {
-    align-self: center;
-    /* Center align when accordion is active */
-    margin-top: 0;
-    /* Remove top margin when accordion is active */
-  }
-}
-
-
-/* Small mobile screens (max-width: 480px) - SCALED UP */
-@media (max-width: 480px) {
-
-  .all-work-view {
-    padding: 1.5rem 0.75rem;
-    /* SCALED UP from 400px values */
-  }
-
-  .work-item {
-    padding: 0.8rem 0;
-    /* SCALED UP */
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto;
-    align-items: flex-start;
-    gap: 0.6rem;
-    /* SCALED UP */
-  }
-
-  .work-title-container {
-    max-width: calc(100% - 75px);
-    /* SCALED UP - more space for preview */
     min-width: 0;
     overflow: hidden;
     display: flex;
@@ -4584,19 +4452,16 @@ body {
     /* Allow wrapping by default */
     align-items: flex-start;
     gap: 0.18em;
-    /* SCALED UP: Single gap value, no extra horizontal spacing */
+    /* REDUCED: Normal word spacing since no hover effects */
     height: auto;
-    min-height: clamp(35px, 7vh, 60px);
-    /* SCALED UP */
+    min-height: clamp(38px, 7.5vh, 65px);
     max-height: none;
     overflow: visible;
-    font-size: clamp(15px, 4.2vw, 38px) !important;
-    /* SCALED UP */
+    font-size: clamp(16px, 4.5vw, 42px) !important;
     font-weight: 700;
     color: #1a1a1a;
     margin: 0;
-    line-height: 1.25;
-    /* SCALED UP: Better line height for readability */
+    line-height: 1.3;
     cursor: pointer;
     max-width: 100%;
     white-space: normal;
@@ -4607,17 +4472,12 @@ body {
   /* CRITICAL FIX: When accordion is active, disable wrapping for preview functionality */
   .work-item.active .work-title {
     flex-wrap: nowrap !important;
-    /* Disable wrapping when accordion is active */
     white-space: nowrap !important;
-    /* Force single line when accordion is active */
     overflow: hidden !important;
-    /* Hide overflow when accordion is active */
     text-overflow: ellipsis !important;
-    /* Add ellipsis when accordion is active */
-    height: clamp(35px, 7vh, 60px) !important;
-    /* Fixed height when active */
-    gap: 0.3em !important;
-    /* SCALED UP: Normal word spacing when active */
+    height: clamp(38px, 7.5vh, 65px) !important;
+    gap: 0.22em !important;
+    /* REDUCED: Normal word spacing when active */
   }
 
   .work-title .word {
@@ -4625,29 +4485,106 @@ body {
     white-space: nowrap;
     font-weight: 600;
     letter-spacing: 0;
-    /* No extra letter spacing needed */
+    /* NO extra letter spacing needed */
+    line-height: 1.3;
+    position: relative;
+    z-index: 2;
+  }
+
+  .work-mobile-preview {
+    width: 65px;
+    height: 65px;
+    align-self: flex-start;
+    margin-top: 0.3rem;
+  }
+
+  /* When accordion is active, align mobile preview to center */
+  .work-item.active .work-mobile-preview {
+    align-self: center;
+    margin-top: 0;
+  }
+}
+
+/* Small mobile screens (max-width: 480px) - SCALED UP */
+@media (max-width: 480px) {
+
+  .all-work-view {
+    padding: 1.5rem 0.75rem;
+  }
+
+  .work-item {
+    padding: 0.8rem 0;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .work-title-container {
+    max-width: calc(100% - 75px);
+    min-width: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .work-title {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow wrapping by default */
+    align-items: flex-start;
+    gap: 0.15em;
+    /* REDUCED: Normal word spacing since no hover effects */
+    height: auto;
+    min-height: clamp(35px, 7vh, 60px);
+    max-height: none;
+    overflow: visible;
+    font-size: clamp(15px, 4.2vw, 38px) !important;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
     line-height: 1.25;
-    /* MATCH: Same as parent */
+    cursor: pointer;
+    max-width: 100%;
+    white-space: normal;
+    /* Allow text wrapping by default */
+    text-overflow: clip;
+  }
+
+  /* CRITICAL FIX: When accordion is active, disable wrapping for preview functionality */
+  .work-item.active .work-title {
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    height: clamp(35px, 7vh, 60px) !important;
+    gap: 0.2em !important;
+    /* REDUCED: Normal word spacing when active */
+  }
+
+  .work-title .word {
+    margin: 0;
+    white-space: nowrap;
+    font-weight: 600;
+    letter-spacing: 0;
+    /* NO extra letter spacing needed */
+    line-height: 1.25;
     position: relative;
     z-index: 2;
   }
 
   .work-mobile-preview {
     width: 60px;
-    /* SCALED UP */
     height: 60px;
-    /* SCALED UP */
     align-self: flex-start;
     margin-top: 0.25rem;
-    /* SCALED UP */
   }
 
   /* When accordion is active, align mobile preview to center */
   .work-item.active .work-mobile-preview {
     align-self: center;
-    /* Center align when accordion is active */
     margin-top: 0;
-    /* Remove top margin when accordion is active */
   }
 }
 
