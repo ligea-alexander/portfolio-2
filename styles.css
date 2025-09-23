@@ -95,6 +95,37 @@ body {
   mix-blend-mode: difference;
 }
 
+/* ==== IOS STYLES  ==== */
+/* Prevent iOS from converting arrows and other characters to emojis */
+.external-arrow,
+.arrow,
+.view-project-btn .arrow,
+.live-site-btn .external-arrow,
+.nav-arrow,
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  font-variant-emoji: text !important;
+  -webkit-font-feature-settings: "liga" off, "clig" off, "calt" off;
+  font-feature-settings: "liga" off, "clig" off, "calt" off;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+}
+
+/* Alternative: Force specific font that doesn't have emoji variants */
+.arrow,
+.external-arrow {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-variant-emoji: text !important;
+}
+
+/* More specific targeting for all arrow elements */
+[class*="arrow"],
+[class*="Arrow"] {
+  font-variant-emoji: text !important;
+  -webkit-font-feature-settings: "liga" off, "clig" off, "calt" off;
+  font-feature-settings: "liga" off, "clig" off, "calt" off;
+}
+
 /* ===== CURSOR: RESPONSIVE DESIGN SYSTEM ===== */
 @media (max-width: 925px) {
 
