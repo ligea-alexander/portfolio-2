@@ -4181,6 +4181,7 @@ body {
   border-bottom: 1px solid #e0e0e0;
   cursor: pointer;
 } */
+
 .work-item {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -4253,14 +4254,14 @@ body {
 .work-type-indicator {
   grid-column: 2;
   grid-row: 1;
-}
-
-/* Keep the existing color square */
-.work-type-indicator {
   width: 100px;
   height: 100px;
   background-color: var(--work-color);
   flex-shrink: 0;
+}
+
+.work-mobile-preview {
+  display: none;
 }
 
 .preview {
@@ -4294,8 +4295,6 @@ body {
 
 /* All Work View Mobile Responsive Design */
 
-/* All Work View Mobile Responsive Design */
-
 /* Main mobile breakpoint (max-width: 925px) */
 @media (max-width: 925px) {
 
@@ -4312,11 +4311,11 @@ body {
     width: 100%;
   }
 
-  /* Scale down work items but maintain layout */
+  /* Keep grid with 2 columns: title + preview image */
   .work-item {
     display: grid;
-    grid-template-columns: 1fr;
-    /* CHANGED: Remove auto column for indicator */
+    grid-template-columns: 1fr auto;
+    /* CHANGED: Keep auto column for mobile preview */
     grid-template-rows: auto auto;
     align-items: center;
     padding: 1rem 0;
@@ -4334,23 +4333,21 @@ body {
     overflow: hidden;
     display: flex;
     align-items: center;
-    max-width: 100%;
-    /* CHANGED: Use full width now that indicator is gone */
+    max-width: calc(100% - 80px);
+    /* CHANGED: Account for mobile preview image */
   }
 
-  /* Scale down work title significantly but keep proportional */
+  /* NO spacing adjustments needed since hover is disabled */
   .work-title {
     position: relative;
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
-    gap: 0.2em;
-    /* Reduce gap between words */
+    gap: 0.35em;
+    /* CHANGED: Keep normal gap since no hover preview */
     height: clamp(40px, 8vh, 70px);
-    /* Scale down height */
     overflow: hidden;
     font-size: clamp(18px, 5vw, 45px) !important;
-    /* Scale down font size */
     font-weight: 700;
     color: #1a1a1a;
     margin: 0;
@@ -4361,51 +4358,47 @@ body {
     text-overflow: ellipsis;
   }
 
-  /* Individual words - scale down */
   .work-title .word {
     margin: 0;
     white-space: nowrap;
     font-weight: 600;
-    letter-spacing: 0.01em;
-    /* Reduce letter spacing */
+    letter-spacing: 0.02em;
+    /* CHANGED: Keep normal letter spacing */
     line-height: 1;
     position: relative;
     z-index: 2;
   }
 
-  /* REMOVED: Hide work type indicator on mobile */
+  /* Hide desktop elements */
   .work-type-indicator {
     display: none !important;
   }
 
-  /* Scale down preview container */
   .preview {
-    position: relative;
-    flex: 0 0 auto;
-    width: 0;
-    height: clamp(70px, 12vh, 90px);
-    /* Scale down from 120px */
-    align-self: center;
-    overflow: hidden;
-    background: transparent;
-    opacity: 1;
-    will-change: width;
-    z-index: 1;
+    display: none !important;
   }
 
-  .preview__img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+  /* Show mobile preview image in same grid position as work-type-indicator */
+  .work-mobile-preview {
+    display: flex !important;
+    grid-column: 2;
+    grid-row: 1;
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    /* Optional background for empty states */
+  }
+
+  .work-mobile-preview img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    object-position: center;
-    pointer-events: none;
+    object-fit: cover;
+    display: block;
   }
-
 }
 
 /* Medium mobile screens (max-width: 768px) and (min-width: 481px) */
@@ -4417,30 +4410,26 @@ body {
 
   .work-item {
     padding: 0.9rem 0;
-    grid-template-columns: 1fr;
-    /* CHANGED: Single column */
+    grid-template-columns: 1fr auto;
+    /* CHANGED: Keep two columns */
   }
 
   .work-title-container {
-    max-width: 100%;
-    /* CHANGED: Full width */
+    max-width: calc(100% - 70px);
+    /* CHANGED: Account for preview */
   }
 
   .work-title {
     height: clamp(38px, 7.5vh, 65px);
     font-size: clamp(16px, 4.5vw, 42px) !important;
-    gap: 0.18em;
+    gap: 0.32em;
+    /* CHANGED: Keep closer to normal gap */
   }
 
-  /* REMOVED: Hide work type indicator */
-  .work-type-indicator {
-    display: none !important;
+  .work-mobile-preview {
+    width: 65px;
+    height: 65px;
   }
-
-  .preview {
-    height: clamp(65px, 11vh, 85px);
-  }
-
 }
 
 /* Small mobile screens (max-width: 480px) */
@@ -4452,30 +4441,26 @@ body {
 
   .work-item {
     padding: 0.8rem 0;
-    grid-template-columns: 1fr;
-    /* CHANGED: Single column */
+    grid-template-columns: 1fr auto;
+    /* CHANGED: Keep two columns */
   }
 
   .work-title-container {
-    max-width: 100%;
-    /* CHANGED: Full width */
+    max-width: calc(100% - 65px);
+    /* CHANGED: Account for preview */
   }
 
   .work-title {
     height: clamp(35px, 7vh, 60px);
     font-size: clamp(15px, 4.2vw, 38px) !important;
-    gap: 0.15em;
+    gap: 0.3em;
+    /* CHANGED: Keep closer to normal gap */
   }
 
-  /* REMOVED: Hide work type indicator */
-  .work-type-indicator {
-    display: none !important;
+  .work-mobile-preview {
+    width: 60px;
+    height: 60px;
   }
-
-  .preview {
-    height: clamp(60px, 10vh, 80px);
-  }
-
 }
 
 /* Very small screens (max-width: 400px) */
@@ -4487,30 +4472,26 @@ body {
 
   .work-item {
     padding: 0.7rem 0;
-    grid-template-columns: 1fr;
-    /* CHANGED: Single column */
+    grid-template-columns: 1fr auto;
+    /* CHANGED: Keep two columns */
   }
 
   .work-title-container {
-    max-width: 100%;
-    /* CHANGED: Full width - no need to account for indicator */
+    max-width: calc(100% - 60px);
+    /* CHANGED: Account for preview */
   }
 
   .work-title {
     height: clamp(32px, 6.5vh, 55px);
     font-size: clamp(14px, 4vw, 35px) !important;
-    gap: 0.12em;
+    gap: 0.28em;
+    /* CHANGED: Keep closer to normal gap */
   }
 
-  /* REMOVED: Hide work type indicator */
-  .work-type-indicator {
-    display: none !important;
+  .work-mobile-preview {
+    width: 55px;
+    height: 55px;
   }
-
-  .preview {
-    height: clamp(55px, 9vh, 75px);
-  }
-
 }
 
 /* Very very small screens (max-width: 360px) */
@@ -4522,30 +4503,26 @@ body {
 
   .work-item {
     padding: 0.6rem 0;
-    grid-template-columns: 1fr;
-    /* CHANGED: Single column */
+    grid-template-columns: 1fr auto;
+    /* CHANGED: Keep two columns */
   }
 
   .work-title-container {
-    max-width: 100%;
-    /* CHANGED: Full width - no need to account for indicator */
+    max-width: calc(100% - 55px);
+    /* CHANGED: Account for preview */
   }
 
   .work-title {
     height: clamp(30px, 6vh, 50px);
     font-size: clamp(13px, 3.8vw, 32px) !important;
-    gap: 0.1em;
+    gap: 0.25em;
+    /* CHANGED: Keep closer to normal gap */
   }
 
-  /* REMOVED: Hide work type indicator */
-  .work-type-indicator {
-    display: none !important;
+  .work-mobile-preview {
+    width: 50px;
+    height: 50px;
   }
-
-  .preview {
-    height: clamp(50px, 8vh, 70px);
-  }
-
 }
 
 /* === Focus View Styles === */
