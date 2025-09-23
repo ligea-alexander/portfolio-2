@@ -5538,6 +5538,12 @@ body {
     transition: max-height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
+  /* INCREASED HEIGHT FOR ALL WORK VIEW - includes project subtitle */
+  .all-work-view .work-item.active .work-accordion {
+    max-height: 480px;
+    /* INCREASED from 400px to 480px for subtitle */
+  }
+
   .work-item.active .work-accordion,
   .focus-project-item.active .work-accordion {
     max-height: 400px;
@@ -5721,6 +5727,12 @@ body {
 /* Medium mobile screens (max-width: 768px) and (min-width: 481px) */
 @media (max-width: 768px) and (min-width: 481px) {
 
+  /* INCREASED HEIGHT FOR ALL WORK VIEW */
+  .all-work-view .work-item.active .work-accordion {
+    max-height: 460px;
+    /* INCREASED from 380px */
+  }
+
   .work-item.active .work-accordion,
   .focus-project-item.active .work-accordion {
     max-height: 380px;
@@ -5784,6 +5796,12 @@ body {
 
 /* Small mobile screens (max-width: 480px) */
 @media (max-width: 480px) {
+
+  /* INCREASED HEIGHT FOR ALL WORK VIEW */
+  .all-work-view .work-item.active .work-accordion {
+    max-height: 430px;
+    /* INCREASED from 350px */
+  }
 
   .work-item.active .work-accordion,
   .focus-project-item.active .work-accordion {
