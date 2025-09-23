@@ -318,20 +318,140 @@ body {
     opacity: 1 !important;
   }
 
-  /* Mobile nav trigger button - favicon icon */
+  /* Replace the favicon background with CSS grid */
   .mobile-nav-trigger-btn {
     width: 40px;
     height: 40px;
-    background-image: url('../icon/favicon.ico');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: transparent;
+    background: none;
+    /* Remove favicon background */
     border: none;
     border-radius: 0;
     cursor: pointer;
     transition: all 0.3s ease;
-    padding: 0;
+    padding: 2px;
+    /* Small padding for grid spacing */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Create the 4x4 grid container */
+  .nav-icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1px;
+    /* Space between squares */
+    width: 32px;
+    /* Slightly smaller than button */
+    height: 32px;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  /* Individual grid squares */
+  .nav-icon-square {
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Color each square to match your favicon */
+  /* Row 1 */
+  .nav-icon-square:nth-child(1) {
+    background-color: #4A5BA8;
+  }
+
+  /* Blue */
+  .nav-icon-square:nth-child(2) {
+    background-color: #4A7BA8;
+  }
+
+  /* Teal-blue */
+  .nav-icon-square:nth-child(3) {
+    background-color: #4A8B4A;
+  }
+
+  /* Green */
+  .nav-icon-square:nth-child(4) {
+    background-color: #B84A4A;
+  }
+
+  /* Red */
+
+  /* Row 2 */
+  .nav-icon-square:nth-child(5) {
+    background-color: #E6A84A;
+  }
+
+  /* Orange */
+  .nav-icon-square:nth-child(6) {
+    background-color: #B84A4A;
+  }
+
+  /* Red */
+  .nav-icon-square:nth-child(7) {
+    background-color: #E6A8E6;
+  }
+
+  /* Pink */
+  .nav-icon-square:nth-child(8) {
+    background-color: #A8B84A;
+  }
+
+  /* Lime */
+
+  /* Row 3 */
+  .nav-icon-square:nth-child(9) {
+    background-color: #B8784A;
+  }
+
+  /* Brown */
+  .nav-icon-square:nth-child(10) {
+    background-color: #4A8BA8;
+  }
+
+  /* Teal */
+  .nav-icon-square:nth-child(11) {
+    background-color: #E6D84A;
+  }
+
+  /* Yellow */
+  .nav-icon-square:nth-child(12) {
+    background-color: #B86A4A;
+  }
+
+  /* Dark orange */
+
+  /* Row 4 */
+  .nav-icon-square:nth-child(13) {
+    background-color: #2A5A4A;
+  }
+
+  /* Dark green */
+  .nav-icon-square:nth-child(14) {
+    background-color: #8A6A8A;
+  }
+
+  /* Purple */
+  .nav-icon-square:nth-child(15) {
+    background-color: #2A2A2A;
+  }
+
+  /* Black */
+  .nav-icon-square:nth-child(16) {
+    background-color: #4A2A4A;
+  }
+
+  /* Dark purple */
+
+  /* Hover effect */
+  .mobile-nav-trigger-btn:hover .nav-icon-grid {
+    transform: scale(1.1);
+  }
+
+  .mobile-nav-trigger-btn:hover .nav-icon-square {
+    opacity: 0.8;
   }
 
   .mobile-nav-trigger-btn:hover {
@@ -339,17 +459,23 @@ body {
     opacity: 0.8;
   }
 
-  /* Mobile dropdown menu */
+  /* Mobile dropdown menu - SCALED DOWN */
   .mobile-nav-dropdown {
     position: absolute;
     top: 100%;
     left: 0;
-    margin-top: 0.5rem;
-    background: white;
-    border: 1px solid #e5e5e5;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    min-width: 200px;
+    margin-top: 0.25rem;
+    /* REDUCED from 0.5rem */
+    background: rgba(255, 255, 255, 0.85);
+    /* MORE TRANSPARENT from rgba(255, 255, 255, 1) */
+    border: none;
+    /* REMOVED border completely */
+    border-radius: 0;
+    /* REMOVED border radius */
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    /* REDUCED shadow */
+    min-width: 140px;
+    /* REDUCED from 200px */
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
@@ -362,17 +488,20 @@ body {
     transform: translateY(0);
   }
 
-  /* Navigation links */
+  /* Navigation links - SCALED DOWN */
   .mobile-nav-link {
     display: block;
-    padding: 1rem 1.25rem;
+    padding: 0.6rem 0.8rem;
+    /* REDUCED from 1rem 1.25rem */
     color: #1a1a1a;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 11px;
+    /* REDUCED from 14px */
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+    /* MORE TRANSPARENT border */
     transition: background-color 0.2s ease;
   }
 
@@ -381,28 +510,35 @@ body {
   }
 
   .mobile-nav-link:hover {
-    background-color: #f9f9f9;
+    background-color: rgba(249, 249, 249, 0.3);
+    /* MORE TRANSPARENT hover */
     color: #666;
   }
 
-  /* Location and email styling */
+  /* Location and email styling - SCALED DOWN */
   .mobile-nav-location {
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid #f5f5f5;
-    background-color: #fafafa;
+    padding: 0.6rem 0.8rem;
+    /* REDUCED from 1rem 1.25rem */
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+    /* MORE TRANSPARENT border */
+    background-color: rgba(250, 250, 250, 0.3);
+    /* MORE TRANSPARENT background */
   }
 
   .mobile-location-line1 {
-    font-size: 11px;
+    font-size: 9px;
+    /* REDUCED from 11px */
     font-weight: 400;
     color: #1a1a1a;
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.2rem 0;
+    /* REDUCED margin */
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
 
   .mobile-location-line2 {
-    font-size: 10px;
+    font-size: 8px;
+    /* REDUCED from 10px */
     font-weight: 300;
     color: #888;
     margin: 0;
@@ -412,14 +548,17 @@ body {
   }
 
   .mobile-nav-email {
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid #f5f5f5;
+    padding: 0.6rem 0.8rem;
+    /* REDUCED from 1rem 1.25rem */
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+    /* MORE TRANSPARENT border */
   }
 
   .mobile-nav-email a {
     color: #1a1a1a;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 10px;
+    /* REDUCED from 12px */
     font-weight: 400;
     letter-spacing: 0.5px;
     transition: color 0.3s ease;
@@ -438,6 +577,781 @@ body {
 
   .nav-container {
     display: flex;
+  }
+}
+
+/* Small mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+
+  .nav-container {
+    display: none;
+  }
+
+  body {
+    padding-top: 0;
+  }
+
+  /* DEFAULT: Floating mobile nav with scroll opacity */
+  .mobile-nav-container {
+    position: fixed !important;
+    top: 1rem !important;
+    left: 1rem !important;
+    z-index: 999 !important;
+    transition: opacity 0.3s ease;
+    pointer-events: auto !important;
+    will-change: opacity;
+  }
+
+  /* Scroll opacity behavior */
+  .mobile-nav-container.scrolled {
+    opacity: 0.4 !important;
+    pointer-events: auto !important;
+  }
+
+  .mobile-nav-container.scrolled:hover,
+  .mobile-nav-container.scrolled:focus-within {
+    opacity: 1 !important;
+  }
+
+  /* Replace the favicon background with CSS grid */
+  .mobile-nav-trigger-btn {
+    width: 38px;
+    /* SCALED DOWN from 40px */
+    height: 38px;
+    /* SCALED DOWN from 40px */
+    background: none;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Create the 4x4 grid container - SCALED DOWN */
+  .nav-icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 1px;
+    width: 30px;
+    /* SCALED DOWN from 32px */
+    height: 30px;
+    /* SCALED DOWN from 32px */
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  /* Individual grid squares */
+  .nav-icon-square {
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Color each square to match your favicon - KEEP SAME */
+  .nav-icon-square:nth-child(1) {
+    background-color: #4A5BA8;
+  }
+
+  .nav-icon-square:nth-child(2) {
+    background-color: #4A7BA8;
+  }
+
+  .nav-icon-square:nth-child(3) {
+    background-color: #4A8B4A;
+  }
+
+  .nav-icon-square:nth-child(4) {
+    background-color: #B84A4A;
+  }
+
+  .nav-icon-square:nth-child(5) {
+    background-color: #E6A84A;
+  }
+
+  .nav-icon-square:nth-child(6) {
+    background-color: #B84A4A;
+  }
+
+  .nav-icon-square:nth-child(7) {
+    background-color: #E6A8E6;
+  }
+
+  .nav-icon-square:nth-child(8) {
+    background-color: #A8B84A;
+  }
+
+  .nav-icon-square:nth-child(9) {
+    background-color: #B8784A;
+  }
+
+  .nav-icon-square:nth-child(10) {
+    background-color: #4A8BA8;
+  }
+
+  .nav-icon-square:nth-child(11) {
+    background-color: #E6D84A;
+  }
+
+  .nav-icon-square:nth-child(12) {
+    background-color: #B86A4A;
+  }
+
+  .nav-icon-square:nth-child(13) {
+    background-color: #2A5A4A;
+  }
+
+  .nav-icon-square:nth-child(14) {
+    background-color: #8A6A8A;
+  }
+
+  .nav-icon-square:nth-child(15) {
+    background-color: #2A2A2A;
+  }
+
+  .nav-icon-square:nth-child(16) {
+    background-color: #4A2A4A;
+  }
+
+  /* Hover effect - SCALED DOWN */
+  .mobile-nav-trigger-btn:hover .nav-icon-grid {
+    transform: scale(1.08);
+    /* REDUCED from 1.1 */
+  }
+
+  .mobile-nav-trigger-btn:hover .nav-icon-square {
+    opacity: 0.8;
+  }
+
+  .mobile-nav-trigger-btn:hover {
+    transform: translateY(-1px) scale(1.08);
+    /* REDUCED from 1.1 */
+    opacity: 0.8;
+  }
+
+  /* Mobile dropdown menu - SCALED DOWN */
+  .mobile-nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.2rem;
+    /* REDUCED from 0.25rem */
+    background: rgba(255, 255, 255, 0.85);
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* REDUCED shadow */
+    min-width: 130px;
+    /* REDUCED from 140px */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-nav-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Navigation links - SCALED DOWN */
+  .mobile-nav-link {
+    display: block;
+    padding: 0.55rem 0.7rem;
+    /* REDUCED from 0.6rem 0.8rem */
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 10px;
+    /* REDUCED from 11px */
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+    transition: background-color 0.2s ease;
+  }
+
+  .mobile-nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-nav-link:hover {
+    background-color: rgba(249, 249, 249, 0.3);
+    color: #666;
+  }
+
+  /* Location and email styling - SCALED DOWN */
+  .mobile-nav-location {
+    padding: 0.55rem 0.7rem;
+    /* REDUCED from 0.6rem 0.8rem */
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+    background-color: rgba(250, 250, 250, 0.3);
+  }
+
+  .mobile-location-line1 {
+    font-size: 8px;
+    /* REDUCED from 9px */
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0 0 0.15rem 0;
+    /* REDUCED margin */
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .mobile-location-line2 {
+    font-size: 7px;
+    /* REDUCED from 8px */
+    font-weight: 300;
+    color: #888;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+  }
+
+  .mobile-nav-email {
+    padding: 0.55rem 0.7rem;
+    /* REDUCED from 0.6rem 0.8rem */
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+  }
+
+  .mobile-nav-email a {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 9px;
+    /* REDUCED from 10px */
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-nav-email a:hover {
+    color: #666;
+  }
+}
+
+/* Very small screens (max-width: 400px) */
+@media (max-width: 400px) {
+
+  .nav-container {
+    display: none;
+  }
+
+  body {
+    padding-top: 0;
+  }
+
+  .mobile-nav-container {
+    position: fixed !important;
+    top: 0.9rem !important;
+    /* REDUCED from 1rem */
+    left: 0.9rem !important;
+    /* REDUCED from 1rem */
+    z-index: 999 !important;
+    transition: opacity 0.3s ease;
+    pointer-events: auto !important;
+    will-change: opacity;
+  }
+
+  .mobile-nav-container.scrolled {
+    opacity: 0.4 !important;
+    pointer-events: auto !important;
+  }
+
+  .mobile-nav-container.scrolled:hover,
+  .mobile-nav-container.scrolled:focus-within {
+    opacity: 1 !important;
+  }
+
+  /* Replace the favicon background with CSS grid - SCALED DOWN MORE */
+  .mobile-nav-trigger-btn {
+    width: 36px;
+    /* REDUCED from 38px */
+    height: 36px;
+    /* REDUCED from 38px */
+    background: none;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 1.5px;
+    /* REDUCED from 2px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Create the 4x4 grid container - SCALED DOWN MORE */
+  .nav-icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0.8px;
+    /* REDUCED from 1px */
+    width: 28px;
+    /* REDUCED from 30px */
+    height: 28px;
+    /* REDUCED from 30px */
+    border-radius: 1.5px;
+    /* REDUCED from 2px */
+    overflow: hidden;
+  }
+
+  .nav-icon-square {
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Color each square - KEEP SAME */
+  .nav-icon-square:nth-child(1) {
+    background-color: #4A5BA8;
+  }
+
+  .nav-icon-square:nth-child(2) {
+    background-color: #4A7BA8;
+  }
+
+  .nav-icon-square:nth-child(3) {
+    background-color: #4A8B4A;
+  }
+
+  .nav-icon-square:nth-child(4) {
+    background-color: #B84A4A;
+  }
+
+  .nav-icon-square:nth-child(5) {
+    background-color: #E6A84A;
+  }
+
+  .nav-icon-square:nth-child(6) {
+    background-color: #B84A4A;
+  }
+
+  .nav-icon-square:nth-child(7) {
+    background-color: #E6A8E6;
+  }
+
+  .nav-icon-square:nth-child(8) {
+    background-color: #A8B84A;
+  }
+
+  .nav-icon-square:nth-child(9) {
+    background-color: #B8784A;
+  }
+
+  .nav-icon-square:nth-child(10) {
+    background-color: #4A8BA8;
+  }
+
+  .nav-icon-square:nth-child(11) {
+    background-color: #E6D84A;
+  }
+
+  .nav-icon-square:nth-child(12) {
+    background-color: #B86A4A;
+  }
+
+  .nav-icon-square:nth-child(13) {
+    background-color: #2A5A4A;
+  }
+
+  .nav-icon-square:nth-child(14) {
+    background-color: #8A6A8A;
+  }
+
+  .nav-icon-square:nth-child(15) {
+    background-color: #2A2A2A;
+  }
+
+  .nav-icon-square:nth-child(16) {
+    background-color: #4A2A4A;
+  }
+
+  /* Hover effect - SCALED DOWN MORE */
+  .mobile-nav-trigger-btn:hover .nav-icon-grid {
+    transform: scale(1.06);
+    /* REDUCED from 1.08 */
+  }
+
+  .mobile-nav-trigger-btn:hover .nav-icon-square {
+    opacity: 0.8;
+  }
+
+  .mobile-nav-trigger-btn:hover {
+    transform: translateY(-1px) scale(1.06);
+    /* REDUCED from 1.08 */
+    opacity: 0.8;
+  }
+
+  /* Mobile dropdown menu - SCALED DOWN MORE */
+  .mobile-nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.15rem;
+    /* REDUCED from 0.2rem */
+    background: rgba(255, 255, 255, 0.85);
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 1.5px 8px rgba(0, 0, 0, 0.1);
+    /* REDUCED shadow */
+    min-width: 120px;
+    /* REDUCED from 130px */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-nav-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Navigation links - SCALED DOWN MORE */
+  .mobile-nav-link {
+    display: block;
+    padding: 0.5rem 0.6rem;
+    /* REDUCED from 0.55rem 0.7rem */
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 9px;
+    /* REDUCED from 10px */
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    /* REDUCED from 0.5px */
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+    transition: background-color 0.2s ease;
+  }
+
+  .mobile-nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-nav-link:hover {
+    background-color: rgba(249, 249, 249, 0.3);
+    color: #666;
+  }
+
+  /* Location and email styling - SCALED DOWN MORE */
+  .mobile-nav-location {
+    padding: 0.5rem 0.6rem;
+    /* REDUCED from 0.55rem 0.7rem */
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+    background-color: rgba(250, 250, 250, 0.3);
+  }
+
+  .mobile-location-line1 {
+    font-size: 7.5px;
+    /* REDUCED from 8px */
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0 0 0.1rem 0;
+    /* REDUCED margin */
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    /* REDUCED from 0.5px */
+  }
+
+  .mobile-location-line2 {
+    font-size: 6.5px;
+    /* REDUCED from 7px */
+    font-weight: 300;
+    color: #888;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    /* REDUCED from 0.5px */
+    opacity: 0.7;
+  }
+
+  .mobile-nav-email {
+    padding: 0.5rem 0.6rem;
+    /* REDUCED from 0.55rem 0.7rem */
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+  }
+
+  .mobile-nav-email a {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 8.5px;
+    /* REDUCED from 9px */
+    font-weight: 400;
+    letter-spacing: 0.4px;
+    /* REDUCED from 0.5px */
+    transition: color 0.3s ease;
+  }
+
+  .mobile-nav-email a:hover {
+    color: #666;
+  }
+}
+
+/* Very very small screens (max-width: 360px) */
+@media (max-width: 360px) {
+
+  .nav-container {
+    display: none;
+  }
+
+  body {
+    padding-top: 0;
+  }
+
+  .mobile-nav-container {
+    position: fixed !important;
+    top: 0.8rem !important;
+    /* REDUCED from 0.9rem */
+    left: 0.8rem !important;
+    /* REDUCED from 0.9rem */
+    z-index: 999 !important;
+    transition: opacity 0.3s ease;
+    pointer-events: auto !important;
+    will-change: opacity;
+  }
+
+  .mobile-nav-container.scrolled {
+    opacity: 0.4 !important;
+    pointer-events: auto !important;
+  }
+
+  .mobile-nav-container.scrolled:hover,
+  .mobile-nav-container.scrolled:focus-within {
+    opacity: 1 !important;
+  }
+
+  /* Replace the favicon background with CSS grid - SMALLEST */
+  .mobile-nav-trigger-btn {
+    width: 34px;
+    /* REDUCED from 36px */
+    height: 34px;
+    /* REDUCED from 36px */
+    background: none;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 1px;
+    /* REDUCED from 1.5px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Create the 4x4 grid container - SMALLEST */
+  .nav-icon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0.6px;
+    /* REDUCED from 0.8px */
+    width: 26px;
+    /* REDUCED from 28px */
+    height: 26px;
+    /* REDUCED from 28px */
+    border-radius: 1px;
+    /* REDUCED from 1.5px */
+    overflow: hidden;
+  }
+
+  .nav-icon-square {
+    width: 100%;
+    height: 100%;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Color each square - KEEP SAME */
+  .nav-icon-square:nth-child(1) {
+    background-color: #4A5BA8;
+  }
+
+  .nav-icon-square:nth-child(2) {
+    background-color: #4A7BA8;
+  }
+
+  .nav-icon-square:nth-child(3) {
+    background-color: #4A8B4A;
+  }
+
+  .nav-icon-square:nth-child(4) {
+    background-color: #B84A4A;
+  }
+
+  .nav-icon-square:nth-child(5) {
+    background-color: #E6A84A;
+  }
+
+  .nav-icon-square:nth-child(6) {
+    background-color: #B84A4A;
+  }
+
+  .nav-icon-square:nth-child(7) {
+    background-color: #E6A8E6;
+  }
+
+  .nav-icon-square:nth-child(8) {
+    background-color: #A8B84A;
+  }
+
+  .nav-icon-square:nth-child(9) {
+    background-color: #B8784A;
+  }
+
+  .nav-icon-square:nth-child(10) {
+    background-color: #4A8BA8;
+  }
+
+  .nav-icon-square:nth-child(11) {
+    background-color: #E6D84A;
+  }
+
+  .nav-icon-square:nth-child(12) {
+    background-color: #B86A4A;
+  }
+
+  .nav-icon-square:nth-child(13) {
+    background-color: #2A5A4A;
+  }
+
+  .nav-icon-square:nth-child(14) {
+    background-color: #8A6A8A;
+  }
+
+  .nav-icon-square:nth-child(15) {
+    background-color: #2A2A2A;
+  }
+
+  .nav-icon-square:nth-child(16) {
+    background-color: #4A2A4A;
+  }
+
+  /* Hover effect - SMALLEST */
+  .mobile-nav-trigger-btn:hover .nav-icon-grid {
+    transform: scale(1.05);
+    /* REDUCED from 1.06 */
+  }
+
+  .mobile-nav-trigger-btn:hover .nav-icon-square {
+    opacity: 0.8;
+  }
+
+  .mobile-nav-trigger-btn:hover {
+    transform: translateY(-1px) scale(1.05);
+    /* REDUCED from 1.06 */
+    opacity: 0.8;
+  }
+
+  /* Mobile dropdown menu - SMALLEST */
+  .mobile-nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.1rem;
+    /* REDUCED from 0.15rem */
+    background: rgba(255, 255, 255, 0.85);
+    border: none;
+    border-radius: 0;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08);
+    /* REDUCED shadow */
+    min-width: 110px;
+    /* REDUCED from 120px */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    /* REDUCED from -10px */
+    transition: all 0.3s ease;
+  }
+
+  .mobile-nav-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Navigation links - SMALLEST */
+  .mobile-nav-link {
+    display: block;
+    padding: 0.45rem 0.55rem;
+    /* REDUCED from 0.5rem 0.6rem */
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 8.5px;
+    /* REDUCED from 9px */
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    /* REDUCED from 0.4px */
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+    transition: background-color 0.2s ease;
+  }
+
+  .mobile-nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-nav-link:hover {
+    background-color: rgba(249, 249, 249, 0.3);
+    color: #666;
+  }
+
+  /* Location and email styling - SMALLEST */
+  .mobile-nav-location {
+    padding: 0.45rem 0.55rem;
+    /* REDUCED from 0.5rem 0.6rem */
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+    background-color: rgba(250, 250, 250, 0.3);
+  }
+
+  .mobile-location-line1 {
+    font-size: 7px;
+    /* REDUCED from 7.5px */
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0 0 0.08rem 0;
+    /* REDUCED margin */
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    /* REDUCED from 0.4px */
+  }
+
+  .mobile-location-line2 {
+    font-size: 6px;
+    /* REDUCED from 6.5px */
+    font-weight: 300;
+    color: #888;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    /* REDUCED from 0.4px */
+    opacity: 0.7;
+  }
+
+  .mobile-nav-email {
+    padding: 0.45rem 0.55rem;
+    /* REDUCED from 0.5rem 0.6rem */
+    border-bottom: 1px solid rgba(245, 245, 245, 0.5);
+  }
+
+  .mobile-nav-email a {
+    color: #1a1a1a;
+    text-decoration: none;
+    font-size: 8px;
+    /* REDUCED from 8.5px */
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    /* REDUCED from 0.4px */
+    transition: color 0.3s ease;
+  }
+
+  .mobile-nav-email a:hover {
+    color: #666;
   }
 }
 
