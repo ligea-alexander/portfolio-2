@@ -5198,7 +5198,7 @@ body {
     font-size: clamp(11px, 3vw, 14px) !important;
     /* Scale down from 17px, 2.5vw, 24px */
     color: #1a1a1a;
-    line-height: 1.2;
+    line-height: 1.1;
     letter-spacing: 0.01em;
   }
 
@@ -5486,6 +5486,23 @@ body {
   .focus-project-item .project-tools span:last-child {
     font-size: 0.7rem;
   }
+
+  .focus-title {
+    line-height: 1.25;
+    /* Fix cutoff */
+  }
+
+  /* .focus-project-item {
+    min-height: 19px;
+  } */
+
+  .project-name,
+  .project-topic {
+    line-height: 1.2;
+    /* Fix cutoff */
+  }
+
+
 }
 
 /* === Work Accordion Styles === */
