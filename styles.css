@@ -2015,89 +2015,6 @@ body {
     padding: 0 0 1.5rem 0;
   }
 
-  /* .service-card p {
-    font-size: 1.15rem !important;
-    line-height: 1.55;
-    color: #ece9e9;
-    margin-bottom: 0;
-    max-width: none;
-    grid-column: 1;
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
-    padding-bottom: 0.35rem !important;
-  }
-
-  .service-card ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-rows: repeat(6, auto) !important;
-    grid-auto-flow: row !important;
-    gap: 0.5rem !important;
-    grid-column: 1;
-    align-items: start;
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
-    padding-top: 0 !important;
-  }
-
-  .service-card li {
-    font-size: 0.95rem !important;
-    color: #ece9e9;
-    padding: 0.35rem 0;
-    position: relative;
-    padding-left: 1.4rem;
-  }
-
-  .service-card li::before {
-    content: "→";
-    position: absolute;
-    left: 0;
-    color: #999;
-    font-weight: 300;
-    font-size: 0.85rem;
-  } */
-
-  /* Tools cloud adjustments for 768px-481px */
-  /* .tools-cloud-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
-    min-height: 220px !important;
-    min-width: 360px !important;
-    background: transparent;
-    padding: 1.5rem !important;
-  }
-
-  .tools-cloud-container span {
-    display: inline-block;
-    font-size: 1.25em !important;
-    color: #222;
-    font-weight: 400;
-    opacity: 0.85;
-    cursor: pointer;
-    position: absolute;
-    white-space: nowrap;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    animation: subtleFloat 8s ease-in-out infinite;
-    text-shadow: 0 0 15px rgba(34, 34, 34, 0.25),
-      0 0 30px rgba(34, 34, 34, 0.15),
-      0 0 45px rgba(34, 34, 34, 0.1);
-    filter: drop-shadow(0 0 10px rgba(34, 34, 34, 0.2));
-    margin: 0.5rem !important;
-  } */
-  /* 
-  .tools-cloud-container span:hover {
-    opacity: 1;
-    transform: scale(1.12) !important;
-    text-shadow: 0 0 20px rgba(34, 34, 34, 0.35),
-      0 0 40px rgba(34, 34, 34, 0.25),
-      0 0 60px rgba(34, 34, 34, 0.15);
-    filter: drop-shadow(0 0 15px rgba(34, 34, 34, 0.3));
-  } */
-
   /* Text block padding */
   .text-block {
     padding: 0 1.35rem;
@@ -3849,8 +3766,8 @@ body {
   text-decoration: none;
   color: inherit;
   display: block;
-  /* height: 100%;
-  width: 100%; */
+  /* width: 100%;
+  height: 100%; */
 }
 
 /* Prevent underline on hover too */
@@ -3905,8 +3822,6 @@ body {
   background-color: var(--journalism);
 }
 
-
-
 /* Image styling */
 .project-card-image img {
   width: 75%;
@@ -3926,10 +3841,18 @@ body {
 
 /* Project header - contains title and meta in same row */
 .project-details .project-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  width: 100%;
+}
+
+.project-details .project-header a {
+  display: contents;
+  /* This makes the anchor "invisible" to flexbox */
+  text-decoration: none;
+  color: inherit;
 }
 
 /* Project title */
@@ -3948,6 +3871,8 @@ body {
   align-items: center;
   display: flex;
   height: 100%;
+  flex-shrink: 0;
+  /* Prevent shrinking */
 }
 
 .project-details .project-tags {
@@ -3973,6 +3898,8 @@ body {
 
 /* Featured View Mobile Responsive Design */
 
+/* Fix for anchor tags around project headers - ALL MOBILE BREAKPOINTS */
+
 /* Main mobile breakpoint (max-width: 925px) */
 @media (max-width: 925px) {
 
@@ -3980,87 +3907,84 @@ body {
   .featured-grid {
     display: grid;
     grid-template-columns: 1fr !important;
-    /* Single column */
     grid-template-rows: auto !important;
-    /* Auto rows for each project */
     gap: 4rem !important;
-    /* Large gap between projects */
     padding: 2rem 1rem !important;
-    /* Add horizontal padding */
     max-width: 100% !important;
     margin: 0 auto;
   }
 
-  /* Project card wrapper - maintain square aspect ratio */
   .project-card-wrapper {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    /* Space between image and details */
     max-width: 400px;
-    /* Reasonable max width */
     margin: 0 auto;
-    /* Center each project */
     width: 100%;
   }
 
-  /* Keep project card image square */
   .project-card-image {
     aspect-ratio: 1;
-    /* Maintain square */
     width: 100%;
     height: auto;
     max-width: 400px;
-    /* Match wrapper max-width */
   }
 
   .project-card-image img {
     width: 75%;
-    /* Keep existing image sizing */
     height: 75%;
     object-fit: cover;
   }
 
-  /* Reorganize project details - tags under title */
+  /* Fix the project details layout completely */
   .project-details {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    /* Space between elements */
     text-align: center;
-    /* Center all text on mobile */
+    padding: 0;
+    margin: 0;
   }
 
+  /* CRITICAL FIX: Remove the anchor from flexbox flow */
+  .project-details .project-header a {
+    display: block !important;
+    width: 100% !important;
+    text-decoration: none !important;
+    color: inherit !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Make the project header a simple block container */
   .project-details .project-header {
-    display: flex;
-    flex-direction: column;
-    /* Stack title and tags vertically */
-    gap: 0.5rem;
-    /* Small gap between title and tags */
-    align-items: center;
-    /* Center content */
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: center !important;
   }
 
-  /* Project title styling */
+  /* Style the title as a centered block */
   .project-details .project-title {
     font-size: clamp(1.2rem, 4vw, 1.5rem) !important;
     font-weight: 600;
     color: #1a1a1a;
-    margin: 0;
+    margin: 0 0 0.5rem 0 !important;
+    padding: 0 !important;
     line-height: 1.3;
     text-align: center;
-    order: 1;
-    /* Title first */
+    display: block;
+    width: 100%;
   }
 
-  /* Project tags/meta under title */
+  /* Style the meta as a centered block below title */
   .project-details .project-meta {
-    display: flex;
-    justify-content: center;
-    /* Center the tags */
-    width: 100%;
-    order: 2;
-    /* Tags second, under title */
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
   .project-details .project-tags {
@@ -4069,27 +3993,27 @@ body {
     font-weight: 400;
     text-align: center;
     white-space: normal;
-    /* Allow wrapping on mobile */
-    padding: 0;
-    /* Remove padding */
+    padding: 0 !important;
+    margin: 0 !important;
+    display: inline-block;
   }
 
-  /* Project description - comes last */
+  /* Project description - separate block */
   .project-details .project-description {
-    order: 3;
-    /* Description third, after tags */
-    margin-top: 0.5rem;
+    margin-top: 1rem !important;
+    padding: 0 !important;
+    width: 100%;
+    text-align: left;
   }
 
   .project-details .project-description p {
     font-size: clamp(0.9rem, 3.5vw, 1rem) !important;
     color: #666;
     line-height: 1.6;
-    margin: 0;
+    margin: 0 !important;
+    padding: 0 !important;
     text-align: left;
-    /* Left align description text */
     max-width: 100%;
-    /* Use full width */
   }
 }
 
@@ -4098,20 +4022,16 @@ body {
 
   .featured-grid {
     gap: 3.5rem !important;
-    /* Slightly smaller gap */
     padding: 1.8rem 1rem !important;
   }
 
   .project-card-wrapper {
     max-width: 380px;
-    /* Slightly smaller max width */
     gap: 1.3rem;
-    /* Adjust gap between image and details */
   }
 
   .project-card-image {
     max-width: 380px;
-    /* Match wrapper */
   }
 
   .project-details .project-title {
@@ -4133,19 +4053,16 @@ body {
 
   .featured-grid {
     gap: 3rem !important;
-    /* Smaller gap for small screens */
     padding: 1.5rem 0.75rem !important;
   }
 
   .project-card-wrapper {
     max-width: 350px;
-    /* Smaller max width */
     gap: 1.2rem;
   }
 
   .project-card-image {
     max-width: 350px;
-    /* Match wrapper */
   }
 
   .project-details .project-title {
@@ -4167,37 +4084,33 @@ body {
 
   .featured-grid {
     gap: 2.5rem !important;
-    /* Even smaller gap */
     padding: 1.25rem 0.5rem !important;
   }
 
   .project-card-wrapper {
     max-width: 320px;
-    /* Smaller for very small screens */
     gap: 1rem;
   }
 
   .project-card-image {
     max-width: 320px;
-    /* Match wrapper */
   }
 
   .project-details {
     gap: 0.8rem;
-    /* Tighter spacing between elements */
-  }
-
-  .project-details .project-header {
-    gap: 0.4rem;
-    /* Smaller gap between title and tags */
   }
 
   .project-details .project-title {
     font-size: clamp(0.95rem, 3.2vw, 1.2rem) !important;
+    margin: 0 0 0.4rem 0 !important;
   }
 
   .project-details .project-tags {
     font-size: clamp(0.65rem, 2.3vw, 0.75rem) !important;
+  }
+
+  .project-details .project-description {
+    margin-top: 0.8rem !important;
   }
 
   .project-details .project-description p {
@@ -4211,37 +4124,33 @@ body {
 
   .featured-grid {
     gap: 2rem !important;
-    /* Minimal gap for tiny screens */
     padding: 1rem 0.25rem !important;
   }
 
   .project-card-wrapper {
     max-width: 300px;
-    /* Smallest max width */
     gap: 0.9rem;
   }
 
   .project-card-image {
     max-width: 300px;
-    /* Match wrapper */
   }
 
   .project-details {
     gap: 0.7rem;
-    /* Very tight spacing */
-  }
-
-  .project-details .project-header {
-    gap: 0.3rem;
-    /* Very small gap between title and tags */
   }
 
   .project-details .project-title {
     font-size: clamp(0.9rem, 3vw, 1.1rem) !important;
+    margin: 0 0 0.3rem 0 !important;
   }
 
   .project-details .project-tags {
     font-size: clamp(0.6rem, 2.1vw, 0.7rem) !important;
+  }
+
+  .project-details .project-description {
+    margin-top: 0.7rem !important;
   }
 
   .project-details .project-description p {
