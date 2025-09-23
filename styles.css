@@ -4296,7 +4296,7 @@ body {
 /* All Work View Mobile Responsive Design */
 
 /* Main mobile breakpoint (max-width: 925px) */
-/* Main mobile breakpoint (max-width: 925px) - SCALED UP SIGNIFICANTLY */
+
 @media (max-width: 925px) {
 
   .all-work-view {
@@ -4680,7 +4680,8 @@ body {
     flex-wrap: wrap;
     /* Allow wrapping by default */
     align-items: flex-start;
-    gap: 0.2em 0.28em;
+    gap: 0.15em;
+    /* REDUCED: Single gap value, no extra horizontal spacing */
     height: auto;
     min-height: clamp(32px, 6.5vh, 55px);
     max-height: none;
@@ -4689,7 +4690,8 @@ body {
     font-weight: 700;
     color: #1a1a1a;
     margin: 0;
-    line-height: 1.1;
+    line-height: 1.2;
+    /* IMPROVED: Slightly more line height for better readability */
     cursor: pointer;
     max-width: 100%;
     white-space: normal;
@@ -4709,14 +4711,18 @@ body {
     /* Add ellipsis when accordion is active */
     height: clamp(32px, 6.5vh, 55px) !important;
     /* Fixed height when active */
+    gap: 0.25em !important;
+    /* REDUCED: Normal word spacing when active */
   }
 
   .work-title .word {
     margin: 0;
     white-space: nowrap;
     font-weight: 600;
-    letter-spacing: 0.02em;
-    line-height: 1.1;
+    letter-spacing: 0;
+    /* REMOVED: No extra letter spacing needed */
+    line-height: 1.2;
+    /* MATCH: Same as parent */
     position: relative;
     z-index: 2;
   }
@@ -4766,7 +4772,8 @@ body {
     flex-wrap: wrap;
     /* Allow wrapping by default */
     align-items: flex-start;
-    gap: 0.15em 0.25em;
+    gap: 0.12em;
+    /* REDUCED: Even smaller gap for very small screens */
     height: auto;
     min-height: clamp(30px, 6vh, 50px);
     max-height: none;
@@ -4775,7 +4782,8 @@ body {
     font-weight: 700;
     color: #1a1a1a;
     margin: 0;
-    line-height: 1.05;
+    line-height: 0.7;
+    /* IMPROVED: Slightly better line height */
     cursor: pointer;
     max-width: 100%;
     white-space: normal;
@@ -4795,14 +4803,18 @@ body {
     /* Add ellipsis when accordion is active */
     height: clamp(30px, 6vh, 50px) !important;
     /* Fixed height when active */
+    gap: 0.2em !important;
+    /* REDUCED: Normal word spacing when active */
   }
 
   .work-title .word {
     margin: 0;
     white-space: nowrap;
     font-weight: 600;
-    letter-spacing: 0.01em;
-    line-height: 1.05;
+    letter-spacing: 0;
+    /* REMOVED: No extra letter spacing needed */
+    line-height: 0.7;
+    /* MATCH: Same as parent */
     position: relative;
     z-index: 2;
   }
