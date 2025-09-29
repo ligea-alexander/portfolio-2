@@ -7842,9 +7842,11 @@ body {
     font-size: 0.85rem;
     /* Slightly smaller values */
   }
+}
 
-  /* Mobile Case Study Navigation - Below iPhone Pro Max (926px) */
-
+/* Mobile Case Study Navigation - Below iPhone Pro Max (926px) */
+/* Mobile Case Study Navigation - Below iPhone Pro Max (926px) */
+@media (max-width: 925px) {
 
   /* Hide desktop rail completely on mobile */
   .case-rail .desktop-rail {
@@ -7875,32 +7877,46 @@ body {
     text-align: left;
   }
 
+  /* UPDATED: Progress container with multiple dashes */
   .progress-container {
-    width: 60px;
+    display: flex;
+    gap: 4px;
+    /* Space between dashes */
+    align-items: center;
+  }
+
+  /* Individual progress dash */
+  .progress-dash {
+    width: 25px;
+    /* Compact width */
     height: 4px;
     background: #e5e5e5;
     border-radius: 2px;
-    overflow: hidden;
+    transition: background 0.3s ease;
   }
 
-  .progress-bar {
-    height: 100%;
+  /* Active/completed dash */
+  .progress-dash.active {
     background: var(--work-color, #1a1a1a);
-    width: 0%;
-    transition: width 0.3s ease;
   }
 
+  /* Current section label - moved more to the right */
   .current-section-label {
     flex: 1;
     font-size: 0.9rem;
     font-weight: 500;
     color: #1a1a1a;
+    margin-left: 1.5rem;
+    /* INCREASED: Push label more to the right */
+    text-align: left;
   }
 
   .nav-arrow {
     font-size: 0.8rem;
     color: #666;
     transition: transform 0.3s ease;
+    margin-left: auto;
+    /* Push arrow to far right */
   }
 
   .mobile-nav-trigger.open .nav-arrow {
@@ -7967,7 +7983,7 @@ body {
   }
 
   .nav-menu-item.active .active-dot {
-    background: #4CAF50;
+    background: var(--work-color, #4CAF50);
   }
 
   /* Adjust case study main section for mobile nav */
@@ -7999,6 +8015,54 @@ body {
   /* Hide pinned media gallery on mobile */
   .pinned-media-gallery {
     display: none !important;
+  }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 480px) {
+  .mobile-nav-trigger {
+    padding: 0.9rem 1rem;
+    /* Reduce padding on very small screens */
+    gap: 0.8rem;
+  }
+
+  .progress-dash {
+    width: 22px;
+    /* Slightly smaller on mobile */
+    height: 3px;
+  }
+
+  .current-section-label {
+    font-size: 0.85rem;
+    margin-left: 1.2rem;
+    /* Adjust for smaller screens */
+  }
+
+  .nav-arrow {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .mobile-nav-trigger {
+    padding: 0.8rem 0.75rem;
+    gap: 0.6rem;
+  }
+
+  .progress-dash {
+    width: 20px;
+    /* Even smaller for tiny screens */
+    height: 3px;
+  }
+
+  .progress-container {
+    gap: 3px;
+    /* Tighter spacing */
+  }
+
+  .current-section-label {
+    font-size: 0.8rem;
+    margin-left: 1rem;
   }
 }
 

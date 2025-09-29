@@ -1136,8 +1136,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   }
 
+  // ===== CASE STUDY PAGE SCROLLSPY FUNCTIONALITY =====  
+  // Replace the entire case study section with proper separation:
+
   if (isCaseStudyPage) {
-    // Case study page-specific functionality
     function initScrollspy() {
       if (!document.querySelector('.case-study-main-section')) {
         console.log('No scrollspy section found');
@@ -1152,37 +1154,57 @@ document.addEventListener("DOMContentLoaded", (event) => {
       const railThumb = document.querySelector('.rail-thumb');
       const railNav = document.querySelector('.rail-nav');
 
-      // Mobile elements
+      // Mobile elements - SEPARATE
       const mobileNavTrigger = document.getElementById('mobile-nav-trigger');
       const mobileNavMenu = document.getElementById('mobile-nav-menu');
-      const mobileProgressBar = document.getElementById('mobile-progress-bar');
-      const currentSectionLabel = document.getElementById('current-section-label');
+      const currentSectionLabel = document.querySelector('.current-section-label');
       const navMenuItems = document.querySelectorAll('.nav-menu-item');
+      const progressDashes = document.querySelectorAll('.progress-dash');
+      const mobileNavBar = document.querySelector('.mobile-nav-bar');
 
-      // Check if mobile
-      const isMobile = window.innerWidth <= 925;
+      // Check if mobile - REALTIME CHECK
+      function isMobile() {
+        return window.innerWidth <= 925;
+      }
 
       console.log('Mobile detection:', {
-        isMobile,
+        isMobile: isMobile(),
         windowWidth: window.innerWidth,
         mobileNavTrigger: !!mobileNavTrigger,
         mobileNavMenu: !!mobileNavMenu,
-        navMenuItems: navMenuItems.length
+        navMenuItems: navMenuItems.length,
+        mobileNavBar: !!mobileNavBar
       });
 
-      // Mobile navigation functions
+      // ===== MOBILE-ONLY FUNCTIONS =====
       function updateMobileProgress() {
-        if (!mobileProgressBar || !scrollContainer) return;
-        const scrollTop = scrollContainer.scrollTop;
-        const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-        mobileProgressBar.style.width = `${Math.min(progress, 100)}%`;
+        // ONLY run on mobile
+        if (!isMobile() || !progressDashes || !scrollContainer) return;
+
+        const activeSection = getMobileActiveSection();
+        if (!activeSection) return;
+
+        const allSections = Array.from(sections);
+        const activeSectionIndex = allSections.indexOf(activeSection);
+
+        console.log('📱 Updating progress dashes. Active section:', activeSection.getAttribute('data-label'), 'Index:', activeSectionIndex);
+
+        progressDashes.forEach((dash, index) => {
+          if (index <= activeSectionIndex) {
+            dash.classList.add('active');
+            console.log(`📱 Dash ${index}: ACTIVE`);
+          } else {
+            dash.classList.remove('active');
+            console.log(`📱 Dash ${index}: INACTIVE`);
+          }
+        });
       }
 
       function updateMobileSection(activeSection) {
-        if (!activeSection) return;
+        // ONLY run on mobile
+        if (!isMobile() || !activeSection) return;
 
-        console.log('Updating mobile section to:', activeSection.getAttribute('data-label'));
+        console.log('📱 Updating mobile section to:', activeSection.getAttribute('data-label'));
 
         // Update current section label
         if (currentSectionLabel) {
@@ -1197,155 +1219,17 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
           if (targetId === `#${sectionId}`) {
             item.classList.add('active');
-            console.log('Set active mobile menu item:', targetId);
-          }
-        });
-      }
-
-      // Set up mobile navigation if mobile elements exist
-      if (mobileNavTrigger && mobileNavMenu) {
-        console.log('Setting up case study mobile navigation...');
-
-        // HIDE the case study nav initially until first step is reached
-        const mobileNavBar = document.querySelector('.mobile-nav-bar');
-        if (mobileNavBar) {
-          mobileNavBar.style.display = 'none';
-        }
-
-        // Mobile nav trigger click
-        mobileNavTrigger.addEventListener('click', (e) => {
-          e.preventDefault();
-          const isOpen = mobileNavMenu.classList.contains('open');
-
-          if (isOpen) {
-            mobileNavMenu.classList.remove('open');
-            mobileNavTrigger.classList.remove('open');
-          } else {
-            mobileNavMenu.classList.add('open');
-            mobileNavTrigger.classList.add('open');
+            console.log('📱 Set active mobile menu item:', targetId);
           }
         });
 
-        // Menu item clicks
-        navMenuItems.forEach(item => {
-          item.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = item.getAttribute('data-target');
-            const targetSection = document.querySelector(targetId);
-
-            if (targetSection) {
-              scrollToSection(targetSection);
-              mobileNavMenu.classList.remove('open');
-              mobileNavTrigger.classList.remove('open');
-            }
-          });
-        });
-
-        // Initialize first section for mobile
-        if (sections.length > 0) {
-          updateMobileSection(sections[0]);
-        }
-      } else {
-        console.log('Case study mobile nav elements not found');
+        // CRITICAL: Update progress dashes when section changes
+        updateMobileProgress();
       }
 
-      // Desktop navigation setup
-      if (railThumb && railNav && scrollContainer && sections.length > 0) {
-        console.log('Setting up desktop navigation...');
-
-        // Build rail nav from sections
-        function buildRailNav() {
-          railNav.innerHTML = '';
-          sections.forEach((section) => {
-            const label = section.getAttribute('data-label');
-            const id = section.getAttribute('id');
-            if (label && id) {
-              const li = document.createElement('li');
-              const button = document.createElement('button');
-              button.textContent = label;
-              button.setAttribute('data-target', `#${id}`);
-              button.addEventListener('click', () => scrollToSection(section));
-              li.appendChild(button);
-              railNav.appendChild(li);
-            }
-          });
-        }
-
-        // Update rail thumb position
-        function updateRailThumb() {
-          const scrollTop = scrollContainer.scrollTop;
-          const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-          const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
-          const thumbHeight = 20;
-          const maxTravel = 100 - thumbHeight;
-          const thumbPosition = progress * maxTravel;
-          railThumb.style.top = `${Math.min(thumbPosition, maxTravel)}%`;
-        }
-
-        // Update active nav button
-        function updateActiveNav(activeSection) {
-          const buttons = railNav.querySelectorAll('button');
-          buttons.forEach(button => button.classList.remove('active'));
-
-          if (activeSection) {
-            const targetId = `#${activeSection.getAttribute('id')}`;
-            const activeButton = railNav.querySelector(`button[data-target="${targetId}"]`);
-            if (activeButton) {
-              activeButton.classList.add('active');
-            }
-            updateMediaGallery(activeSection.getAttribute('id'));
-          }
-        }
-
-        buildRailNav();
-        updateRailThumb();
-
-        // Desktop scroll handling
-        let scrollTimeout;
-        scrollContainer.addEventListener('scroll', () => {
-          updateRailThumb();
-          railNav.classList.add('show-nav');
-          clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => {
-            railNav.classList.remove('show-nav');
-          }, 1000);
-
-          const activeSection = getActiveSection();
-          if (activeSection) {
-            updateActiveNav(activeSection);
-            if (mobileNavTrigger) {
-              updateMobileSection(activeSection);
-            }
-          }
-
-          // Update mobile progress
-          updateMobileProgress();
-        });
-
-        // Set first section as active
-        if (sections.length > 0) {
-          updateActiveNav(sections[0]);
-          updateMediaGallery(sections[0].getAttribute('id'));
-        }
-      }
-
-      // Shared functions
-      function scrollToSection(targetSection) {
-        if (!scrollContainer || !targetSection) return;
-
-        const containerRect = scrollContainer.getBoundingClientRect();
-        const sectionRect = targetSection.getBoundingClientRect();
-        const currentScroll = scrollContainer.scrollTop;
-        const targetScroll = currentScroll + sectionRect.top - containerRect.top - 100;
-
-        scrollContainer.scrollTo({
-          top: Math.max(0, targetScroll),
-          behavior: 'smooth'
-        });
-      }
-
-      function getActiveSection() {
-        if (!scrollContainer) return null;
+      function getMobileActiveSection() {
+        // MOBILE-SPECIFIC active section detection
+        if (!isMobile() || !scrollContainer) return null;
 
         const containerRect = scrollContainer.getBoundingClientRect();
         const containerCenter = containerRect.top + (containerRect.height / 2);
@@ -1368,7 +1252,114 @@ document.addEventListener("DOMContentLoaded", (event) => {
         return activeSection;
       }
 
+      function updateCaseStudyNavVisibility() {
+        // ONLY run on mobile
+        if (!isMobile() || !mobileNavBar) return;
+
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        const caseBody = document.querySelector('.case-body');
+        const takeawaySection = document.querySelector('.takeaway-section');
+
+        if (!caseBody) return;
+
+        // Get case-body position relative to the document
+        const caseBodyRect = caseBody.getBoundingClientRect();
+        const caseBodyTop = caseBodyRect.top + scrollY;
+        const caseBodyBottom = caseBodyRect.bottom + scrollY;
+
+        // If takeaway section exists, use it as the end boundary
+        let endBoundary = caseBodyBottom;
+        if (takeawaySection) {
+          const takeawayRect = takeawaySection.getBoundingClientRect();
+          endBoundary = takeawayRect.top + scrollY - 100; // Hide 100px before takeaway starts
+        }
+
+        const buffer = 200;
+        const shouldShowNav = scrollY >= (caseBodyTop - buffer) && scrollY <= endBoundary;
+
+        console.log('📱 Case study nav visibility check:', {
+          scrollY: scrollY,
+          caseBodyTop: caseBodyTop,
+          endBoundary: endBoundary,
+          shouldShowNav: shouldShowNav
+        });
+
+        if (shouldShowNav) {
+          console.log('✅ Case study: SHOWING MOBILE NAV');
+          mobileNavBar.style.display = 'block';
+          mobileNavBar.style.opacity = '1';
+          mobileNavBar.style.transition = 'opacity 0.3s ease';
+        } else {
+          console.log('✅ Case study: HIDING MOBILE NAV');
+          mobileNavBar.style.opacity = '0';
+          setTimeout(() => {
+            if (mobileNavBar.style.opacity === '0') {
+              mobileNavBar.style.display = 'none';
+            }
+          }, 300);
+        }
+      }
+
+      function scrollToSectionMobile(targetSection) {
+        // MOBILE-SPECIFIC scroll function
+        if (!isMobile() || !scrollContainer || !targetSection) return;
+
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const sectionRect = targetSection.getBoundingClientRect();
+        const currentScroll = scrollContainer.scrollTop;
+        const targetScroll = currentScroll + sectionRect.top - containerRect.top - 100;
+
+        scrollContainer.scrollTo({
+          top: Math.max(0, targetScroll),
+          behavior: 'smooth'
+        });
+      }
+
+      // ===== DESKTOP-ONLY FUNCTIONS =====
+      function getDesktopActiveSection() {
+        // DESKTOP-SPECIFIC active section detection
+        if (isMobile() || !scrollContainer) return null;
+
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const containerCenter = containerRect.top + (containerRect.height / 2);
+        let activeSection = null;
+        let minDistance = Infinity;
+
+        sections.forEach((section) => {
+          const sectionRect = section.getBoundingClientRect();
+          const sectionCenter = sectionRect.top + (sectionRect.height / 2);
+          const distance = Math.abs(sectionCenter - containerCenter);
+
+          if (sectionRect.bottom > containerRect.top &&
+            sectionRect.top < containerRect.bottom &&
+            distance < minDistance) {
+            minDistance = distance;
+            activeSection = section;
+          }
+        });
+
+        return activeSection;
+      }
+
+      function scrollToSectionDesktop(targetSection) {
+        // DESKTOP-SPECIFIC scroll function
+        if (isMobile() || !scrollContainer || !targetSection) return;
+
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const sectionRect = targetSection.getBoundingClientRect();
+        const currentScroll = scrollContainer.scrollTop;
+        const targetScroll = currentScroll + sectionRect.top - containerRect.top - 100;
+
+        scrollContainer.scrollTo({
+          top: Math.max(0, targetScroll),
+          behavior: 'smooth'
+        });
+      }
+
       function updateMediaGallery(sectionId) {
+        // DESKTOP-ONLY media gallery
+        if (isMobile()) return;
+
         const mediaItems = document.querySelectorAll('.media-item');
         mediaItems.forEach(item => item.classList.remove('active'));
         const activeMedia = document.querySelector(`[data-media="${sectionId}"]`);
@@ -1377,8 +1368,143 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
       }
 
-      // ScrollTrigger for desktop only
-      if (!isMobile && sections.length > 0) {
+      // ===== MOBILE SETUP =====
+      if (isMobile() && mobileNavTrigger && mobileNavMenu && mobileNavBar) {
+        console.log('📱 Setting up MOBILE case study navigation...');
+
+        // Hide mobile nav initially
+        mobileNavBar.style.display = 'none';
+        mobileNavBar.style.opacity = '0';
+
+        // Mobile nav trigger click
+        mobileNavTrigger.addEventListener('click', (e) => {
+          e.preventDefault();
+          const isOpen = mobileNavMenu.classList.contains('open');
+
+          if (isOpen) {
+            mobileNavMenu.classList.remove('open');
+            mobileNavTrigger.classList.remove('open');
+          } else {
+            mobileNavMenu.classList.add('open');
+            mobileNavTrigger.classList.add('open');
+          }
+        });
+
+        // Menu item clicks - MOBILE ONLY
+        navMenuItems.forEach(item => {
+          item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = item.getAttribute('data-target');
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+              scrollToSectionMobile(targetSection);
+              mobileNavMenu.classList.remove('open');
+              mobileNavTrigger.classList.remove('open');
+            }
+          });
+        });
+
+        // Initialize first section for mobile
+        if (sections.length > 0) {
+          updateMobileSection(sections[0]);
+          updateMobileProgress(); // CRITICAL: Initialize progress on load
+        }
+
+        // MOBILE WINDOW SCROLL LISTENER - for nav visibility
+        window.addEventListener('scroll', () => {
+          updateCaseStudyNavVisibility();
+        });
+
+        // MOBILE CONTAINER SCROLL LISTENER - for section tracking AND progress updates
+        scrollContainer.addEventListener('scroll', () => {
+          const activeSection = getMobileActiveSection();
+          if (activeSection) {
+            updateMobileSection(activeSection); // This now calls updateMobileProgress() internally
+          }
+        });
+
+        // Initial check
+        updateCaseStudyNavVisibility();
+        updateMobileProgress(); // CRITICAL: Initialize progress immediately
+
+      } else {
+        console.log('📱 Mobile navigation not initialized - either not mobile or elements missing');
+      }
+      // ===== DESKTOP SETUP =====
+      if (!isMobile() && railThumb && railNav && scrollContainer && sections.length > 0) {
+        console.log('🖥️ Setting up DESKTOP navigation...');
+
+        // Build rail nav from sections - DESKTOP ONLY
+        function buildRailNav() {
+          railNav.innerHTML = '';
+          sections.forEach((section) => {
+            const label = section.getAttribute('data-label');
+            const id = section.getAttribute('id');
+            if (label && id) {
+              const li = document.createElement('li');
+              const button = document.createElement('button');
+              button.textContent = label;
+              button.setAttribute('data-target', `#${id}`);
+              button.addEventListener('click', () => scrollToSectionDesktop(section));
+              li.appendChild(button);
+              railNav.appendChild(li);
+            }
+          });
+        }
+
+        // Update rail thumb position - DESKTOP ONLY
+        function updateRailThumb() {
+          const scrollTop = scrollContainer.scrollTop;
+          const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
+          const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
+          const thumbHeight = 20;
+          const maxTravel = 100 - thumbHeight;
+          const thumbPosition = progress * maxTravel;
+          railThumb.style.top = `${Math.min(thumbPosition, maxTravel)}%`;
+        }
+
+        // Update active nav button - DESKTOP ONLY
+        function updateActiveNav(activeSection) {
+          const buttons = railNav.querySelectorAll('button');
+          buttons.forEach(button => button.classList.remove('active'));
+
+          if (activeSection) {
+            const targetId = `#${activeSection.getAttribute('id')}`;
+            const activeButton = railNav.querySelector(`button[data-target="${targetId}"]`);
+            if (activeButton) {
+              activeButton.classList.add('active');
+            }
+            updateMediaGallery(activeSection.getAttribute('id'));
+          }
+        }
+
+        buildRailNav();
+        updateRailThumb();
+
+        // DESKTOP CONTAINER SCROLL HANDLING
+        let scrollTimeout;
+        scrollContainer.addEventListener('scroll', () => {
+          updateRailThumb();
+          railNav.classList.add('show-nav');
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            railNav.classList.remove('show-nav');
+          }, 1000);
+
+          const activeSection = getDesktopActiveSection();
+          if (activeSection) {
+            updateActiveNav(activeSection);
+          }
+        });
+
+        // Set first section as active - DESKTOP ONLY
+        if (sections.length > 0) {
+          updateActiveNav(sections[0]);
+          updateMediaGallery(sections[0].getAttribute('id'));
+        }
+
+        // ScrollTrigger for desktop only
         sections.forEach((section) => {
           ScrollTrigger.create({
             trigger: section,
@@ -1390,185 +1516,152 @@ document.addEventListener("DOMContentLoaded", (event) => {
           });
         });
         ScrollTrigger.refresh();
+
+      } else {
+        console.log('🖥️ Desktop navigation not initialized - either mobile or elements missing');
       }
 
-      // Show/hide case study navigation based on scroll position
-      function updateCaseStudyNavVisibility() {
-        const mobileNavBar = document.querySelector('.mobile-nav-bar');
-        const firstStep = document.querySelector('.step[data-label]');
+      // ===== RESIZE HANDLER =====
+      window.addEventListener('resize', () => {
+        // Debounce resize
+        clearTimeout(window.resizeTimeout);
+        window.resizeTimeout = setTimeout(() => {
+          // Re-initialize based on new screen size
+          const wasDesktop = !isMobile();
+          const nowMobile = window.innerWidth <= 925;
 
-        if (!mobileNavBar || !firstStep || !scrollContainer) return;
-
-        const firstStepRect = firstStep.getBoundingClientRect();
-        const containerRect = scrollContainer.getBoundingClientRect();
-
-        // Show nav when first step comes into view
-        if (firstStepRect.top <= containerRect.top + 100) {
-          mobileNavBar.style.display = 'block';
-          // Add a fade-in animation
-          if (mobileNavBar.style.opacity === '0' || !mobileNavBar.style.opacity) {
-            mobileNavBar.style.opacity = '0';
-            mobileNavBar.style.transition = 'opacity 0.3s ease';
-            setTimeout(() => {
-              mobileNavBar.style.opacity = '1';
-            }, 10);
+          if (wasDesktop && nowMobile) {
+            // Switched to mobile - page needs refresh for proper mobile setup
+            console.log('📱 Switched to mobile - consider refreshing for full mobile functionality');
+          } else if (!wasDesktop && !nowMobile) {
+            // Switched to desktop - page needs refresh for proper desktop setup
+            console.log('🖥️ Switched to desktop - consider refreshing for full desktop functionality');
           }
-        } else {
-          // Hide nav when scrolled back up before first step
-          mobileNavBar.style.opacity = '0';
-          setTimeout(() => {
-            if (mobileNavBar.style.opacity === '0') {
-              mobileNavBar.style.display = 'none';
-            }
-          }, 300);
-        }
-      }
-
-      // Add this to the existing scroll listener in the desktop navigation setup:
-      scrollContainer.addEventListener('scroll', () => {
-        updateRailThumb();
-        railNav.classList.add('show-nav');
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          railNav.classList.remove('show-nav');
-        }, 1000);
-
-        const activeSection = getActiveSection();
-        if (activeSection) {
-          updateActiveNav(activeSection);
-          if (mobileNavTrigger) {
-            updateMobileSection(activeSection);
-          }
-        }
-
-        // Update mobile progress
-        updateMobileProgress();
-
-        // ADD THIS: Update case study nav visibility
-        updateCaseStudyNavVisibility();
+        }, 250);
       });
     }
+
     initScrollspy();
+  }
+  // Lightbox functionality - move outside initScrollspy and fix
+  //   function initLightbox() {
+  //     const galleryImages = document.querySelectorAll('.gallery-image.clickable');
+  //     const lightbox = document.getElementById('lightbox');
+  //     const lightboxImage = document.getElementById('lightbox-image');
+  //     const lightboxClose = document.getElementById('lightbox-close');
+  //     const lightboxPrev = document.getElementById('lightbox-prev');
+  //     const lightboxNext = document.getElementById('lightbox-next');
+  //     const lightboxCounter = document.getElementById('lightbox-counter');
 
-    // Lightbox functionality - move outside initScrollspy and fix
-    function initLightbox() {
-      const galleryImages = document.querySelectorAll('.gallery-image.clickable');
-      const lightbox = document.getElementById('lightbox');
-      const lightboxImage = document.getElementById('lightbox-image');
-      const lightboxClose = document.getElementById('lightbox-close');
-      const lightboxPrev = document.getElementById('lightbox-prev');
-      const lightboxNext = document.getElementById('lightbox-next');
-      const lightboxCounter = document.getElementById('lightbox-counter');
+  //     // Check if all elements exist
+  //     if (!lightbox || !lightboxImage || !lightboxClose || !lightboxPrev || !lightboxNext || !lightboxCounter) {
+  //       console.log('Lightbox elements missing:', {
+  //         lightbox: !!lightbox,
+  //         lightboxImage: !!lightboxImage,
+  //         lightboxClose: !!lightboxClose,
+  //         lightboxPrev: !!lightboxPrev,
+  //         lightboxNext: !!lightboxNext,
+  //         lightboxCounter: !!lightboxCounter
+  //       });
+  //       return;
+  //     }
 
-      // Check if all elements exist
-      if (!lightbox || !lightboxImage || !lightboxClose || !lightboxPrev || !lightboxNext || !lightboxCounter) {
-        console.log('Lightbox elements missing:', {
-          lightbox: !!lightbox,
-          lightboxImage: !!lightboxImage,
-          lightboxClose: !!lightboxClose,
-          lightboxPrev: !!lightboxPrev,
-          lightboxNext: !!lightboxNext,
-          lightboxCounter: !!lightboxCounter
-        });
-        return;
-      }
+  //     if (galleryImages.length === 0) {
+  //       console.log('No gallery images found');
+  //       return;
+  //     }
 
-      if (galleryImages.length === 0) {
-        console.log('No gallery images found');
-        return;
-      }
+  //     console.log('Initializing lightbox with', galleryImages.length, 'images');
 
-      console.log('Initializing lightbox with', galleryImages.length, 'images');
+  //     let currentImageIndex = 0;
+  //     const imageUrls = [];
 
-      let currentImageIndex = 0;
-      const imageUrls = [];
+  //     // Use placeholder images for now (replace with actual paths later)
+  //     galleryImages.forEach((img, index) => {
+  //       imageUrls.push(`https://picsum.photos/800/600?random=${index + 1}`);
+  //     });
 
-      // Use placeholder images for now (replace with actual paths later)
-      galleryImages.forEach((img, index) => {
-        imageUrls.push(`https://picsum.photos/800/600?random=${index + 1}`);
-      });
+  //     // Open lightbox
+  //     galleryImages.forEach((img, index) => {
+  //       img.addEventListener('click', (e) => {
+  //         e.preventDefault();
+  //         e.stopPropagation(); // Prevent event bubbling
+  //         console.log('Image clicked:', index);
+  //         currentImageIndex = index;
+  //         openLightbox();
+  //       });
+  //     });
 
-      // Open lightbox
-      galleryImages.forEach((img, index) => {
-        img.addEventListener('click', (e) => {
-          e.preventDefault();
-          e.stopPropagation(); // Prevent event bubbling
-          console.log('Image clicked:', index);
-          currentImageIndex = index;
-          openLightbox();
-        });
-      });
+  //     // Close lightbox
+  //     lightboxClose.addEventListener('click', (e) => {
+  //       e.preventDefault();
+  //       e.stopPropagation();
+  //       closeLightbox();
+  //     });
 
-      // Close lightbox
-      lightboxClose.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        closeLightbox();
-      });
+  //     lightbox.addEventListener('click', (e) => {
+  //       if (e.target === lightbox) {
+  //         e.preventDefault();
+  //         e.stopPropagation();
+  //         closeLightbox();
+  //       }
+  //     });
 
-      lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-          e.preventDefault();
-          e.stopPropagation();
-          closeLightbox();
-        }
-      });
+  //     // Navigation
+  //     lightboxPrev.addEventListener('click', (e) => {
+  //       e.preventDefault();
+  //       e.stopPropagation();
+  //       currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : imageUrls.length - 1;
+  //       updateLightboxImage();
+  //     });
 
-      // Navigation
-      lightboxPrev.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : imageUrls.length - 1;
-        updateLightboxImage();
-      });
+  //     lightboxNext.addEventListener('click', (e) => {
+  //       e.preventDefault();
+  //       e.stopPropagation();
+  //       currentImageIndex = currentImageIndex < imageUrls.length - 1 ? currentImageIndex + 1 : 0;
+  //       updateLightboxImage();
+  //     });
 
-      lightboxNext.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        currentImageIndex = currentImageIndex < imageUrls.length - 1 ? currentImageIndex + 1 : 0;
-        updateLightboxImage();
-      });
+  //     // Keyboard navigation
+  //     document.addEventListener('keydown', (e) => {
+  //       if (!lightbox.classList.contains('active')) return;
 
-      // Keyboard navigation
-      document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
+  //       if (e.key === 'Escape') {
+  //         e.preventDefault();
+  //         closeLightbox();
+  //       }
+  //       if (e.key === 'ArrowLeft') {
+  //         e.preventDefault();
+  //         lightboxPrev.click();
+  //       }
+  //       if (e.key === 'ArrowRight') {
+  //         e.preventDefault();
+  //         lightboxNext.click();
+  //       }
+  //     });
 
-        if (e.key === 'Escape') {
-          e.preventDefault();
-          closeLightbox();
-        }
-        if (e.key === 'ArrowLeft') {
-          e.preventDefault();
-          lightboxPrev.click();
-        }
-        if (e.key === 'ArrowRight') {
-          e.preventDefault();
-          lightboxNext.click();
-        }
-      });
+  //     function openLightbox() {
+  //       console.log('Opening lightbox');
+  //       lightbox.classList.add('active');
+  //       // DON'T prevent body scrolling - this might be causing the scroll issue
+  //       updateLightboxImage();
+  //     }
 
-      function openLightbox() {
-        console.log('Opening lightbox');
-        lightbox.classList.add('active');
-        // DON'T prevent body scrolling - this might be causing the scroll issue
-        updateLightboxImage();
-      }
+  //     function closeLightbox() {
+  //       console.log('Closing lightbox');
+  //       lightbox.classList.remove('active');
+  //       // Restore body scrolling
+  //       document.body.style.overflow = '';
+  //     }
 
-      function closeLightbox() {
-        console.log('Closing lightbox');
-        lightbox.classList.remove('active');
-        // Restore body scrolling
-        document.body.style.overflow = '';
-      }
-
-      function updateLightboxImage() {
-        console.log('Updating image to:', imageUrls[currentImageIndex]);
-        lightboxImage.src = imageUrls[currentImageIndex];
-        lightboxCounter.textContent = `${currentImageIndex + 1} / ${imageUrls.length}`;
-      }
-    }
-    initLightbox();
-  } // End of isCaseStudyPage
+  //     function updateLightboxImage() {
+  //       console.log('Updating image to:', imageUrls[currentImageIndex]);
+  //       lightboxImage.src = imageUrls[currentImageIndex];
+  //       lightboxCounter.textContent = `${currentImageIndex + 1} / ${imageUrls.length}`;
+  //     }
+  //   }
+  //   initLightbox();
+  // } // End of isCaseStudyPage
 
 
 });
