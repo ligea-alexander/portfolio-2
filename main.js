@@ -1137,227 +1137,163 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   // ===== CASE STUDY PAGE SCROLLSPY FUNCTIONALITY =====  
-  // Replace the entire case study section with proper separation:
+
+  // Replace the entire case study section in main.js with this:
 
   if (isCaseStudyPage) {
     function initScrollspy() {
-      if (!document.querySelector('.case-study-main-section')) {
-        console.log('No scrollspy section found');
-        return;
-      }
+      const caseMain = document.querySelector('.case-study-main-section');
+      const caseBody = document.querySelector('.case-body');
+      const sections = Array.from(document.querySelectorAll('.step[data-label]'));
+      const railThumb = document.querySelector('.rail-thumb');   // desktop
+      const railNav = document.querySelector('.rail-nav');     // desktop
 
-      console.log('Initializing scrollspy...');
-
-      // Get elements
-      const scrollContainer = document.querySelector('.case-body');
-      const sections = document.querySelectorAll('.step[data-label]');
-      const railThumb = document.querySelector('.rail-thumb');
-      const railNav = document.querySelector('.rail-nav');
-
-      // Mobile elements - SEPARATE
+      // MOBILE UI
+      const mobileNavBar = document.querySelector('.mobile-nav-bar');
       const mobileNavTrigger = document.getElementById('mobile-nav-trigger');
       const mobileNavMenu = document.getElementById('mobile-nav-menu');
       const currentSectionLabel = document.querySelector('.current-section-label');
-      const navMenuItems = document.querySelectorAll('.nav-menu-item');
-      const progressDashes = document.querySelectorAll('.progress-dash');
-      const mobileNavBar = document.querySelector('.mobile-nav-bar');
+      const menuItems = Array.from(document.querySelectorAll('.nav-menu-item'));
+      const progressContainer = document.querySelector('.progress-container');
 
-      // Check if mobile - REALTIME CHECK
-      function isMobile() {
-        return window.innerWidth <= 925;
+      if (!caseMain || !caseBody || sections.length === 0) {
+        console.log('Scrollspy: required elements missing');
+        return;
       }
 
-      console.log('Mobile detection:', {
-        isMobile: isMobile(),
-        windowWidth: window.innerWidth,
-        mobileNavTrigger: !!mobileNavTrigger,
-        mobileNavMenu: !!mobileNavMenu,
-        navMenuItems: navMenuItems.length,
-        mobileNavBar: !!mobileNavBar
-      });
+      const isMobile = () => window.innerWidth <= 925;
 
-      // ===== MOBILE-ONLY FUNCTIONS =====
-      function updateMobileProgress() {
-        // ONLY run on mobile
-        if (!isMobile() || !progressDashes || !scrollContainer) return;
-
-        const activeSection = getMobileActiveSection();
-        if (!activeSection) return;
-
-        const allSections = Array.from(sections);
-        const activeSectionIndex = allSections.indexOf(activeSection);
-
-        console.log('📱 Updating progress dashes. Active section:', activeSection.getAttribute('data-label'), 'Index:', activeSectionIndex);
-
-        progressDashes.forEach((dash, index) => {
-          if (index <= activeSectionIndex) {
-            dash.classList.add('active');
-            console.log(`📱 Dash ${index}: ACTIVE`);
-          } else {
-            dash.classList.remove('active');
-            console.log(`📱 Dash ${index}: INACTIVE`);
-          }
-        });
-      }
-
-      function updateMobileSection(activeSection) {
-        // ONLY run on mobile
-        if (!isMobile() || !activeSection) return;
-
-        console.log('📱 Updating mobile section to:', activeSection.getAttribute('data-label'));
-
-        // Update current section label
-        if (currentSectionLabel) {
-          currentSectionLabel.textContent = activeSection.getAttribute('data-label');
-        }
-
-        // Update menu items active state
-        navMenuItems.forEach(item => {
-          item.classList.remove('active');
-          const targetId = item.getAttribute('data-target');
-          const sectionId = activeSection.getAttribute('id');
-
-          if (targetId === `#${sectionId}`) {
-            item.classList.add('active');
-            console.log('📱 Set active mobile menu item:', targetId);
-          }
-        });
-
-        // CRITICAL: Update progress dashes when section changes
-        updateMobileProgress();
-      }
-
-      function getMobileActiveSection() {
-        // MOBILE-SPECIFIC active section detection
-        if (!isMobile() || !scrollContainer) return null;
-
-        const containerRect = scrollContainer.getBoundingClientRect();
-        const containerCenter = containerRect.top + (containerRect.height / 2);
-        let activeSection = null;
-        let minDistance = Infinity;
-
-        sections.forEach((section) => {
-          const sectionRect = section.getBoundingClientRect();
-          const sectionCenter = sectionRect.top + (sectionRect.height / 2);
-          const distance = Math.abs(sectionCenter - containerCenter);
-
-          if (sectionRect.bottom > containerRect.top &&
-            sectionRect.top < containerRect.bottom &&
-            distance < minDistance) {
-            minDistance = distance;
-            activeSection = section;
-          }
-        });
-
-        return activeSection;
-      }
-
-      function updateCaseStudyNavVisibility() {
-        // ONLY run on mobile
-        if (!isMobile() || !mobileNavBar) return;
-
-        const scrollY = window.scrollY || document.documentElement.scrollTop;
-        const caseBody = document.querySelector('.case-body');
-        const takeawaySection = document.querySelector('.takeaway-section');
-
-        if (!caseBody) return;
-
-        // Get case-body position relative to the document
-        const caseBodyRect = caseBody.getBoundingClientRect();
-        const caseBodyTop = caseBodyRect.top + scrollY;
-        const caseBodyBottom = caseBodyRect.bottom + scrollY;
-
-        // If takeaway section exists, use it as the end boundary
-        let endBoundary = caseBodyBottom;
-        if (takeawaySection) {
-          const takeawayRect = takeawaySection.getBoundingClientRect();
-          endBoundary = takeawayRect.top + scrollY - 100; // Hide 100px before takeaway starts
-        }
-
-        const buffer = 200;
-        const shouldShowNav = scrollY >= (caseBodyTop - buffer) && scrollY <= endBoundary;
-
-        console.log('📱 Case study nav visibility check:', {
-          scrollY: scrollY,
-          caseBodyTop: caseBodyTop,
-          endBoundary: endBoundary,
-          shouldShowNav: shouldShowNav
-        });
-
-        if (shouldShowNav) {
-          console.log('✅ Case study: SHOWING MOBILE NAV');
-          mobileNavBar.style.display = 'block';
-          mobileNavBar.style.opacity = '1';
-          mobileNavBar.style.transition = 'opacity 0.3s ease';
-        } else {
-          console.log('✅ Case study: HIDING MOBILE NAV');
-          mobileNavBar.style.opacity = '0';
-          setTimeout(() => {
-            if (mobileNavBar.style.opacity === '0') {
-              mobileNavBar.style.display = 'none';
+      // ---------- Build progress dashes from sections (mobile) ----------
+      function buildProgressDashes() {
+        if (!progressContainer) return;
+        progressContainer.innerHTML = ''; // rebuild to match sections count
+        sections.forEach((sec, i) => {
+          const dash = document.createElement('div');
+          dash.className = 'progress-dash';
+          dash.dataset.index = String(i);
+          dash.addEventListener('click', (e) => {
+            e.stopPropagation();
+            scrollToSection(i);
+            // close menu if open
+            if (mobileNavMenu?.classList.contains('open')) {
+              mobileNavMenu.classList.remove('open');
+              mobileNavTrigger?.classList.remove('open');
             }
-          }, 300);
+          });
+          progressContainer.appendChild(dash);
+        });
+      }
+
+      // ---------- Helpers to read scroll + sizes ----------
+      const TOP_OFFSET_MOBILE = 80;   // your fixed mobile bar height
+      const TARGET_BIAS = 0.45; // center-ish target
+
+      function getScrollY() {
+        return isMobile() ? (window.scrollY || document.documentElement.scrollTop || 0)
+          : caseBody.scrollTop;
+      }
+      function getViewportHeight() {
+        return isMobile() ? window.innerHeight : caseBody.clientHeight;
+      }
+
+      function scrollToSection(index) {
+        const target = sections[index];
+        if (!target) return;
+
+        if (isMobile()) {
+          const rect = target.getBoundingClientRect();
+          const y = rect.top + (window.scrollY || 0) - TOP_OFFSET_MOBILE;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        } else {
+          const rect = target.getBoundingClientRect();
+          const containerRect = caseBody.getBoundingClientRect();
+          const current = caseBody.scrollTop;
+          const delta = rect.top - containerRect.top - 100; // desktop bias
+          caseBody.scrollTo({ top: Math.max(0, current + delta), behavior: 'smooth' });
         }
       }
 
-      function scrollToSectionMobile(targetSection) {
-        // MOBILE-SPECIFIC scroll function
-        if (!isMobile() || !scrollContainer || !targetSection) return;
+      // ---------- Active section detection ----------
+      function getActiveIndex() {
+        // pick the section whose center is closest to the viewport center
+        const center = getViewportHeight() * TARGET_BIAS;
+        let best = 0, bestDist = Infinity;
 
-        const containerRect = scrollContainer.getBoundingClientRect();
-        const sectionRect = targetSection.getBoundingClientRect();
-        const currentScroll = scrollContainer.scrollTop;
-        const targetScroll = currentScroll + sectionRect.top - containerRect.top - 100;
-
-        scrollContainer.scrollTo({
-          top: Math.max(0, targetScroll),
-          behavior: 'smooth'
+        sections.forEach((sec, i) => {
+          const r = sec.getBoundingClientRect();
+          // Use getBoundingClientRect relative to scroller viewport:
+          const top = isMobile() ? r.top : (r.top - caseBody.getBoundingClientRect().top);
+          const bottom = top + r.height;
+          const mid = top + r.height / 2;
+          const dist = Math.abs(mid - center);
+          const visible = bottom > 0 && top < getViewportHeight();
+          if (visible && dist < bestDist) { bestDist = dist; best = i; }
         });
+        return best;
       }
 
-      // ===== DESKTOP-ONLY FUNCTIONS =====
-      function getDesktopActiveSection() {
-        // DESKTOP-SPECIFIC active section detection
-        if (isMobile() || !scrollContainer) return null;
+      // ---------- UI updates ----------
+      function updateMobileUI(index) {
+        if (!isMobile()) return;
 
-        const containerRect = scrollContainer.getBoundingClientRect();
-        const containerCenter = containerRect.top + (containerRect.height / 2);
-        let activeSection = null;
-        let minDistance = Infinity;
+        // label
+        if (currentSectionLabel) {
+          currentSectionLabel.textContent = sections[index].dataset.label || sections[index].id || `Section ${index + 1}`;
+        }
+        // menu active dot/row
+        menuItems.forEach(item => {
+          item.classList.toggle('active', item.getAttribute('data-target') === `#${sections[index].id}`);
+        });
+        // dashes
+        const dashes = progressContainer ? Array.from(progressContainer.querySelectorAll('.progress-dash')) : [];
+        dashes.forEach((dash, i) => dash.classList.toggle('active', i <= index));
+      }
 
-        sections.forEach((section) => {
-          const sectionRect = section.getBoundingClientRect();
-          const sectionCenter = sectionRect.top + (sectionRect.height / 2);
-          const distance = Math.abs(sectionCenter - containerCenter);
+      function updateDesktopRail() {
+        if (isMobile() || !railThumb) return;
+        const scrollHeight = caseBody.scrollHeight - caseBody.clientHeight;
+        const progress = scrollHeight > 0 ? (caseBody.scrollTop / scrollHeight) : 0;
+        const thumbHeight = 20; // %
+        const maxTravel = 100 - thumbHeight;
+        railThumb.style.top = `${Math.min(progress * maxTravel, maxTravel)}%`;
+      }
 
-          if (sectionRect.bottom > containerRect.top &&
-            sectionRect.top < containerRect.bottom &&
-            distance < minDistance) {
-            minDistance = distance;
-            activeSection = section;
+      // ---------- Desktop rail nav setup ----------
+      function buildDesktopRailNav() {
+        if (isMobile() || !railNav) return;
+
+        railNav.innerHTML = '';
+        sections.forEach((section, i) => {
+          const label = section.getAttribute('data-label');
+          const id = section.getAttribute('id');
+          if (label && id) {
+            const li = document.createElement('li');
+            const button = document.createElement('button');
+            button.textContent = label;
+            button.setAttribute('data-target', `#${id}`);
+            button.addEventListener('click', () => scrollToSection(i));
+            li.appendChild(button);
+            railNav.appendChild(li);
           }
         });
-
-        return activeSection;
       }
 
-      function scrollToSectionDesktop(targetSection) {
-        // DESKTOP-SPECIFIC scroll function
-        if (isMobile() || !scrollContainer || !targetSection) return;
+      function updateDesktopActiveNav(index) {
+        if (isMobile() || !railNav) return;
 
-        const containerRect = scrollContainer.getBoundingClientRect();
-        const sectionRect = targetSection.getBoundingClientRect();
-        const currentScroll = scrollContainer.scrollTop;
-        const targetScroll = currentScroll + sectionRect.top - containerRect.top - 100;
+        const buttons = railNav.querySelectorAll('button');
+        buttons.forEach(button => button.classList.remove('active'));
 
-        scrollContainer.scrollTo({
-          top: Math.max(0, targetScroll),
-          behavior: 'smooth'
-        });
+        const activeButton = buttons[index];
+        if (activeButton) {
+          activeButton.classList.add('active');
+        }
+
+        // Update media gallery if exists
+        updateMediaGallery(sections[index].id);
       }
 
       function updateMediaGallery(sectionId) {
-        // DESKTOP-ONLY media gallery
         if (isMobile()) return;
 
         const mediaItems = document.querySelectorAll('.media-item');
@@ -1368,177 +1304,126 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
       }
 
-      // ===== MOBILE SETUP =====
-      if (isMobile() && mobileNavTrigger && mobileNavMenu && mobileNavBar) {
-        console.log('📱 Setting up MOBILE case study navigation...');
+      // ---------- Mobile nav visibility tied to page scroll ----------
+      function updateMobileNavVisibility() {
+        if (!isMobile() || !mobileNavBar) return;
+        const y = getScrollY();
 
-        // Hide mobile nav initially
-        mobileNavBar.style.display = 'none';
-        mobileNavBar.style.opacity = '0';
+        // show nav while in the case body band; hide otherwise
+        const bodyRect = caseBody.getBoundingClientRect();
+        const docYTop = (window.scrollY || 0) + bodyRect.top;
+        const docYBot = docYTop + bodyRect.height;
 
-        // Mobile nav trigger click
+        const within = y >= (docYTop - 160) && y <= (docYBot - 120); // small buffer
+        mobileNavBar.style.opacity = within ? '1' : '0';
+        mobileNavBar.style.display = within ? 'block' : 'none';
+
+        console.log('📱 Nav visibility:', { y, docYTop, docYBot, within });
+      }
+
+      // ---------- Wire menu clicks (mobile) ----------
+      if (mobileNavTrigger && mobileNavMenu) {
         mobileNavTrigger.addEventListener('click', (e) => {
           e.preventDefault();
-          const isOpen = mobileNavMenu.classList.contains('open');
-
-          if (isOpen) {
-            mobileNavMenu.classList.remove('open');
-            mobileNavTrigger.classList.remove('open');
-          } else {
-            mobileNavMenu.classList.add('open');
-            mobileNavTrigger.classList.add('open');
-          }
+          mobileNavMenu.classList.toggle('open');
+          mobileNavTrigger.classList.toggle('open');
         });
-
-        // Menu item clicks - MOBILE ONLY
-        navMenuItems.forEach(item => {
+        // menu item clicks -> jump
+        menuItems.forEach(item => {
           item.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetId = item.getAttribute('data-target');
-            const targetSection = document.querySelector(targetId);
-
-            if (targetSection) {
-              scrollToSectionMobile(targetSection);
-              mobileNavMenu.classList.remove('open');
-              mobileNavTrigger.classList.remove('open');
-            }
+            const id = item.getAttribute('data-target');
+            const idx = sections.findIndex(s => `#${s.id}` === id);
+            if (idx >= 0) scrollToSection(idx);
+            mobileNavMenu.classList.remove('open');
+            mobileNavTrigger.classList.remove('open');
           });
         });
-
-        // Initialize first section for mobile
-        if (sections.length > 0) {
-          updateMobileSection(sections[0]);
-          updateMobileProgress(); // CRITICAL: Initialize progress on load
-        }
-
-        // MOBILE WINDOW SCROLL LISTENER - for nav visibility
-        window.addEventListener('scroll', () => {
-          updateCaseStudyNavVisibility();
-        });
-
-        // MOBILE CONTAINER SCROLL LISTENER - for section tracking AND progress updates
-        scrollContainer.addEventListener('scroll', () => {
-          const activeSection = getMobileActiveSection();
-          if (activeSection) {
-            updateMobileSection(activeSection); // This now calls updateMobileProgress() internally
-          }
-        });
-
-        // Initial check
-        updateCaseStudyNavVisibility();
-        updateMobileProgress(); // CRITICAL: Initialize progress immediately
-
-      } else {
-        console.log('📱 Mobile navigation not initialized - either not mobile or elements missing');
       }
-      // ===== DESKTOP SETUP =====
-      if (!isMobile() && railThumb && railNav && scrollContainer && sections.length > 0) {
-        console.log('🖥️ Setting up DESKTOP navigation...');
 
-        // Build rail nav from sections - DESKTOP ONLY
-        function buildRailNav() {
-          railNav.innerHTML = '';
-          sections.forEach((section) => {
-            const label = section.getAttribute('data-label');
-            const id = section.getAttribute('id');
-            if (label && id) {
-              const li = document.createElement('li');
-              const button = document.createElement('button');
-              button.textContent = label;
-              button.setAttribute('data-target', `#${id}`);
-              button.addEventListener('click', () => scrollToSectionDesktop(section));
-              li.appendChild(button);
-              railNav.appendChild(li);
-            }
-          });
-        }
+      // ---------- Desktop rail nav interaction ----------
+      function setupDesktopRailVisibility() {
+        if (isMobile() || !railNav) return;
 
-        // Update rail thumb position - DESKTOP ONLY
-        function updateRailThumb() {
-          const scrollTop = scrollContainer.scrollTop;
-          const scrollHeight = scrollContainer.scrollHeight - scrollContainer.clientHeight;
-          const progress = scrollHeight > 0 ? scrollTop / scrollHeight : 0;
-          const thumbHeight = 20;
-          const maxTravel = 100 - thumbHeight;
-          const thumbPosition = progress * maxTravel;
-          railThumb.style.top = `${Math.min(thumbPosition, maxTravel)}%`;
-        }
-
-        // Update active nav button - DESKTOP ONLY
-        function updateActiveNav(activeSection) {
-          const buttons = railNav.querySelectorAll('button');
-          buttons.forEach(button => button.classList.remove('active'));
-
-          if (activeSection) {
-            const targetId = `#${activeSection.getAttribute('id')}`;
-            const activeButton = railNav.querySelector(`button[data-target="${targetId}"]`);
-            if (activeButton) {
-              activeButton.classList.add('active');
-            }
-            updateMediaGallery(activeSection.getAttribute('id'));
-          }
-        }
-
-        buildRailNav();
-        updateRailThumb();
-
-        // DESKTOP CONTAINER SCROLL HANDLING
         let scrollTimeout;
-        scrollContainer.addEventListener('scroll', () => {
-          updateRailThumb();
+        function showRailNav() {
           railNav.classList.add('show-nav');
           clearTimeout(scrollTimeout);
           scrollTimeout = setTimeout(() => {
             railNav.classList.remove('show-nav');
           }, 1000);
-
-          const activeSection = getDesktopActiveSection();
-          if (activeSection) {
-            updateActiveNav(activeSection);
-          }
-        });
-
-        // Set first section as active - DESKTOP ONLY
-        if (sections.length > 0) {
-          updateActiveNav(sections[0]);
-          updateMediaGallery(sections[0].getAttribute('id'));
         }
 
-        // ScrollTrigger for desktop only
-        sections.forEach((section) => {
-          ScrollTrigger.create({
-            trigger: section,
-            start: "top 60%",
-            end: "bottom 40%",
-            scroller: scrollContainer,
-            onEnter: () => updateActiveNav(section),
-            onEnterBack: () => updateActiveNav(section)
-          });
-        });
-        ScrollTrigger.refresh();
-
-      } else {
-        console.log('🖥️ Desktop navigation not initialized - either mobile or elements missing');
+        return showRailNav;
       }
 
-      // ===== RESIZE HANDLER =====
-      window.addEventListener('resize', () => {
-        // Debounce resize
-        clearTimeout(window.resizeTimeout);
-        window.resizeTimeout = setTimeout(() => {
-          // Re-initialize based on new screen size
-          const wasDesktop = !isMobile();
-          const nowMobile = window.innerWidth <= 925;
+      // ---------- Scroll listeners ----------
+      // rAF-throttle to avoid jank
+      let ticking = false;
+      const showRailNav = setupDesktopRailVisibility();
 
-          if (wasDesktop && nowMobile) {
-            // Switched to mobile - page needs refresh for proper mobile setup
-            console.log('📱 Switched to mobile - consider refreshing for full mobile functionality');
-          } else if (!wasDesktop && !nowMobile) {
-            // Switched to desktop - page needs refresh for proper desktop setup
-            console.log('🖥️ Switched to desktop - consider refreshing for full desktop functionality');
+      function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          const idx = getActiveIndex();
+          updateMobileUI(idx);
+          updateDesktopRail();
+          updateDesktopActiveNav(idx);
+          updateMobileNavVisibility();
+
+          // Show desktop rail nav on scroll
+          if (!isMobile() && showRailNav) {
+            showRailNav();
           }
-        }, 250);
+
+          ticking = false;
+        });
+      }
+
+      // Use the correct scroller
+      if (isMobile()) {
+        window.addEventListener('scroll', onScroll, { passive: true });
+      } else {
+        caseBody.addEventListener('scroll', onScroll, { passive: true });
+      }
+
+      // ---------- Init ----------
+      buildProgressDashes();
+      buildDesktopRailNav();
+
+      // ensure each section has an id for menu targets
+      sections.forEach((s, i) => { if (!s.id) s.id = `section-${i + 1}`; });
+
+      // Hide mobile nav initially
+      if (mobileNavBar) {
+        mobileNavBar.style.display = 'none';
+        mobileNavBar.style.opacity = '0';
+      }
+
+      // first paint
+      onScroll();
+
+      // Re-init on resize breakpoint flip
+      let rTO;
+      window.addEventListener('resize', () => {
+        clearTimeout(rTO);
+        rTO = setTimeout(() => {
+          // detach old listeners and re-init (simple path)
+          if (isMobile()) {
+            caseBody.removeEventListener('scroll', onScroll);
+            window.addEventListener('scroll', onScroll, { passive: true });
+          } else {
+            window.removeEventListener('scroll', onScroll);
+            caseBody.addEventListener('scroll', onScroll, { passive: true });
+          }
+          buildProgressDashes();
+          buildDesktopRailNav();
+          onScroll();
+        }, 150);
       });
+
+      console.log('✅ Scrollspy initialized with', sections.length, 'sections');
     }
 
     initScrollspy();

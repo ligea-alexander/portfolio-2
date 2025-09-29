@@ -7844,8 +7844,9 @@ body {
   }
 }
 
-/* Mobile Case Study Navigation - Below iPhone Pro Max (926px) */
-/* Mobile Case Study Navigation - Below iPhone Pro Max (926px) */
+/* ==== Mobile Case Study Navigation ==== */
+
+/*  Below iPhone Pro Max (926px)  */
 @media (max-width: 925px) {
 
   /* Hide desktop rail completely on mobile */
