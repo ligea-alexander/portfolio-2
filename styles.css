@@ -7231,6 +7231,7 @@ body {
   grid-template-columns: 1fr 1fr;
   min-height: auto;
   margin: 0 1rem;
+  padding-bottom: 4rem;
 }
 
 /* Case Article Container */
@@ -7254,6 +7255,10 @@ body {
   align-items: flex-start;
   padding: 10rem 2rem 4rem 4rem;
   z-index: 10;
+}
+
+.desktop-rail {
+  padding-top: 3rem;
 }
 
 /* Rail Track - The scrollbar */
@@ -7383,7 +7388,7 @@ body {
 .pinned-media-gallery {
   position: sticky;
   top: 0;
-  height: 100vh;
+  height: 85vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7438,23 +7443,63 @@ body {
   display: block;
 }
 
-/* Horizontal Gallery */
-
+/* ==== Horizontal Gallery ==== */
 .horizontal-gallery {
-  padding: 2rem 2rem 6rem 2rem;
-  background-color: #820f0f;
+  padding: 0 2rem 6rem 2rem;
+  /* Remove top padding since header has its own */
+  background-color: #f6f7f3;
   position: relative;
-  /* This is already there */
   overflow: hidden;
-  /* Add this to prevent lightbox from escaping */
+}
+
+/* Gallery Header - matches case study meta section styling */
+.gallery-header {
+  padding: 4rem 0 3rem 0;
+  border-top: 1px solid #e5e5e5;
+  /* border-bottom: 1px solid #e5e5e5; */
+  margin-bottom: 3rem;
+  margin-left: 1rem;
+  /* Match .case-study-main-section margin */
+  margin-right: 1rem;
+  /* Match .case-study-main-section margin */
+}
+
+/* New wrapper to align content with case study steps */
+.gallery-header-content {
+  padding: 0 2rem;
+  /* Add horizontal padding here instead */
+  margin-left: 14.25rem;
+  /* Match case study step alignment */
+  margin-right: 3rem;
+  max-width: none;
+}
+
+.gallery-header-content h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.2;
+}
+
+.gallery-instructions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.gallery-instructions p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
 }
 
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  /* Change to 5 columns to match your HTML */
   gap: 1.5rem;
-  /* Reduce gap slightly for better fit */
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -7464,7 +7509,6 @@ body {
   background-color: #ddd;
   border-radius: 8px;
   cursor: zoom-in;
-  /* Changed from pointer to zoom-in for lightbox indication */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   align-items: center;
@@ -7475,9 +7519,7 @@ body {
 
 .gallery-image:hover {
   transform: scale(1.03);
-  /* Slightly reduced scale for subtlety */
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  /* Add shadow on hover */
 }
 
 .gallery-image.clickable {
@@ -7500,19 +7542,102 @@ body {
 
 .gallery-image:hover::before {
   background: rgba(0, 0, 0, 0.1);
-  /* Subtle dark overlay on hover */
 }
 
-/* Lightbox overlay */
+.gallery-image .image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #ccc;
+  border-radius: 8px;
+}
+
+.gallery-image .image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mobile responsive adjustments for gallery header */
+@media (max-width: 925px) {
+
+  .gallery-header {
+    padding: 3rem 1.5rem 2rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .gallery-header h2 {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    margin-bottom: 1rem;
+  }
+
+  .gallery-instructions p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columns on mobile */
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .gallery-header {
+    padding: 2rem 1rem 1.5rem 1rem;
+  }
+
+  .gallery-header h2 {
+    font-size: clamp(1.3rem, 6vw, 1.8rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .gallery-instructions {
+    gap: 0.3rem;
+  }
+
+  .gallery-instructions p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    /* Single column on very small screens */
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+
+  .gallery-header {
+    padding: 1.5rem 0.5rem 1rem 0.5rem;
+  }
+
+  .gallery-header h2 {
+    font-size: clamp(1.2rem, 6.5vw, 1.6rem);
+  }
+
+  .gallery-instructions p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Keep existing lightbox styles unchanged */
 .lightbox-overlay {
   position: absolute;
-  /* Change from fixed to absolute */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(84, 84, 84, 0.8);
-  /* Slightly less opaque */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -7522,184 +7647,66 @@ body {
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Make sure the gallery container can contain the lightbox */
-.horizontal-gallery {
-  padding: 2rem 2rem 6rem 2rem;
-  background-color: #f6f7f3;
-  position: relative;
-  /* Add this to contain the absolute lightbox */
-}
 
-/* Lightbox content - much smaller */
-.lightbox-content {
-  position: relative;
-  max-width: 80vw;
-  max-height: 80vh;
-  transform: scale(0.9);
-  transition: transform 0.3s ease;
-}
-
-.lightbox-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.lightbox-overlay.active .lightbox-content {
-  transform: scale(1);
-}
-
-.lightbox-image {
-  width: 100%;
-  height: auto;
-  max-width: 80vw;
-  max-height: 80vh;
-  object-fit: contain;
-  /* Show full image */
-  border-radius: 8px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-}
-
-/* Close button - adjusted for smaller lightbox */
-.lightbox-close {
-  position: absolute;
-  top: -30px;
-  /* Bring closer */
-  right: -30px;
-  /* Bring closer */
-  background: rgba(255, 255, 255, 0.9);
-  /* More opaque */
-  border: none;
-  width: 35px;
-  /* Slightly smaller */
-  height: 35px;
-  /* Slightly smaller */
-  border-radius: 50%;
-  color: #333;
-  /* Darker color for better contrast */
-  font-size: 18px;
-  /* Slightly smaller */
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.lightbox-close:hover {
-  background: rgba(255, 255, 255, 1);
-}
-
-/* Navigation arrows - adjusted for smaller lightbox */
-.lightbox-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
-  /* More opaque */
-  border: none;
-  width: 45px;
-  /* Slightly smaller */
-  height: 45px;
-  /* Slightly smaller */
-  border-radius: 50%;
-  color: #333;
-  /* Darker color */
-  font-size: 20px;
-  /* Slightly smaller */
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.lightbox-nav:hover {
-  background: rgba(255, 255, 255, 1);
-}
-
-.lightbox-prev {
-  left: -60px;
-  /* Bring closer */
-}
-
-.lightbox-next {
-  right: -60px;
-  /* Bring closer */
-}
-
-/* Image counter - adjusted position */
-.lightbox-counter {
-  position: absolute;
-  bottom: -35px;
-  /* Bring closer */
-  left: 50%;
-  transform: translateX(-50%);
-  color: white;
-  font-size: 13px;
-  /* Slightly smaller */
-  background: rgba(0, 0, 0, 0.7);
-  padding: 4px 12px;
-  /* Slightly smaller padding */
-  border-radius: 15px;
-  /* Smaller radius */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
+/* ==== Takeaway Section ==== */
 
 .takeaway-section {
   min-height: 30vh;
-  padding: 4rem 2rem 4rem 2rem;
-  /* Add more generous padding */
-  margin: 0 auto 4rem auto;
-  /* Center it with auto margins */
-  max-width: 1400px;
-  /* Match the step max-width */
-  text-align: center;
-  /* Center the content */
+  padding: 0 2rem 6rem 2rem;
+  /* Remove padding since header will have its own */
+  background-color: #f6f7f3;
+  /* Match gallery background */
+  position: relative;
+  overflow: hidden;
 }
 
-.takeaway-section .content-wrapper {
+/* Takeaway Header - matches gallery header styling */
+.takeaway-header {
+  padding: 4rem 0 3rem 0;
+  border-top: 1px solid #e5e5e5;
+  margin-bottom: 3rem;
+  margin-left: 1rem;
+  /* Match .case-study-main-section margin */
+  margin-right: 1rem;
+  /* Match .case-study-main-section margin */
+}
+
+.takeaway-header-content {
+  padding: 0 2rem;
+  margin-left: auto;
+  /* Center horizontally */
+  margin-right: auto;
+  /* Center horizontally */
   max-width: 800px;
-  /* Slightly narrower for better readability when centered */
-  margin: 0 auto;
-  /* Center the wrapper */
+  /* Set a reasonable max-width for readability */
+  text-align: center;
+  /* Center the text content */
 }
 
 .takeaway-section h2 {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
-  /* Match step h2 sizing */
   font-weight: 600;
-  /* Match step h2 weight */
   color: #1a1a1a;
-  /* Match step h2 color */
-  margin-bottom: 1.5rem;
-  /* Match step h2 margin */
+  margin: 0 0 1.5rem 0;
   line-height: 1.2;
-  /* Match step h2 line-height */
   text-align: left;
-  /* Align the heading to the left */
 }
 
 .takeaway-section p {
   font-size: 1.1rem;
-  /* Match step p font size */
   line-height: 1.7;
-  /* Match step p line-height */
   color: #666;
-  /* Match step p color */
-  text-align: left;
-  /* Align the paragraph text to the left */
   margin: 0;
-  /* Remove default margins */
-  max-width: none;
-  /* Remove width constraints */
+  max-width: 100%;
+  /* Allow full width within the container */
+  text-align: left;
+  /* Keep paragraph text left-aligned for readability */
 }
 
-/* ===== CASE STUDY: RESPONSIVE DESIGN SYSTEM ===== */
-/* ===== MOBILE FIRST - BELOW IPHONE PRO MAX (926px) ===== */
+/* ===== MOBILE FIRST CASE STUDY: RESPONSIVE DESIGN SYSTEM ===== */
+/* MOBILE CASE STUDY HERO SECTION */
 
-/* Mobile Case Study Hero */
+/* Below iPhone Pro Max (926px)*/
 @media (max-width: 925px) {
 
   /* Convert split layout to vertical stack */
@@ -7846,7 +7853,7 @@ body {
 
 /* ==== Mobile Case Study Navigation ==== */
 
-/*  Below iPhone Pro Max (926px)  */
+/* Below iPhone Pro Max (926px) */
 @media (max-width: 925px) {
 
   /* Hide desktop rail completely on mobile */
@@ -7878,22 +7885,21 @@ body {
     text-align: left;
   }
 
-  /* UPDATED: Progress container with multiple dashes */
+  /* Progress container with multiple dashes */
   .progress-container {
     display: flex;
     gap: 4px;
-    /* Space between dashes */
     align-items: center;
   }
 
   /* Individual progress dash */
   .progress-dash {
     width: 25px;
-    /* Compact width */
     height: 4px;
     background: #e5e5e5;
     border-radius: 2px;
     transition: background 0.3s ease;
+    cursor: pointer;
   }
 
   /* Active/completed dash */
@@ -7901,14 +7907,13 @@ body {
     background: var(--work-color, #1a1a1a);
   }
 
-  /* Current section label - moved more to the right */
+  /* Current section label */
   .current-section-label {
     flex: 1;
     font-size: 0.9rem;
     font-weight: 500;
     color: #1a1a1a;
     margin-left: 1.5rem;
-    /* INCREASED: Push label more to the right */
     text-align: left;
   }
 
@@ -7917,7 +7922,6 @@ body {
     color: #666;
     transition: transform 0.3s ease;
     margin-left: auto;
-    /* Push arrow to far right */
   }
 
   .mobile-nav-trigger.open .nav-arrow {
@@ -7992,7 +7996,6 @@ body {
     grid-template-columns: 1fr !important;
     margin: 0;
     padding-top: 80px;
-    /* Account for fixed nav */
   }
 
   .case-rail {
@@ -8019,51 +8022,250 @@ body {
   }
 }
 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 480px) {
+/* Medium mobile screens (max-width: 768px) and (min-width: 481px) */
+@media (max-width: 768px) and (min-width: 481px) {
+
   .mobile-nav-trigger {
-    padding: 0.9rem 1rem;
-    /* Reduce padding on very small screens */
+    padding: 0.95rem 1.4rem;
+    gap: 0.95rem;
+  }
+
+  .progress-dash {
+    width: 24px;
+    height: 3.5px;
+  }
+
+  .current-section-label {
+    font-size: 0.88rem;
+    margin-left: 1.4rem;
+  }
+
+  .nav-arrow {
+    font-size: 0.78rem;
+  }
+
+  .nav-menu-item {
+    padding: 0.95rem 1.4rem;
+  }
+
+  .section-number {
+    font-size: 0.78rem;
+    min-width: 22px;
+  }
+
+  .section-title {
+    font-size: 0.88rem;
+  }
+
+  .case-body {
+    padding: 1.8rem 1.4rem;
+  }
+
+  .step {
+    padding-bottom: 2.8rem;
+    margin-bottom: 2.8rem;
+  }
+}
+
+/* Small mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+
+  .mobile-nav-trigger {
+    padding: 0.9rem 1.2rem;
+    gap: 0.9rem;
+  }
+
+  .progress-dash {
+    width: 23px;
+    height: 3.5px;
+  }
+
+  .progress-container {
+    gap: 3.5px;
+  }
+
+  .current-section-label {
+    font-size: 0.86rem;
+    margin-left: 1.3rem;
+  }
+
+  .nav-arrow {
+    font-size: 0.76rem;
+  }
+
+  .mobile-nav-menu.open {
+    max-height: 280px;
+  }
+
+  .nav-menu-item {
+    padding: 0.9rem 1.2rem;
+  }
+
+  .section-number {
+    font-size: 0.76rem;
+    margin-right: 0.9rem;
+    min-width: 20px;
+  }
+
+  .section-title {
+    font-size: 0.86rem;
+  }
+
+  .active-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .case-study-main-section {
+    padding-top: 75px;
+  }
+
+  .case-body {
+    padding: 1.6rem 1.2rem;
+  }
+
+  .step {
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* Very small screens (max-width: 400px) */
+@media (max-width: 400px) {
+
+  .mobile-nav-trigger {
+    padding: 0.85rem 1rem;
     gap: 0.8rem;
   }
 
   .progress-dash {
     width: 22px;
-    /* Slightly smaller on mobile */
-    height: 3px;
-  }
-
-  .current-section-label {
-    font-size: 0.85rem;
-    margin-left: 1.2rem;
-    /* Adjust for smaller screens */
-  }
-
-  .nav-arrow {
-    font-size: 0.75rem;
-  }
-}
-
-@media (max-width: 360px) {
-  .mobile-nav-trigger {
-    padding: 0.8rem 0.75rem;
-    gap: 0.6rem;
-  }
-
-  .progress-dash {
-    width: 20px;
-    /* Even smaller for tiny screens */
     height: 3px;
   }
 
   .progress-container {
     gap: 3px;
-    /* Tighter spacing */
   }
 
   .current-section-label {
-    font-size: 0.8rem;
+    font-size: 0.84rem;
+    margin-left: 1.2rem;
+  }
+
+  .nav-arrow {
+    font-size: 0.74rem;
+  }
+
+  .mobile-nav-menu.open {
+    max-height: 260px;
+  }
+
+  .nav-menu-item {
+    padding: 0.85rem 1rem;
+  }
+
+  .section-number {
+    font-size: 0.74rem;
+    margin-right: 0.8rem;
+    min-width: 18px;
+  }
+
+  .section-title {
+    font-size: 0.84rem;
+  }
+
+  .active-dot {
+    width: 6px;
+    height: 6px;
+    margin-left: 0.8rem;
+  }
+
+  .case-study-main-section {
+    padding-top: 70px;
+  }
+
+  .case-body {
+    padding: 1.4rem 1rem;
+  }
+
+  .step {
+    padding-bottom: 2.2rem;
+    margin-bottom: 2.2rem;
+  }
+}
+
+/* Very very small screens (max-width: 360px) */
+@media (max-width: 360px) {
+
+  .mobile-nav-trigger {
+    padding: 0.8rem 0.8rem;
+    gap: 0.7rem;
+  }
+
+  .progress-dash {
+    width: 20px;
+    height: 3px;
+  }
+
+  .progress-container {
+    gap: 2.5px;
+  }
+
+  .current-section-label {
+    font-size: 0.82rem;
     margin-left: 1rem;
+  }
+
+  .nav-arrow {
+    font-size: 0.72rem;
+  }
+
+  .mobile-nav-menu.open {
+    max-height: 240px;
+  }
+
+  .nav-menu-item {
+    padding: 0.8rem 0.8rem;
+  }
+
+  .section-number {
+    font-size: 0.72rem;
+    margin-right: 0.7rem;
+    min-width: 16px;
+  }
+
+  .section-title {
+    font-size: 0.82rem;
+  }
+
+  .active-dot {
+    width: 5px;
+    height: 5px;
+    margin-left: 0.7rem;
+  }
+
+  .case-study-main-section {
+    padding-top: 65px;
+  }
+
+  .case-body {
+    padding: 1.2rem 0.8rem;
+  }
+
+  .step {
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .step h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-bottom: 1.2rem;
+  }
+
+  .step p,
+  .step ul {
+    font-size: 1rem;
+    line-height: 1.6;
   }
 }
 
