@@ -7464,7 +7464,6 @@ body {
   /* Match .case-study-main-section margin */
 }
 
-/* New wrapper to align content with case study steps */
 .gallery-header-content {
   padding: 0 2rem;
   /* Add horizontal padding here instead */
@@ -7496,6 +7495,7 @@ body {
   font-weight: 400;
 }
 
+/* Gallery Grid */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -7562,17 +7562,39 @@ body {
   display: block;
 }
 
-/* Mobile responsive adjustments for gallery header */
+/* Mobile responsive adjustments for gallery header and grid */
 @media (max-width: 925px) {
 
-  .gallery-header {
-    padding: 3rem 1.5rem 2rem 1.5rem;
-    margin-bottom: 2rem;
+  .horizontal-gallery {
+    padding: 0 1rem 4rem 1rem;
+    background-color: #f6f7f3;
+    position: relative;
+    overflow: hidden;
   }
 
-  .gallery-header h2 {
+  .gallery-header {
+    padding: 3rem 0 2rem 0;
+    border-top: 1px solid #e5e5e5;
+    margin-bottom: 2rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .gallery-header-content {
+    padding: 0 1rem;
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .gallery-header-content h2 {
     font-size: clamp(1.5rem, 5vw, 2rem);
     margin-bottom: 1rem;
+  }
+
+  .gallery-instructions {
+    gap: 0.4rem;
   }
 
   .gallery-instructions p {
@@ -7582,21 +7604,84 @@ body {
 
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
-    /* 2 columns on mobile */
     gap: 1rem;
+    max-width: 100%;
+    margin: 0;
     padding: 0 1rem;
+  }
+
+  .gallery-image {
+    aspect-ratio: 4/3;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .gallery-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   }
 }
 
-@media (max-width: 480px) {
+/* Medium mobile screens (max-width: 768px) and (min-width: 481px) */
+@media (max-width: 768px) and (min-width: 481px) {
 
-  .gallery-header {
-    padding: 2rem 1rem 1.5rem 1rem;
+  .horizontal-gallery {
+    padding: 0 0.9rem 3.5rem 0.9rem;
   }
 
-  .gallery-header h2 {
-    font-size: clamp(1.3rem, 6vw, 1.8rem);
-    margin-bottom: 0.75rem;
+  .gallery-header {
+    padding: 2.8rem 0 1.8rem 0;
+    margin-bottom: 1.8rem;
+  }
+
+  .gallery-header-content {
+    padding: 0 0.9rem;
+  }
+
+  .gallery-header-content h2 {
+    font-size: clamp(1.4rem, 4.8vw, 1.9rem);
+    margin-bottom: 0.9rem;
+  }
+
+  .gallery-instructions {
+    gap: 0.35rem;
+  }
+
+  .gallery-instructions p {
+    font-size: 0.88rem;
+    line-height: 1.48;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.9rem;
+    padding: 0 0.9rem;
+  }
+
+  .gallery-image:hover {
+    transform: scale(1.015);
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.11);
+  }
+}
+
+/* Small mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+
+  .horizontal-gallery {
+    padding: 0 0.8rem 3rem 0.8rem;
+  }
+
+  .gallery-header {
+    padding: 2.5rem 0 1.5rem 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .gallery-header-content {
+    padding: 0 0.8rem;
+  }
+
+  .gallery-header-content h2 {
+    font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+    margin-bottom: 0.8rem;
   }
 
   .gallery-instructions {
@@ -7605,48 +7690,168 @@ body {
 
   .gallery-instructions p {
     font-size: 0.85rem;
+    line-height: 1.45;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 0 0.8rem;
+  }
+
+  .gallery-image {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .gallery-image:hover {
+    transform: scale(1.01);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Very small screens (max-width: 400px) */
+@media (max-width: 400px) {
+
+  .horizontal-gallery {
+    padding: 0 0.7rem 2.5rem 0.7rem;
+  }
+
+  .gallery-header {
+    padding: 2.2rem 0 1.2rem 0;
+    margin-bottom: 1.2rem;
+  }
+
+  .gallery-header-content {
+    padding: 0 0.7rem;
+  }
+
+  .gallery-header-content h2 {
+    font-size: clamp(1.2rem, 4.2vw, 1.7rem);
+    margin-bottom: 0.7rem;
+  }
+
+  .gallery-instructions {
+    gap: 0.25rem;
+  }
+
+  .gallery-instructions p {
+    font-size: 0.82rem;
     line-height: 1.4;
   }
 
   .gallery-grid {
     grid-template-columns: 1fr;
-    /* Single column on very small screens */
-    gap: 0.75rem;
+    gap: 0.7rem;
+    padding: 0 0.7rem;
+  }
+
+  .gallery-image {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .gallery-image:hover {
+    transform: scale(1.008);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.09);
   }
 }
 
+/* Very very small screens (max-width: 360px) */
 @media (max-width: 360px) {
 
-  .gallery-header {
-    padding: 1.5rem 0.5rem 1rem 0.5rem;
+  .horizontal-gallery {
+    padding: 0 0.6rem 2rem 0.6rem;
   }
 
-  .gallery-header h2 {
-    font-size: clamp(1.2rem, 6.5vw, 1.6rem);
+  .gallery-header {
+    padding: 2rem 0 1rem 0;
+    margin-bottom: 1rem;
+  }
+
+  .gallery-header-content {
+    padding: 0 0.6rem;
+  }
+
+  .gallery-header-content h2 {
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .gallery-instructions {
+    gap: 0.2rem;
   }
 
   .gallery-instructions p {
     font-size: 0.8rem;
+    line-height: 1.38;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    padding: 0 0.6rem;
+  }
+
+  .gallery-image {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .gallery-image:hover {
+    transform: scale(1.005);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Scale down image placeholders and improve touch targets */
+  .gallery-image .image-placeholder {
+    border-radius: 6px;
+  }
+
+  .gallery-image .image-placeholder img {
+    border-radius: 6px;
   }
 }
 
-/* Keep existing lightbox styles unchanged */
-.lightbox-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(84, 84, 84, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
+/* Ensure images maintain quality and proper loading on all mobile sizes */
+@media (max-width: 925px) {
 
+  .gallery-image .image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Add loading state for better UX */
+  .gallery-image .image-placeholder img[src=""] {
+    opacity: 0;
+  }
+
+  .gallery-image .image-placeholder img:not([src=""]) {
+    opacity: 1;
+  }
+
+  /* Improve touch targets for mobile */
+  .gallery-image.clickable {
+    cursor: pointer;
+    min-height: 44px;
+    /* Minimum touch target size */
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-image {
+      transition: none;
+    }
+
+    .gallery-image:hover {
+      transform: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+}
 
 /* ==== Takeaway Section ==== */
 
@@ -7701,6 +7906,166 @@ body {
   /* Allow full width within the container */
   text-align: left;
   /* Keep paragraph text left-aligned for readability */
+}
+
+/* Mobile responsive adjustments for takeaway section */
+@media (max-width: 925px) {
+
+  .takeaway-section {
+    min-height: 20vh;
+    padding: 0;
+    background-color: #f6f7f3;
+    position: relative;
+    overflow: hidden;
+    margin: 0 1rem;
+  }
+
+  .takeaway-header {
+    padding: 3rem 0 2rem 0;
+    border-top: 1px solid #e5e5e5;
+    margin-bottom: 2rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .takeaway-header-content {
+    padding: 0 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .takeaway-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .takeaway-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #666;
+    margin: 0;
+    max-width: 100%;
+    text-align: left;
+  }
+}
+
+/* Medium mobile screens (max-width: 768px) and (min-width: 481px) */
+@media (max-width: 768px) and (min-width: 481px) {
+
+  .takeaway-section {
+    min-height: 18vh;
+    margin: 0 0.9rem;
+  }
+
+  .takeaway-header {
+    padding: 2.8rem 0 1.8rem 0;
+    margin-bottom: 1.8rem;
+  }
+
+  .takeaway-header-content {
+    padding: 0 0.9rem;
+  }
+
+  .takeaway-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .takeaway-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+}
+
+/* Small mobile screens (max-width: 480px) */
+@media (max-width: 480px) {
+
+  .takeaway-section {
+    min-height: 16vh;
+    margin: 0 0.8rem;
+  }
+
+  .takeaway-header {
+    padding: 2.5rem 0 1.5rem 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .takeaway-header-content {
+    padding: 0 0.8rem;
+  }
+
+  .takeaway-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .takeaway-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+}
+
+/* Very small screens (max-width: 400px) */
+@media (max-width: 400px) {
+
+  .takeaway-section {
+    min-height: 14vh;
+    margin: 0 0.7rem;
+  }
+
+  .takeaway-header {
+    padding: 2.2rem 0 1.2rem 0;
+    margin-bottom: 1.2rem;
+  }
+
+  .takeaway-header-content {
+    padding: 0 0.7rem;
+    max-width: 100%;
+  }
+
+  .takeaway-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .takeaway-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+}
+
+/* Very very small screens (max-width: 360px) */
+@media (max-width: 360px) {
+
+  .takeaway-section {
+    min-height: 12vh;
+    margin: 0 0.6rem;
+  }
+
+  .takeaway-header {
+    padding: 2rem 0 1rem 0;
+    margin-bottom: 1rem;
+  }
+
+  .takeaway-header-content {
+    padding: 0 0.6rem;
+  }
+
+  .takeaway-section h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .takeaway-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
 }
 
 /* ===== MOBILE FIRST CASE STUDY: RESPONSIVE DESIGN SYSTEM ===== */
