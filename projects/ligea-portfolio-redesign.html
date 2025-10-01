@@ -14,17 +14,36 @@
 </head>
 
 <body>
+  <!-- Interactive Gallery Overlay -->
+  <div class="ig-overlay" id="igOverlay" aria-hidden="true">
+    <div class="ig-backdrop"></div>
+    <div class="ig-stage" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <button class="ig-close" aria-label="Close viewer">✕</button>
+      <button class="ig-prev" aria-label="Previous image">‹</button>
+      <button class="ig-next" aria-label="Next image">›</button>
+
+      <!-- Pagination Dots -->
+      <div class="ig-pagination" id="igPagination"></div>
+      <figure class="ig-figure">
+        <img id="igImage" alt="">
+      </figure>
+
+      <figcaption id="igCaption"></figcaption>
+    </div>
+  </div>
+  <!-- Custom Cursor -->
   <div id="custom-cursor">
     <div class="cursor-square"></div>
     <div class="cursor-circle"></div>
   </div>
+  <!-- Navigation -->
   <nav class="nav-container">
     <div class="nav-content">
       <div>
         <p><a href="../work.html">Work</a></p>
       </div>
       <div>
-        <p><a href="../about.html">Background</a></p>
+        <p><a href="#">Background</a></p>
       </div>
     </div>
     <div class="nav-location">
@@ -41,17 +60,33 @@
   <!-- Mobile Navigation -->
   <div class="mobile-nav-container" id="mobile-nav-container">
     <button class="mobile-nav-trigger-btn" id="mobile-nav-trigger-btn">
+      <div class="nav-icon-grid">
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+        <div class="nav-icon-square"></div>
+      </div>
     </button>
-
     <div class="mobile-nav-dropdown" id="mobile-nav-dropdown">
       <div class="mobile-nav-location">
         <p class="mobile-location-line1">Hamburg, Germany</p>
         <p class="mobile-location-line2">New York, America</p>
       </div>
-
+      <a href="../index.html" class="mobile-nav-link">Home</a>
       <a href="../work.html" class="mobile-nav-link">Work</a>
-      <a href="../about.html" class="mobile-nav-link">Background</a>
-
+      <a href="#" class="mobile-nav-link">Background</a>
       <div class="mobile-nav-email">
         <a href="mailto:hi@ligea-alexander.xyz">hi@ligea-alexander.xyz</a>
       </div>
@@ -233,49 +268,91 @@
 
     <!-- Horizontal Asset Gallery -->
     <section class="horizontal-gallery">
+      <div class="gallery-header">
+        <div class="gallery-header-content">
+          <h2>Assets</h2>
+          <div class="gallery-instructions">
+            <p>Click on any image to explore it in detail with navigation and captions; use arrow keys or navigation
+              buttons to browse through the gallery.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="gallery-grid">
-        <div class="gallery-image clickable" data-lightbox="project-gallery">
-          <div class="image-placeholder">Asset 1</div>
+        <div class="gallery-image clickable" data-caption="Main article layout featuring Librae Bakery">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset1.png"
+              alt="Dialogue Magazine article layout"></div>
         </div>
-        <div class="gallery-image clickable" data-lightbox="project-gallery">
-          <div class="image-placeholder">Asset 2</div>
+        <div class="gallery-image clickable" data-caption="Interior view showing the open kitchen design">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset2.png" alt="Librae Bakery interior">
+          </div>
         </div>
-        <div class="gallery-image clickable" data-lightbox="project-gallery">
-          <div class="image-placeholder">Asset 3</div>
+        <div class="gallery-image clickable" data-caption="Architectural details and seating arrangement">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset3.png" alt="Architectural details">
+          </div>
         </div>
-        <div class="gallery-image clickable" data-lightbox="project-gallery">
-          <div class="image-placeholder">Asset 4</div>
+        <div class="gallery-image clickable" data-caption="Featured pastries and coffee culture">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset4.png" alt="Featured pastries"></div>
         </div>
-        <div class="gallery-image clickable" data-lightbox="project-gallery">
-          <div class="image-placeholder">Asset 5</div>
+        <div class="gallery-image clickable" data-caption="Community gathering space and modern Majlis concept">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset5.jpeg" alt="Community space"></div>
         </div>
       </div>
     </section>
 
     <!-- Learning/Takeaways Section -->
     <section class="takeaway-section">
-      <div class="content-wrapper">
-        <h2>Reflection</h2>
-        <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-          pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-          tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-          senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-          placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
-          Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+      <div class="takeaway-header">
+        <div class="takeaway-header-content">
+          <h2>Reflection</h2>
+          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
+            Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+        </div>
       </div>
     </section>
   </main>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-main">
+        <div class="footer-section footer-contact">
+          <h3>Let's Work Together</h3>
+          <p>Ready to turn complex data into compelling stories?</p>
+          <a href="mailto:hi@ligea-alexander.xyz" class="footer-email">hi@ligea-alexander.xyz</a>
+        </div>
 
-  <!-- Add this lightbox HTML before closing body tag -->
-  <div class="lightbox-overlay" id="lightbox">
-    <div class="lightbox-content">
-      <img class="lightbox-image" id="lightbox-image" src="" alt="">
-      <button class="lightbox-close" id="lightbox-close">×</button>
-      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
-      <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
-      <div class="lightbox-counter" id="lightbox-counter">1 / 5</div>
+        <div class="footer-section footer-links">
+          <h3>Explore</h3>
+          <nav class="footer-nav">
+            <a href="index.html">Home</a>
+            <a href="work.html">Work</a>
+            <a href="about.html">Background</a>
+          </nav>
+        </div>
+
+        <div class="footer-section footer-location">
+          <h3>Currently</h3>
+          <p>Hamburg, Germany</p>
+          <p>New York, America</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Ligea Alexander. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/ligea-alexander/" target="_blank" aria-label="LinkedIn">
+            <img src="../icon/LI-Logo.png" alt="LinkedIn" class="social-icon">
+          </a>
+          <a href="https://github.com/ligea-alexander" target="_blank" aria-label="GitHub">
+            <img src="../icon/github-mark-white.png" alt="GitHub" class="social-icon">
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
+  </footer>
 </body>
 
 </html>

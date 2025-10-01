@@ -1215,7 +1215,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
       // ---------- Active section detection ----------
       function getActiveIndex() {
-        // pick the section whose center is closest to the viewport center
+        // Special handling for desktop scroll detection
         const center = getViewportHeight() * TARGET_BIAS;
         let best = 0, bestDist = Infinity;
 
@@ -1227,8 +1227,27 @@ document.addEventListener("DOMContentLoaded", (event) => {
           const mid = top + r.height / 2;
           const dist = Math.abs(mid - center);
           const visible = bottom > 0 && top < getViewportHeight();
-          if (visible && dist < bestDist) { bestDist = dist; best = i; }
+
+          if (visible && dist < bestDist) {
+            bestDist = dist;
+            best = i;
+          }
         });
+
+        // ADDED: Special case for last section - if we're near the bottom, force last section
+        if (!isMobile()) {
+          const scrollPercent = caseBody.scrollTop / (caseBody.scrollHeight - caseBody.clientHeight);
+          if (scrollPercent > 0.85) { // If scrolled more than 85% down
+            return sections.length - 1; // Force last section
+          }
+        } else {
+          // Mobile version
+          const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+          if (scrollPercent > 0.85) {
+            return sections.length - 1;
+          }
+        }
+
         return best;
       }
 
@@ -1427,126 +1446,169 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     initScrollspy();
+
+    // Enhanced Interactive Gallery Viewer
+    function initInteractiveGallery() {
+      const overlay = document.getElementById('igOverlay');
+      if (!overlay) return;
+
+      const tiles = Array.from(document.querySelectorAll('.gallery-grid .gallery-image.clickable'));
+      if (!tiles.length) return;
+
+      const imgEl = overlay.querySelector('#igImage');
+      const capEl = overlay.querySelector('#igCaption');
+      const btnX = overlay.querySelector('.ig-close');
+      const btnPrev = overlay.querySelector('.ig-prev');
+      const btnNext = overlay.querySelector('.ig-next');
+      const backdrop = overlay.querySelector('.ig-backdrop');
+      const pagination = overlay.querySelector('#igPagination');
+
+      const items = tiles.map(tile => {
+        const img = tile.querySelector('img');
+        return {
+          src: img?.currentSrc || img?.src || '',
+          alt: img?.alt || '',
+          cap: tile.dataset.caption || img?.alt || ''
+        };
+      });
+
+      let index = 0;
+      let lastFocus = null;
+
+      // Create pagination dots
+      function createPagination() {
+        pagination.innerHTML = '';
+        items.forEach((_, i) => {
+          const dot = document.createElement('div');
+          dot.className = 'ig-dot';
+          if (i === index) dot.classList.add('active');
+          dot.addEventListener('click', () => openAt(i));
+          pagination.appendChild(dot);
+        });
+      }
+
+      // Update pagination dots
+      function updatePagination() {
+        const dots = pagination.querySelectorAll('.ig-dot');
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      }
+
+      function openAt(i) {
+        index = (i + items.length) % items.length;
+        const it = items[index];
+
+        imgEl.src = it.src;
+        imgEl.alt = it.alt;
+        capEl.textContent = it.cap;
+
+        updatePagination();
+
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('ig-lock');
+        lastFocus = document.activeElement;
+        btnX.focus();
+      }
+
+      function close() {
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('ig-lock');
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      function next() {
+        openAt(index + 1);
+      }
+
+      function prev() {
+        openAt(index - 1);
+      }
+
+      // Initialize pagination
+      createPagination();
+
+      // Wire tiles
+      tiles.forEach((tile, i) => {
+        tile.addEventListener('click', (e) => {
+          e.preventDefault();
+          openAt(i);
+        });
+
+        tile.tabIndex = 0;
+        tile.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openAt(i);
+          }
+        });
+      });
+
+      // Wire controls
+      btnX.addEventListener('click', close);
+      btnNext.addEventListener('click', next);
+      btnPrev.addEventListener('click', prev);
+      backdrop.addEventListener('click', close);
+
+      // Keyboard controls
+      document.addEventListener('keydown', e => {
+        if (overlay.getAttribute('aria-hidden') === 'true') return;
+
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          close();
+        }
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          next();
+        }
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          prev();
+        }
+      });
+
+      // Enhanced swipe support
+      let startX = null;
+      let startY = null;
+
+      overlay.addEventListener('touchstart', e => {
+        const touch = e.touches?.[0];
+        if (touch) {
+          startX = touch.clientX;
+          startY = touch.clientY;
+        }
+      }, { passive: true });
+
+      overlay.addEventListener('touchend', e => {
+        if (startX == null || startY == null) return;
+
+        const touch = e.changedTouches?.[0];
+        if (!touch) return;
+
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+
+        if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+          if (dx < 0) {
+            next();
+          } else {
+            prev();
+          }
+        }
+
+        startX = null;
+        startY = null;
+      }, { passive: true });
+
+      console.log('✅ Enhanced interactive gallery initialized with', items.length, 'images');
+    }
+
+    // Initialize when page loads
+    if (isCaseStudyPage) {
+      setTimeout(() => {
+        initInteractiveGallery();
+      }, 100);
+    }
   }
-  // Lightbox functionality - move outside initScrollspy and fix
-  //   function initLightbox() {
-  //     const galleryImages = document.querySelectorAll('.gallery-image.clickable');
-  //     const lightbox = document.getElementById('lightbox');
-  //     const lightboxImage = document.getElementById('lightbox-image');
-  //     const lightboxClose = document.getElementById('lightbox-close');
-  //     const lightboxPrev = document.getElementById('lightbox-prev');
-  //     const lightboxNext = document.getElementById('lightbox-next');
-  //     const lightboxCounter = document.getElementById('lightbox-counter');
-
-  //     // Check if all elements exist
-  //     if (!lightbox || !lightboxImage || !lightboxClose || !lightboxPrev || !lightboxNext || !lightboxCounter) {
-  //       console.log('Lightbox elements missing:', {
-  //         lightbox: !!lightbox,
-  //         lightboxImage: !!lightboxImage,
-  //         lightboxClose: !!lightboxClose,
-  //         lightboxPrev: !!lightboxPrev,
-  //         lightboxNext: !!lightboxNext,
-  //         lightboxCounter: !!lightboxCounter
-  //       });
-  //       return;
-  //     }
-
-  //     if (galleryImages.length === 0) {
-  //       console.log('No gallery images found');
-  //       return;
-  //     }
-
-  //     console.log('Initializing lightbox with', galleryImages.length, 'images');
-
-  //     let currentImageIndex = 0;
-  //     const imageUrls = [];
-
-  //     // Use placeholder images for now (replace with actual paths later)
-  //     galleryImages.forEach((img, index) => {
-  //       imageUrls.push(`https://picsum.photos/800/600?random=${index + 1}`);
-  //     });
-
-  //     // Open lightbox
-  //     galleryImages.forEach((img, index) => {
-  //       img.addEventListener('click', (e) => {
-  //         e.preventDefault();
-  //         e.stopPropagation(); // Prevent event bubbling
-  //         console.log('Image clicked:', index);
-  //         currentImageIndex = index;
-  //         openLightbox();
-  //       });
-  //     });
-
-  //     // Close lightbox
-  //     lightboxClose.addEventListener('click', (e) => {
-  //       e.preventDefault();
-  //       e.stopPropagation();
-  //       closeLightbox();
-  //     });
-
-  //     lightbox.addEventListener('click', (e) => {
-  //       if (e.target === lightbox) {
-  //         e.preventDefault();
-  //         e.stopPropagation();
-  //         closeLightbox();
-  //       }
-  //     });
-
-  //     // Navigation
-  //     lightboxPrev.addEventListener('click', (e) => {
-  //       e.preventDefault();
-  //       e.stopPropagation();
-  //       currentImageIndex = currentImageIndex > 0 ? currentImageIndex - 1 : imageUrls.length - 1;
-  //       updateLightboxImage();
-  //     });
-
-  //     lightboxNext.addEventListener('click', (e) => {
-  //       e.preventDefault();
-  //       e.stopPropagation();
-  //       currentImageIndex = currentImageIndex < imageUrls.length - 1 ? currentImageIndex + 1 : 0;
-  //       updateLightboxImage();
-  //     });
-
-  //     // Keyboard navigation
-  //     document.addEventListener('keydown', (e) => {
-  //       if (!lightbox.classList.contains('active')) return;
-
-  //       if (e.key === 'Escape') {
-  //         e.preventDefault();
-  //         closeLightbox();
-  //       }
-  //       if (e.key === 'ArrowLeft') {
-  //         e.preventDefault();
-  //         lightboxPrev.click();
-  //       }
-  //       if (e.key === 'ArrowRight') {
-  //         e.preventDefault();
-  //         lightboxNext.click();
-  //       }
-  //     });
-
-  //     function openLightbox() {
-  //       console.log('Opening lightbox');
-  //       lightbox.classList.add('active');
-  //       // DON'T prevent body scrolling - this might be causing the scroll issue
-  //       updateLightboxImage();
-  //     }
-
-  //     function closeLightbox() {
-  //       console.log('Closing lightbox');
-  //       lightbox.classList.remove('active');
-  //       // Restore body scrolling
-  //       document.body.style.overflow = '';
-  //     }
-
-  //     function updateLightboxImage() {
-  //       console.log('Updating image to:', imageUrls[currentImageIndex]);
-  //       lightboxImage.src = imageUrls[currentImageIndex];
-  //       lightboxCounter.textContent = `${currentImageIndex + 1} / ${imageUrls.length}`;
-  //     }
-  //   }
-  //   initLightbox();
-  // } // End of isCaseStudyPage
-
-
 });

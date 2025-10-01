@@ -23,18 +23,37 @@
   <title>Librae Bakery Feature</title>
 </head>
 
-<body class="case-study-page">
+<body class="case-study-page" data-work-type="writing">
+  <!-- Interactive Gallery Overlay -->
+  <div class="ig-overlay" id="igOverlay" aria-hidden="true">
+    <div class="ig-backdrop"></div>
+    <div class="ig-stage" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <button class="ig-close" aria-label="Close viewer">✕</button>
+      <button class="ig-prev" aria-label="Previous image">‹</button>
+      <button class="ig-next" aria-label="Next image">›</button>
+
+      <!-- Pagination Dots -->
+      <div class="ig-pagination" id="igPagination"></div>
+      <figure class="ig-figure">
+        <img id="igImage" alt="">
+      </figure>
+
+      <figcaption id="igCaption"></figcaption>
+    </div>
+  </div>
+  <!-- Custom Cursor -->
   <div id="custom-cursor">
     <div class="cursor-square"></div>
     <div class="cursor-circle"></div>
   </div>
+  <!-- Navigation -->
   <nav class="nav-container">
     <div class="nav-content">
       <div>
         <p><a href="../work.html">Work</a></p>
       </div>
       <div>
-        <p><a href="../about.html">Background</a></p>
+        <p><a href="#">Background</a></p>
       </div>
     </div>
     <div class="nav-location">
@@ -77,7 +96,7 @@
       </div>
       <a href="../index.html" class="mobile-nav-link">Home</a>
       <a href="../work.html" class="mobile-nav-link">Work</a>
-      <a href="../about.html" class="mobile-nav-link">Background</a>
+      <a href="#" class="mobile-nav-link">Background</a>
       <div class="mobile-nav-email">
         <a href="mailto:hi@ligea-alexander.xyz">hi@ligea-alexander.xyz</a>
       </div>
@@ -110,7 +129,7 @@
             Square — a café where Middle Eastern design, coffee culture, and community converge to create a modern
             Majlis.</p>
           <!-- Live Site Link -->
-          <a href="https://www.dialoguemag.com" class="live-site-btn">
+          <a href="https://www.dialoguemag.com" target="_blank" class="live-site-btn">
             Visit Dialogue Magazine <span class="external-arrow">↗</span>
           </a>
         </div>
@@ -213,10 +232,17 @@
             <p>I pitched Librae Bakery because it represented more than a trendy café opening. It was a story about how
               architecture, heritage, and food culture intersect in New York City. Librae's design drew from Bahraini
               traditions while adapting to the rhythms of downtown Manhattan, making it a natural fit for <a
-                href="https://www.dialoguemag.com">Dialogue Magazine's</a> second issue, themed around architecture and
-              coffee. The bakery's open production concept, fusion of Danish and Middle Eastern baking, and its role as
-              a community hub offered a chance to write a feature that spoke to both design and cultural storytelling.
+                href="https://www.dialoguemag.com" target="_blank">Dialogue Magazine's</a> second issue, themed around
+              architecture and coffee. The bakery's open production concept, fusion of Danish and Middle Eastern baking,
+              and its role as a community hub offered a chance to write a feature that spoke to both design and cultural
+              storytelling.
             </p>
+            <br>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam debitis eum et consequuntur laudantium
+              ullam, ab ipsam assumenda eius, aliquid quisquam neque rem, necessitatibus libero fugiat distinctio
+              temporibus culpa nobis. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio nulla fuga dicta
+              quasi esse, voluptatibus dignissimos illum est omnis exercitationem voluptas maxime vero cupiditate.
+              Dolore, adipisci? Atque rem deleniti sunt?</p>
           </section>
           <section id="my-role" class="step" data-label="My Approach" data-index="02">
             <h2>My Approach</h2>
@@ -257,6 +283,11 @@
               specific pastry mentions — so that text and visuals reinforced one another. Their layout decisions
               elevated the story, ensuring that the design mirrored the balance of immersion and clarity I aimed for in
               the writing.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis veniam quos assumenda, exercitationem
+              laborum deleniti. Obcaecati quas in nisi, iure, illum impedit accusamus mollitia molestias id distinctio,
+              temporibus eligendi. Dicta! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi quisquam saepe
+              labore culpa error quaerat sint mollitia quia in quam accusantium, dolorum deserunt velit perferendis quos
+              cupiditate? Vel, eum quidem!</p>
           </section>
 
           <section id="impact" class="step" data-label="Impact" data-index="05">
@@ -273,16 +304,16 @@
       <!-- Right Side: Pinned Media Gallery -->
       <div class="pinned-media-gallery">
         <div class="media-item active" data-media="context">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_preview.png" alt=""></div>
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/dialogue-mag-2-cover.png" alt=""></div>
         </div>
-        <div class="media-item" data-media="my-role">
-          <div class="image-placeholder">My Role Media</div>
+        <div class=" media-item" data-media="my-role">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset4.png" alt=""></div>
         </div>
         <div class="media-item" data-media="execution">
-          <div class="image-placeholder">Execution Media</div>
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_execution.jpg" alt=""></div>
         </div>
         <div class="media-item" data-media="design">
-          <div class="image-placeholder">Design Media</div>
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_preview.png" alt=""></div>
         </div>
         <div class="media-item" data-media="impact">
           <div class="image-placeholder">Impact Media</div>
@@ -296,26 +327,30 @@
         <div class="gallery-header-content">
           <h2>Assets</h2>
           <div class="gallery-instructions">
-            <p>Click any image to view in detail; use arrow keys or navigation buttons to browse through the gallery.
-            </p>
+            <p>Click on any image to explore it in detail with navigation and captions; use arrow keys or navigation
+              buttons to browse through the gallery.</p>
           </div>
         </div>
       </div>
+
       <div class="gallery-grid">
-        <div class="gallery-image clickable" data-lightbox="project-gallery">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset1.png" alt=""></div>
+        <div class="gallery-image clickable" data-caption="Main article layout featuring Librae Bakery">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset1.png"
+              alt="Dialogue Magazine article layout"></div>
         </div>
-        <div class="gallery-image clickable" data-lightbox="project-gallery">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset2.png" alt=""></div>
+        <div class="gallery-image clickable" data-caption="Interior view showing the open kitchen design">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset2.png" alt="Librae Bakery interior">
+          </div>
         </div>
-        <div class="gallery-image clickable" data-lightbox="project-gallery">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset3.png" alt=""></div>
+        <div class="gallery-image clickable" data-caption="Architectural details and seating arrangement">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset3.png" alt="Architectural details">
+          </div>
         </div>
-        <div class="gallery-image clickable" data-lightbox="project-gallery">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset4.png" alt=""></div>
+        <div class="gallery-image clickable" data-caption="Featured pastries and coffee culture">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset4.png" alt="Featured pastries"></div>
         </div>
-        <div class="gallery-image clickable" data-lightbox="project-gallery">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset5.jpeg" alt=""></div>
+        <div class="gallery-image clickable" data-caption="Community gathering space and modern Majlis concept">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset5.jpeg" alt="Community space"></div>
         </div>
       </div>
     </section>
@@ -335,52 +370,44 @@
       </div>
     </section>
   </main>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-main">
+        <div class="footer-section footer-contact">
+          <h3>Let's Work Together</h3>
+          <p>Ready to turn complex data into compelling stories?</p>
+          <a href="mailto:hi@ligea-alexander.xyz" class="footer-email">hi@ligea-alexander.xyz</a>
+        </div>
 
-  <!-- Add this lightbox HTML before closing body tag -->
-  <div class="lightbox-overlay" id="lightbox">
-    <div class="lightbox-content">
-      <img class="lightbox-image" id="lightbox-image" src="" alt="">
-      <button class="lightbox-close" id="lightbox-close">×</button>
-      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">‹</button>
-      <button class="lightbox-nav lightbox-next" id="lightbox-next">›</button>
-      <div class="lightbox-counter" id="lightbox-counter">1 / 5</div>
+        <div class="footer-section footer-links">
+          <h3>Explore</h3>
+          <nav class="footer-nav">
+            <a href="index.html">Home</a>
+            <a href="work.html">Work</a>
+            <a href="about.html">Background</a>
+          </nav>
+        </div>
+
+        <div class="footer-section footer-location">
+          <h3>Currently</h3>
+          <p>Hamburg, Germany</p>
+          <p>New York, America</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Ligea Alexander. All rights reserved.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/ligea-alexander/" target="_blank" aria-label="LinkedIn">
+            <img src="../icon/LI-Logo.png" alt="LinkedIn" class="social-icon">
+          </a>
+          <a href="https://github.com/ligea-alexander" target="_blank" aria-label="GitHub">
+            <img src="../icon/github-mark-white.png" alt="GitHub" class="social-icon">
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
+  </footer>
 </body>
-<footer class="footer">
-  <div class="footer-content">
-    <div class="footer-main">
-      <div class="footer-section footer-contact">
-        <h3>Let's Work Together</h3>
-        <p>Ready to turn complex data into compelling stories?</p>
-        <a href="mailto:hi@ligea-alexander.xyz" class="footer-email">hi@ligea-alexander.xyz</a>
-      </div>
-
-      <div class="footer-section footer-links">
-        <h3>Explore</h3>
-        <nav class="footer-nav">
-          <a href="index.html">Home</a>
-          <a href="work.html">Work</a>
-          <a href="about.html">Background</a>
-        </nav>
-      </div>
-
-      <div class="footer-section footer-location">
-        <h3>Currently</h3>
-        <p>Hamburg, Germany</p>
-        <p>New York, America</p>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>&copy; 2025 Ligea Alexander. All rights reserved.</p>
-      <div class="footer-social">
-        <a href="#" aria-label="LinkedIn">LinkedIn</a>
-        <a href="#" aria-label="GitHub">GitHub</a>
-        <a href="#" aria-label="Dribbble">Dribbble</a>
-      </div>
-    </div>
-  </div>
-</footer>
 
 </html>
