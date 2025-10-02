@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
   <link rel="stylesheet" href="../styles.css">
   <link rel="shortcut icon" href="../icon/favicon.ico" type="image/x-icon">
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
@@ -13,7 +14,7 @@
   <title>Portfolio Redesign</title>
 </head>
 
-<body>
+<body lass="case-study-page" data-work-type="developer">
   <!-- Interactive Gallery Overlay -->
   <div class="ig-overlay" id="igOverlay" aria-hidden="true">
     <div class="ig-backdrop"></div>
@@ -153,96 +154,142 @@
     <!-- Scrollspy + Pinned Media Section -->
     <section class="case-study-main-section">
       <!-- Case Study Article Container -->
-      <article id="case" class="case">
-        <!-- Left Side: Fixed Rail -->
-        <aside id="case-rail" class="case-rail">
+      <aside id="case-rail" class="case-rail">
+        <!-- Desktop Rail (hidden on mobile) -->
+        <div class="desktop-rail">
           <div class="rail-track">
             <div class="rail-thumb"></div>
           </div>
           <ol class="rail-nav">
             <li><button data-target="#context">Why This Story</button></li>
-            <li><button data-target="#my-role">Topic Development</button></li>
-            <li><button data-target="#execution">Methodology</button></li>
-            <li><button data-target="#design">Design Choices</button></li>
+            <li><button data-target="#my-role">My Approach</button></li>
+            <li><button data-target="#execution">Execution</button></li>
+            <li><button data-target="#design">Design & Production</button></li>
             <li><button data-target="#impact">Impact</button></li>
           </ol>
-        </aside>
+        </div>
 
-        <!-- Center: Scrolling Content -->
-        <main class="case-body">
-          <section id="context" class="step" data-label="Why / Rationale">
-            <h2>A Site That (Better) Represents Me</h2>
-            <p>My <a href="https://ligea-alexander.github.io/ligea-portfolio/" target="_blank">previous portfolio</a>
-              was functional but flat — a simple grid that showed projects without much
-              character. It didn't communicate how I work or the kinds of experiences I aim to create through my work.
-              For me, it's obvious how a creator (whether writer, coder, or analyst) works from the <em>moment</em> you
-              come into visual contact with their work — long before you scroll to an About page. My old site failed
-              that test.
-            </p>
-            <br>
-            <p>Like many of us, I leaned on fast, out-of-the-box tools to get something online quickly when I realized I
-              needed to share my work for jobs and conversations. For me, that tool was Quarto; especially attractive
-              because of its rising popularity among people working at the intersection of data science, analytics,
-              research, and storytelling (and its tight connection to R).</p>
-            <br>
-            <p>That first site served its purpose, but it wasn't enough. I needed a portfolio that would do two things
-              at once:</p>
-            <ul>
-              <li>Showcase my skills in frontend development, animation, and design thinking</li>
-              <li>Express my perspective as a creative technologist — blending narrative, interaction, and code into
-                something cohesive.</li>
-            </ul>
-            <p>The redesign became a chance to treat my own portfolio like a client project: setting goals,
-              experimenting
-              with design direction, and building an experience that reflects who I am now, not who I was when I first
-              coded a site.
-            </p>
-          </section>
+        <!-- Mobile Sticky Navigation -->
+        <div class="mobile-nav-bar">
+          <button class="mobile-nav-trigger" id="mobile-nav-trigger">
+            <div class="progress-container">
+              <div class="progress-dash" data-section="0"></div>
+              <div class="progress-dash" data-section="1"></div>
+              <div class="progress-dash" data-section="2"></div>
+              <div class="progress-dash" data-section="3"></div>
+              <div class="progress-dash" data-section="4"></div>
+              <!-- Add more dashes based on number of sections -->
+            </div>
+            <span class="current-section-label" id="current-section-label">Why This Story</span>
+            <span class="nav-arrow">▼</span>
+          </button>
 
-          <section id="my-role" class="step" data-label="Shaping the Direction">
-            <h2>Shaping the Direction</h2>
-            <p>The redesign wasn't just a reskin — it was a rebuild. My old site relied on Quarto, a fast,
-              out-of-the-box solution popular among data practitioners. It worked, but it also limited my ability to
-              control design, interaction, and identity.
-              Here's the shift I captured in the redesign:</p>
-            <pre><!-- Diagram using text characters -->
+          <!-- Slide-down menu -->
+          <div class="mobile-nav-menu" id="mobile-nav-menu">
+            <div class="nav-menu-item" data-target="#context" data-index="01">
+              <span class="section-number">01</span>
+              <span class="section-title">Why This Story</span>
+              <span class="active-dot"></span>
+            </div>
+            <div class="nav-menu-item" data-target="#my-role" data-index="02">
+              <span class="section-number">02</span>
+              <span class="section-title">My Approach</span>
+              <span class="active-dot"></span>
+            </div>
+            <div class="nav-menu-item" data-target="#execution" data-index="03">
+              <span class="section-number">03</span>
+              <span class="section-title">Execution</span>
+              <span class="active-dot"></span>
+            </div>
+            <div class="nav-menu-item" data-target="#design" data-index="04">
+              <span class="section-number">04</span>
+              <span class="section-title">Design & Production</span>
+              <span class="active-dot"></span>
+            </div>
+            <div class="nav-menu-item" data-target="#impact" data-index="05">
+              <span class="section-number">05</span>
+              <span class="section-title">Impact</span>
+              <span class="active-dot"></span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Center: Scrolling Content -->
+      <main class="case-body">
+        <section id="context" class="step" data-label="Why / Rationale" data-index="01">
+          <h2>A Site That (Better) Represents Me</h2>
+          <p>My <a href="https://ligea-alexander.github.io/ligea-portfolio/" target="_blank">previous portfolio</a>
+            was functional but flat — a simple grid that showed projects without much
+            character. It didn't communicate how I work or the kinds of experiences I aim to create through my work.
+            For me, it's obvious how a creator (whether writer, coder, or analyst) works from the <em>moment</em> you
+            come into visual contact with their work — long before you scroll to an About page. My old site failed
+            that test.
+          </p>
+          <br>
+          <p>Like many of us, I leaned on fast, out-of-the-box tools to get something online quickly when I realized I
+            needed to share my work for jobs and conversations. For me, that tool was Quarto; especially attractive
+            because of its rising popularity among people working at the intersection of data science, analytics,
+            research, and storytelling (and its tight connection to R).</p>
+          <br>
+          <p>That first site served its purpose, but it wasn't enough. I needed a portfolio that would do two things
+            at once:</p>
+          <ul>
+            <li>Showcase my skills in frontend development, animation, and design thinking</li>
+            <li>Express my perspective as a creative technologist — blending narrative, interaction, and code into
+              something cohesive.</li>
+          </ul>
+          <p>The redesign became a chance to treat my own portfolio like a client project: setting goals,
+            experimenting
+            with design direction, and building an experience that reflects who I am now, not who I was when I first
+            coded a site.
+          </p>
+        </section>
+
+        <section id="my-role" class="step" data-label="Shaping the Direction" data-index="02">
+          <h2>Shaping the Direction</h2>
+          <p>The redesign wasn't just a reskin — it was a rebuild. My old site relied on Quarto, a fast,
+            out-of-the-box solution popular among data practitioners. It worked, but it also limited my ability to
+            control design, interaction, and identity.
+            Here's the shift I captured in the redesign:</p>
+          <pre><!-- Diagram using text characters -->
             Old Portfolio ──> Functional | Fast-build | Tool-dependent (Quarto)
                                   │
                                   ▼
             New Portfolio ──> Interactive | Narrative | Hand-coded Identity
             </pre>
-            <p>From there, I approached the rebuild as both designer and developer, making deliberate choices about
-              aesthetic direction, interaction design, and the underlying architecture.</p>
-          </section>
+          <p>From there, I approached the rebuild as both designer and developer, making deliberate choices about
+            aesthetic direction, interaction design, and the underlying architecture.</p>
+        </section>
 
-          <section id="execution" class="step" data-label="Methodology">
-            <h2>Methodology / Execution</h2>
-            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
-              Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
-          </section>
+        <section id="execution" class="step" data-label="Methodology / Execution" data-index="03">
+          <h2>Methodology / Execution</h2>
+          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
+            Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+        </section>
 
-          <section id="design" class="step" data-label="Design">
-            <h2>Design and Production Choices</h2>
-            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
-          </section>
+        <section id="design" class="step" data-label="Design and Production Choices" data-index="04">
+          <h2>Design and Production Choices</h2>
+          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
+        </section>
 
-          <section id="impact" class="step" data-label="Impact">
-            <h2>Impact</h2>
-            <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-              pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-              tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-              senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-              placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
-          </section>
-        </main>
+        <section id="impact" class="step" data-label="Impact" data-index="05">
+          <h2>Impact</h2>
+          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
+            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
+            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
+            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
+            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
+        </section>
+      </main>
       </article>
 
       <!-- Right Side: Pinned Media Gallery -->
