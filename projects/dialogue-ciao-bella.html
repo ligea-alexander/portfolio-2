@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
   <meta name="description"
     content="Feature story for Dialogue Magazine exploring Librae Bakery in New York's Cooper Square — where Middle Eastern design, coffee culture, and community converge in a modern Majlis." />
   <meta name="author" content="Ligea Alexander" />
@@ -19,10 +20,10 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
   <script src="../main.js" defer></script>
-  <title>Ciao Bella Café Feature</title>
+  <title>Ciao Bella Feature</title>
 </head>
 
-<body>
+<body class="case-study-page" data-work-type="writing">
   <!-- Interactive Gallery Overlay -->
   <div class="ig-overlay" id="igOverlay" aria-hidden="true">
     <div class="ig-backdrop"></div>
@@ -108,26 +109,26 @@
         <!-- Left Half: Title Block with Background Color -->
         <div class="hero-title-block">
           <span class="case-study-subtitle">EDITORIAL</span>
-          <h1 class="case-study-title">Dialogue Magazine: Ciao Bella Café Feature</h1>
+          <h1 class="case-study-title">Dialogue Magazine: Ciao Bella</h1>
         </div>
 
         <!-- Right Half: Hero Image -->
         <div class="hero-image-block">
           <div class="image-placeholder">
-            <img src="../img/img_wrk_prvw/ciao_bella_preview.png"
-              alt="Two people standing side by side, one wearing a dark shirt and cap with a gold pendant necklace, the other with long curly hair, a green scarf, and holding a white coffee cup. The background is a soft cream color, creating a warm and inviting atmosphere. The illustration style is gentle and friendly, suggesting a relaxed and pleasant mood. No visible text in the image." />
+            <img src="../img/img_wrk_prvw/ciao_bella_preview.png" alt="an illustration of Ciao Bella owners" />
           </div>
         </div>
+      </div>
       </div>
 
       <!-- Meta Info Section - Full Width Below -->
       <div class="hero-meta-section">
         <div class="hero-text-content">
-          <p class="case-study-intro">In Dialogue Magazine's second issue, I profiled Librae Bakery in New York's Cooper
-            Square — a café where Middle Eastern design, coffee culture, and community converge to create a modern
-            Majlis.</p>
+          <p class="case-study-intro">Feature for Dialogue Magazine's debut issue profiling Ciao Bella, a Prospect
+            Lefferts Gardens café founded by Marco and Jessica. The story explores how a neighborhood shop born at the
+            height of the COVID-19 pandemic redefined community, coffee, and belonging in Brooklyn.</p>
           <!-- Live Site Link -->
-          <a href="https://www.dialoguemag.com" class="live-site-btn">
+          <a href="https://www.dialoguemag.com" target="_blank" class="live-site-btn">
             Visit Dialogue Magazine <span class="external-arrow">↗</span>
           </a>
         </div>
@@ -136,22 +137,22 @@
           <div class="meta-item">
             <span class="meta-label">Focus/Domain</span>
             <span class="meta-value">Feature Writing</span>
-            <span class="meta-value">Architecture & Food Culture</span>
+            <span class="meta-value">Coffee & Community</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Roles</span>
             <span class="meta-value">Writer</span>
             <span class="meta-value">Reporter</span>
-            <span class="meta-value">Researcher</span>
+            <span class="meta-value">Collaborative Editor</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Duration</span>
-            <span class="meta-value">1 month</span>
+            <span class="meta-value">3 weeks</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">Tools</span>
             <span class="meta-value">Interviews (virtual call, recorded)</span>
-            <span class="meta-value">On-site observation</span>
+            <span class="meta-value">On-site observation (pre-pandemic)</span>
           </div>
         </div>
       </div>
@@ -163,78 +164,168 @@
       <article id="case" class="case">
         <!-- Left Side: Fixed Rail -->
         <aside id="case-rail" class="case-rail">
-          <div class="rail-track">
-            <div class="rail-thumb"></div>
+          <!-- Desktop Rail (hidden on mobile) -->
+          <div class="desktop-rail">
+            <div class="rail-track">
+              <div class="rail-thumb"></div>
+            </div>
+            <ol class="rail-nav">
+              <li><button data-target="#context">Why This Story</button></li>
+              <li><button data-target="#my-role">My Approach</button></li>
+              <li><button data-target="#execution">Execution</button></li>
+              <li><button data-target="#design">Design & Production</button></li>
+              <li><button data-target="#impact">Impact</button></li>
+            </ol>
           </div>
-          <ol class="rail-nav">
-            <li><button data-target="#context">Why This Story</button></li>
-            <li><button data-target="#my-role">Topic Development</button></li>
-            <li><button data-target="#execution">Methodology</button></li>
-            <li><button data-target="#design">Design Choices</button></li>
-            <li><button data-target="#impact">Impact</button></li>
-          </ol>
+
+          <!-- Mobile Sticky Navigation -->
+          <div class="mobile-nav-bar">
+            <button class="mobile-nav-trigger" id="mobile-nav-trigger">
+              <div class="progress-container">
+                <div class="progress-dash" data-section="0"></div>
+                <div class="progress-dash" data-section="1"></div>
+                <div class="progress-dash" data-section="2"></div>
+                <div class="progress-dash" data-section="3"></div>
+                <div class="progress-dash" data-section="4"></div>
+                <!-- Add more dashes based on number of sections -->
+              </div>
+              <span class="current-section-label" id="current-section-label">Why This Story</span>
+              <span class="nav-arrow">▼</span>
+            </button>
+
+            <!-- Slide-down menu -->
+            <div class="mobile-nav-menu" id="mobile-nav-menu">
+              <div class="nav-menu-item" data-target="#context" data-index="01">
+                <span class="section-number">01</span>
+                <span class="section-title">Why This Story</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#my-role" data-index="02">
+                <span class="section-number">02</span>
+                <span class="section-title">My Approach</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#execution" data-index="03">
+                <span class="section-number">03</span>
+                <span class="section-title">Execution</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#design" data-index="04">
+                <span class="section-number">04</span>
+                <span class="section-title">Design & Production</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#impact" data-index="05">
+                <span class="section-number">05</span>
+                <span class="section-title">Impact</span>
+                <span class="active-dot"></span>
+              </div>
+            </div>
+          </div>
         </aside>
 
         <!-- Center: Scrolling Content -->
         <main class="case-body">
-          <section id="context" class="step" data-label="Why This Story">
+          <section id="context" class="step" data-label="Why This Story" data-index="01">
             <h2>Why This Story</h2>
-            <p>I pitched Librae Bakery because it represented more than a trendy café opening. It was a story about how
-              architecture, heritage, and food culture intersect in New York City. Librae's design drew from Bahraini
-              traditions while adapting to the rhythms of downtown Manhattan, making it a natural fit for <a
-                href="https://www.dialoguemag.com">Dialogue Magazine's</a> second issue, themed around architecture and
-              coffee. The bakery's open production concept, fusion of Danish and Middle Eastern baking, and its role as
-              a community hub offered a chance to write a feature that spoke to both design and cultural storytelling.
+            <p>When Dialogue launched its first issue, I wanted to contribute a piece rooted as much in community as in
+              coffee. <a href="https://share.google/vo4seAkiOcB9eHM61" target="_blank">Ciao Bella</a> first came onto my
+              radar through a
+              friend (who I later quoted in the piece) who had
+              lived in Prospect Lefferts Gardens (PLG) much longer than I had - I had only just moved into the
+              neighborhood.
+              When I eventually visited, looking for a café to highlight, I sat for a while and watched the flow of the
+              space: the interior, the barista-customer exchanges, the way people settled in. I tried the coffee, and by
+              chance I met the owners, Marco and Jessica. Putting together their presence with the place they had built,
+              I recognized something that felt true to Brooklyn and to PLG in particular.
             </p>
-          </section>
-          <section id="my-role" class="step" data-label="My Approach">
-            <h2>My Approach</h2>
-            <p>I structured the feature with a classic magazine arc. The <strong>lede</strong> immersed readers in the
-              sensory experience
-              of entering Librae — the queue at the door, the rhythm of movement between bakery, barista, and pastry
-              counter, and the open glass view into production — to recreate the orchestral feel of the space.
-            <p>The <strong>nut graf</strong> established Librae as a modern Majlis, emphasizing the deliberate seating
-              design and the transparency of the open bakery, which bridged traditional Danish techniques with Bahraini
-              culture.
-            </p>
-            <p>The <strong>arc</strong> wove together these observations with interview insights, highlighting
-              architecture, sustainability, and coffee culture.</p>
             <br>
-            <p>
-              My goal was to create a piece that stood apart from earlier coverage: not just reporting on
-              Librae's popularity, but showing how its fusion of design and practice exemplified the issue's theme of
-              architecture and coffee.
+            <p>PLG is at its heart a Caribbean neighborhood, and Ciao Bella managed to create a café that did not
+              exclude that community by chasing trends or distancing itself from its surroundings. There are plenty of
+              other cafés within walking distance, but this one seemed to bridge two currents: the newer wave of modern,
+              style-conscious coffee culture, and the rootedness of the neighborhood it belonged to. After interviewing
+              Marco and Jessica and learning how they had opened right at the edge of the COVID-19 lockdowns, and how
+              they adapted with grit and community support, I was certain I had chosen the right story. Instead of
+              abandoning their vision, they reshaped it into something more resilient. That persistence, that insistence
+              on community even under pressure, is what made me want to tell their story.
             </p>
           </section>
+          <section id="my-role" class="step" data-label="My Approach" data-index="02">
+            <h2>My Approach</h2>
+            <p>I knew from the start that the piece had to begin with atmosphere. My first visits to Ciao Bella left me
+              holding onto small sensory anchors that carried the story forward: the sound of shots being pulled,
+              sometimes by Marco himself, the hiss of steam from the steamer-wand, the shelves of records lining the
+              walls with jazz and Caribbean artists, and that oversized blue velvet couch that seemed to both welcome
+              and command attention at the center of the room. These were not just decorative details but signposts of
+              the café's identity, and I wanted readers to enter the space in the same way I did, noticing the texture
+              of it before anything else.
+            </p>
+            <br>
+            <p>The nut graf built on that entry point and set up the bigger frame. It established Ciao Bella as more
+              than a coffee shop, positioning it as a response to the shrinking number of cafés in Brooklyn where people
+              could genuinely linger. For Marco, who had grown up in a small Swiss town, and for Jessica, who had seen
+              how welcoming a campus café could be, the decision to create a space that encouraged connection was deeply
+              personal. Their backstories and values shaped the choices they made, from the music on the walls to the
+              design of the bar.</p>
+            <br>
+            <p>The arc of the piece followed this progression: begin with sensory immersion, move into the personal
+              histories that explained why the café took the shape it did, and return to the present, where Ciao Bella
+              had become a steady anchor for neighbors and a deliberate choice for remote workers who walked past other
+              cafés just to sit at that blue sofa.</p>
+          </section>
 
-          <section id="execution" class="step" data-label="Execution">
+          <section id="execution" class="step" data-label="Execution" data-index="03">
             <h2>Execution</h2>
-            <p>I conducted a virtual interview with owner Dona Murad, who shared the backstory of launching Librae with
-              her family and her broader work with Hopscotch and Grind Roastery. Her reflections set the tone for the
-              piece, motivating me to capture the café's story with honesty and depth. To complement her perspective, I
-              returned to Librae for additional on-site reporting, pushing myself beyond my comfort zone by exploring
-              the full menu — from signature pastries to dishes like the Loomi sandwich — to better understand the
-              bakery's range. This combination of interview insights and firsthand observation allowed me to craft a
-              narrative that blended personal detail, cultural context, and sensory immersion.</p>
+            <p>I first reached out to Marco and Jessica in February 2022 and set up a Zoom interview. By then, Ciao
+              Bella had weathered the hardest phases of the pandemic and was slowly becoming an anchor in Prospect
+              Lefferts Gardens. The interview gave me the backstory: how they had opened right before lockdowns, how
+              quickly they had to adapt, and how their different personal histories came together in the café. Marco
+              spoke about the community ties of his small Swiss hometown and the his experiences working as a barista in
+              Manhattan, while Jessica described both the inclusiveness of campus coffee shops she loved and the moments
+              she had felt unwelcome in Brooklyn cafés. Those reflections shaped the emotional core of the piece.</p>
+            <br>
+            <p>The interview also revealed how much meaning was embedded in small details: the records chosen for the
+              walls, or the bar that Jessica's uncle had built by hand. These touches weren't incidental; they told as
+              much about the café's purpose as any direct statement could. I wanted the narrative to hold both the
+              owners' voices and my own observations, so it felt grounded in lived experience rather than just a
+              retelling of their story.</p>
+            <br>
+            <p>In drafting, I worked to balance these layers: the intimacy of their story, the atmosphere of the café,
+              and the wider context of Brooklyn's café culture at that moment. Editing meant finding the right pace, so
+              the piece didn't linger too long on any single thread but gave readers enough to feel why Ciao Bella
+              mattered to its neighborhood.</p>
           </section>
 
-          <section id="design" class="step" data-label="Design & Production">
-            <h2>Design and Production</h2>
-            <p>The visual presentation was led by Dialogue Magazine's founder and editor-in-chief, Kristin
-              Sandgren-Jolain, together with the magazine's graphic designer. They paired Sophie Chen's photography with
-              the narrative arc of my feature, aligning imagery with key moments — from architectural details to
-              specific pastry mentions — so that text and visuals reinforced one another. Their layout decisions
-              elevated the story, ensuring that the design mirrored the balance of immersion and clarity I aimed for in
-              the writing.</p>
+          <section id="design" class="step" data-label="Design & Production" data-index="04">
+            <h2>Design, Collaboration & Production</h2>
+            <p>From the beginning I imagined Ciao Bella paired with illustration rather than photography. I asked my
+              MICA classmate at the time, Evan Manning (previously Bailey), to experiment with line drawings that would
+              carry
+              the same qualities I noticed in the café: the wide blue velvet sofa at the center, the rhythm of the
+              records on the walls, and the likeness of Marco and Jessica themselves. What I wanted was a style that
+              felt contemporary but did not flatten or Europeanize their features, something that acknowledged them as
+              they were while capturing the warmth of the space.</p>
+            <br>
+            <p>The early sketches focused on those visual anchors that had stayed with me — the couch in particular was
+              the detail that burned into memory, a kind of shorthand for how the café held people. The illustrations
+              translated those anchors into something playful and memorable. In the end, the editor decided to go in a
+              different visual direction, which meant those drawings never ran in print. But that process reminded me
+              how strongly I tie stories to objects and atmosphere, and how visuals can deepen the cues that text sets
+              in motion.</p>
           </section>
 
-          <section id="impact" class="step" data-label="Impact">
+          <section id="impact" class="step" data-label="Impact" data-index="05">
             <h2>Impact</h2>
-            <p>The feature appeared in the print-only second issue of Dialogue Magazine. Readers shared that the piece
-              drew them toward Librae, with several noting they felt compelled to visit specifically to experience the
-              seating described in the article. Even those who weren't regular coffee drinkers or part of the bakery
-              café scene remarked that the narrative created a sense of pull — turning architectural details and
-              atmosphere into an invitation.</p>
+            <p>The feature appeared in the debut issue of Dialogue Magazine, placed at the center of the book. Rather
+              than standing apart, it sat in harmony with the mix of stories, interview pieces, and poems that gave the
+              issue its range. The choice to pair it with illustration rather than photography also created a natural
+              break in the magazine's pacing, offering readers a different visual entry point between the more
+              photo-forward features.</p>
+            <br>
+            <p>Positioned this way, the Ciao Bella piece carried weight not only as a profile but also as part of the
+              issue's rhythm and design. It showed how an editorial feature could speak to community and atmosphere
+              while also contributing to the flow of the magazine as an object — something that felt cohesive, layered,
+              and intentional from cover to back.</p>
           </section>
         </main>
       </article>
@@ -242,19 +333,19 @@
       <!-- Right Side: Pinned Media Gallery -->
       <div class="pinned-media-gallery">
         <div class="media-item active" data-media="context">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/ciao_bella_asset1.png" alt=""></div>
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/" alt=""></div>
         </div>
-        <div class="media-item" data-media="my-role">
-          <div class="image-placeholder">My Role Media</div>
+        <div class=" media-item" data-media="my-role">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/ciao_bella_approach.webp" alt=""></div>
         </div>
         <div class="media-item" data-media="execution">
-          <div class="image-placeholder">Execution Media</div>
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw" alt=""></div>
         </div>
         <div class="media-item" data-media="design">
-          <div class="image-placeholder">Design Media</div>
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/" alt=""></div>
         </div>
         <div class="media-item" data-media="impact">
-          <div class="image-placeholder">Impact Media</div>
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/" alt=""></div>
         </div>
       </div>
     </section>
@@ -272,37 +363,43 @@
       </div>
 
       <div class="gallery-grid">
-        <div class="gallery-image clickable" data-caption="Main article layout featuring Librae Bakery">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset1.png"
-              alt="Dialogue Magazine article layout"></div>
+        <div class="gallery-image clickable" data-caption="">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/" alt=""></div>
         </div>
-        <div class="gallery-image clickable" data-caption="Interior view showing the open kitchen design">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset2.png" alt="Librae Bakery interior">
+        <div class="gallery-image clickable" data-caption="">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/" alt="">
           </div>
         </div>
-        <div class="gallery-image clickable" data-caption="Architectural details and seating arrangement">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset3.png" alt="Architectural details">
+        <div class="gallery-image clickable" data-caption="">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/" alt="">
           </div>
         </div>
-        <div class="gallery-image clickable" data-caption="Featured pastries and coffee culture">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset4.png" alt="Featured pastries"></div>
+        <div class="gallery-image clickable" data-caption="">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw" alt=""></div>
         </div>
-        <div class="gallery-image clickable" data-caption="Community gathering space and modern Majlis concept">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset5.jpeg" alt="Community space"></div>
+        <div class="gallery-image clickable" data-caption="">
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/" alt=""></div>
         </div>
       </div>
     </section>
+
     <!-- Learning/Takeaways Section -->
     <section class="takeaway-section">
       <div class="takeaway-header">
         <div class="takeaway-header-content">
           <h2>Reflection</h2>
-          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
-            Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+          <p>This was my first feature writing opportunity, and it taught me a great deal about shaping both the
+            interview and the story. I prepared questions with the magazine's editorial goals in mind, but I also
+            learned how to let the conversation guide me — when to follow a thread, when to rephrase, and when to allow
+            an answer to spark the next question. I was disappointed that Evan's illustrations weren't ultimately
+            chosen, but I came to understand that editorial direction sometimes means letting go of personal vision in
+            service of the whole.</p>
+          <br>
+          <p>The hardest part was cutting the draft down so one sentiment or thread didn't linger too long. That
+            discipline reminded me of what I had practiced in short story writing, where rhythm and restraint are as
+            important as atmosphere. I know I lean toward descriptive, immersive writing, always wanting the reader to
+            feel the emotion of a space, and this piece was an exercise in finding the balance between immersion and
+            clarity.</p>
         </div>
       </div>
     </section>
@@ -345,5 +442,6 @@
       </div>
     </div>
   </footer>
+</body>
 
 </html>
