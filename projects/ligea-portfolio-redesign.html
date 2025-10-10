@@ -5,16 +5,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
+  <meta name="description"
+    content="Feature story for Dialogue Magazine exploring Librae Bakery in New York's Cooper Square — where Middle Eastern design, coffee culture, and community converge in a modern Majlis." />
+  <meta name="author" content="Ligea Alexander" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Librae Bakery Feature — Dialogue Magazine" />
+  <meta property="og:description"
+    content="An editorial feature by Ligea Alexander profiling Librae Bakery as a cultural landmark in New York, blending architecture, culinary craft, and community." />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="https://ligea-alexander.xyz/projects/assets/librae-feature/social-cover.jpg" />
   <link rel="stylesheet" href="../styles.css">
   <link rel="shortcut icon" href="../icon/favicon.ico" type="image/x-icon">
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js" defer></script>
   <script src="../main.js" defer></script>
-  <title>Portfolio Redesign</title>
+  <title>My Portfolio Redesign</title>
 </head>
 
-<body lass="case-study-page" data-work-type="developer">
+<body class="case-study-page" data-work-type="developer">
   <!-- Interactive Gallery Overlay -->
   <div class="ig-overlay" id="igOverlay" aria-hidden="true">
     <div class="ig-backdrop"></div>
@@ -93,7 +102,7 @@
       </div>
     </div>
   </div>
-  <main class="case-study-main" data-work-type="developer">
+  <main class="case-study-main" data-work-type="">
     <!-- Hero Section - Split Layout -->
     <section class="case-study-hero">
       <div class="hero-split-container">
@@ -117,7 +126,7 @@
           <p class="case-study-intro">Redesigning my portfolio to showcase interactive storytelling, thoughtful design
             direction, and front-end development skills.</p>
           <!-- Live Site Link -->
-          <a href="https://ligea-alexander.xyz" class="live-site-btn">
+          <a href="https://ligea-alexander.xyz" target="_blank" class="live-site-btn">
             Live Site <span class="external-arrow">↗</span>
           </a>
         </div>
@@ -154,158 +163,237 @@
     <!-- Scrollspy + Pinned Media Section -->
     <section class="case-study-main-section">
       <!-- Case Study Article Container -->
-      <aside id="case-rail" class="case-rail">
-        <!-- Desktop Rail (hidden on mobile) -->
-        <div class="desktop-rail">
-          <div class="rail-track">
-            <div class="rail-thumb"></div>
+      <article id="case" class="case">
+        <!-- Left Side: Fixed Rail -->
+        <aside id="case-rail" class="case-rail">
+          <!-- Desktop Rail (hidden on mobile) -->
+          <div class="desktop-rail">
+            <div class="rail-track">
+              <div class="rail-thumb"></div>
+            </div>
+            <ol class="rail-nav">
+              <!-- <li><button data-target="#context">Why / Rationale</button></li>
+              <li><button data-target="#my-role">Shaping the Direction</button></li>
+              <li><button data-target="#execution">Methodology / Execution</button></li>
+              <li><button data-target="#design">Design & Production</button></li>
+              <li><button data-target="#impact">Impact</button></li> -->
+            </ol>
           </div>
-          <ol class="rail-nav">
-            <li><button data-target="#context">Why This Story</button></li>
-            <li><button data-target="#my-role">My Approach</button></li>
-            <li><button data-target="#execution">Execution</button></li>
-            <li><button data-target="#design">Design & Production</button></li>
-            <li><button data-target="#impact">Impact</button></li>
-          </ol>
-        </div>
 
-        <!-- Mobile Sticky Navigation -->
-        <div class="mobile-nav-bar">
-          <button class="mobile-nav-trigger" id="mobile-nav-trigger">
-            <div class="progress-container">
-              <div class="progress-dash" data-section="0"></div>
-              <div class="progress-dash" data-section="1"></div>
-              <div class="progress-dash" data-section="2"></div>
-              <div class="progress-dash" data-section="3"></div>
-              <div class="progress-dash" data-section="4"></div>
-              <!-- Add more dashes based on number of sections -->
-            </div>
-            <span class="current-section-label" id="current-section-label">Why This Story</span>
-            <span class="nav-arrow">▼</span>
-          </button>
+          <!-- Mobile Sticky Navigation -->
+          <div class="mobile-nav-bar">
+            <button class="mobile-nav-trigger" id="mobile-nav-trigger">
+              <div class="progress-container">
+                <div class="progress-dash" data-section="0"></div>
+                <div class="progress-dash" data-section="1"></div>
+                <div class="progress-dash" data-section="2"></div>
+                <div class="progress-dash" data-section="3"></div>
+                <div class="progress-dash" data-section="4"></div>
+                <!-- Add more dashes based on number of sections -->
+              </div>
+              <span class="current-section-label" id="current-section-label">Why This Story</span>
+              <span class="nav-arrow">▼</span>
+            </button>
 
-          <!-- Slide-down menu -->
-          <div class="mobile-nav-menu" id="mobile-nav-menu">
-            <div class="nav-menu-item" data-target="#context" data-index="01">
-              <span class="section-number">01</span>
-              <span class="section-title">Why This Story</span>
-              <span class="active-dot"></span>
-            </div>
-            <div class="nav-menu-item" data-target="#my-role" data-index="02">
-              <span class="section-number">02</span>
-              <span class="section-title">My Approach</span>
-              <span class="active-dot"></span>
-            </div>
-            <div class="nav-menu-item" data-target="#execution" data-index="03">
-              <span class="section-number">03</span>
-              <span class="section-title">Execution</span>
-              <span class="active-dot"></span>
-            </div>
-            <div class="nav-menu-item" data-target="#design" data-index="04">
-              <span class="section-number">04</span>
-              <span class="section-title">Design & Production</span>
-              <span class="active-dot"></span>
-            </div>
-            <div class="nav-menu-item" data-target="#impact" data-index="05">
-              <span class="section-number">05</span>
-              <span class="section-title">Impact</span>
-              <span class="active-dot"></span>
+            <!-- Slide-down menu -->
+            <div class="mobile-nav-menu" id="mobile-nav-menu">
+              <div class="nav-menu-item" data-target="#context" data-index="01">
+                <span class="section-number">01</span>
+                <span class="section-title">Why / Rationale</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#my-role" data-index="02">
+                <span class="section-number">02</span>
+                <span class="section-title">Shaping the Direction</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#execution" data-index="03">
+                <span class="section-number">03</span>
+                <span class="section-title">Methodology / Execution</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#design" data-index="04">
+                <span class="section-number">04</span>
+                <span class="section-title">Design & Production</span>
+                <span class="active-dot"></span>
+              </div>
+              <div class="nav-menu-item" data-target="#impact" data-index="05">
+                <span class="section-number">05</span>
+                <span class="section-title">Impact</span>
+                <span class="active-dot"></span>
+              </div>
             </div>
           </div>
-        </div>
-      </aside>
+        </aside>
 
-      <!-- Center: Scrolling Content -->
-      <main class="case-body">
-        <section id="context" class="step" data-label="Why / Rationale" data-index="01">
-          <h2>A Site That (Better) Represents Me</h2>
-          <p>My <a href="https://ligea-alexander.github.io/ligea-portfolio/" target="_blank">previous portfolio</a>
-            was functional but flat — a simple grid that showed projects without much
-            character. It didn't communicate how I work or the kinds of experiences I aim to create through my work.
-            For me, it's obvious how a creator (whether writer, coder, or analyst) works from the <em>moment</em> you
-            come into visual contact with their work — long before you scroll to an About page. My old site failed
-            that test.
-          </p>
-          <br>
-          <p>Like many of us, I leaned on fast, out-of-the-box tools to get something online quickly when I realized I
-            needed to share my work for jobs and conversations. For me, that tool was Quarto; especially attractive
-            because of its rising popularity among people working at the intersection of data science, analytics,
-            research, and storytelling (and its tight connection to R).</p>
-          <br>
-          <p>That first site served its purpose, but it wasn't enough. I needed a portfolio that would do two things
-            at once:</p>
-          <ul>
-            <li>Showcase my skills in frontend development, animation, and design thinking</li>
-            <li>Express my perspective as a creative technologist — blending narrative, interaction, and code into
-              something cohesive.</li>
-          </ul>
-          <p>The redesign became a chance to treat my own portfolio like a client project: setting goals,
-            experimenting
-            with design direction, and building an experience that reflects who I am now, not who I was when I first
-            coded a site.
-          </p>
-        </section>
-
-        <section id="my-role" class="step" data-label="Shaping the Direction" data-index="02">
-          <h2>Shaping the Direction</h2>
-          <p>The redesign wasn't just a reskin — it was a rebuild. My old site relied on Quarto, a fast,
-            out-of-the-box solution popular among data practitioners. It worked, but it also limited my ability to
-            control design, interaction, and identity.
-            Here's the shift I captured in the redesign:</p>
-          <pre><!-- Diagram using text characters -->
+        <!-- Center: Scrolling Content -->
+        <main class="case-body">
+          <section id="context" class="step" data-label="Why / Rationale" data-index="01">
+            <h2>A Site That (Better) Represents Me</h2>
+            <p>My <a href="https://ligea-alexander.github.io/ligea-portfolio/" target="_blank">previous portfolio</a>
+              was functional but flat — a simple grid that showed projects without much
+              character. It didn't communicate how I work or the kinds of experiences I aim to create through my work.
+              For me, it's obvious how a creator (whether writer, coder, or analyst) works from the <em>moment</em> you
+              come into visual contact with their work — long before you scroll to an About page. My old site failed
+              that test.
+            </p>
+            <br>
+            <p>Like many of us, I leaned on fast, out-of-the-box tools to get something online quickly when I realized I
+              needed to share my work for jobs and conversations. For me, that tool was Quarto; especially attractive
+              because of its rising popularity among people working at the intersection of data science, analytics,
+              research, and storytelling (and its tight connection to R).</p>
+            <br>
+            <p>That first site served its purpose, but it wasn't enough. I needed a portfolio that would do two things
+              at once:</p>
+            <ul>
+              <li>Showcase my skills in frontend development, animation, and design thinking</li>
+              <li>Express my perspective as a creative technologist — blending narrative, interaction, and code into
+                something cohesive.</li>
+            </ul>
+            <p>The redesign became a chance to treat my own portfolio like a client project: setting goals,
+              experimenting
+              with design direction, and building an experience that reflects who I am now, not who I was when I first
+              coded a site.
+            </p>
+          </section>
+          <section id="my-role" class="step" data-label="Shaping the Direction" data-index="02">
+            <h2>Shaping the Direction</h2>
+            <p>The redesign wasn't just a reskin — it was a rebuild. My old site relied on Quarto, a fast,
+              out-of-the-box solution popular among data practitioners. It worked, but it also limited my ability to
+              control design, interaction, and identity.
+              Here's the shift I captured in the redesign:</p>
+            <br>
+            <!-- Diagram using text characters -->
+            <pre>
             Old Portfolio ──> Functional | Fast-build | Tool-dependent (Quarto)
                                   │
                                   ▼
             New Portfolio ──> Interactive | Narrative | Hand-coded Identity
             </pre>
-          <p>From there, I approached the rebuild as both designer and developer, making deliberate choices about
-            aesthetic direction, interaction design, and the underlying architecture.</p>
-        </section>
+            <p>This rebuild was a holistic process, where I acted as both designer and developer. Every choice, from
+              visual direction to interaction and architecture was intentional and interconnected. By designing the
+              site's structure, visuals, and motion system together, I aimed to create an experience that seamlessly
+              blends design, development, and storytelling.</p>
+          </section>
 
-        <section id="execution" class="step" data-label="Methodology / Execution" data-index="03">
-          <h2>Methodology / Execution</h2>
-          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
-            Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
-        </section>
+          <section id="execution" class="step" data-label="From Notes to Framework" data-index="03">
+            <h2>From Notes to Framework</h2>
+            <p>I started on paper, outlining exactly what each page needed to do. Writing instead of designing helped me
+              focus on purpose before polish — structure, flow, and what each section should communicate.</p>
+            <p>
+              <br>
+              Once things were on paper, I got deliberate about what I needed:
+            </p>
+            <br>
+            <ul>
+              <li><strong>Featured Work:</strong> deciding how many projects to highlight and how to balance variety
+                with depth.</li>
+              <li><strong>Services:</strong> outlining what value I offer and how to communicate it clearly.</li>
+              <li><strong>Work Pages:</strong> planning how different project types (data, dev, storytelling) should
+                live on the page and 'feel'.</li>
+            </ul>
+            <br>
+            <p>These notes became my low-fidelity frames in Figma. Once the structure was sound, I began layering in
+              rhythm and behavior — how sections would move, reveal, and guide attention.</p>
+            <br>
+            <p>As I moved from design to build, realism guided every decision. I didn't want to over-engineer or fall
+              into experimental rabbit holes. The goal was to make something expressive yet achievable — a site I could
+              build cleanly, understand fully, and expand over time. Tools like Copilot and GPT helped with repetitive
+              scripting, but every core interaction was hand-written. Earlier GSAP experiments, like animating my name,
+              gave me the fluency to code confidently without relying on trial and error.</p>
+            <br>
+            <p>Throughout the process, I held my audience in mind:</p>
+            <br>
+            <ol>
+              <li><strong>Potential employers and clients</strong> — people evaluating what I can build and how I think.
+              </li>
+              <li><strong>The right kind of collaborators</strong> — those drawn to clarity, experimentation, and
+                narrative.</li>
+              <li> <strong>Peers</strong> — fellow designers, developers, and data storytellers interested in process.
+              </li>
+            </ol>
+            <br>
+            <p>Every design decision had to serve one of these groups — balancing personality with professionalism, and
+              aesthetics with usability.</p>
+          </section>
 
-        <section id="design" class="step" data-label="Design and Production Choices" data-index="04">
-          <h2>Design and Production Choices</h2>
-          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
-        </section>
-
-        <section id="impact" class="step" data-label="Impact" data-index="05">
-          <h2>Impact</h2>
-          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.</p>
-        </section>
-      </main>
+          <section id="design" class="step" data-label="Design Direction & Language" data-index="04">
+            <h2>Visual Direction & Interaction Language</h2>
+            <p>The visual identity for this portfolio came together like a visual equation — part editorial design, part
+              data-viz clarity, and part physical inspiration. Over the years, I've collected references from
+              everywhere: Awwwards sites, Are.na channels, TikTok and Instagram interface clips, textures from museum
+              postcards, and even compositions spotted in everyday signage. For this redesign, I finally turned that
+              archive into a working system.</p>
+            <br>
+            <p>I drew from Gerhard Richter's <a href="https://www.gerhard-richter.com/en/art/microsites/4900-colours/I"
+                target="_blank">4900 Colours</a> and Herman Miller's geometry to shape the site's language of
+              squares and circles — a metaphor for living at the intersection of data, design, and development. The
+              motif runs throughout:</p>
+            <br>
+            <ul>
+              <li><strong>the custom cursor</strong>, a square with a centered dot, always trailing and seeking
+                balance;</li>
+              <li><strong>my logo and favicon</strong>, a square grid with Miller-style dots at each intersection;
+                and the square-dot relationship itself, inspired by the rudimentary forms of data — 0 and 1.
+              </li>
+            </ul>
+            <br>
+            <p>Each interaction and transition reinforces that logic. Subtle GSAP-driven motions reveal or fold
+              sections, guiding attention like rhythm in a story. Hover states feel tactile, scroll cues feel
+              deliberate. The goal wasn't to decorate but to choreograph how information is experienced.
+              Visually, I aimed for editorial simplicity with kinetic depth — clean typography, generous spacing, and
+              motion that responds rather than distracts. Every movement is functional: it signals hierarchy, aids
+              orientation, and sustains narrative flow.</p>
+            <br>
+            <p>The result is a cohesive interaction language where motion equals meaning — a design system that feels
+              alive yet restrained, reflecting both the analytical and expressive sides of my practice.</p>
+          </section>
+          <section id="impact" class="step" data-label="Structure & Storytelling" data-index="05">
+            <h2>Structure & Storytelling</h2>
+            <p>At its core, this site was designed as a reading experience — not just a portfolio. I wanted every
+              section, from the Work page to the individual case studies, to feel guided, structured, and intentional.
+            </p>
+            <br>
+            <p>The Work page was built around hierarchy and orientation. Visitors can explore my projects in three ways
+              — Featured, All, or by Focus / Domain / Industry — depending on what they're looking for. It's a simple
+              system, but it mirrors how different audiences browse: recruiters jump straight to focus, peers explore by
+              craft, and potential clients filter by relevance. The goal was to give everyone an efficient path through
+              the site without losing narrative coherence.
+              My biggest frustration with portfolios has always been the endless scroll — pages that make you work to
+              reach the point. I wanted a structure that respected time and attention. That's where scrollytelling and
+              the pinned gallery came in. Each case study unfolds in clear, digestible steps, with visuals pinned beside
+              the text to maintain context. No infinite scrolls, no walls of content — just a rhythm that feels readable
+              and alive.</p>
+            <br>
+            <p>Using GSAP, I built a scroll-spy navigation rail that pins to the left on desktop, tracking progress as
+              readers move through the story. It lets visitors skim or deep-dive at their own pace, keeping orientation
+              without friction.</p>
+            <br>
+            <p>On mobile, that same navigation system collapses into a top progress bar — a lightweight tracker that
+              preserves spatial awareness without clutter. Both versions work toward the same goal: a guided story that
+              feels fluid, not forced.</p>
+            <br>
+            <p>Each layer — the Work page hierarchy, the case study structure, and the adaptive navigation — contributes
+              to one consistent philosophy: clarity through motion and design. The site tells stories the way I approach
+              creative technology itself — through structure, narrative flow, and respect for how people actually move
+              through information.</p>
+          </section>
+        </main>
       </article>
 
       <!-- Right Side: Pinned Media Gallery -->
       <div class="pinned-media-gallery">
         <div class="media-item active" data-media="context">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/redesign_previous_portfolio.png" alt="">
-          </div>
+          <div class="image-placeholder"><img src="../img/img_wrk_prvw/redesign_previous_portfolio.png" alt=""></div>
         </div>
         <div class="media-item" data-media="my-role">
-          <div class="image-placeholder">My Role Media</div>
+          <div class="image-placeholder"><img src="#" alt=""></div>
         </div>
         <div class="media-item" data-media="execution">
-          <div class="image-placeholder">Execution Media</div>
+          <div class="image-placeholder"><img src="#" alt=""></div>
         </div>
         <div class="media-item" data-media="design">
-          <div class="image-placeholder">Design Media</div>
+          <div class="image-placeholder"><img src="#" alt=""></div>
         </div>
         <div class="media-item" data-media="impact">
           <div class="image-placeholder">Impact Media</div>
@@ -327,22 +415,21 @@
 
       <div class="gallery-grid">
         <div class="gallery-image clickable" data-caption="Main article layout featuring Librae Bakery">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset1.png"
-              alt="Dialogue Magazine article layout"></div>
+          <div class="image-placeholder"><img src="#" alt=""></div>
         </div>
         <div class="gallery-image clickable" data-caption="Interior view showing the open kitchen design">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset2.png" alt="Librae Bakery interior">
+          <div class="image-placeholder"><img src="#" alt="">
           </div>
         </div>
         <div class="gallery-image clickable" data-caption="Architectural details and seating arrangement">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset3.png" alt="Architectural details">
+          <div class="image-placeholder"><img src="#" alt="">
           </div>
         </div>
         <div class="gallery-image clickable" data-caption="Featured pastries and coffee culture">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset4.png" alt="Featured pastries"></div>
+          <div class="image-placeholder"><img src="#" alt=""></div>
         </div>
         <div class="gallery-image clickable" data-caption="Community gathering space and modern Majlis concept">
-          <div class="image-placeholder"><img src="../img/img_wrk_prvw/librae_asset5.jpeg" alt="Community space"></div>
+          <div class="image-placeholder"><img src="#" alt=""></div>
         </div>
       </div>
     </section>
@@ -352,12 +439,10 @@
       <div class="takeaway-header">
         <div class="takeaway-header-content">
           <h2>Reflection</h2>
-          <p>Lorem ipsum dolor sit amet consectetur. In sed egestas turpis ornare rhoncus venenatis. Massa arcu
-            pretium ac odio auctor cursus nunc. Dapibus leo venenatis nisl eu massa pharetra arcu mauris. Sit
-            tincidunt pharetra consectetur urna at consectetur vestibulum consequat. Purus pulvinar a purus ut
-            senectus lectus id. Lacus lobortis aliquam rutrum nibh phaselius pharetra nec interdum nam. Gravida
-            placerat nisl sed et ipsum donec urna. Quam et libero tellus congue arcu facilisi id curabitur cursus.
-            Et aliquam lorem viverra mattis sit vitae augue. Sed integer molestie nulla neque quam.</p>
+          <p>Designing and building this portfolio taught me how to think like my own client: balancing story with
+            usability, and narrative with performance. It's not just a site that shows my work — it acts like my work:
+            interactive, structured, and aware of its
+            audience.</p>
         </div>
       </div>
     </section>

@@ -1512,7 +1512,7 @@ body {
 }
 
 .yellow-bar {
-  background-color: #FFD86F;
+  background-color: #F8C129;
   width: 400px;
   height: 100px;
 }
@@ -1813,7 +1813,7 @@ body {
 /* Pink */
 
 .project-card:nth-child(6) {
-  background-color: #FFD86F;
+  background-color: #F8C129;
 }
 
 /* Yellow */
@@ -2054,7 +2054,7 @@ body {
 }
 
 .service-item.active[data-service="developer"] {
-  background: #FBBF24 !important;
+  background: #F8C129 !important;
 }
 
 .service-item.active[data-service="visualization"] {
@@ -4599,7 +4599,7 @@ body {
 :root {
   --data-science: #3344A8;
   --writing: #BB4142;
-  --developer: #FFD86F;
+  --developer: #F8C129;
   --visualization: #5AAAAF;
   --research: #00634E;
   --journalism: #FFBDF2;
@@ -7738,6 +7738,14 @@ body {
   padding-left: 2rem;
 }
 
+.step ol {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #666;
+  max-width: none;
+  padding-left: 2rem;
+}
+
 /* RIGHT HALF: Pinned Media Gallery - stays the same */
 .pinned-media-gallery {
   position: sticky;
@@ -9210,7 +9218,7 @@ body {
   }
 
   body.case-study-page[data-work-type="developer"] .ig-overlay .ig-dot.active {
-    background: #FFD86F !important;
+    background: #F8C129 !important;
   }
 
   body.case-study-page[data-work-type="visualization"] .ig-overlay .ig-dot.active {
