@@ -7741,7 +7741,7 @@ body {
 }
 
 .step h2 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.2rem);
   font-weight: 600;
   color: #1a1a1a;
   margin-bottom: 1.5rem;
@@ -7928,7 +7928,7 @@ body {
 }
 
 .gallery-header-content h2 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.2rem);
   font-weight: 600;
   color: #1a1a1a;
   margin: 0 0 1.5rem 0;
@@ -8226,7 +8226,7 @@ body {
 }
 
 .takeaway-section h2 {
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.2rem);
   font-weight: 600;
   color: #1a1a1a;
   margin: 0 0 1.5rem 0;
@@ -9336,7 +9336,7 @@ body {
   }
 
   .step h2 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-size: clamp(1.5rem, 3.5vw, 1.8rem);
     margin-bottom: 1.2rem;
   }
 
