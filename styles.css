@@ -8811,6 +8811,10 @@ body {
 
 /* ==== Mobile Case Study Navigation & Case Body ==== */
 @media (max-width: 925px) {
+  .case {
+    gap: 0.5rem !important;
+    /* REDUCED from 2rem to 0.5rem */
+  }
 
   /* Hide desktop rail completely on mobile */
   .case-rail .desktop-rail {
@@ -8972,7 +8976,10 @@ body {
     padding-bottom: 3rem;
     margin-bottom: 3rem;
     max-width: 100% !important;
-    /* ADDED: Allow full width usage */
+    padding-left: 0 !important;
+    /* ADDED: Ensure no left padding on steps */
+    padding-right: 0 !important;
+    /* ADDED: Ensure no right padding on steps */
   }
 
   /* Hide pinned media gallery on mobile */
@@ -9023,16 +9030,24 @@ body {
     font-size: 0.88rem;
   }
 
+  .case {
+    gap: 0.4rem !important;
+    /* REDUCED even more */
+  }
+
   .case-body {
-    padding: 1.8rem 1.4rem !important;
-    /* CHANGED: Remove excessive left padding */
+    padding: 1.8rem 1.2rem !important;
+    /* REDUCED left/right padding further */
   }
 
   .step {
     padding-bottom: 2.8rem;
     margin-bottom: 2.8rem;
     max-width: 100% !important;
-    /* ADDED: Allow full width usage */
+    padding-left: 0 !important;
+    /* ADDED: Remove any step left padding */
+    padding-right: 0 !important;
+    /* ADDED: Remove any step right padding */
   }
 
   .step pre {
@@ -9106,16 +9121,24 @@ body {
     padding-top: 75px;
   }
 
+  .case {
+    gap: 0.3rem !important;
+    /* REDUCED even more */
+  }
+
   .case-body {
-    padding: 1.6rem 1.2rem !important;
-    /* CHANGED: Remove excessive left padding */
+    padding: 1.6rem 1rem !important;
+    /* REDUCED left/right padding further */
   }
 
   .step {
     padding-bottom: 2.5rem;
     margin-bottom: 2.5rem;
     max-width: 100% !important;
-    /* ADDED: Allow full width usage */
+    padding-left: 0 !important;
+    /* ADDED: Remove any step left padding */
+    padding-right: 0 !important;
+    /* ADDED: Remove any step right padding */
   }
 
   .step pre {
@@ -9191,16 +9214,24 @@ body {
     padding-top: 70px;
   }
 
+  .case {
+    gap: 0.2rem !important;
+    /* REDUCED to minimum */
+  }
+
   .case-body {
-    padding: 1.4rem 1rem !important;
-    /* CHANGED: Remove excessive left padding */
+    padding: 1.4rem 0.8rem !important;
+    /* REDUCED left/right padding further */
   }
 
   .step {
     padding-bottom: 2.2rem;
     margin-bottom: 2.2rem;
     max-width: 100% !important;
-    /* ADDED: Allow full width usage */
+    padding-left: 0 !important;
+    /* ADDED: Remove any step left padding */
+    padding-right: 0 !important;
+    /* ADDED: Remove any step right padding */
   }
 
   .step pre {
@@ -9271,16 +9302,24 @@ body {
     padding-top: 65px;
   }
 
+  .case {
+    gap: 0.1rem !important;
+    /* REDUCED to almost nothing */
+  }
+
   .case-body {
-    padding: 1.2rem 0.8rem !important;
-    /* CHANGED: Remove excessive left padding */
+    padding: 1.2rem 0.6rem !important;
+    /* REDUCED left/right padding to minimum */
   }
 
   .step {
     padding-bottom: 2rem;
     margin-bottom: 2rem;
     max-width: 100% !important;
-    /* ADDED: Allow full width usage */
+    padding-left: 0 !important;
+    /* ADDED: Remove any step left padding */
+    padding-right: 0 !important;
+    /* ADDED: Remove any step right padding */
   }
 
   .step {
