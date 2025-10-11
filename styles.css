@@ -7737,7 +7737,7 @@ body {
 }
 
 .step:last-child {
-  margin-bottom: 6rem;
+  margin-bottom: 2rem;
 }
 
 .step h2 {
@@ -8967,7 +8967,7 @@ body {
   .case-body {
     height: auto !important;
     overflow-y: visible !important;
-    padding: 2rem 1.5rem !important;
+    padding: 2rem 1.75rem !important;
     /* CHANGED: Remove the 10rem left padding */
   }
 
@@ -9005,6 +9005,7 @@ body {
     object-fit: cover;
     display: block;
   }
+
 }
 
 /* Medium mobile screens (max-width: 768px) and (min-width: 481px) */
@@ -9048,7 +9049,7 @@ body {
   }
 
   .case-body {
-    padding: 1.8rem 1.2rem !important;
+    padding: 1.8rem 1.4rem !important;
     /* REDUCED left/right padding further */
   }
 
@@ -9139,7 +9140,7 @@ body {
   }
 
   .case-body {
-    padding: 1.6rem 1rem !important;
+    padding: 1.6rem 1.2rem !important;
     /* REDUCED left/right padding further */
   }
 
@@ -9232,7 +9233,7 @@ body {
   }
 
   .case-body {
-    padding: 1.4rem 0.8rem !important;
+    padding: 1.4rem 1rem !important;
     /* REDUCED left/right padding further */
   }
 
@@ -9320,7 +9321,7 @@ body {
   }
 
   .case-body {
-    padding: 1.2rem 0.6rem !important;
+    padding: 1.2rem 0.8rem !important;
     /* REDUCED left/right padding to minimum */
   }
 
@@ -9332,11 +9333,6 @@ body {
     /* ADDED: Remove any step left padding */
     padding-right: 0 !important;
     /* ADDED: Remove any step right padding */
-  }
-
-  .step {
-    padding-bottom: 2rem;
-    margin-bottom: 2rem;
   }
 
   .step h2 {
