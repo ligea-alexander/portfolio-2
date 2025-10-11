@@ -8250,30 +8250,22 @@ body {
 
 /* Below iPhone Pro Max (926px)*/
 @media (max-width: 925px) {
-
-  /* Convert split layout to vertical stack */
   .hero-split-container {
     display: flex;
     flex-direction: column;
     min-height: auto;
     margin: 0 1rem;
-    /* Reduce horizontal margin */
   }
 
-  /* Title block - full width, reduced padding */
   .hero-title-block {
     width: 100%;
     padding: 3rem 2rem 2rem 2rem;
-    /* Reduce padding significantly */
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Center content instead of flex-end */
     position: relative;
-    /* Remove absolute positioning context */
   }
 
-  /* Remove absolute positioning for mobile */
   .hero-title-text {
     position: static;
     bottom: auto;
@@ -8281,52 +8273,37 @@ body {
     right: auto;
   }
 
-  /* Adjust title sizing for mobile */
   .case-study-title {
     font-size: clamp(1.8rem, 6vw, 2.5rem);
     line-height: 1.2;
     margin-top: 0;
-    /* Remove the 0.5rem margin-top */
   }
 
-  /* Tighten spacing between subtitle and title */
   .case-study-subtitle {
     font-size: 0.8rem;
     margin-bottom: 0.25rem;
-    /* Reduce from 0.75rem to 0.25rem */
   }
 
-  /* Image block - full width, reduced padding */
   .hero-image-block {
     width: 100%;
     padding: 1rem 2rem 2rem 2rem;
-    /* Reduce padding */
     background-color: var(--work-color);
-    /* Keep same background as title block */
   }
 
   .hero-image-block .image-placeholder {
     max-width: 100%;
     max-height: 300px;
-    /* Limit height on mobile */
     aspect-ratio: 4/3;
-    /* Change to landscape aspect ratio */
   }
 
-  /* Meta section adjustments */
   .hero-meta-section {
     margin: 0 1rem;
-    /* Match container margin */
     padding: 2rem 0;
-    /* Reduce padding */
   }
 
-  /* Stack intro and button vertically with button below intro */
   .hero-text-content {
     grid-template-columns: 1fr;
-    /* Single column layout */
     grid-template-rows: auto auto;
-    /* Two rows: intro, then button */
     gap: 1.5rem;
     padding: 0 2rem;
     margin-bottom: 2rem;
@@ -8338,30 +8315,22 @@ body {
     line-height: 1.5;
     grid-column: 1;
     grid-row: 1;
-    /* First row */
   }
 
   .live-site-btn {
     justify-self: start;
-    /* Align to left */
     font-size: 0.85rem;
     padding: 0.65rem 1.25rem;
     grid-column: 1;
     grid-row: 2;
-    /* Second row (below intro) */
   }
 
-  /* Meta grid - stack vertically or reduce columns */
   .case-study-meta-grid {
     grid-template-columns: repeat(2, 1fr);
-    /* 2 columns instead of 6 */
     gap: 1.5rem 1rem;
-    /* Reduce gaps */
     padding: 1.5rem 2rem;
-    /* Reduce padding */
   }
 
-  /* Reposition meta items for 2-column grid */
   .meta-item:nth-child(1) {
     grid-column: 1;
     grid-row: 1;
@@ -8384,39 +8353,32 @@ body {
 
   .meta-label {
     font-size: 0.75rem;
-    /* Slightly smaller labels */
   }
 
   .meta-value {
     font-size: 0.85rem;
-    /* Slightly smaller values */
   }
 }
 
-/* Medium mobile screens (max-width: 768px) and (min-width: 481px) */
+/* 
 @media (max-width: 768px) and (min-width: 481px) {
 
-  /* Convert split layout to vertical stack */
   .hero-split-container {
     display: flex;
     flex-direction: column;
     min-height: auto;
     margin: 0 0.9rem;
-    /* REDUCED from 1rem */
   }
 
-  /* Title block - full width, reduced padding */
   .hero-title-block {
     width: 100%;
     padding: 2.8rem 1.8rem 1.8rem 1.8rem;
-    /* REDUCED from 3rem 2rem 2rem 2rem */
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
   }
 
-  /* Remove absolute positioning for mobile */
   .hero-title-text {
     position: static;
     bottom: auto;
@@ -8424,63 +8386,46 @@ body {
     right: auto;
   }
 
-  /* Adjust title sizing for mobile */
   .case-study-title {
     font-size: clamp(1.7rem, 5.8vw, 2.3rem);
-    /* REDUCED from 1.8rem, 6vw, 2.5rem */
     line-height: 1.2;
     margin-top: 0;
   }
 
-  /* Tighten spacing between subtitle and title */
   .case-study-subtitle {
     font-size: 0.75rem;
-    /* REDUCED from 0.8rem */
     margin-bottom: 0.2rem;
-    /* REDUCED from 0.25rem */
   }
 
-  /* Image block - full width, reduced padding */
   .hero-image-block {
     width: 100%;
     padding: 0.9rem 1.8rem 1.8rem 1.8rem;
-    /* REDUCED from 1rem 2rem 2rem 2rem */
     background-color: var(--work-color);
   }
 
   .hero-image-block .image-placeholder {
     max-width: 100%;
     max-height: 280px;
-    /* REDUCED from 300px */
     aspect-ratio: 4/3;
   }
 
-  /* Meta section adjustments */
   .hero-meta-section {
     margin: 0 0.9rem;
-    /* REDUCED from 1rem */
     padding: 1.8rem 0;
-    /* REDUCED from 2rem */
   }
 
-  /* Stack intro and button vertically with button below intro */
   .hero-text-content {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     gap: 1.4rem;
-    /* REDUCED from 1.5rem */
     padding: 0 1.8rem;
-    /* REDUCED from 2rem */
     margin-bottom: 1.8rem;
-    /* REDUCED from 2rem */
   }
 
   .case-study-intro {
     max-width: 100%;
     font-size: 0.95rem;
-    /* REDUCED from 1rem */
     line-height: 1.48;
-    /* REDUCED from 1.5 */
     grid-column: 1;
     grid-row: 1;
   }
@@ -8488,23 +8433,17 @@ body {
   .live-site-btn {
     justify-self: start;
     font-size: 0.8rem;
-    /* REDUCED from 0.85rem */
     padding: 0.6rem 1.2rem;
-    /* REDUCED from 0.65rem 1.25rem */
     grid-column: 1;
     grid-row: 2;
   }
 
-  /* Meta grid - stack vertically or reduce columns */
   .case-study-meta-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.4rem 0.9rem;
-    /* REDUCED from 1.5rem 1rem */
     padding: 1.4rem 1.8rem;
-    /* REDUCED from 1.5rem 2rem */
   }
 
-  /* Reposition meta items for 2-column grid */
   .meta-item:nth-child(1) {
     grid-column: 1;
     grid-row: 1;
@@ -8527,39 +8466,31 @@ body {
 
   .meta-label {
     font-size: 0.7rem;
-    /* REDUCED from 0.75rem */
   }
 
   .meta-value {
     font-size: 0.8rem;
-    /* REDUCED from 0.85rem */
   }
 }
 
-/* Small mobile screens (max-width: 480px) */
 @media (max-width: 480px) {
 
-  /* Convert split layout to vertical stack */
   .hero-split-container {
     display: flex;
     flex-direction: column;
     min-height: auto;
     margin: 0 0.8rem;
-    /* REDUCED from 0.9rem */
   }
 
-  /* Title block - full width, reduced padding */
   .hero-title-block {
     width: 100%;
     padding: 2.5rem 1.5rem 1.5rem 1.5rem;
-    /* REDUCED from 2.8rem 1.8rem */
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
   }
 
-  /* Remove absolute positioning for mobile */
   .hero-title-text {
     position: static;
     bottom: auto;
@@ -8567,63 +8498,46 @@ body {
     right: auto;
   }
 
-  /* Adjust title sizing for mobile */
   .case-study-title {
     font-size: clamp(1.6rem, 5.5vw, 2.1rem);
-    /* REDUCED from 1.7rem, 5.8vw, 2.3rem */
     line-height: 1.2;
     margin-top: 0;
   }
 
-  /* Tighten spacing between subtitle and title */
   .case-study-subtitle {
     font-size: 0.7rem;
-    /* REDUCED from 0.75rem */
     margin-bottom: 0.18rem;
-    /* REDUCED from 0.2rem */
   }
 
-  /* Image block - full width, reduced padding */
   .hero-image-block {
     width: 100%;
     padding: 0.8rem 1.5rem 1.5rem 1.5rem;
-    /* REDUCED from 0.9rem 1.8rem */
     background-color: var(--work-color);
   }
 
   .hero-image-block .image-placeholder {
     max-width: 100%;
     max-height: 260px;
-    /* REDUCED from 280px */
     aspect-ratio: 4/3;
   }
 
-  /* Meta section adjustments */
   .hero-meta-section {
     margin: 0 0.8rem;
-    /* REDUCED from 0.9rem */
     padding: 1.5rem 0;
-    /* REDUCED from 1.8rem */
   }
 
-  /* Stack intro and button vertically with button below intro */
   .hero-text-content {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     gap: 1.25rem;
-    /* REDUCED from 1.4rem */
     padding: 0 1.5rem;
-    /* REDUCED from 1.8rem */
     margin-bottom: 1.5rem;
-    /* REDUCED from 1.8rem */
   }
 
   .case-study-intro {
     max-width: 100%;
     font-size: 0.9rem;
-    /* REDUCED from 0.95rem */
     line-height: 1.45;
-    /* REDUCED from 1.48 */
     grid-column: 1;
     grid-row: 1;
   }
@@ -8631,23 +8545,17 @@ body {
   .live-site-btn {
     justify-self: start;
     font-size: 0.75rem;
-    /* REDUCED from 0.8rem */
     padding: 0.55rem 1.1rem;
-    /* REDUCED from 0.6rem 1.2rem */
     grid-column: 1;
     grid-row: 2;
   }
 
-  /* Meta grid - stack vertically or reduce columns */
   .case-study-meta-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem 0.8rem;
-    /* REDUCED from 1.4rem 0.9rem */
     padding: 1.25rem 1.5rem;
-    /* REDUCED from 1.4rem 1.8rem */
   }
 
-  /* Reposition meta items for 2-column grid */
   .meta-item:nth-child(1) {
     grid-column: 1;
     grid-row: 1;
@@ -8670,39 +8578,31 @@ body {
 
   .meta-label {
     font-size: 0.65rem;
-    /* REDUCED from 0.7rem */
   }
 
   .meta-value {
     font-size: 0.75rem;
-    /* REDUCED from 0.8rem */
   }
 }
 
-/* Very small screens (max-width: 400px) */
 @media (max-width: 400px) {
 
-  /* Convert split layout to vertical stack */
   .hero-split-container {
     display: flex;
     flex-direction: column;
     min-height: auto;
     margin: 0 0.7rem;
-    /* REDUCED from 0.8rem */
   }
 
-  /* Title block - full width, reduced padding */
   .hero-title-block {
     width: 100%;
     padding: 2.2rem 1.2rem 1.2rem 1.2rem;
-    /* REDUCED from 2.5rem 1.5rem */
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
   }
 
-  /* Remove absolute positioning for mobile */
   .hero-title-text {
     position: static;
     bottom: auto;
@@ -8710,63 +8610,46 @@ body {
     right: auto;
   }
 
-  /* Adjust title sizing for mobile */
   .case-study-title {
     font-size: clamp(1.5rem, 5.2vw, 1.9rem);
-    /* REDUCED from 1.6rem, 5.5vw, 2.1rem */
     line-height: 1.2;
     margin-top: 0;
   }
 
-  /* Tighten spacing between subtitle and title */
   .case-study-subtitle {
     font-size: 0.65rem;
-    /* REDUCED from 0.7rem */
     margin-bottom: 0.15rem;
-    /* REDUCED from 0.18rem */
   }
 
-  /* Image block - full width, reduced padding */
   .hero-image-block {
     width: 100%;
     padding: 0.7rem 1.2rem 1.2rem 1.2rem;
-    /* REDUCED from 0.8rem 1.5rem */
     background-color: var(--work-color);
   }
 
   .hero-image-block .image-placeholder {
     max-width: 100%;
     max-height: 240px;
-    /* REDUCED from 260px */
     aspect-ratio: 4/3;
   }
 
-  /* Meta section adjustments */
   .hero-meta-section {
     margin: 0 0.7rem;
-    /* REDUCED from 0.8rem */
     padding: 1.2rem 0;
-    /* REDUCED from 1.5rem */
   }
 
-  /* Stack intro and button vertically with button below intro */
   .hero-text-content {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     gap: 1.1rem;
-    /* REDUCED from 1.25rem */
     padding: 0 1.2rem;
-    /* REDUCED from 1.5rem */
     margin-bottom: 1.2rem;
-    /* REDUCED from 1.5rem */
   }
 
   .case-study-intro {
     max-width: 100%;
     font-size: 0.85rem;
-    /* REDUCED from 0.9rem */
     line-height: 1.4;
-    /* REDUCED from 1.45 */
     grid-column: 1;
     grid-row: 1;
   }
@@ -8774,23 +8657,17 @@ body {
   .live-site-btn {
     justify-self: start;
     font-size: 0.7rem;
-    /* REDUCED from 0.75rem */
     padding: 0.5rem 1rem;
-    /* REDUCED from 0.55rem 1.1rem */
     grid-column: 1;
     grid-row: 2;
   }
 
-  /* Meta grid - stack vertically or reduce columns */
   .case-study-meta-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.1rem 0.7rem;
-    /* REDUCED from 1.25rem 0.8rem */
     padding: 1.1rem 1.2rem;
-    /* REDUCED from 1.25rem 1.5rem */
   }
 
-  /* Reposition meta items for 2-column grid */
   .meta-item:nth-child(1) {
     grid-column: 1;
     grid-row: 1;
@@ -8813,39 +8690,31 @@ body {
 
   .meta-label {
     font-size: 0.6rem;
-    /* REDUCED from 0.65rem */
   }
 
   .meta-value {
     font-size: 0.7rem;
-    /* REDUCED from 0.75rem */
   }
 }
 
-/* Very very small screens (max-width: 360px) */
 @media (max-width: 360px) {
 
-  /* Convert split layout to vertical stack */
   .hero-split-container {
     display: flex;
     flex-direction: column;
     min-height: auto;
     margin: 0 0.6rem;
-    /* REDUCED from 0.7rem */
   }
 
-  /* Title block - full width, reduced padding */
   .hero-title-block {
     width: 100%;
     padding: 2rem 1rem 1rem 1rem;
-    /* REDUCED from 2.2rem 1.2rem */
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: relative;
   }
 
-  /* Remove absolute positioning for mobile */
   .hero-title-text {
     position: static;
     bottom: auto;
@@ -8853,63 +8722,46 @@ body {
     right: auto;
   }
 
-  /* Adjust title sizing for mobile */
   .case-study-title {
     font-size: clamp(1.4rem, 5vw, 1.7rem);
-    /* REDUCED from 1.5rem, 5.2vw, 1.9rem */
     line-height: 1.2;
     margin-top: 0;
   }
 
-  /* Tighten spacing between subtitle and title */
   .case-study-subtitle {
     font-size: 0.6rem;
-    /* REDUCED from 0.65rem */
     margin-bottom: 0.12rem;
-    /* REDUCED from 0.15rem */
   }
 
-  /* Image block - full width, reduced padding */
   .hero-image-block {
     width: 100%;
     padding: 0.6rem 1rem 1rem 1rem;
-    /* REDUCED from 0.7rem 1.2rem */
     background-color: var(--work-color);
   }
 
   .hero-image-block .image-placeholder {
     max-width: 100%;
     max-height: 220px;
-    /* REDUCED from 240px */
     aspect-ratio: 4/3;
   }
 
-  /* Meta section adjustments */
   .hero-meta-section {
     margin: 0 0.6rem;
-    /* REDUCED from 0.7rem */
     padding: 1rem 0;
-    /* REDUCED from 1.2rem */
   }
 
-  /* Stack intro and button vertically with button below intro */
   .hero-text-content {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     gap: 1rem;
-    /* REDUCED from 1.1rem */
     padding: 0 1rem;
-    /* REDUCED from 1.2rem */
     margin-bottom: 1rem;
-    /* REDUCED from 1.2rem */
   }
 
   .case-study-intro {
     max-width: 100%;
     font-size: 0.8rem;
-    /* REDUCED from 0.85rem */
     line-height: 1.35;
-    /* REDUCED from 1.4 */
     grid-column: 1;
     grid-row: 1;
   }
@@ -8917,23 +8769,17 @@ body {
   .live-site-btn {
     justify-self: start;
     font-size: 0.65rem;
-    /* REDUCED from 0.7rem */
     padding: 0.45rem 0.9rem;
-    /* REDUCED from 0.5rem 1rem */
     grid-column: 1;
     grid-row: 2;
   }
 
-  /* Meta grid - stack vertically or reduce columns */
   .case-study-meta-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem 0.6rem;
-    /* REDUCED from 1.1rem 0.7rem */
     padding: 1rem 1rem;
-    /* REDUCED from 1.1rem 1.2rem */
   }
 
-  /* Reposition meta items for 2-column grid */
   .meta-item:nth-child(1) {
     grid-column: 1;
     grid-row: 1;
@@ -8956,14 +8802,12 @@ body {
 
   .meta-label {
     font-size: 0.55rem;
-    /* REDUCED from 0.6rem */
   }
 
   .meta-value {
     font-size: 0.65rem;
-    /* REDUCED from 0.7rem */
   }
-}
+} */
 
 /* ==== Mobile Case Study Navigation & Case Body ==== */
 @media (max-width: 925px) {
