@@ -8360,7 +8360,7 @@ body {
   }
 }
 
-/* 
+
 @media (max-width: 768px) and (min-width: 481px) {
 
   .hero-split-container {
@@ -8465,11 +8465,11 @@ body {
   }
 
   .meta-label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
 
   .meta-value {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -8577,11 +8577,11 @@ body {
   }
 
   .meta-label {
-    font-size: 0.65rem;
+    font-size: 0.75rem;
   }
 
   .meta-value {
-    font-size: 0.75rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -8689,11 +8689,11 @@ body {
   }
 
   .meta-label {
-    font-size: 0.6rem;
+    font-size: 0.75rem;
   }
 
   .meta-value {
-    font-size: 0.7rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -8801,13 +8801,13 @@ body {
   }
 
   .meta-label {
-    font-size: 0.55rem;
+    font-size: 0.75rem;
   }
 
   .meta-value {
-    font-size: 0.65rem;
+    font-size: 0.85rem;
   }
-} */
+}
 
 /* ==== Mobile Case Study Navigation & Case Body ==== */
 @media (max-width: 925px) {
@@ -8987,11 +8987,23 @@ body {
     display: none !important;
   }
 
-  /* Different styling for different breakpoints */
+  .mobile-section-image {
+    display: block !important;
+    margin: 2rem 0;
+  }
+
   .mobile-section-image .image-placeholder {
     aspect-ratio: 16/9;
-    /* Different aspect ratio for mobile */
     border-radius: 12px;
+    background-color: #f0f0f0;
+    overflow: hidden;
+  }
+
+  .mobile-section-image .image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
 }
 
