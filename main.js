@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
           opacity: 1,
           skewY: 0,
           ease: 'power3.out',
-          duration: 1.65,
+          duration: 1.3, // slightly slower for smoother effect
           stagger: {
             each: el.tagName.match(/^H\d$/) ? 0.08 : 0.05,
             from: el.tagName.match(/^H\d$/) ? 'center' : 0
@@ -1446,6 +1446,53 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     initScrollspy();
+
+    // ===== SIMPLE MOBILE SECTION IMAGES HANDLING =====
+    function initMobileSectionImages() {
+      console.log('🖼️ Initializing mobile section images...');
+
+      const mobileSectionImages = document.querySelectorAll('.mobile-section-image');
+
+      if (mobileSectionImages.length === 0) {
+        console.log('No mobile section images found');
+        return;
+      }
+
+      // Simple visibility toggle based on screen size
+      function toggleMobileImages() {
+        const isMobile = window.innerWidth <= 925;
+
+        mobileSectionImages.forEach((image, index) => {
+          if (isMobile) {
+            image.style.display = 'block';
+            console.log(`📱 Showing mobile image ${index + 1}`);
+          } else {
+            image.style.display = 'none';
+            console.log(`🖥️ Hiding mobile image ${index + 1}`);
+          }
+        });
+      }
+
+      // Initial setup
+      toggleMobileImages();
+
+      // Handle window resize
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          toggleMobileImages();
+          // Refresh ScrollTrigger after resize
+          ScrollTrigger.refresh();
+        }, 150);
+      });
+
+      console.log(`✅ Mobile section images initialized: ${mobileSectionImages.length} images`);
+    }
+
+    // ===== CALL THE MOBILE IMAGES FUNCTION =====
+    initMobileSectionImages();
+
 
     // Enhanced Interactive Gallery Viewer
     function initInteractiveGallery() {

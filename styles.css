@@ -7960,7 +7960,7 @@ body {
 
 .gallery-image {
   aspect-ratio: 4/3;
-  background-color: #ddd;
+  background-color: #fcfcfc;
   border-radius: 8px;
   cursor: zoom-in;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -8005,7 +8005,7 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #ccc;
+  /* background-color: #fcfcfc; */
   border-radius: 8px;
 }
 
@@ -8243,6 +8243,29 @@ body {
   /* Allow full width within the container */
   text-align: left;
   /* Keep paragraph text left-aligned for readability */
+}
+
+.takeaway-section a {
+  color: var(--work-color);
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.takeaway-section ul {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #666;
+  max-width: none;
+  /* padding-left: 2rem; */
+}
+
+.takeaway-section ol {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #666;
+  max-width: none;
+  /* padding-left: 2rem; */
 }
 
 /* ===== MOBILE FIRST CASE STUDY: RESPONSIVE DESIGN SYSTEM ===== */
