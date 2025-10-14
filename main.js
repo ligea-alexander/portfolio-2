@@ -496,6 +496,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // ===== DYNAMIC FILTER COUNTS =====
     function updateFilterCounts() {
+      console.log('🔢 Updating filter counts...');
+
       const filterButtons = document.querySelectorAll('.filter-btn');
 
       filterButtons.forEach(button => {
@@ -511,14 +513,26 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }
 
         // Update the data-count attribute
-        button.setAttribute('data-count', count.toString().padStart(2, '0'));
+        const formattedCount = count.toString().padStart(2, '0');
+        button.setAttribute('data-count', formattedCount);
+
+        console.log(`📊 ${filter}: ${formattedCount} items`);
       });
+
+      console.log('✅ Filter counts updated');
     }
 
-    // Call it when the page loads
+    // Call it immediately when the page loads AND make sure it runs before mobile init
     setTimeout(() => {
       updateFilterCounts();
+
+      // Then initialize mobile filter
+      setTimeout(() => {
+        initWorkFilterMobile();
+      }, 50);
     }, 100);
+
+
     // ===== VIEW-SWITCH REVEAL FUNCTION (immediate, snappy reveals) =====
     function setupViewSwitchReveals(selector) {
       const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -614,7 +628,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }, 200);
 
     // ===== MOBILE WORK PAGE FILTER FUNCTION =====
-
     function initWorkFilterMobile() {
       const filterContainer = document.querySelector('.filter-container');
       const filterButtons = document.querySelectorAll('.filter-btn');
@@ -626,7 +639,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         return window.innerWidth <= 925;
       }
 
-      // Create dropdown menu structure
+      // ENHANCED: Create dropdown menu structure with proper count handling
       function createDropdownMenu() {
         // Only create if it doesn't exist
         if (filterContainer.querySelector('.filter-dropdown')) return;
@@ -636,7 +649,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         filterButtons.forEach(button => {
           const filter = button.getAttribute('data-filter');
-          const count = button.getAttribute('data-count') || '00';
+
+          // FIXED: Get count from CSS ::after content or calculate it
+          let count = button.getAttribute('data-count') || '00';
+
+          // If count is still not available, calculate it manually
+          if (!count || count === '00') {
+            if (filter === 'featured') {
+              count = document.querySelectorAll('.featured-view .project-card-wrapper').length;
+            } else if (filter === 'all') {
+              count = document.querySelectorAll('.all-work-view .work-item').length;
+            } else if (filter === 'focus') {
+              count = document.querySelectorAll('.focus-view .focus-project-item').length;
+            }
+            // Format count to 2 digits
+            count = count.toString().padStart(2, '0');
+            // Update the button's data-count attribute
+            button.setAttribute('data-count', count);
+          }
+
           const text = button.textContent.replace(/\d+/g, '').trim(); // Remove existing numbers
 
           const dropdownItem = document.createElement('div');
@@ -654,19 +685,36 @@ document.addEventListener("DOMContentLoaded", (event) => {
         filterContainer.appendChild(dropdown);
       }
 
+
       // Update active filter display
+      // ENHANCED: Update active filter display with proper count
       function updateActiveDisplay() {
         const activeButton = document.querySelector('.filter-btn.active');
         if (!activeButton) return;
 
         const activeText = activeButton.textContent.replace(/\d+/g, '').trim();
-        const activeCount = activeButton.getAttribute('data-count') || '00';
+        let activeCount = activeButton.getAttribute('data-count') || '00';
+
+        // ADDED: If count is still missing, recalculate it
+        if (!activeCount || activeCount === '00') {
+          const filter = activeButton.getAttribute('data-filter');
+          if (filter === 'featured') {
+            activeCount = document.querySelectorAll('.featured-view .project-card-wrapper').length;
+          } else if (filter === 'all') {
+            activeCount = document.querySelectorAll('.all-work-view .work-item').length;
+          } else if (filter === 'focus') {
+            activeCount = document.querySelectorAll('.focus-view .focus-project-item').length;
+          }
+          activeCount = activeCount.toString().padStart(2, '0');
+          activeButton.setAttribute('data-count', activeCount);
+        }
 
         // Update active button display for mobile
         if (isMobile()) {
           activeButton.innerHTML = `
-      <span class="filter-text" data-count="${activeCount}">${activeText}</span>`;
+        <span class="filter-text" data-count="${activeCount}">${activeText}</span>`;
         }
+
         // Update dropdown items
         const dropdownItems = document.querySelectorAll('.dropdown-item');
         dropdownItems.forEach(item => {
@@ -806,8 +854,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
       }
 
-      // Initialize
+
+      // ENHANCED: Initialize function with count updates
       function init() {
+        // First, ensure all filter buttons have their counts updated
+        updateFilterCounts();
+
         if (isMobile()) {
           createDropdownMenu();
         }
@@ -818,10 +870,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
       // Run initialization
       init();
 
-      // Re-run on window resize to handle mobile/desktop switches
+      // ENHANCED: Re-run on window resize with count updates
       window.addEventListener('resize', () => {
         setTimeout(() => {
           if (isMobile() && !filterContainer.querySelector('.filter-dropdown')) {
+            updateFilterCounts(); // Ensure counts are updated
             createDropdownMenu();
             updateActiveDisplay();
           }
