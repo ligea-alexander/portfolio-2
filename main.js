@@ -492,6 +492,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   }
 
   // Work page-specific functionality
+
   if (isWorkPage) {
 
     // ===== DYNAMIC FILTER COUNTS =====
@@ -522,15 +523,275 @@ document.addEventListener("DOMContentLoaded", (event) => {
       console.log('✅ Filter counts updated');
     }
 
-    // Call it immediately when the page loads AND make sure it runs before mobile init
+    // ===== MOBILE WORK PAGE FILTER FUNCTION =====
+    function initWorkFilterMobile() {
+      const filterContainer = document.querySelector('.filter-container');
+      const filterButtons = document.querySelectorAll('.filter-btn');
+
+      if (!filterContainer || filterButtons.length === 0) {
+        console.log('❌ Mobile filter: missing elements');
+        return;
+      }
+
+      console.log('🔄 Initializing mobile work filter...');
+
+      // Check if we're on mobile
+      function isMobile() {
+        return window.innerWidth <= 925;
+      }
+
+      // Create dropdown menu structure with proper count handling
+      function createDropdownMenu() {
+        // Remove existing dropdown first
+        const existingDropdown = filterContainer.querySelector('.filter-dropdown');
+        if (existingDropdown) {
+          existingDropdown.remove();
+        }
+
+        if (!isMobile()) return;
+
+        const dropdown = document.createElement('div');
+        dropdown.className = 'filter-dropdown';
+
+        filterButtons.forEach(button => {
+          const filter = button.getAttribute('data-filter');
+          let count = button.getAttribute('data-count') || '00';
+
+          // If count is still not available, calculate it manually
+          if (!count || count === '00') {
+            if (filter === 'featured') {
+              count = document.querySelectorAll('.featured-view .project-card-wrapper').length;
+            } else if (filter === 'all') {
+              count = document.querySelectorAll('.all-work-view .work-item').length;
+            } else if (filter === 'focus') {
+              count = document.querySelectorAll('.focus-view .focus-project-item').length;
+            }
+            count = count.toString().padStart(2, '0');
+            button.setAttribute('data-count', count);
+          }
+
+          const text = button.textContent.replace(/\d+/g, '').trim();
+
+          const dropdownItem = document.createElement('div');
+          dropdownItem.className = 'dropdown-item';
+          dropdownItem.setAttribute('data-filter', filter);
+
+          dropdownItem.innerHTML = `
+          <span class="filter-text">${text}</span>
+          <span class="count">${count}</span>
+        `;
+
+          dropdown.appendChild(dropdownItem);
+        });
+
+        filterContainer.appendChild(dropdown);
+        console.log('✅ Dropdown menu created');
+      }
+
+      // Update active filter display with proper count
+      function updateActiveDisplay() {
+        const activeButton = document.querySelector('.filter-btn.active');
+        if (!activeButton) return;
+
+        const activeText = activeButton.textContent.replace(/\d+/g, '').trim();
+        let activeCount = activeButton.getAttribute('data-count') || '00';
+
+        // If count is still missing, recalculate it
+        if (!activeCount || activeCount === '00') {
+          const filter = activeButton.getAttribute('data-filter');
+          if (filter === 'featured') {
+            activeCount = document.querySelectorAll('.featured-view .project-card-wrapper').length;
+          } else if (filter === 'all') {
+            activeCount = document.querySelectorAll('.all-work-view .work-item').length;
+          } else if (filter === 'focus') {
+            activeCount = document.querySelectorAll('.focus-view .focus-project-item').length;
+          }
+          activeCount = activeCount.toString().padStart(2, '0');
+          activeButton.setAttribute('data-count', activeCount);
+        }
+
+        // Update active button display for mobile
+        if (isMobile()) {
+          activeButton.innerHTML = `
+          <span class="filter-text" data-count="${activeCount}">${activeText}</span>
+        `;
+        }
+
+        // Update dropdown items
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+          item.classList.remove('current');
+          if (item.getAttribute('data-filter') === activeButton.getAttribute('data-filter')) {
+            item.classList.add('current');
+          }
+        });
+
+        console.log(`📱 Active display updated: ${activeText} (${activeCount})`);
+      }
+
+      // Toggle dropdown
+      function toggleDropdown() {
+        if (!isMobile()) return;
+
+        const isOpen = filterContainer.classList.contains('open');
+        console.log(`🔄 Toggling dropdown: ${isOpen ? 'closing' : 'opening'}`);
+
+        if (isOpen) {
+          filterContainer.classList.remove('open');
+        } else {
+          filterContainer.classList.add('open');
+        }
+      }
+
+      // Close dropdown
+      function closeDropdown() {
+        filterContainer.classList.remove('open');
+        console.log('❌ Dropdown closed');
+      }
+
+      // Handle filter selection
+      function selectFilter(filterValue) {
+        console.log(`🎯 Filter selected: ${filterValue}`);
+
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+
+        // Add active class to selected button
+        const newActiveButton = document.querySelector(`[data-filter="${filterValue}"]`);
+        if (newActiveButton) {
+          newActiveButton.classList.add('active');
+        }
+
+        // Update the display
+        updateActiveDisplay();
+        closeDropdown();
+        triggerFilterChange(filterValue);
+      }
+
+      // Trigger existing filter functionality
+      function triggerFilterChange(filter) {
+        const featuredView = document.querySelector('.featured-view');
+        const allWorkView = document.querySelector('.all-work-view');
+        const focusView = document.querySelector('.focus-view');
+
+        // Hide all views first
+        if (featuredView) featuredView.classList.add('hidden');
+        if (allWorkView) allWorkView.classList.add('hidden');
+        if (focusView) focusView.classList.add('hidden');
+
+        // Show the selected view
+        if (filter === 'featured' && featuredView) {
+          featuredView.classList.remove('hidden');
+          setTimeout(() => {
+            setupViewSwitchReveals('.featured-view .reveal-text');
+            setTimeout(() => setupScrollReveals('.featured-view .reveal-text'), 100);
+          }, 100);
+        } else if (filter === 'all' && allWorkView) {
+          allWorkView.classList.remove('hidden');
+          setTimeout(() => {
+            setupViewSwitchReveals('.all-work-view .reveal-text');
+            setTimeout(() => setupScrollReveals('.all-work-view .reveal-text'), 100);
+          }, 100);
+        } else if (filter === 'focus' && focusView) {
+          focusView.classList.remove('hidden');
+          setTimeout(() => {
+            setupViewSwitchReveals('.focus-view .reveal-text');
+            setTimeout(() => setupScrollReveals('.focus-view .reveal-text'), 100);
+          }, 100);
+        }
+
+        setTimeout(() => ScrollTrigger.refresh(), 200);
+      }
+
+      // Setup event listeners
+      function setupEventListeners() {
+        // Remove existing listeners first
+        const existingListeners = filterContainer.__mobileListeners || [];
+        existingListeners.forEach(({ element, event, handler }) => {
+          element.removeEventListener(event, handler);
+        });
+        filterContainer.__mobileListeners = [];
+
+        // Click on active filter button to toggle dropdown (mobile only)
+        filterButtons.forEach(button => {
+          const handler = (e) => {
+            if (isMobile() && button.classList.contains('active')) {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleDropdown();
+            }
+          };
+          button.addEventListener('click', handler);
+          filterContainer.__mobileListeners.push({ element: button, event: 'click', handler });
+        });
+
+        // Click on dropdown items
+        const dropdownHandler = (e) => {
+          const dropdownItem = e.target.closest('.dropdown-item');
+          if (dropdownItem) {
+            e.preventDefault();
+            e.stopPropagation();
+            const filterValue = dropdownItem.getAttribute('data-filter');
+            selectFilter(filterValue);
+          }
+        };
+        filterContainer.addEventListener('click', dropdownHandler);
+        filterContainer.__mobileListeners.push({ element: filterContainer, event: 'click', handler: dropdownHandler });
+
+        // Close dropdown when clicking outside
+        const outsideHandler = (e) => {
+          if (!filterContainer.contains(e.target)) {
+            closeDropdown();
+          }
+        };
+        document.addEventListener('click', outsideHandler);
+        filterContainer.__mobileListeners.push({ element: document, event: 'click', handler: outsideHandler });
+
+        // Close dropdown on escape key
+        const escapeHandler = (e) => {
+          if (e.key === 'Escape') {
+            closeDropdown();
+          }
+        };
+        document.addEventListener('keydown', escapeHandler);
+        filterContainer.__mobileListeners.push({ element: document, event: 'keydown', handler: escapeHandler });
+
+        console.log('✅ Event listeners setup complete');
+      }
+
+      // Initialize function
+      function init() {
+        updateFilterCounts();
+        createDropdownMenu();
+        updateActiveDisplay();
+        setupEventListeners();
+      }
+
+      // Handle window resize
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          console.log(`📏 Resize detected - Mobile: ${isMobile()}`);
+          createDropdownMenu();
+          updateActiveDisplay();
+        }, 200);
+      });
+
+      // Run initialization
+      init();
+      console.log('✅ Mobile work filter initialized');
+    }
+
+    // INITIALIZE EVERYTHING IN THE CORRECT ORDER
     setTimeout(() => {
       updateFilterCounts();
 
-      // Then initialize mobile filter
       setTimeout(() => {
-        initWorkFilterMobile();
-      }, 50);
-    }, 100);
+        initWorkFilterMobile(); // ONLY CALL IT HERE
+      }, 100);
+    }, 200);
+
 
 
     // ===== VIEW-SWITCH REVEAL FUNCTION (immediate, snappy reveals) =====
@@ -627,262 +888,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       animateWorkTitles(); // Add this line
     }, 200);
 
-    // ===== MOBILE WORK PAGE FILTER FUNCTION =====
-    function initWorkFilterMobile() {
-      const filterContainer = document.querySelector('.filter-container');
-      const filterButtons = document.querySelectorAll('.filter-btn');
-
-      if (!filterContainer || filterButtons.length === 0) return;
-
-      // Check if we're on mobile
-      function isMobile() {
-        return window.innerWidth <= 925;
-      }
-
-      // ENHANCED: Create dropdown menu structure with proper count handling
-      function createDropdownMenu() {
-        // Only create if it doesn't exist
-        if (filterContainer.querySelector('.filter-dropdown')) return;
-
-        const dropdown = document.createElement('div');
-        dropdown.className = 'filter-dropdown';
-
-        filterButtons.forEach(button => {
-          const filter = button.getAttribute('data-filter');
-
-          // FIXED: Get count from CSS ::after content or calculate it
-          let count = button.getAttribute('data-count') || '00';
-
-          // If count is still not available, calculate it manually
-          if (!count || count === '00') {
-            if (filter === 'featured') {
-              count = document.querySelectorAll('.featured-view .project-card-wrapper').length;
-            } else if (filter === 'all') {
-              count = document.querySelectorAll('.all-work-view .work-item').length;
-            } else if (filter === 'focus') {
-              count = document.querySelectorAll('.focus-view .focus-project-item').length;
-            }
-            // Format count to 2 digits
-            count = count.toString().padStart(2, '0');
-            // Update the button's data-count attribute
-            button.setAttribute('data-count', count);
-          }
-
-          const text = button.textContent.replace(/\d+/g, '').trim(); // Remove existing numbers
-
-          const dropdownItem = document.createElement('div');
-          dropdownItem.className = 'dropdown-item';
-          dropdownItem.setAttribute('data-filter', filter);
-
-          dropdownItem.innerHTML = `
-        <span class="filter-text">${text}</span>
-        <span class="count">${count}</span>
-      `;
-
-          dropdown.appendChild(dropdownItem);
-        });
-
-        filterContainer.appendChild(dropdown);
-      }
-
-
-      // Update active filter display
-      // ENHANCED: Update active filter display with proper count
-      function updateActiveDisplay() {
-        const activeButton = document.querySelector('.filter-btn.active');
-        if (!activeButton) return;
-
-        const activeText = activeButton.textContent.replace(/\d+/g, '').trim();
-        let activeCount = activeButton.getAttribute('data-count') || '00';
-
-        // ADDED: If count is still missing, recalculate it
-        if (!activeCount || activeCount === '00') {
-          const filter = activeButton.getAttribute('data-filter');
-          if (filter === 'featured') {
-            activeCount = document.querySelectorAll('.featured-view .project-card-wrapper').length;
-          } else if (filter === 'all') {
-            activeCount = document.querySelectorAll('.all-work-view .work-item').length;
-          } else if (filter === 'focus') {
-            activeCount = document.querySelectorAll('.focus-view .focus-project-item').length;
-          }
-          activeCount = activeCount.toString().padStart(2, '0');
-          activeButton.setAttribute('data-count', activeCount);
-        }
-
-        // Update active button display for mobile
-        if (isMobile()) {
-          activeButton.innerHTML = `
-        <span class="filter-text" data-count="${activeCount}">${activeText}</span>`;
-        }
-
-        // Update dropdown items
-        const dropdownItems = document.querySelectorAll('.dropdown-item');
-        dropdownItems.forEach(item => {
-          item.classList.remove('current');
-          if (item.getAttribute('data-filter') === activeButton.getAttribute('data-filter')) {
-            item.classList.add('current');
-          }
-        });
-      }
-
-      // Toggle dropdown
-      function toggleDropdown() {
-        if (!isMobile()) return;
-
-        const isOpen = filterContainer.classList.contains('open');
-
-        if (isOpen) {
-          filterContainer.classList.remove('open');
-        } else {
-          filterContainer.classList.add('open');
-        }
-      }
-
-      // Close dropdown
-      function closeDropdown() {
-        filterContainer.classList.remove('open');
-      }
-
-      // Handle filter selection
-      function selectFilter(filterValue) {
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-
-        // Add active class to selected button
-        const newActiveButton = document.querySelector(`[data-filter="${filterValue}"]`);
-        if (newActiveButton) {
-          newActiveButton.classList.add('active');
-        }
-
-        // Update the display
-        updateActiveDisplay();
-
-        // Close dropdown
-        closeDropdown();
-
-        // Trigger the existing filter functionality
-        triggerFilterChange(filterValue);
-      }
-
-      // Trigger existing filter functionality
-      function triggerFilterChange(filter) {
-        const featuredView = document.querySelector('.featured-view');
-        const allWorkView = document.querySelector('.all-work-view');
-        const focusView = document.querySelector('.focus-view');
-
-        // Hide all views first
-        if (featuredView) featuredView.classList.add('hidden');
-        if (allWorkView) allWorkView.classList.add('hidden');
-        if (focusView) focusView.classList.add('hidden');
-
-        // Show the selected view
-        if (filter === 'featured' && featuredView) {
-          featuredView.classList.remove('hidden');
-          setTimeout(() => {
-            setupViewSwitchReveals('.featured-view .reveal-text');
-            setTimeout(() => {
-              setupScrollReveals('.featured-view .reveal-text');
-            }, 100);
-          }, 100);
-
-        } else if (filter === 'all' && allWorkView) {
-          allWorkView.classList.remove('hidden');
-          setTimeout(() => {
-            setupViewSwitchReveals('.all-work-view .reveal-text');
-            setTimeout(() => {
-              setupScrollReveals('.all-work-view .reveal-text');
-            }, 100);
-          }, 100);
-
-        } else if (filter === 'focus' && focusView) {
-          focusView.classList.remove('hidden');
-          setTimeout(() => {
-            setupViewSwitchReveals('.focus-view .reveal-text');
-            setTimeout(() => {
-              setupScrollReveals('.focus-view .reveal-text');
-            }, 100);
-          }, 100);
-        }
-
-        // Refresh ScrollTrigger after view change
-        setTimeout(() => ScrollTrigger.refresh(), 200);
-      }
-
-      // Setup event listeners
-      function setupEventListeners() {
-        // Click on active filter button to toggle dropdown (mobile only)
-        filterButtons.forEach(button => {
-          button.addEventListener('click', (e) => {
-            if (isMobile() && button.classList.contains('active')) {
-              e.preventDefault();
-              toggleDropdown();
-            }
-          });
-        });
-
-        // Click on dropdown items
-        filterContainer.addEventListener('click', (e) => {
-          const dropdownItem = e.target.closest('.dropdown-item');
-          if (dropdownItem) {
-            e.preventDefault();
-            const filterValue = dropdownItem.getAttribute('data-filter');
-            selectFilter(filterValue);
-          }
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-          if (!filterContainer.contains(e.target)) {
-            closeDropdown();
-          }
-        });
-
-        // Close dropdown on escape key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') {
-            closeDropdown();
-          }
-        });
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-          if (!isMobile()) {
-            closeDropdown();
-            filterContainer.classList.remove('open');
-          }
-          updateActiveDisplay();
-        });
-      }
-
-
-      // ENHANCED: Initialize function with count updates
-      function init() {
-        // First, ensure all filter buttons have their counts updated
-        updateFilterCounts();
-
-        if (isMobile()) {
-          createDropdownMenu();
-        }
-        updateActiveDisplay();
-        setupEventListeners();
-      }
-
-      // Run initialization
-      init();
-
-      // ENHANCED: Re-run on window resize with count updates
-      window.addEventListener('resize', () => {
-        setTimeout(() => {
-          if (isMobile() && !filterContainer.querySelector('.filter-dropdown')) {
-            updateFilterCounts(); // Ensure counts are updated
-            createDropdownMenu();
-            updateActiveDisplay();
-          }
-        }, 100);
-      });
-    }
-
-    initWorkFilterMobile();
 
     // ===== ALL WORK VIEW IMAGE REVEAL FUNCTION =====
     // Work page filtering
